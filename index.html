@@ -237,6 +237,30 @@
       flex: 1 1 calc(50% - 10px);
     }
 
+    .example-box {
+      background: #fffbf0;
+      border-left: 3px solid #f59e0b;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 0.75rem;
+      color: #92400e;
+      margin-top: 3px;
+      line-height: 1.3;
+      font-weight: 500;
+    }
+
+    .info-box {
+      background: #dbeafe;
+      border-left: 3px solid #3b82f6;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 0.75rem;
+      color: #1e40af;
+      margin-top: 3px;
+      line-height: 1.3;
+      font-weight: 500;
+    }
+
     @media (max-width: 480px) {
       .container { padding: 16px; }
       .field { flex: 1 1 100%; }
@@ -260,18 +284,42 @@
   <div class="section">
     <div class="section-title"><i class="fas fa-user-circle"></i> Kepala Keluarga</div>
     <div class="row">
-      <div class="field full"><label>NAMA KEPALA KELUARGA</label><input type="text" id="namaKK" placeholder="Nama lengkap" value=""></div>
+      <div class="field full">
+        <label>NAMA KEPALA KELUARGA</label>
+        <input type="text" id="namaKK" placeholder="Nama lengkap" value="">
+        <div class="example-box">Contoh: Budi Santoso atau Siti Nurhaliza</div>
+      </div>
     </div>
     <div class="row">
-      <div class="field"><label>NO. UB</label><input type="text" id="noUB" placeholder="Nomor UB" value=""></div>
-      <div class="field"><label>JML ANGGOTA</label><input type="text" id="jmlAnggota" placeholder="Jumlah" value=""></div>
+      <div class="field">
+        <label>NO. UB</label>
+        <input type="text" id="noUB" placeholder="Nomor UB" value="">
+        <div class="example-box">Nomor Unit Blok dari kartu keluarga</div>
+      </div>
+      <div class="field">
+        <label>JML ANGGOTA</label>
+        <input type="text" id="jmlAnggota" placeholder="Jumlah" value="">
+        <div class="example-box">Contoh: 4 atau 5 orang</div>
+      </div>
     </div>
     <div class="row">
-      <div class="field full"><label><i class="fas fa-camera" style="margin-right: 6px;"></i> FOTO KK</label><input type="text" id="fotoKK" placeholder="Nama file / keterangan" value=""></div>
+      <div class="field full">
+        <label><i class="fas fa-camera" style="margin-right: 6px;"></i> FOTO KK</label>
+        <input type="text" id="fotoKK" placeholder="Nama file / keterangan" value="">
+        <div class="example-box">Contoh: KK_001.jpg atau ✓ Sudah diambil</div>
+      </div>
     </div>
     <div class="row">
-      <div class="field"><label><i class="fas fa-phone-alt"></i> NO TLP/WA</label><input type="text" id="noWA" placeholder="08xx" value=""></div>
-      <div class="field"><label>AWAS LUPA</label><input type="text" id="awasLupa" placeholder="catatan" value=""></div>
+      <div class="field">
+        <label><i class="fas fa-phone-alt"></i> NO TLP/WA</label>
+        <input type="text" id="noWA" placeholder="08xx" value="">
+        <div class="example-box">Contoh: 08123456789 atau 0812-3456-789</div>
+      </div>
+      <div class="field">
+        <label>AWAS LUPA</label>
+        <input type="text" id="awasLupa" placeholder="catatan" value="">
+        <div class="example-box">Catatan penting jika ada (opsional)</div>
+      </div>
     </div>
 
     <div style="margin-top: 10px; background: #f2f6fd; border-radius: 40px; padding: 12px 16px;">
@@ -291,8 +339,16 @@
     </div>
 
     <div class="row" style="margin-top: 12px;">
-      <div class="field"><label>NO. METER/ID</label><input type="text" id="noMeter" placeholder="ID meter" value=""></div>
-      <div class="field"><label>KWH WATT</label><input type="text" id="kwhWatt" placeholder="Daya terpasang" value=""></div>
+      <div class="field">
+        <label>NO. METER/ID</label>
+        <input type="text" id="noMeter" placeholder="ID meter" value="">
+        <div class="example-box">Contoh: 12345678 atau lihat di meteran listrik</div>
+      </div>
+      <div class="field">
+        <label>KWH WATT</label>
+        <input type="text" id="kwhWatt" placeholder="Daya terpasang" value="">
+        <div class="example-box">Contoh: 1300 VA atau 2200 VA</div>
+      </div>
     </div>
   </div>
 
@@ -300,64 +356,177 @@
   <div class="section">
     <div class="section-title"><i class="fas fa-briefcase"></i> Pekerjaan & Usaha</div>
     <div class="row">
-      <div class="field"><label>KK</label><input type="text" id="pekerjaanKK" placeholder="Pekerjaan KK" value=""></div>
-      <div class="field"><label>ISTRI</label><input type="text" id="pekerjaanIstri" placeholder="Pekerjaan Istri" value=""></div>
+      <div class="field">
+        <label>KK</label>
+        <input type="text" id="pekerjaanKK" placeholder="Pekerjaan KK" value="">
+        <div class="example-box">Contoh: Karyawan Swasta, PNS, Wiraswasta, dll</div>
+      </div>
+      <div class="field">
+        <label>ISTRI</label>
+        <input type="text" id="pekerjaanIstri" placeholder="Pekerjaan Istri" value="">
+        <div class="example-box">Contoh: Ibu Rumah Tangga, Pedagang, dll</div>
+      </div>
     </div>
     <div class="row">
-      <div class="field"><label>ANAK</label><input type="text" id="pekerjaanAnak" placeholder="Pekerjaan anak" value=""></div>
-      <div class="field"><label>GAJI</label><input type="text" id="gaji" placeholder="Total gaji" value=""></div>
+      <div class="field">
+        <label>ANAK</label>
+        <input type="text" id="pekerjaanAnak" placeholder="Pekerjaan anak" value="">
+        <div class="example-box">Contoh: Pelajar, Mahasiswa, Karyawan, dll</div>
+      </div>
+      <div class="field">
+        <label>GAJI</label>
+        <input type="text" id="gaji" placeholder="Total gaji" value="">
+        <div class="example-box">Contoh: Rp 5.000.000 atau 5 juta</div>
+      </div>
     </div>
     <div style="border-top: 1px dashed #d0dae8; margin: 12px 0 12px;"></div>
+    
+    <div class="info-box" style="margin-bottom: 12px;">💼 Bagian ini diisi HANYA jika ada usaha/bisnis keluarga. Jika tidak ada usaha, bisa kosongkan.</div>
+    
     <div class="row">
-      <div class="field"><label>JENIS USAHA</label><input type="text" id="jenisUsaha" placeholder="Jenis" value=""></div>
-      <div class="field"><label>TAHUN</label><input type="text" id="tahunUsaha" placeholder="Tahun berdiri" value=""></div>
+      <div class="field">
+        <label>JENIS USAHA</label>
+        <input type="text" id="jenisUsaha" placeholder="Jenis" value="">
+        <div class="example-box">Contoh: Toko Kelontong, Warung Makan, Jahitan, dll</div>
+      </div>
+      <div class="field">
+        <label>TAHUN</label>
+        <input type="text" id="tahunUsaha" placeholder="Tahun berdiri" value="">
+        <div class="example-box">Contoh: 2015 atau 2020</div>
+      </div>
     </div>
     <div class="row">
-      <div class="field"><label>MODAL</label><input type="text" id="modalUsaha" placeholder="Modal" value=""></div>
-      <div class="field"><label>BIAYA PRODUKSI</label><input type="text" id="biayaProduksi" placeholder="Biaya" value=""></div>
+      <div class="field">
+        <label>MODAL</label>
+        <input type="text" id="modalUsaha" placeholder="Modal" value="">
+        <div class="example-box">Contoh: Rp 2.000.000 atau 2 juta</div>
+      </div>
+      <div class="field">
+        <label>BIAYA PRODUKSI</label>
+        <input type="text" id="biayaProduksi" placeholder="Biaya" value="">
+        <div class="example-box">Contoh: Rp 500.000/bulan</div>
+      </div>
     </div>
     <div class="row">
-      <div class="field"><label>PENDAPATAN</label><input type="text" id="pendapatan" placeholder="Pendapatan" value=""></div>
-      <div class="field"><label>KARYAWAN</label><input type="text" id="karyawan" placeholder="Jumlah" value=""></div>
+      <div class="field">
+        <label>PENDAPATAN</label>
+        <input type="text" id="pendapatan" placeholder="Pendapatan" value="">
+        <div class="example-box">Contoh: Rp 1.000.000/bulan atau 1 juta</div>
+      </div>
+      <div class="field">
+        <label>KARYAWAN</label>
+        <input type="text" id="karyawan" placeholder="Jumlah" value="">
+        <div class="example-box">Contoh: 0, 1, 2, 3, dst (jumlah orang)</div>
+      </div>
     </div>
     <div class="row">
-      <div class="field"><label>UPAH</label><input type="text" id="upah" placeholder="Upah karyawan" value=""></div>
-      <div class="field"><label>LOKASI</label><input type="text" id="lokasiUsaha" placeholder="Lokasi" value=""></div>
+      <div class="field">
+        <label>UPAH</label>
+        <input type="text" id="upah" placeholder="Upah karyawan" value="">
+        <div class="example-box">Contoh: Rp 500.000/bulan per orang</div>
+      </div>
+      <div class="field">
+        <label>LOKASI</label>
+        <input type="text" id="lokasiUsaha" placeholder="Lokasi" value="">
+        <div class="example-box">Contoh: Rumah, Pasar, Toko, Jalan XX, dll</div>
+      </div>
     </div>
     <div class="row">
-      <div class="field full"><label>NO NIB</label><input type="text" id="noNIB" placeholder="Nomor NIB" value=""></div>
+      <div class="field full">
+        <label>NO NIB</label>
+        <input type="text" id="noNIB" placeholder="Nomor NIB" value="">
+        <div class="example-box">Nomor Induk Berusaha (jika ada, opsional)</div>
+      </div>
     </div>
   </div>
 
   <!-- PENGELUARAN & ASET -->
   <div class="section">
     <div class="section-title"><i class="fas fa-wallet"></i> Pengeluaran & Aset</div>
+    
+    <div style="margin-bottom: 12px; font-weight: 600; color: #0b1a33; font-size: 0.9rem;">📊 PENGELUARAN PER BULAN</div>
+    
     <div class="row">
-      <div class="field"><label>MKN 7 HARI</label><input type="text" id="mkn7" placeholder="Makanan 7 hari" value=""></div>
-      <div class="field"><label>NON MKN</label><input type="text" id="nonMkn" placeholder="Non makanan" value=""></div>
+      <div class="field">
+        <label>MKN 7 HARI</label>
+        <input type="text" id="mkn7" placeholder="Makanan 7 hari" value="">
+        <div class="example-box">Contoh: Rp 350.000 (pengeluaran 7 hari)</div>
+      </div>
+      <div class="field">
+        <label>NON MKN</label>
+        <input type="text" id="nonMkn" placeholder="Non makanan" value="">
+        <div class="example-box">Contoh: Rp 200.000 (sabun, pasta gigi, dll)</div>
+      </div>
     </div>
     <div class="row">
-      <div class="field"><label>INTERNET</label><input type="text" id="internet" placeholder="Biaya internet" value=""></div>
-      <div class="field"><label>LISTRIK</label><input type="text" id="listrik" placeholder="Biaya listrik" value=""></div>
+      <div class="field">
+        <label>INTERNET</label>
+        <input type="text" id="internet" placeholder="Biaya internet" value="">
+        <div class="example-box">Contoh: Rp 50.000 atau 0 (tidak ada)</div>
+      </div>
+      <div class="field">
+        <label>LISTRIK</label>
+        <input type="text" id="listrik" placeholder="Biaya listrik" value="">
+        <div class="example-box">Contoh: Rp 150.000/bulan</div>
+      </div>
+    </div>
+
+    <div style="margin: 12px 0; font-weight: 600; color: #0b1a33; font-size: 0.9rem;">🏠 ASET KEPEMILIKAN</div>
+
+    <div class="row">
+      <div class="field">
+        <label>KULKAS</label>
+        <input type="text" id="kulkas" placeholder="Jumlah / biaya" value="">
+        <div class="example-box">Contoh: 1 unit atau Rp 2.500.000</div>
+      </div>
+      <div class="field">
+        <label>AC</label>
+        <input type="text" id="ac" placeholder="Jumlah / biaya" value="">
+        <div class="example-box">Contoh: 2 unit atau Rp 1.500.000</div>
+      </div>
     </div>
     <div class="row">
-      <div class="field"><label>KULKAS</label><input type="text" id="kulkas" placeholder="Jumlah / biaya" value=""></div>
-      <div class="field"><label>AC</label><input type="text" id="ac" placeholder="Jumlah / biaya" value=""></div>
+      <div class="field">
+        <label>LAPTOP/PC</label>
+        <input type="text" id="laptop" placeholder="Jumlah" value="">
+        <div class="example-box">Contoh: 1 unit atau 0 (tidak memiliki)</div>
+      </div>
+      <div class="field">
+        <label>MOBIL</label>
+        <input type="text" id="mobil" placeholder="Jumlah" value="">
+        <div class="example-box">Contoh: 1 unit atau 0 (tidak memiliki)</div>
+      </div>
     </div>
     <div class="row">
-      <div class="field"><label>LAPTOP/PC</label><input type="text" id="laptop" placeholder="Jumlah" value=""></div>
-      <div class="field"><label>MOBIL</label><input type="text" id="mobil" placeholder="Jumlah" value=""></div>
+      <div class="field">
+        <label>NILAI (aset)</label>
+        <input type="text" id="nilaiAset" placeholder="Nilai aset" value="">
+        <div class="example-box">Total estimasi aset kulkas, AC, laptop, dll</div>
+      </div>
+      <div class="field">
+        <label>ASET LAIN</label>
+        <input type="text" id="asetLain" placeholder="Aset lain" value="">
+        <div class="example-box">Contoh: Motor, Sepeda, Alat Pertanian, dll</div>
+      </div>
     </div>
     <div class="row">
-      <div class="field"><label>NILAI (aset)</label><input type="text" id="nilaiAset" placeholder="Nilai aset" value=""></div>
-      <div class="field"><label>ASET</label><input type="text" id="asetLain" placeholder="Aset lain" value=""></div>
+      <div class="field">
+        <label>GAS 3KG/5</label>
+        <input type="text" id="gas" placeholder="Jumlah tabung" value="">
+        <div class="example-box">Contoh: 2 tabung 3kg atau 1 tabung 5kg</div>
+      </div>
+      <div class="field">
+        <label>EMAS</label>
+        <input type="text" id="emas" placeholder="Gram / nilai" value="">
+        <div class="example-box">Contoh: 50 gram atau Rp 5.000.000</div>
+      </div>
     </div>
     <div class="row">
-      <div class="field"><label>GAS 3KG/5</label><input type="text" id="gas" placeholder="Jumlah tabung" value=""></div>
-      <div class="field"><label>EMAS</label><input type="text" id="emas" placeholder="Gram / nilai" value=""></div>
-    </div>
-    <div class="row">
-      <div class="field full"><label>NILAI (emas)</label><input type="text" id="nilaiEmas" placeholder="Nilai emas" value=""></div>
+      <div class="field full">
+        <label>NILAI (emas)</label>
+        <input type="text" id="nilaiEmas" placeholder="Nilai emas" value="">
+        <div class="example-box">Estimasi nilai total emas (Rp)</div>
+      </div>
     </div>
   </div>
 
@@ -365,8 +534,16 @@
   <div class="section">
     <div class="section-title"><i class="fas fa-building"></i> Tempat Tinggal</div>
     <div class="row">
-      <div class="field"><label>MILIK/SEWA</label><input type="text" id="milikSewa" placeholder="Milik / Sewa" value=""></div>
-      <div class="field"><label>NILAI ASET</label><input type="text" id="nilaiAsetTempat" placeholder="Nilai properti" value=""></div>
+      <div class="field">
+        <label>MILIK/SEWA</label>
+        <input type="text" id="milikSewa" placeholder="Milik / Sewa" value="">
+        <div class="example-box">Contoh: Milik Sendiri, Sewa, Menumpang, dll</div>
+      </div>
+      <div class="field">
+        <label>NILAI ASET</label>
+        <input type="text" id="nilaiAsetTempat" placeholder="Nilai properti" value="">
+        <div class="example-box">Contoh: Rp 50.000.000 atau 0 (jika sewa)</div>
+      </div>
     </div>
   </div>
 
