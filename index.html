@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Kuesioner Keluarga</title>
+    <title>Kuesioner Keluarga - Dengan Perhitungan Otomatis</title>
     <style>
         * {
             box-sizing: border-box;
@@ -12,94 +12,100 @@
         }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f4f7fc;
-            padding: 20px;
+            background: #f0f4f9;
+            padding: 16px;
         }
         .container {
-            max-width: 1000px;
+            max-width: 1100px;
             margin: 0 auto;
-            background: #fff;
-            padding: 30px 35px;
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            background: #ffffff;
+            padding: 24px 28px;
+            border-radius: 18px;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.08);
         }
         h1 {
-            font-size: 28px;
-            border-left: 6px solid #2a7de1;
+            font-size: clamp(22px, 4vw, 32px);
+            border-left: 6px solid #2563eb;
             padding-left: 16px;
-            margin-bottom: 30px;
-            color: #1a2b4a;
+            margin-bottom: 24px;
+            color: #1e293b;
         }
         h2 {
-            font-size: 20px;
-            margin: 30px 0 16px 0;
+            font-size: clamp(18px, 2.5vw, 22px);
+            margin: 28px 0 14px 0;
             padding-bottom: 8px;
             border-bottom: 2px solid #e2e8f0;
             color: #1e3a6b;
         }
         h3 {
-            font-size: 18px;
-            margin: 20px 0 12px 0;
+            font-size: clamp(16px, 2vw, 19px);
+            margin: 18px 0 10px 0;
             color: #1e3a6b;
         }
         .form-group {
-            margin-bottom: 18px;
+            margin-bottom: 14px;
             display: flex;
             flex-wrap: wrap;
             align-items: center;
+            gap: 6px;
         }
         .form-group label {
-            width: 200px;
+            min-width: 170px;
             font-weight: 600;
-            color: #2d3748;
+            color: #1e293b;
+            font-size: 14px;
             flex-shrink: 0;
         }
         .form-group .desc {
             width: 100%;
-            font-size: 13px;
-            color: #4a5568;
-            background: #f0f4fa;
-            padding: 6px 12px;
+            font-size: 12.5px;
+            color: #475569;
+            background: #f1f5f9;
+            padding: 5px 12px;
             border-radius: 8px;
-            margin-top: 4px;
-            margin-left: 0;
+            margin-top: 3px;
         }
         .form-group input, .form-group select, .form-group textarea {
             flex: 1;
-            min-width: 200px;
+            min-width: 180px;
             padding: 10px 14px;
-            border: 1px solid #cbd5e0;
+            border: 1px solid #cbd5e1;
             border-radius: 10px;
             font-size: 15px;
             background: #fafcff;
             transition: 0.2s;
         }
         .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
-            border-color: #2a7de1;
+            border-color: #2563eb;
             outline: none;
-            box-shadow: 0 0 0 3px rgba(42,125,225,0.2);
+            box-shadow: 0 0 0 3px rgba(37,99,235,0.15);
+        }
+        .form-group input[readonly] {
+            background: #eef2f6;
+            color: #1e293b;
+            font-weight: 600;
+            border-color: #b9c7da;
         }
         .form-group textarea {
-            min-height: 60px;
+            min-height: 50px;
             resize: vertical;
         }
         .inline-group {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px 20px;
+            gap: 8px 16px;
             align-items: center;
         }
         .inline-group .form-group {
-            flex: 1 1 200px;
-            margin-bottom: 8px;
+            flex: 1 1 180px;
+            margin-bottom: 6px;
         }
         .inline-group .form-group label {
-            width: auto;
             min-width: 100px;
         }
         .table-wrap {
             overflow-x: auto;
-            margin: 12px 0 20px 0;
+            margin: 12px 0 18px 0;
             border-radius: 12px;
             border: 1px solid #e2e8f0;
         }
@@ -107,373 +113,560 @@
             width: 100%;
             border-collapse: collapse;
             font-size: 14px;
+            min-width: 600px;
         }
         th {
             background: #eef2f7;
-            padding: 12px 8px;
+            padding: 10px 8px;
             text-align: left;
             font-weight: 600;
             color: #1e3a6b;
             border-bottom: 2px solid #d0d9e6;
+            white-space: nowrap;
         }
         td {
-            padding: 8px 8px;
+            padding: 6px 6px;
             border-bottom: 1px solid #e2e8f0;
         }
         td input, td select {
             width: 100%;
-            padding: 8px 10px;
+            padding: 7px 10px;
             border: 1px solid #d0d9e6;
             border-radius: 8px;
-            font-size: 14px;
+            font-size: 13px;
             background: #fafcff;
         }
         td input:focus, td select:focus {
-            border-color: #2a7de1;
+            border-color: #2563eb;
             outline: none;
         }
         .sub-section {
-            background: #f9fbfd;
+            background: #f8fafc;
             padding: 16px 20px;
             border-radius: 14px;
-            margin: 16px 0;
+            margin: 12px 0 16px 0;
+            border: 1px solid #e9edf2;
         }
         .sub-section .form-group label {
-            width: 180px;
+            min-width: 160px;
+        }
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px 24px;
         }
         .btn-submit {
             background: #1e3a6b;
             color: #fff;
             border: none;
-            padding: 14px 36px;
+            padding: 14px 40px;
             font-size: 18px;
             border-radius: 50px;
             cursor: pointer;
-            margin-top: 30px;
+            margin-top: 28px;
             transition: 0.25s;
             font-weight: 600;
+            width: 100%;
+            max-width: 320px;
         }
         .btn-submit:hover {
             background: #2a4f8a;
             transform: scale(1.01);
-            box-shadow: 0 6px 14px rgba(30,58,107,0.3);
+            box-shadow: 0 6px 18px rgba(30,58,107,0.25);
+        }
+        .btn-center {
+            display: flex;
+            justify-content: center;
         }
         .note {
             font-size: 14px;
-            color: #2d3748;
+            color: #1e293b;
             background: #edf2f9;
-            padding: 14px 18px;
+            padding: 12px 18px;
             border-radius: 12px;
-            margin-top: 12px;
+            margin: 8px 0 14px 0;
         }
-        .row-desc {
-            font-size: 13px;
-            color: #4a5568;
-            background: #f0f4fa;
-            padding: 4px 12px;
+        .tag {
+            font-size: 12px;
+            color: #475569;
+            background: #e9edf2;
+            padding: 2px 12px;
             border-radius: 30px;
             display: inline-block;
-            margin-left: 8px;
+            margin-right: 6px;
         }
-        @media (max-width: 700px) {
-            .container { padding: 20px; }
+        .highlight-box {
+            background: #dbeafe;
+            border-left: 4px solid #2563eb;
+            padding: 14px 20px;
+            border-radius: 12px;
+            margin: 16px 0;
+        }
+        .highlight-box h4 {
+            color: #1e3a6b;
+            font-size: 17px;
+        }
+        .highlight-box .form-group label {
+            min-width: 200px;
+        }
+        .row-desc {
+            font-size: 12.5px;
+            color: #475569;
+            background: #f1f5f9;
+            padding: 3px 14px;
+            border-radius: 30px;
+            display: inline-block;
+            margin: 2px 4px 2px 0;
+        }
+
+        @media (max-width: 720px) {
+            .container { padding: 16px; }
             .form-group { flex-direction: column; align-items: stretch; }
-            .form-group label { width: 100%; margin-bottom: 4px; }
-            .inline-group .form-group label { width: 100%; }
+            .form-group label { min-width: unset; width: 100%; margin-bottom: 2px; }
+            .inline-group .form-group { flex: 1 1 100%; }
+            .inline-group .form-group label { min-width: unset; }
+            .sub-section .form-group label { min-width: unset; }
+            .grid-2 { grid-template-columns: 1fr; }
+            .highlight-box .form-group label { min-width: unset; }
+            .btn-submit { max-width: 100%; }
+            th, td { font-size: 12px; }
+            td input { font-size: 12px; padding: 6px 8px; }
+        }
+        @media (max-width: 480px) {
+            body { padding: 8px; }
+            .container { padding: 12px; }
+            h1 { font-size: 20px; }
+            .sub-section { padding: 12px 14px; }
         }
     </style>
 </head>
 <body>
-<div class="container">
+<div class="container" id="app">
     <h1>📋 KUESIONER KELUARGA</h1>
-    <p style="color:#2d3748; margin-bottom: 20px;">Isi semua data dengan benar. Kolom bertanda <span style="color:#c53030;">*</span> wajib diisi.</p>
+    <p style="color:#334155; margin-bottom: 16px; font-size: 15px;">
+        Isi semua data dengan benar. Kolom bertanda <span style="color:#b91c1c;">*</span> wajib diisi. 
+        Beberapa total akan dihitung otomatis.
+    </p>
 
-    <!-- ===== BAGIAN I: IDENTITAS ===== -->
+    <!-- ========================================================= -->
+    <!-- BAGIAN I: IDENTITAS -->
     <h2>I. IDENTITAS KELUARGA</h2>
-
     <div class="form-group">
-        <label>NO BANGUNAN <span style="color:#c53030;">*</span></label>
-        <input type="text" placeholder="Contoh: B-01" />
-        <div class="desc">⚠️ Nomor unik bangunan tempat tinggal (bisa dari RT/RW atau nomor rumah).</div>
+        <label>NO BANGUNAN <span style="color:#b91c1c;">*</span></label>
+        <input type="text" placeholder="Contoh: B-01" id="noBangunan" />
+        <div class="desc">⚠️ Nomor unik bangunan tempat tinggal.</div>
     </div>
-
     <div class="form-group">
-        <label>NO URUT KK <span style="color:#c53030;">*</span></label>
-        <input type="text" placeholder="Contoh: 001" />
-        <div class="desc">⚠️ Nomor urut keluarga dalam bangunan (jika lebih dari 1 KK).</div>
+        <label>NO URUT KK <span style="color:#b91c1c;">*</span></label>
+        <input type="text" placeholder="Contoh: 001" id="noUrutKK" />
+        <div class="desc">⚠️ Nomor urut keluarga dalam bangunan.</div>
     </div>
-
     <div class="form-group">
-        <label>Nama Kepala Keluarga <span style="color:#c53030;">*</span></label>
-        <input type="text" placeholder="Nama lengkap" />
+        <label>Nama Kepala Keluarga <span style="color:#b91c1c;">*</span></label>
+        <input type="text" placeholder="Nama lengkap" id="namaKepala" />
         <div class="desc">⚠️ Nama sesuai KTP/Kartu Keluarga.</div>
     </div>
-
     <div class="form-group">
-        <label>Jumlah Penghuni Dalam Bangunan <span style="color:#c53030;">*</span></label>
-        <input type="number" placeholder="Jumlah orang" min="1" />
-        <div class="desc">⚠️ Total semua orang yang tinggal tetap di bangunan ini.</div>
+        <label>Jumlah Penghuni <span style="color:#b91c1c;">*</span></label>
+        <input type="number" placeholder="Jumlah orang" min="1" id="jmlPenghuni" />
+        <div class="desc">⚠️ Total semua orang yang tinggal tetap.</div>
     </div>
-
     <div class="form-group">
-        <label>No.KK <span style="color:#c53030;">*</span></label>
-        <input type="text" placeholder="Nomor Kartu Keluarga" />
+        <label>No.KK <span style="color:#b91c1c;">*</span></label>
+        <input type="text" placeholder="Nomor Kartu Keluarga" id="noKK" />
         <div class="desc">⚠️ Nomor KK sesuai kartu keluarga.</div>
     </div>
 
-    <!-- ===== BAGIAN II: PENDAPATAN & PEKERJAAN ===== -->
+    <!-- ========================================================= -->
+    <!-- BAGIAN II: PEKERJAAN -->
     <h2>II. PENDAPATAN KELUARGA DAN PEKERJAAN</h2>
     <div class="note">
         <strong>✏️ Isi untuk setiap anggota keluarga yang bekerja.</strong> 
-        Tambahkan baris sesuai kebutuhan.
+        Total pendapatan keluarga akan dihitung otomatis.
     </div>
     <div class="table-wrap">
-        <table>
+        <table id="tabelPekerjaan">
             <thead>
-                <tr>
-                    <th style="width:50px;">No</th>
-                    <th>Nama</th>
-                    <th>Pekerjaan</th>
-                    <th>Gaji (Rp/bulan)</th>
-                    <th>Ijazah</th>
-                    <th>Rekening</th>
-                </tr>
+                <tr><th style="width:40px;">No</th><th>Nama</th><th>Pekerjaan</th><th>Gaji (Rp/bln)</th><th>Ijazah</th><th>Rekening</th></tr>
             </thead>
-            <tbody>
+            <tbody id="tbodyPekerjaan">
                 <tr>
-                    <td><input type="text" value="1" style="width:50px;" /></td>
-                    <td><input type="text" placeholder="Nama" /></td>
-                    <td><input type="text" placeholder="Pekerjaan" /></td>
-                    <td><input type="text" placeholder="0" /></td>
-                    <td><input type="text" placeholder="Terakhir" /></td>
-                    <td><input type="text" placeholder="No Rekening" /></td>
+                    <td><input type="text" value="1" style="width:40px;text-align:center;" /></td>
+                    <td><input type="text" placeholder="Nama" class="namaPekerja" /></td>
+                    <td><input type="text" placeholder="Pekerjaan" class="pekerjaan" /></td>
+                    <td><input type="number" placeholder="0" class="gajiPekerja" oninput="hitungTotalPendapatan()" /></td>
+                    <td><input type="text" placeholder="Terakhir" class="ijazah" /></td>
+                    <td><input type="text" placeholder="No Rekening" class="rekening" /></td>
                 </tr>
                 <tr>
-                    <td><input type="text" value="2" style="width:50px;" /></td>
-                    <td><input type="text" placeholder="Nama" /></td>
-                    <td><input type="text" placeholder="Pekerjaan" /></td>
-                    <td><input type="text" placeholder="0" /></td>
-                    <td><input type="text" placeholder="Terakhir" /></td>
-                    <td><input type="text" placeholder="No Rekening" /></td>
+                    <td><input type="text" value="2" style="width:40px;text-align:center;" /></td>
+                    <td><input type="text" placeholder="Nama" class="namaPekerja" /></td>
+                    <td><input type="text" placeholder="Pekerjaan" class="pekerjaan" /></td>
+                    <td><input type="number" placeholder="0" class="gajiPekerja" oninput="hitungTotalPendapatan()" /></td>
+                    <td><input type="text" placeholder="Terakhir" class="ijazah" /></td>
+                    <td><input type="text" placeholder="No Rekening" class="rekening" /></td>
                 </tr>
             </tbody>
         </table>
     </div>
-    <div style="margin-bottom: 8px; font-size:14px; color:#2d3748;">
-        <span class="row-desc">📌 Pekerjaan: jabatan/pekerjaan utama.</span>
-        <span class="row-desc">📌 Ijazah: pendidikan terakhir (SD/SMP/SMA/D3/S1/dll).</span>
-        <span class="row-desc">📌 Rekening: nomor rekening bank (jika ada).</span>
+    <div style="margin-bottom: 12px; display:flex; flex-wrap:wrap; gap:6px;">
+        <span class="row-desc">📌 Pekerjaan: jabatan utama.</span>
+        <span class="row-desc">📌 Ijazah: pendidikan terakhir.</span>
+        <span class="row-desc">📌 Rekening: nomor rekening (opsional).</span>
+    </div>
+    <div class="form-group">
+        <label><strong>Total Pendapatan Keluarga / Bulan</strong></label>
+        <input type="text" id="totalPendapatanKeluarga" readonly placeholder="Rp 0" />
+        <div class="desc">✅ Otomatis dihitung dari jumlah gaji semua anggota.</div>
     </div>
 
-    <!-- ===== BAGIAN III: RINCIAN USAHA ===== -->
+    <!-- ========================================================= -->
+    <!-- BAGIAN III: USAHA -->
     <h2>III. RINCIAN USAHA</h2>
     <div class="sub-section">
         <div class="form-group">
             <label>Jenis Usaha</label>
-            <input type="text" placeholder="Contoh: Dagang, Pertanian" />
-            <div class="desc">⚠️ Jenis usaha utama yang dijalankan keluarga.</div>
+            <input type="text" placeholder="Contoh: Dagang, Pertanian" id="jenisUsaha" />
+            <div class="desc">⚠️ Jenis usaha utama keluarga.</div>
         </div>
         <div class="form-group">
             <label>Jenis Barang Usaha</label>
-            <input type="text" placeholder="Contoh: Sembako, Sayuran" />
-            <div class="desc">⚠️ Komoditas atau barang yang diperjualbelikan.</div>
+            <input type="text" placeholder="Contoh: Sembako, Sayuran" id="jenisBarang" />
+            <div class="desc">⚠️ Komoditas yang diperjualbelikan.</div>
         </div>
         <div class="form-group">
             <label>Tahun Mulai</label>
-            <input type="text" placeholder="Tahun (contoh: 2018)" />
-            <div class="desc">⚠️ Tahun pertama kali usaha ini dimulai.</div>
+            <input type="text" placeholder="Tahun" id="tahunMulai" />
+            <div class="desc">⚠️ Tahun pertama usaha dimulai.</div>
         </div>
         <div class="form-group">
             <label>NIB</label>
-            <input type="text" placeholder="Nomor Induk Berusaha" />
-            <div class="desc">⚠️ NIB jika sudah memiliki (opsional).</div>
+            <input type="text" placeholder="Nomor Induk Berusaha" id="nib" />
+            <div class="desc">⚠️ NIB (opsional).</div>
         </div>
         <div class="form-group">
             <label>Alamat Usaha</label>
-            <textarea placeholder="Alamat lengkap usaha"></textarea>
-            <div class="desc">⚠️ Alamat tempat usaha beroperasi.</div>
+            <textarea placeholder="Alamat lengkap" id="alamatUsaha"></textarea>
+            <div class="desc">⚠️ Alamat tempat usaha.</div>
         </div>
     </div>
 
-    <h3>A. Pengeluaran Usaha</h3>
+    <h3>A. Pengeluaran Usaha (per Bulan)</h3>
     <div class="sub-section">
-        <div class="form-group">
-            <label>Total Upah</label>
-            <input type="text" placeholder="Rp / bulan" />
-            <div class="desc">⚠️ Total upah untuk karyawan (jika ada).</div>
+        <div class="grid-2">
+            <div class="form-group"><label>Total Upah</label><input type="number" placeholder="0" id="upah" oninput="hitungKeuntunganUsaha()" /></div>
+            <div class="form-group"><label>Biaya Produksi</label><input type="number" placeholder="0" id="biayaProduksi" oninput="hitungKeuntunganUsaha()" /></div>
+            <div class="form-group"><label>Biaya Operasional</label><input type="number" placeholder="0" id="biayaOperasional" oninput="hitungKeuntunganUsaha()" /></div>
+            <div class="form-group"><label>Non Operasional</label><input type="number" placeholder="0" id="nonOperasional" oninput="hitungKeuntunganUsaha()" /></div>
         </div>
         <div class="form-group">
-            <label>Biaya Produksi</label>
-            <input type="text" placeholder="Bahan Baku, Pupuk, Pakan / bulan" />
-            <div class="desc">⚠️ Biaya bahan baku, pupuk, pakan per bulan.</div>
-        </div>
-        <div class="form-group">
-            <label>Biaya Operasional</label>
-            <input type="text" placeholder="Listrik, BBM, Sewa, Transport / bulan" />
-            <div class="desc">⚠️ Biaya operasional rutin per bulan.</div>
-        </div>
-        <div class="form-group">
-            <label>Non Operasional</label>
-            <input type="text" placeholder="Pajak, dll / bulan" />
-            <div class="desc">⚠️ Biaya non-operasional seperti pajak per bulan.</div>
+            <label><strong>Total Pengeluaran Usaha</strong></label>
+            <input type="text" id="totalPengeluaranUsaha" readonly placeholder="Rp 0" />
+            <div class="desc">✅ Otomatis dihitung dari semua pengeluaran usaha.</div>
         </div>
     </div>
 
-    <h3>B. Pendapatan Usaha</h3>
+    <h3>B. Pendapatan Usaha (per Bulan)</h3>
     <div class="sub-section">
         <div class="form-group">
             <label>Nilai Penjualan & Jasa (27a)</label>
-            <input type="text" placeholder="Rp / bulan" />
-            <div class="desc">⚠️ Pendapatan dari penjualan barang/jasa per bulan.</div>
+            <input type="number" placeholder="0" id="penjualan" oninput="hitungKeuntunganUsaha()" />
+            <div class="desc">⚠️ Pendapatan dari penjualan barang/jasa.</div>
         </div>
         <div class="form-group">
             <label>Pendapatan Lainnya (27b)</label>
-            <input type="text" placeholder="Rp / bulan" />
-            <div class="desc">⚠️ Pendapatan lain dari usaha (sewa, bunga, dll).</div>
+            <input type="number" placeholder="0" id="pendapatanLain" oninput="hitungKeuntunganUsaha()" />
+            <div class="desc">⚠️ Pendapatan lain dari usaha.</div>
+        </div>
+        <div class="form-group">
+            <label><strong>Total Pendapatan Usaha</strong></label>
+            <input type="text" id="totalPendapatanUsaha" readonly placeholder="Rp 0" />
+            <div class="desc">✅ Otomatis dihitung dari penjualan + pendapatan lain.</div>
+        </div>
+    </div>
+
+    <!-- HIGHLIGHT KEUNTUNGAN USAHA -->
+    <div class="highlight-box">
+        <h4>📊 Keuntungan Usaha (Bersih) per Bulan</h4>
+        <div class="form-group">
+            <label><strong style="font-size:18px;">Keuntungan Usaha</strong></label>
+            <input type="text" id="keuntunganUsaha" readonly placeholder="Rp 0" style="font-size:18px; font-weight:700; color:#075985;" />
+            <div class="desc">✅ Keuntungan = Total Pendapatan Usaha − Total Pengeluaran Usaha.</div>
         </div>
     </div>
 
     <h3>C. Nilai Aset Usaha</h3>
     <div class="sub-section">
-        <div class="form-group">
-            <label>Nilai Aset Tanah & Bangunan</label>
-            <input type="text" placeholder="Rp" />
-            <div class="desc">⚠️ Perkiraan nilai tanah dan bangunan untuk usaha.</div>
-        </div>
-        <div class="form-group">
-            <label>Nilai Aset Selain Tanah</label>
-            <input type="text" placeholder="Rp" />
-            <div class="desc">⚠️ Peralatan, kendaraan, mesin, dll.</div>
-        </div>
-        <div class="form-group">
-            <label>Total Aset</label>
-            <input type="text" placeholder="Otomatis / isi total" />
-            <div class="desc">⚠️ Total nilai aset (tanah+bangunan + selain tanah).</div>
-        </div>
-        <div class="form-group">
-            <label>Luas Bangunan untuk Usaha</label>
-            <input type="text" placeholder="m²" />
-            <div class="desc">⚠️ Luas bangunan yang digunakan khusus untuk usaha.</div>
-        </div>
+        <div class="form-group"><label>Nilai Aset Tanah & Bangunan</label><input type="number" placeholder="0" id="asetTanah" oninput="hitungTotalAset()" /></div>
+        <div class="form-group"><label>Nilai Aset Selain Tanah</label><input type="number" placeholder="0" id="asetLain" oninput="hitungTotalAset()" /></div>
+        <div class="form-group"><label><strong>Total Aset</strong></label><input type="text" id="totalAset" readonly placeholder="Rp 0" /></div>
+        <div class="form-group"><label>Luas Bangunan untuk Usaha</label><input type="number" placeholder="m²" id="luasUsaha" /></div>
     </div>
 
-    <!-- ===== BAGIAN IV: PENGELUARAN KELUARGA ===== -->
+    <!-- ========================================================= -->
+    <!-- BAGIAN IV: PENGELUARAN KELUARGA -->
     <h2>IV. PENGELUARAN KELUARGA</h2>
-    
+
     <h3>A. Pengeluaran Makan</h3>
     <div class="sub-section">
-        <div class="form-group">
-            <label>Beras</label>
-            <input type="text" placeholder="Rp / hari / minggu / bulan" />
-            <div class="desc">⚠️ Biaya beras per hari (atau minggu/bulan, sesuaikan).</div>
+        <div class="grid-2">
+            <div class="form-group"><label>Beras (per hari)</label><input type="number" placeholder="0" id="beras" oninput="hitungTotalMakan()" /></div>
+            <div class="form-group"><label>Sayuran (per hari)</label><input type="number" placeholder="0" id="sayuran" oninput="hitungTotalMakan()" /></div>
+            <div class="form-group"><label>Lauk Pauk (per hari)</label><input type="number" placeholder="0" id="lauk" oninput="hitungTotalMakan()" /></div>
+            <div class="form-group"><label>Minyak Goreng (per minggu)</label><input type="number" placeholder="0" id="minyak" oninput="hitungTotalMakan()" /></div>
+            <div class="form-group"><label>Air Minum Galon (per bulan)</label><input type="number" placeholder="0" id="airGalon" oninput="hitungTotalMakan()" /></div>
         </div>
         <div class="form-group">
-            <label>Sayuran</label>
-            <input type="text" placeholder="Rp / hari" />
-            <div class="desc">⚠️ Pengeluaran sayuran per hari.</div>
-        </div>
-        <div class="form-group">
-            <label>Lauk Pauk</label>
-            <input type="text" placeholder="Rp / hari" />
-            <div class="desc">⚠️ Biaya lauk pauk per hari.</div>
-        </div>
-        <div class="form-group">
-            <label>Total per Hari</label>
-            <input type="text" placeholder="Total makan per hari" />
-            <div class="desc">⚠️ Total pengeluaran makan per hari.</div>
-        </div>
-        <div class="form-group">
-            <label>Minyak Goreng</label>
-            <input type="text" placeholder="Rp / minggu" />
-            <div class="desc">⚠️ Biaya minyak goreng per minggu.</div>
-        </div>
-        <div class="form-group">
-            <label>Total per Minggu</label>
-            <input type="text" placeholder="Total per minggu" />
-            <div class="desc">⚠️ Total pengeluaran makan per minggu (opsional).</div>
-        </div>
-        <div class="form-group">
-            <label>Air Minum (Galon)</label>
-            <input type="text" placeholder="Rp / bulan" />
-            <div class="desc">⚠️ Biaya air minum galon per bulan.</div>
-        </div>
-        <div class="form-group">
-            <label>Total per Bulan</label>
-            <input type="text" placeholder="Total makan per bulan" />
-            <div class="desc">⚠️ Total pengeluaran makan per bulan.</div>
+            <label><strong>Total Pengeluaran Makan per Bulan</strong></label>
+            <input type="text" id="totalMakanBulan" readonly placeholder="Rp 0" />
+            <div class="desc">
+                ✅ Perhitungan: (Beras+Sayuran+Lauk) × 30 + (Minyak × 4) + Air Galon.
+                <br>⚠️ Jika data per minggu/hari sudah sesuai, sesuaikan formulanya di kode.
+            </div>
         </div>
     </div>
 
     <h3>B. Pengeluaran Bukan Makan (Bulanan)</h3>
     <div class="sub-section">
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px 20px;">
-            <div class="form-group"><label>Listrik</label><input placeholder="Rp" /></div>
-            <div class="form-group"><label>Internet/Wifi</label><input placeholder="Rp" /></div>
-            <div class="form-group"><label>Air PAM</label><input placeholder="Rp" /></div>
-            <div class="form-group"><label>LPG/Gas</label><input placeholder="Rp" /></div>
-            <div class="form-group"><label>Pulsa & Paket Data</label><input placeholder="Rp" /></div>
-            <div class="form-group"><label>Bensin</label><input placeholder="Rp" /></div>
-            <div class="form-group"><label>Ongkos Angkutan</label><input placeholder="Rp" /></div>
-            <div class="form-group"><label>Alat Mandi</label><input placeholder="Rp" /></div>
-            <div class="form-group"><label>Alat Cuci Baju</label><input placeholder="Rp" /></div>
-            <div class="form-group"><label>Alat Cuci Piring</label><input placeholder="Rp" /></div>
-            <div class="form-group"><label>Lainnya (bulanan)</label><input placeholder="Rp" /></div>
+        <div class="grid-2">
+            <div class="form-group"><label>Listrik</label><input type="number" placeholder="0" id="listrik" oninput="hitungTotalBukanMakan()" /></div>
+            <div class="form-group"><label>Internet/Wifi</label><input type="number" placeholder="0" id="internet" oninput="hitungTotalBukanMakan()" /></div>
+            <div class="form-group"><label>Air PAM</label><input type="number" placeholder="0" id="airPAM" oninput="hitungTotalBukanMakan()" /></div>
+            <div class="form-group"><label>LPG/Gas</label><input type="number" placeholder="0" id="lpg" oninput="hitungTotalBukanMakan()" /></div>
+            <div class="form-group"><label>Pulsa & Paket Data</label><input type="number" placeholder="0" id="pulsa" oninput="hitungTotalBukanMakan()" /></div>
+            <div class="form-group"><label>Bensin</label><input type="number" placeholder="0" id="bensin" oninput="hitungTotalBukanMakan()" /></div>
+            <div class="form-group"><label>Ongkos Angkutan</label><input type="number" placeholder="0" id="ongkos" oninput="hitungTotalBukanMakan()" /></div>
+            <div class="form-group"><label>Alat Mandi</label><input type="number" placeholder="0" id="alatMandi" oninput="hitungTotalBukanMakan()" /></div>
+            <div class="form-group"><label>Alat Cuci Baju</label><input type="number" placeholder="0" id="cuciBaju" oninput="hitungTotalBukanMakan()" /></div>
+            <div class="form-group"><label>Alat Cuci Piring</label><input type="number" placeholder="0" id="cuciPiring" oninput="hitungTotalBukanMakan()" /></div>
+            <div class="form-group"><label>Lainnya (Bukan Makan)</label><input type="number" placeholder="0" id="lainBukanMakan" oninput="hitungTotalBukanMakan()" /></div>
         </div>
-        <div class="form-group" style="margin-top:8px;">
-            <label>Total Bukan Makan / Bulan</label>
-            <input type="text" placeholder="Total semua pengeluaran bukan makan" />
-            <div class="desc">⚠️ Jumlahkan semua pengeluaran bukan makan per bulan.</div>
+        <div class="form-group">
+            <label><strong>Total Bukan Makan / Bulan</strong></label>
+            <input type="text" id="totalBukanMakan" readonly placeholder="Rp 0" />
         </div>
     </div>
 
-    <h3>Pendidikan & Jasa</h3>
+    <h3>Pendidikan & Jasa (Bulanan)</h3>
     <div class="sub-section">
-        <div class="form-group"><label>Uang SPP Anak</label><input placeholder="Rp / bulan" /></div>
-        <div class="form-group"><label>Uang Jajan</label><input placeholder="Rp / bulan" /></div>
-        <div class="form-group"><label>Potong Rambut</label><input placeholder="Rp / bulan" /></div>
-        <div class="form-group"><label>Jahit/Raju/Permak</label><input placeholder="Rp / bulan" /></div>
-        <div class="form-group"><label>Lainnya (Pendidikan/Jasa)</label><input placeholder="Rp / bulan" /></div>
-        <div class="form-group"><label>Total Pendidikan & Jasa / Bulan</label><input placeholder="Total" /></div>
+        <div class="grid-2">
+            <div class="form-group"><label>Uang SPP Anak</label><input type="number" placeholder="0" id="spp" oninput="hitungTotalPendidikan()" /></div>
+            <div class="form-group"><label>Uang Jajan</label><input type="number" placeholder="0" id="jajan" oninput="hitungTotalPendidikan()" /></div>
+            <div class="form-group"><label>Potong Rambut</label><input type="number" placeholder="0" id="potongRambut" oninput="hitungTotalPendidikan()" /></div>
+            <div class="form-group"><label>Jahit/Permak</label><input type="number" placeholder="0" id="jahit" oninput="hitungTotalPendidikan()" /></div>
+            <div class="form-group"><label>Lainnya (Pendidikan/Jasa)</label><input type="number" placeholder="0" id="lainPendidikan" oninput="hitungTotalPendidikan()" /></div>
+        </div>
+        <div class="form-group">
+            <label><strong>Total Pendidikan & Jasa / Bulan</strong></label>
+            <input type="text" id="totalPendidikan" readonly placeholder="Rp 0" />
+        </div>
     </div>
 
     <h3>PENGELUARAN TAHUNAN</h3>
     <div class="sub-section">
-        <div class="form-group"><label>Beli Baju</label><input placeholder="Rp / bulan" /></div>
-        <div class="form-group"><label>Seragam Sekolah</label><input placeholder="Rp / bulan" /></div>
-        <div class="form-group"><label>Pajak STNK</label><input placeholder="Rp / tahun" /></div>
-        <div class="form-group"><label>Pajak SPPT</label><input placeholder="Rp / tahun" /></div>
-        <div class="form-group"><label>Service Kendaraan</label><input placeholder="Rp / tahun" /></div>
-        <div class="form-group"><label>Perbaikan Rumah/Cat</label><input placeholder="Rp / tahun" /></div>
-        <div class="form-group"><label>Buku & Perlengkapan Sekolah</label><input placeholder="Rp / tahun" /></div>
-        <div class="form-group"><label>Hajatan</label><input placeholder="Rp / tahun" /></div>
-        <div class="form-group"><label>Iuran Hari Besar</label><input placeholder="Rp / tahun" /></div>
-        <div class="form-group"><label>Lainnya (Tahunan)</label><input placeholder="Rp / tahun" /></div>
-        <div class="form-group"><label><strong>TOTAL PENGELUARAN TAHUNAN</strong></label>
-            <input type="text" placeholder="Total semua pengeluaran tahunan" />
+        <div class="grid-2">
+            <div class="form-group"><label>Beli Baju</label><input type="number" placeholder="0" id="beliBaju" oninput="hitungTotalTahunan()" /></div>
+            <div class="form-group"><label>Seragam Sekolah</label><input type="number" placeholder="0" id="seragam" oninput="hitungTotalTahunan()" /></div>
+            <div class="form-group"><label>Pajak STNK</label><input type="number" placeholder="0" id="pajakSTNK" oninput="hitungTotalTahunan()" /></div>
+            <div class="form-group"><label>Pajak SPPT</label><input type="number" placeholder="0" id="pajakSPPT" oninput="hitungTotalTahunan()" /></div>
+            <div class="form-group"><label>Service Kendaraan</label><input type="number" placeholder="0" id="service" oninput="hitungTotalTahunan()" /></div>
+            <div class="form-group"><label>Perbaikan Rumah/Cat</label><input type="number" placeholder="0" id="perbaikan" oninput="hitungTotalTahunan()" /></div>
+            <div class="form-group"><label>Buku & Perlengkapan Sekolah</label><input type="number" placeholder="0" id="buku" oninput="hitungTotalTahunan()" /></div>
+            <div class="form-group"><label>Hajatan</label><input type="number" placeholder="0" id="hajatan" oninput="hitungTotalTahunan()" /></div>
+            <div class="form-group"><label>Iuran Hari Besar</label><input type="number" placeholder="0" id="iuran" oninput="hitungTotalTahunan()" /></div>
+            <div class="form-group"><label>Lainnya (Tahunan)</label><input type="number" placeholder="0" id="lainTahunan" oninput="hitungTotalTahunan()" /></div>
+        </div>
+        <div class="form-group">
+            <label><strong>TOTAL PENGELUARAN TAHUNAN</strong></label>
+            <input type="text" id="totalTahunan" readonly placeholder="Rp 0" />
         </div>
     </div>
 
-    <!-- ===== DATA ASET DAN KONDISI ===== -->
+    <!-- ========================================================= -->
+    <!-- DATA ASET DAN KONDISI -->
     <h2>DATA ASET DAN KONDISI RUMAH TANGGA</h2>
     <div class="sub-section">
-        <div class="form-group"><label>Luas Bangunan Tempat Tinggal</label><input placeholder="m²" /></div>
-        <div class="form-group"><label>Luas Tanah yang Ditempati</label><input placeholder="m²" /></div>
-        <div class="form-group"><label>Tanah Selain yang Ditempati</label><input placeholder="m²" /></div>
-        <div class="form-group"><label>Nilai Aset Tanah dan Bangunan</label><input placeholder="Rp" /></div>
-        <div class="form-group"><label>Jumlah Motor</label><input type="number" placeholder="0" /></div>
-        <div class="form-group"><label>Jumlah Mobil</label><input type="number" placeholder="0" /></div>
-        <div class="form-group"><label>Jumlah Emas</label><input type="text" placeholder="gram / jumlah" /></div>
-        <div class="form-group"><label>Riwayat Penyakit</label><textarea placeholder="Sebutkan penyakit kronis/riwayat"></textarea></div>
-        <div class="form-group"><label>Disabilitas Keluarga</label><textarea placeholder="Jenis disabilitas jika ada"></textarea></div>
+        <div class="grid-2">
+            <div class="form-group"><label>Luas Bangunan Tempat Tinggal</label><input type="number" placeholder="m²" id="luasBangunan" /></div>
+            <div class="form-group"><label>Luas Tanah yang Ditempati</label><input type="number" placeholder="m²" id="luasTanah" /></div>
+            <div class="form-group"><label>Tanah Selain yang Ditempati</label><input type="number" placeholder="m²" id="tanahLain" /></div>
+            <div class="form-group"><label>Nilai Aset Tanah & Bangunan</label><input type="number" placeholder="Rp" id="nilaiProperti" /></div>
+            <div class="form-group"><label>Jumlah Motor</label><input type="number" placeholder="0" id="jmlMotor" /></div>
+            <div class="form-group"><label>Jumlah Mobil</label><input type="number" placeholder="0" id="jmlMobil" /></div>
+            <div class="form-group"><label>Jumlah Emas</label><input type="text" placeholder="gram" id="jmlEmas" /></div>
+        </div>
+        <div class="form-group"><label>Riwayat Penyakit</label><textarea placeholder="Sebutkan penyakit kronis" id="riwayatPenyakit"></textarea></div>
+        <div class="form-group"><label>Disabilitas Keluarga</label><textarea placeholder="Jenis disabilitas" id="disabilitas"></textarea></div>
     </div>
 
-    <!-- ===== SUBMIT ===== -->
-    <div style="display:flex; justify-content:center; margin-top:30px;">
-        <button class="btn-submit" type="submit">Simpan Kuesioner</button>
+    <!-- ========================================================= -->
+    <!-- RINGKASAN EKONOMI -->
+    <h2>📊 RINGKASAN EKONOMI KELUARGA</h2>
+    <div class="highlight-box" style="background:#f1f5f9; border-left-color:#0b7e3d;">
+        <div class="grid-2">
+            <div class="form-group"><label>Total Pendapatan Keluarga</label><input type="text" id="ringkasanPendapatan" readonly placeholder="Rp 0" /></div>
+            <div class="form-group"><label>Keuntungan Usaha (jika ada)</label><input type="text" id="ringkasanKeuntungan" readonly placeholder="Rp 0" /></div>
+            <div class="form-group"><label>Total Pengeluaran Bulanan (Makan+BukanMakan+Pendidikan)</label><input type="text" id="ringkasanPengeluaran" readonly placeholder="Rp 0" /></div>
+            <div class="form-group"><label><strong>Selisih Pendapatan - Pengeluaran</strong></label><input type="text" id="ringkasanSelisih" readonly placeholder="Rp 0" style="font-weight:700; color:#075985;" /></div>
+        </div>
     </div>
-    <p style="text-align:center; margin-top:16px; color:#4a5568; font-size:14px;">
+
+    <div class="btn-center">
+        <button class="btn-submit" type="button" onclick="simpanKuesioner()">💾 Simpan Kuesioner</button>
+    </div>
+    <p style="text-align:center; margin-top:14px; color:#475569; font-size:14px;">
         Pastikan semua data terisi dengan benar sebelum menyimpan.
     </p>
 </div>
+
+<script>
+    // ===== FUNGSI PERHITUNGAN OTOMATIS =====
+
+    // 1. Total Pendapatan Keluarga (dari tabel gaji)
+    function hitungTotalPendapatan() {
+        const gajiInputs = document.querySelectorAll('.gajiPekerja');
+        let total = 0;
+        gajiInputs.forEach(inp => {
+            const val = parseFloat(inp.value) || 0;
+            total += val;
+        });
+        document.getElementById('totalPendapatanKeluarga').value = formatRupiah(total);
+        updateRingkasan();
+    }
+
+    // 2. Keuntungan Usaha
+    function hitungKeuntunganUsaha() {
+        // Pengeluaran
+        const upah = parseFloat(document.getElementById('upah').value) || 0;
+        const produksi = parseFloat(document.getElementById('biayaProduksi').value) || 0;
+        const operasional = parseFloat(document.getElementById('biayaOperasional').value) || 0;
+        const nonOp = parseFloat(document.getElementById('nonOperasional').value) || 0;
+        const totalPengeluaran = upah + produksi + operasional + nonOp;
+        document.getElementById('totalPengeluaranUsaha').value = formatRupiah(totalPengeluaran);
+
+        // Pendapatan
+        const penjualan = parseFloat(document.getElementById('penjualan').value) || 0;
+        const pendLain = parseFloat(document.getElementById('pendapatanLain').value) || 0;
+        const totalPendapatan = penjualan + pendLain;
+        document.getElementById('totalPendapatanUsaha').value = formatRupiah(totalPendapatan);
+
+        // Keuntungan
+        const keuntungan = totalPendapatan - totalPengeluaran;
+        document.getElementById('keuntunganUsaha').value = formatRupiah(keuntungan);
+        updateRingkasan();
+    }
+
+    // 3. Total Aset Usaha
+    function hitungTotalAset() {
+        const tanah = parseFloat(document.getElementById('asetTanah').value) || 0;
+        const lain = parseFloat(document.getElementById('asetLain').value) || 0;
+        const total = tanah + lain;
+        document.getElementById('totalAset').value = formatRupiah(total);
+    }
+
+    // 4. Total Pengeluaran Makan per Bulan
+    function hitungTotalMakan() {
+        const beras = parseFloat(document.getElementById('beras').value) || 0;
+        const sayur = parseFloat(document.getElementById('sayuran').value) || 0;
+        const lauk = parseFloat(document.getElementById('lauk').value) || 0;
+        const minyak = parseFloat(document.getElementById('minyak').value) || 0; // per minggu
+        const galon = parseFloat(document.getElementById('airGalon').value) || 0; // per bulan
+
+        // Asumsi: beras+sayur+lauk per hari, minyak per minggu, galon per bulan
+        const totalBulan = (beras + sayur + lauk) * 30 + (minyak * 4) + galon;
+        document.getElementById('totalMakanBulan').value = formatRupiah(totalBulan);
+        updateRingkasan();
+    }
+
+    // 5. Total Bukan Makan
+    function hitungTotalBukanMakan() {
+        const ids = ['listrik','internet','airPAM','lpg','pulsa','bensin','ongkos','alatMandi','cuciBaju','cuciPiring','lainBukanMakan'];
+        let total = 0;
+        ids.forEach(id => {
+            total += parseFloat(document.getElementById(id).value) || 0;
+        });
+        document.getElementById('totalBukanMakan').value = formatRupiah(total);
+        updateRingkasan();
+    }
+
+    // 6. Total Pendidikan & Jasa
+    function hitungTotalPendidikan() {
+        const ids = ['spp','jajan','potongRambut','jahit','lainPendidikan'];
+        let total = 0;
+        ids.forEach(id => {
+            total += parseFloat(document.getElementById(id).value) || 0;
+        });
+        document.getElementById('totalPendidikan').value = formatRupiah(total);
+        updateRingkasan();
+    }
+
+    // 7. Total Pengeluaran Tahunan
+    function hitungTotalTahunan() {
+        const ids = ['beliBaju','seragam','pajakSTNK','pajakSPPT','service','perbaikan','buku','hajatan','iuran','lainTahunan'];
+        let total = 0;
+        ids.forEach(id => {
+            total += parseFloat(document.getElementById(id).value) || 0;
+        });
+        document.getElementById('totalTahunan').value = formatRupiah(total);
+    }
+
+    // 8. Ringkasan Ekonomi
+    function updateRingkasan() {
+        const pendapatan = parseFloat(document.getElementById('totalPendapatanKeluarga').value.replace(/[^0-9\-]/g,'')) || 0;
+        const keuntungan = parseFloat(document.getElementById('keuntunganUsaha').value.replace(/[^0-9\-]/g,'')) || 0;
+        const makan = parseFloat(document.getElementById('totalMakanBulan').value.replace(/[^0-9\-]/g,'')) || 0;
+        const bukanMakan = parseFloat(document.getElementById('totalBukanMakan').value.replace(/[^0-9\-]/g,'')) || 0;
+        const pendidikan = parseFloat(document.getElementById('totalPendidikan').value.replace(/[^0-9\-]/g,'')) || 0;
+
+        const totalPengeluaran = makan + bukanMakan + pendidikan;
+        const totalPendapatan = pendapatan + keuntungan; // pendapatan dari gaji + keuntungan usaha
+
+        document.getElementById('ringkasanPendapatan').value = formatRupiah(totalPendapatan);
+        document.getElementById('ringkasanKeuntungan').value = formatRupiah(keuntungan);
+        document.getElementById('ringkasanPengeluaran').value = formatRupiah(totalPengeluaran);
+        document.getElementById('ringkasanSelisih').value = formatRupiah(totalPendapatan - totalPengeluaran);
+    }
+
+    // ===== UTILITY =====
+    function formatRupiah(angka) {
+        if (angka < 0) return '- Rp ' + Math.abs(angka).toLocaleString('id-ID');
+        return 'Rp ' + angka.toLocaleString('id-ID');
+    }
+
+    // ===== SIMULASI SIMPAN =====
+    function simpanKuesioner() {
+        alert('✅ Data kuesioner berhasil disimpan (simulasi).\n\n' +
+              'Total Pendapatan Keluarga: ' + document.getElementById('totalPendapatanKeluarga').value + '\n' +
+              'Keuntungan Usaha: ' + document.getElementById('keuntunganUsaha').value + '\n' +
+              'Selisih Pendapatan - Pengeluaran: ' + document.getElementById('ringkasanSelisih').value);
+    }
+
+    // Panggil sekali di awal untuk inisialisasi
+    window.onload = function() {
+        hitungTotalPendapatan();
+        hitungKeuntunganUsaha();
+        hitungTotalAset();
+        hitungTotalMakan();
+        hitungTotalBukanMakan();
+        hitungTotalPendidikan();
+        hitungTotalTahunan();
+        updateRingkasan();
+    };
+
+    // Event listener untuk semua input number agar update otomatis
+    document.addEventListener('input', function(e) {
+        if (e.target.tagName === 'INPUT' && e.target.type === 'number') {
+            // Trigger semua perhitungan (cukup panggil ulang)
+            hitungTotalPendapatan();
+            hitungKeuntunganUsaha();
+            hitungTotalAset();
+            hitungTotalMakan();
+            hitungTotalBukanMakan();
+            hitungTotalPendidikan();
+            hitungTotalTahunan();
+            updateRingkasan();
+        }
+    });
+</script>
 </body>
 </html>
