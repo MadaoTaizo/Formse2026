@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>Form Data Keluarga</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+    }
+
+    body {
+      background: #e6e9f0;
+      min-height: 100vh;
+      padding: 16px 12px 40px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .container {
+      max-width: 720px;
+      width: 100%;
+      background: #ffffff;
+      border-radius: 32px;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+      padding: 24px 20px 32px;
+      transition: 0.2s;
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: #0b1a33;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+      letter-spacing: -0.3px;
+    }
+
+    h1 small {
+      font-size: 0.9rem;
+      font-weight: 400;
+      color: #4a5b7a;
+      margin-left: 6px;
+    }
+
+    .subhead {
+      color: #4a5b7a;
+      font-size: 0.95rem;
+      border-left: 4px solid #2a7de1;
+      padding-left: 14px;
+      margin-bottom: 28px;
+      background: #f2f6fc;
+      border-radius: 0 12px 12px 0;
+      line-height: 1.4;
+    }
+
+    .section {
+      background: #f9faff;
+      border-radius: 24px;
+      padding: 18px 16px 16px;
+      margin-bottom: 24px;
+      border: 1px solid #eef2f8;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: #0b1a33;
+      margin-bottom: 16px;
+      border-bottom: 2px dashed #d0dae8;
+      padding-bottom: 10px;
+    }
+
+    .section-title i {
+      color: #2a7de1;
+      width: 24px;
+      font-size: 1.2rem;
+    }
+
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 10px;
+      margin-bottom: 8px;
+    }
+
+    .field {
+      flex: 1 1 calc(50% - 10px);
+      min-width: 140px;
+    }
+
+    .field.full {
+      flex: 1 1 100%;
+    }
+
+    .field label {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      color: #3d4f6e;
+      margin-bottom: 2px;
+    }
+
+    .field input, .field select {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #d8e0ec;
+      border-radius: 16px;
+      font-size: 0.95rem;
+      background: white;
+      transition: 0.15s;
+      color: #0b1a33;
+    }
+
+    .field input:focus, .field select:focus {
+      outline: 2px solid #2a7de1;
+      border-color: transparent;
+      background: white;
+      box-shadow: 0 4px 10px rgba(42, 125, 225, 0.08);
+    }
+
+    .field input::placeholder {
+      color: #a0b2cc;
+      font-weight: 400;
+      font-size: 0.85rem;
+    }
+
+    .inline-badge {
+      display: inline-block;
+      background: #eaf1fe;
+      color: #1e4f8a;
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 2px 12px;
+      border-radius: 30px;
+      margin-left: 6px;
+      letter-spacing: 0.3px;
+    }
+
+    .photo-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin: 6px 0 4px;
+    }
+
+    .photo-item {
+      background: #eef3fc;
+      border-radius: 40px;
+      padding: 6px 18px 6px 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: #1a2d4a;
+      border: 1px solid #dce5f2;
+    }
+
+    .photo-item i {
+      color: #2a7de1;
+      font-size: 1rem;
+    }
+
+    .warning-tag {
+      background: #fef4e6;
+      border: 1px solid #fadc9f;
+      border-radius: 40px;
+      padding: 6px 16px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 600;
+      font-size: 0.8rem;
+      color: #a8681a;
+      margin-top: 4px;
+    }
+
+    .btn-wa {
+      background: #25D366;
+      color: white;
+      border: none;
+      border-radius: 60px;
+      padding: 16px 20px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      width: 100%;
+      margin-top: 12px;
+      transition: 0.15s;
+      box-shadow: 0 8px 18px rgba(37, 211, 102, 0.25);
+      cursor: pointer;
+    }
+
+    .btn-wa i {
+      font-size: 1.6rem;
+    }
+
+    .btn-wa:active {
+      transform: scale(0.97);
+      box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3);
+    }
+
+    .footer-note {
+      text-align: center;
+      font-size: 0.75rem;
+      color: #7a8aa3;
+      margin-top: 20px;
+      border-top: 1px solid #e6edf6;
+      padding-top: 18px;
+      letter-spacing: 0.2px;
+    }
+
+    .field .hint {
+      font-size: 0.7rem;
+      color: #6f82a0;
+      margin-top: 2px;
+      padding-left: 6px;
+    }
+
+    .row .field.half {
+      flex: 1 1 calc(50% - 10px);
+    }
+
+    @media (max-width: 480px) {
+      .container { padding: 16px; }
+      .field { flex: 1 1 100%; }
+      .row .field.half { flex: 1 1 100%; }
+      .photo-item { padding: 4px 12px; font-size: 0.75rem; }
+      h1 { font-size: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="container" id="app">
+  <h1>
+    <i class="fas fa-users" style="color:#1f4e8a;"></i> KELUARGA
+    <small>SLS</small>
+  </h1>
+  <div class="subhead">
+    <i class="fas fa-pen-fancy" style="margin-right: 6px;"></i> isi data dengan lengkap & ceklis foto
+  </div>
+
+  <!-- KELUARGA -->
+  <div class="section">
+    <div class="section-title"><i class="fas fa-user-circle"></i> Kepala Keluarga</div>
+    <div class="row">
+      <div class="field full"><label>NAMA KEPALA KELUARGA</label><input type="text" id="namaKK" placeholder="Nama lengkap" value=""></div>
+    </div>
+    <div class="row">
+      <div class="field"><label>NO. UB</label><input type="text" id="noUB" placeholder="Nomor UB" value=""></div>
+      <div class="field"><label>JML ANGGOTA</label><input type="text" id="jmlAnggota" placeholder="Jumlah" value=""></div>
+    </div>
+    <div class="row">
+      <div class="field full"><label><i class="fas fa-camera" style="margin-right: 6px;"></i> FOTO KK</label><input type="text" id="fotoKK" placeholder="Nama file / keterangan" value=""></div>
+    </div>
+    <div class="row">
+      <div class="field"><label><i class="fas fa-phone-alt"></i> NO TLP/WA</label><input type="text" id="noWA" placeholder="08xx" value=""></div>
+      <div class="field"><label>AWAS LUPA</label><input type="text" id="awasLupa" placeholder="catatan" value=""></div>
+    </div>
+
+    <div style="margin-top: 10px; background: #f2f6fd; border-radius: 40px; padding: 12px 16px;">
+      <div style="display: flex; flex-wrap: wrap; gap: 8px 16px;">
+        <span style="font-weight: 600; color:#1a2d4a;"><i class="fas fa-map-pin"></i> GEOTAGGING</span>
+        <span style="font-weight: 600; color:#1a2d4a;"><i class="fas fa-image"></i> FOTO RUANG TAMU</span>
+        <span style="font-weight: 600; color:#1a2d4a;"><i class="fas fa-home"></i> FOTO DEPAN RMH</span>
+        <span style="font-weight: 600; color:#1a2d4a;"><i class="fas fa-bolt"></i> FOTO METERAN LISTRIK</span>
+      </div>
+      <div class="photo-grid" style="margin-top: 8px;">
+        <span class="photo-item"><i class="fas fa-check-circle" style="color:#25a56a;"></i> geo</span>
+        <span class="photo-item"><i class="fas fa-check-circle" style="color:#25a56a;"></i> ruang tamu</span>
+        <span class="photo-item"><i class="fas fa-check-circle" style="color:#25a56a;"></i> depan rumah</span>
+        <span class="photo-item"><i class="fas fa-check-circle" style="color:#25a56a;"></i> meteran</span>
+      </div>
+      <div class="warning-tag"><i class="fas fa-exclamation-triangle"></i> pastikan semua foto tersimpan</div>
+    </div>
+
+    <div class="row" style="margin-top: 12px;">
+      <div class="field"><label>NO. METER/ID</label><input type="text" id="noMeter" placeholder="ID meter" value=""></div>
+      <div class="field"><label>KWH WATT</label><input type="text" id="kwhWatt" placeholder="Daya terpasang" value=""></div>
+    </div>
+  </div>
+
+  <!-- PEKERJAAN & USAHA -->
+  <div class="section">
+    <div class="section-title"><i class="fas fa-briefcase"></i> Pekerjaan & Usaha</div>
+    <div class="row">
+      <div class="field"><label>KK</label><input type="text" id="pekerjaanKK" placeholder="Pekerjaan KK" value=""></div>
+      <div class="field"><label>ISTRI</label><input type="text" id="pekerjaanIstri" placeholder="Pekerjaan Istri" value=""></div>
+    </div>
+    <div class="row">
+      <div class="field"><label>ANAK</label><input type="text" id="pekerjaanAnak" placeholder="Pekerjaan anak" value=""></div>
+      <div class="field"><label>GAJI</label><input type="text" id="gaji" placeholder="Total gaji" value=""></div>
+    </div>
+    <div style="border-top: 1px dashed #d0dae8; margin: 12px 0 12px;"></div>
+    <div class="row">
+      <div class="field"><label>JENIS USAHA</label><input type="text" id="jenisUsaha" placeholder="Jenis" value=""></div>
+      <div class="field"><label>TAHUN</label><input type="text" id="tahunUsaha" placeholder="Tahun berdiri" value=""></div>
+    </div>
+    <div class="row">
+      <div class="field"><label>MODAL</label><input type="text" id="modalUsaha" placeholder="Modal" value=""></div>
+      <div class="field"><label>BIAYA PRODUKSI</label><input type="text" id="biayaProduksi" placeholder="Biaya" value=""></div>
+    </div>
+    <div class="row">
+      <div class="field"><label>PENDAPATAN</label><input type="text" id="pendapatan" placeholder="Pendapatan" value=""></div>
+      <div class="field"><label>KARYAWAN</label><input type="text" id="karyawan" placeholder="Jumlah" value=""></div>
+    </div>
+    <div class="row">
+      <div class="field"><label>UPAH</label><input type="text" id="upah" placeholder="Upah karyawan" value=""></div>
+      <div class="field"><label>LOKASI</label><input type="text" id="lokasiUsaha" placeholder="Lokasi" value=""></div>
+    </div>
+    <div class="row">
+      <div class="field full"><label>NO NIB</label><input type="text" id="noNIB" placeholder="Nomor NIB" value=""></div>
+    </div>
+  </div>
+
+  <!-- PENGELUARAN & ASET -->
+  <div class="section">
+    <div class="section-title"><i class="fas fa-wallet"></i> Pengeluaran & Aset</div>
+    <div class="row">
+      <div class="field"><label>MKN 7 HARI</label><input type="text" id="mkn7" placeholder="Makanan 7 hari" value=""></div>
+      <div class="field"><label>NON MKN</label><input type="text" id="nonMkn" placeholder="Non makanan" value=""></div>
+    </div>
+    <div class="row">
+      <div class="field"><label>INTERNET</label><input type="text" id="internet" placeholder="Biaya internet" value=""></div>
+      <div class="field"><label>LISTRIK</label><input type="text" id="listrik" placeholder="Biaya listrik" value=""></div>
+    </div>
+    <div class="row">
+      <div class="field"><label>KULKAS</label><input type="text" id="kulkas" placeholder="Jumlah / biaya" value=""></div>
+      <div class="field"><label>AC</label><input type="text" id="ac" placeholder="Jumlah / biaya" value=""></div>
+    </div>
+    <div class="row">
+      <div class="field"><label>LAPTOP/PC</label><input type="text" id="laptop" placeholder="Jumlah" value=""></div>
+      <div class="field"><label>MOBIL</label><input type="text" id="mobil" placeholder="Jumlah" value=""></div>
+    </div>
+    <div class="row">
+      <div class="field"><label>NILAI (aset)</label><input type="text" id="nilaiAset" placeholder="Nilai aset" value=""></div>
+      <div class="field"><label>ASET</label><input type="text" id="asetLain" placeholder="Aset lain" value=""></div>
+    </div>
+    <div class="row">
+      <div class="field"><label>GAS 3KG/5</label><input type="text" id="gas" placeholder="Jumlah tabung" value=""></div>
+      <div class="field"><label>EMAS</label><input type="text" id="emas" placeholder="Gram / nilai" value=""></div>
+    </div>
+    <div class="row">
+      <div class="field full"><label>NILAI (emas)</label><input type="text" id="nilaiEmas" placeholder="Nilai emas" value=""></div>
+    </div>
+  </div>
+
+  <!-- TEMPAT TINGGAL -->
+  <div class="section">
+    <div class="section-title"><i class="fas fa-building"></i> Tempat Tinggal</div>
+    <div class="row">
+      <div class="field"><label>MILIK/SEWA</label><input type="text" id="milikSewa" placeholder="Milik / Sewa" value=""></div>
+      <div class="field"><label>NILAI ASET</label><input type="text" id="nilaiAsetTempat" placeholder="Nilai properti" value=""></div>
+    </div>
+  </div>
+
+  <!-- KIRIM WA -->
+  <button class="btn-wa" id="sendWA">
+    <i class="fab fa-whatsapp"></i> Kirim ke WhatsApp
+  </button>
+  <div class="footer-note">
+    <i class="fas fa-check-circle" style="color:#25a56a;"></i> data akan diformat rapi & dikirim via WhatsApp
+  </div>
+</div>
+
+<script>
+  (function() {
+    const sendBtn = document.getElementById('sendWA');
+
+    function getVal(id) {
+      const el = document.getElementById(id);
+      return el ? el.value.trim() : '';
+    }
+
+    function buildMessage() {
+      const namaKK = getVal('namaKK') || '-';
+      const noUB = getVal('noUB') || '-';
+      const jmlAnggota = getVal('jmlAnggota') || '-';
+      const fotoKK = getVal('fotoKK') || '-';
+      const noWA = getVal('noWA') || '-';
+      const awasLupa = getVal('awasLupa') || '-';
+      const noMeter = getVal('noMeter') || '-';
+      const kwhWatt = getVal('kwhWatt') || '-';
+      const pekerjaanKK = getVal('pekerjaanKK') || '-';
+      const pekerjaanIstri = getVal('pekerjaanIstri') || '-';
+      const pekerjaanAnak = getVal('pekerjaanAnak') || '-';
+      const gaji = getVal('gaji') || '-';
+      const jenisUsaha = getVal('jenisUsaha') || '-';
+      const tahunUsaha = getVal('tahunUsaha') || '-';
+      const modalUsaha = getVal('modalUsaha') || '-';
+      const biayaProduksi = getVal('biayaProduksi') || '-';
+      const pendapatan = getVal('pendapatan') || '-';
+      const karyawan = getVal('karyawan') || '-';
+      const upah = getVal('upah') || '-';
+      const lokasiUsaha = getVal('lokasiUsaha') || '-';
+      const noNIB = getVal('noNIB') || '-';
+      const mkn7 = getVal('mkn7') || '-';
+      const nonMkn = getVal('nonMkn') || '-';
+      const internet = getVal('internet') || '-';
+      const listrik = getVal('listrik') || '-';
+      const kulkas = getVal('kulkas') || '-';
+      const ac = getVal('ac') || '-';
+      const laptop = getVal('laptop') || '-';
+      const mobil = getVal('mobil') || '-';
+      const nilaiAset = getVal('nilaiAset') || '-';
+      const asetLain = getVal('asetLain') || '-';
+      const gas = getVal('gas') || '-';
+      const emas = getVal('emas') || '-';
+      const nilaiEmas = getVal('nilaiEmas') || '-';
+      const milikSewa = getVal('milikSewa') || '-';
+      const nilaiAsetTempat = getVal('nilaiAsetTempat') || '-';
+
+      // format rapi seperti di gambar
+      return `📋 *DATA KELUARGA* 
+━━━━━━━━━━━━━━━━━━
+👨‍👩‍👧‍👦 *KEPALA KELUARGA*  
+NAMA : ${namaKK}  
+NO. UB : ${noUB}  
+JML ANGGOTA : ${jmlAnggota}  
+FOTO KK : ${fotoKK}  
+NO TLP/WA : ${noWA}  
+AWAS LUPA : ${awasLupa}  
+
+📍 *GEOTAGGING & FOTO*  
+✅ Geotagging | Foto ruang tamu  
+✅ Foto depan rmh | Foto meteran  
+NO. METER/ID : ${noMeter}  
+KWH WATT : ${kwhWatt}  
+
+💼 *PEKERJAAN*  
+KK : ${pekerjaanKK}  
+ISTRI : ${pekerjaanIstri}  
+ANAK : ${pekerjaanAnak}  
+GAJI : ${gaji}  
+
+🏪 *USAHA*  
+JENIS : ${jenisUsaha}  
+TAHUN : ${tahunUsaha}  
+MODAL : ${modalUsaha}  
+BIAYA PRODUKSI : ${biayaProduksi}  
+PENDAPATAN : ${pendapatan}  
+KARYAWAN : ${karyawan}  
+UPAH : ${upah}  
+LOKASI : ${lokasiUsaha}  
+NO NIB : ${noNIB}  
+
+💸 *PENGELUARAN*  
+MKN 7 HARI : ${mkn7}  
+NON MKN : ${nonMkn}  
+INTERNET : ${internet}  
+LISTRIK : ${listrik}  
+KULKAS : ${kulkas}  
+AC : ${ac}  
+LAPTOP/PC : ${laptop}  
+MOBIL : ${mobil}  
+NILAI ASET : ${nilaiAset}  
+ASET : ${asetLain}  
+GAS 3KG/5 : ${gas}  
+EMAS : ${emas}  
+NILAI EMAS : ${nilaiEmas}  
+
+🏠 *TEMPAT TINGGAL*  
+MILIK/SEWA : ${milikSewa}  
+NILAI ASET : ${nilaiAsetTempat}  
+━━━━━━━━━━━━━━━━━━
+📅 dikirim dari form data keluarga`;
+    }
+
+    sendBtn.addEventListener('click', function() {
+      const message = buildMessage();
+      // encode untuk URL
+      const encoded = encodeURIComponent(message);
+      // nomor tujuan (ganti dengan nomor tujuan, misal 6281234567890)
+      // default: gunakan nomor kosong agar user bisa memilih kontak
+      const phone = '+62895700341213'; // kosongkan agar user pilih kontak sendiri
+      const url = `https://wa.me/${phone}?text=${encoded}`;
+      window.open(url, '_blank');
+    });
+
+  })();
+</script>
+</body>
+</html>
