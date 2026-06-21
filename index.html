@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-  <title>Form Data Keluarga</title>
+  <title>Form Data Keluarga - Smart</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
     * {
@@ -137,16 +137,22 @@
       font-size: 0.85rem;
     }
 
-    .inline-badge {
-      display: inline-block;
-      background: #eaf1fe;
-      color: #1e4f8a;
+    .field .recommendation {
+      display: block;
       font-size: 0.7rem;
-      font-weight: 600;
-      padding: 2px 12px;
-      border-radius: 30px;
-      margin-left: 6px;
-      letter-spacing: 0.3px;
+      color: #2a7de1;
+      margin-top: 3px;
+      padding-left: 6px;
+      font-weight: 500;
+      min-height: 18px;
+    }
+
+    .field .recommendation.warning {
+      color: #e67e22;
+    }
+
+    .field .recommendation.success {
+      color: #27ae60;
     }
 
     .photo-grid {
@@ -226,39 +232,37 @@
       letter-spacing: 0.2px;
     }
 
-    .field .hint {
-      font-size: 0.7rem;
-      color: #6f82a0;
-      margin-top: 2px;
-      padding-left: 6px;
+    .total-box {
+      background: #eaf4ff;
+      border-radius: 16px;
+      padding: 12px 16px;
+      margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: space-between;
     }
 
-    .row .field.half {
-      flex: 1 1 calc(50% - 10px);
+    .total-item {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #0b1a33;
     }
 
-    .example-box {
-      background: #fffbf0;
-      border-left: 3px solid #f59e0b;
-      padding: 8px 12px;
-      border-radius: 8px;
-      font-size: 0.75rem;
-      color: #92400e;
-      margin-top: 3px;
-      line-height: 1.3;
-      font-weight: 500;
+    .total-item span {
+      font-weight: 400;
+      color: #2a7de1;
     }
 
-    .info-box {
-      background: #dbeafe;
-      border-left: 3px solid #3b82f6;
-      padding: 8px 12px;
-      border-radius: 8px;
-      font-size: 0.75rem;
-      color: #1e40af;
-      margin-top: 3px;
-      line-height: 1.3;
-      font-weight: 500;
+    .badge-sm {
+      display: inline-block;
+      background: #2a7de1;
+      color: white;
+      font-size: 0.6rem;
+      border-radius: 30px;
+      padding: 2px 10px;
+      margin-left: 6px;
+      font-weight: 700;
     }
 
     @media (max-width: 480px) {
@@ -284,41 +288,35 @@
   <div class="section">
     <div class="section-title"><i class="fas fa-user-circle"></i> Kepala Keluarga</div>
     <div class="row">
-      <div class="field full">
-        <label>NAMA KEPALA KELUARGA</label>
+      <div class="field full"><label>NAMA KEPALA KELUARGA</label>
         <input type="text" id="namaKK" placeholder="Nama lengkap" value="">
-        <div class="example-box">Contoh: Budi Santoso atau Siti Nurhaliza</div>
+        <span class="recommendation" id="rec-namaKK"></span>
       </div>
     </div>
     <div class="row">
-      <div class="field">
-        <label>NO. UB</label>
+      <div class="field"><label>NO. UB</label>
         <input type="text" id="noUB" placeholder="Nomor UB" value="">
-        <div class="example-box">Nomor Unit Blok dari kartu keluarga</div>
+        <span class="recommendation" id="rec-noUB"></span>
       </div>
-      <div class="field">
-        <label>JML ANGGOTA</label>
-        <input type="text" id="jmlAnggota" placeholder="Jumlah" value="">
-        <div class="example-box">Contoh: 4 atau 5 orang</div>
+      <div class="field"><label>JML ANGGOTA</label>
+        <input type="number" id="jmlAnggota" placeholder="Jumlah" value="" min="1" max="20">
+        <span class="recommendation" id="rec-jmlAnggota"></span>
       </div>
     </div>
     <div class="row">
-      <div class="field full">
-        <label><i class="fas fa-camera" style="margin-right: 6px;"></i> FOTO KK</label>
+      <div class="field full"><label><i class="fas fa-camera" style="margin-right: 6px;"></i> FOTO KK</label>
         <input type="text" id="fotoKK" placeholder="Nama file / keterangan" value="">
-        <div class="example-box">Contoh: KK_001.jpg atau ✓ Sudah diambil</div>
+        <span class="recommendation" id="rec-fotoKK"></span>
       </div>
     </div>
     <div class="row">
-      <div class="field">
-        <label><i class="fas fa-phone-alt"></i> NO TLP/WA</label>
+      <div class="field"><label><i class="fas fa-phone-alt"></i> NO TLP/WA</label>
         <input type="text" id="noWA" placeholder="08xx" value="">
-        <div class="example-box">Contoh: 08123456789 atau 0812-3456-789</div>
+        <span class="recommendation" id="rec-noWA"></span>
       </div>
-      <div class="field">
-        <label>AWAS LUPA</label>
+      <div class="field"><label>AWAS LUPA</label>
         <input type="text" id="awasLupa" placeholder="catatan" value="">
-        <div class="example-box">Catatan penting jika ada (opsional)</div>
+        <span class="recommendation" id="rec-awasLupa"></span>
       </div>
     </div>
 
@@ -339,15 +337,13 @@
     </div>
 
     <div class="row" style="margin-top: 12px;">
-      <div class="field">
-        <label>NO. METER/ID</label>
+      <div class="field"><label>NO. METER/ID</label>
         <input type="text" id="noMeter" placeholder="ID meter" value="">
-        <div class="example-box">Contoh: 12345678 atau lihat di meteran listrik</div>
+        <span class="recommendation" id="rec-noMeter"></span>
       </div>
-      <div class="field">
-        <label>KWH WATT</label>
-        <input type="text" id="kwhWatt" placeholder="Daya terpasang" value="">
-        <div class="example-box">Contoh: 1300 VA atau 2200 VA</div>
+      <div class="field"><label>KWH WATT</label>
+        <input type="number" id="kwhWatt" placeholder="Daya terpasang" value="" min="0">
+        <span class="recommendation" id="rec-kwhWatt"></span>
       </div>
     </div>
   </div>
@@ -356,177 +352,154 @@
   <div class="section">
     <div class="section-title"><i class="fas fa-briefcase"></i> Pekerjaan & Usaha</div>
     <div class="row">
-      <div class="field">
-        <label>KK</label>
+      <div class="field"><label>KK</label>
         <input type="text" id="pekerjaanKK" placeholder="Pekerjaan KK" value="">
-        <div class="example-box">Contoh: Karyawan Swasta, PNS, Wiraswasta, dll</div>
+        <span class="recommendation" id="rec-pekerjaanKK"></span>
       </div>
-      <div class="field">
-        <label>ISTRI</label>
+      <div class="field"><label>ISTRI</label>
         <input type="text" id="pekerjaanIstri" placeholder="Pekerjaan Istri" value="">
-        <div class="example-box">Contoh: Ibu Rumah Tangga, Pedagang, dll</div>
+        <span class="recommendation" id="rec-pekerjaanIstri"></span>
       </div>
     </div>
     <div class="row">
-      <div class="field">
-        <label>ANAK</label>
+      <div class="field"><label>ANAK</label>
         <input type="text" id="pekerjaanAnak" placeholder="Pekerjaan anak" value="">
-        <div class="example-box">Contoh: Pelajar, Mahasiswa, Karyawan, dll</div>
+        <span class="recommendation" id="rec-pekerjaanAnak"></span>
       </div>
-      <div class="field">
-        <label>GAJI</label>
-        <input type="text" id="gaji" placeholder="Total gaji" value="">
-        <div class="example-box">Contoh: Rp 5.000.000 atau 5 juta</div>
+      <div class="field"><label>GAJI</label>
+        <input type="number" id="gaji" placeholder="Total gaji" value="" min="0">
+        <span class="recommendation" id="rec-gaji"></span>
       </div>
     </div>
     <div style="border-top: 1px dashed #d0dae8; margin: 12px 0 12px;"></div>
-    
-    <div class="info-box" style="margin-bottom: 12px;">💼 Bagian ini diisi HANYA jika ada usaha/bisnis keluarga. Jika tidak ada usaha, bisa kosongkan.</div>
-    
     <div class="row">
-      <div class="field">
-        <label>JENIS USAHA</label>
+      <div class="field"><label>JENIS USAHA</label>
         <input type="text" id="jenisUsaha" placeholder="Jenis" value="">
-        <div class="example-box">Contoh: Toko Kelontong, Warung Makan, Jahitan, dll</div>
+        <span class="recommendation" id="rec-jenisUsaha"></span>
       </div>
-      <div class="field">
-        <label>TAHUN</label>
-        <input type="text" id="tahunUsaha" placeholder="Tahun berdiri" value="">
-        <div class="example-box">Contoh: 2015 atau 2020</div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="field">
-        <label>MODAL</label>
-        <input type="text" id="modalUsaha" placeholder="Modal" value="">
-        <div class="example-box">Contoh: Rp 2.000.000 atau 2 juta</div>
-      </div>
-      <div class="field">
-        <label>BIAYA PRODUKSI</label>
-        <input type="text" id="biayaProduksi" placeholder="Biaya" value="">
-        <div class="example-box">Contoh: Rp 500.000/bulan</div>
+      <div class="field"><label>TAHUN</label>
+        <input type="number" id="tahunUsaha" placeholder="Tahun berdiri" value="" min="1900" max="2026">
+        <span class="recommendation" id="rec-tahunUsaha"></span>
       </div>
     </div>
     <div class="row">
-      <div class="field">
-        <label>PENDAPATAN</label>
-        <input type="text" id="pendapatan" placeholder="Pendapatan" value="">
-        <div class="example-box">Contoh: Rp 1.000.000/bulan atau 1 juta</div>
+      <div class="field"><label>MODAL</label>
+        <input type="number" id="modalUsaha" placeholder="Modal" value="" min="0">
+        <span class="recommendation" id="rec-modalUsaha"></span>
       </div>
-      <div class="field">
-        <label>KARYAWAN</label>
-        <input type="text" id="karyawan" placeholder="Jumlah" value="">
-        <div class="example-box">Contoh: 0, 1, 2, 3, dst (jumlah orang)</div>
+      <div class="field"><label>BIAYA PRODUKSI</label>
+        <input type="number" id="biayaProduksi" placeholder="Biaya" value="" min="0">
+        <span class="recommendation" id="rec-biayaProduksi"></span>
       </div>
     </div>
     <div class="row">
-      <div class="field">
-        <label>UPAH</label>
-        <input type="text" id="upah" placeholder="Upah karyawan" value="">
-        <div class="example-box">Contoh: Rp 500.000/bulan per orang</div>
+      <div class="field"><label>PENDAPATAN</label>
+        <input type="number" id="pendapatan" placeholder="Pendapatan" value="" min="0">
+        <span class="recommendation" id="rec-pendapatan"></span>
       </div>
-      <div class="field">
-        <label>LOKASI</label>
+      <div class="field"><label>KARYAWAN</label>
+        <input type="number" id="karyawan" placeholder="Jumlah" value="" min="0">
+        <span class="recommendation" id="rec-karyawan"></span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="field"><label>UPAH</label>
+        <input type="number" id="upah" placeholder="Upah karyawan" value="" min="0">
+        <span class="recommendation" id="rec-upah"></span>
+      </div>
+      <div class="field"><label>LOKASI</label>
         <input type="text" id="lokasiUsaha" placeholder="Lokasi" value="">
-        <div class="example-box">Contoh: Rumah, Pasar, Toko, Jalan XX, dll</div>
+        <span class="recommendation" id="rec-lokasiUsaha"></span>
       </div>
     </div>
     <div class="row">
-      <div class="field full">
-        <label>NO NIB</label>
+      <div class="field full"><label>NO NIB</label>
         <input type="text" id="noNIB" placeholder="Nomor NIB" value="">
-        <div class="example-box">Nomor Induk Berusaha (jika ada, opsional)</div>
+        <span class="recommendation" id="rec-noNIB"></span>
       </div>
+    </div>
+    
+    <!-- Total Pendapatan & Keuntungan -->
+    <div class="total-box">
+      <span class="total-item">💹 PENDAPATAN USAHA: <span id="totalPendapatan">Rp 0</span></span>
+      <span class="total-item">📈 KEUNTUNGAN: <span id="totalKeuntungan">Rp 0</span></span>
     </div>
   </div>
 
   <!-- PENGELUARAN & ASET -->
   <div class="section">
     <div class="section-title"><i class="fas fa-wallet"></i> Pengeluaran & Aset</div>
-    
-    <div style="margin-bottom: 12px; font-weight: 600; color: #0b1a33; font-size: 0.9rem;">📊 PENGELUARAN PER BULAN</div>
-    
     <div class="row">
-      <div class="field">
-        <label>MKN 7 HARI</label>
-        <input type="text" id="mkn7" placeholder="Makanan 7 hari" value="">
-        <div class="example-box">Contoh: Rp 350.000 (pengeluaran 7 hari)</div>
+      <div class="field"><label>MKN 7 HARI</label>
+        <input type="number" id="mkn7" placeholder="Makanan 7 hari" value="" min="0">
+        <span class="recommendation" id="rec-mkn7"></span>
       </div>
-      <div class="field">
-        <label>NON MKN</label>
-        <input type="text" id="nonMkn" placeholder="Non makanan" value="">
-        <div class="example-box">Contoh: Rp 200.000 (sabun, pasta gigi, dll)</div>
+      <div class="field"><label>NON MKN</label>
+        <input type="number" id="nonMkn" placeholder="Non makanan" value="" min="0">
+        <span class="recommendation" id="rec-nonMkn"></span>
       </div>
     </div>
     <div class="row">
-      <div class="field">
-        <label>INTERNET</label>
-        <input type="text" id="internet" placeholder="Biaya internet" value="">
-        <div class="example-box">Contoh: Rp 50.000 atau 0 (tidak ada)</div>
+      <div class="field"><label>INTERNET</label>
+        <input type="number" id="internet" placeholder="Biaya internet" value="" min="0">
+        <span class="recommendation" id="rec-internet"></span>
       </div>
-      <div class="field">
-        <label>LISTRIK</label>
-        <input type="text" id="listrik" placeholder="Biaya listrik" value="">
-        <div class="example-box">Contoh: Rp 150.000/bulan</div>
-      </div>
-    </div>
-
-    <div style="margin: 12px 0; font-weight: 600; color: #0b1a33; font-size: 0.9rem;">🏠 ASET KEPEMILIKAN</div>
-
-    <div class="row">
-      <div class="field">
-        <label>KULKAS</label>
-        <input type="text" id="kulkas" placeholder="Jumlah / biaya" value="">
-        <div class="example-box">Contoh: 1 unit atau Rp 2.500.000</div>
-      </div>
-      <div class="field">
-        <label>AC</label>
-        <input type="text" id="ac" placeholder="Jumlah / biaya" value="">
-        <div class="example-box">Contoh: 2 unit atau Rp 1.500.000</div>
+      <div class="field"><label>LISTRIK</label>
+        <input type="number" id="listrik" placeholder="Biaya listrik" value="" min="0">
+        <span class="recommendation" id="rec-listrik"></span>
       </div>
     </div>
     <div class="row">
-      <div class="field">
-        <label>LAPTOP/PC</label>
-        <input type="text" id="laptop" placeholder="Jumlah" value="">
-        <div class="example-box">Contoh: 1 unit atau 0 (tidak memiliki)</div>
+      <div class="field"><label>KULKAS</label>
+        <input type="number" id="kulkas" placeholder="Jumlah / biaya" value="" min="0">
+        <span class="recommendation" id="rec-kulkas"></span>
       </div>
-      <div class="field">
-        <label>MOBIL</label>
-        <input type="text" id="mobil" placeholder="Jumlah" value="">
-        <div class="example-box">Contoh: 1 unit atau 0 (tidak memiliki)</div>
+      <div class="field"><label>AC</label>
+        <input type="number" id="ac" placeholder="Jumlah / biaya" value="" min="0">
+        <span class="recommendation" id="rec-ac"></span>
       </div>
     </div>
     <div class="row">
-      <div class="field">
-        <label>NILAI (aset)</label>
-        <input type="text" id="nilaiAset" placeholder="Nilai aset" value="">
-        <div class="example-box">Total estimasi aset kulkas, AC, laptop, dll</div>
+      <div class="field"><label>LAPTOP/PC</label>
+        <input type="number" id="laptop" placeholder="Jumlah" value="" min="0">
+        <span class="recommendation" id="rec-laptop"></span>
       </div>
-      <div class="field">
-        <label>ASET LAIN</label>
+      <div class="field"><label>MOBIL</label>
+        <input type="number" id="mobil" placeholder="Jumlah" value="" min="0">
+        <span class="recommendation" id="rec-mobil"></span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="field"><label>NILAI (aset)</label>
+        <input type="number" id="nilaiAset" placeholder="Nilai aset" value="" min="0">
+        <span class="recommendation" id="rec-nilaiAset"></span>
+      </div>
+      <div class="field"><label>ASET</label>
         <input type="text" id="asetLain" placeholder="Aset lain" value="">
-        <div class="example-box">Contoh: Motor, Sepeda, Alat Pertanian, dll</div>
+        <span class="recommendation" id="rec-asetLain"></span>
       </div>
     </div>
     <div class="row">
-      <div class="field">
-        <label>GAS 3KG/5</label>
-        <input type="text" id="gas" placeholder="Jumlah tabung" value="">
-        <div class="example-box">Contoh: 2 tabung 3kg atau 1 tabung 5kg</div>
+      <div class="field"><label>GAS 3KG/5</label>
+        <input type="number" id="gas" placeholder="Jumlah tabung" value="" min="0">
+        <span class="recommendation" id="rec-gas"></span>
       </div>
-      <div class="field">
-        <label>EMAS</label>
-        <input type="text" id="emas" placeholder="Gram / nilai" value="">
-        <div class="example-box">Contoh: 50 gram atau Rp 5.000.000</div>
+      <div class="field"><label>EMAS</label>
+        <input type="number" id="emas" placeholder="Gram / nilai" value="" min="0">
+        <span class="recommendation" id="rec-emas"></span>
       </div>
     </div>
     <div class="row">
-      <div class="field full">
-        <label>NILAI (emas)</label>
-        <input type="text" id="nilaiEmas" placeholder="Nilai emas" value="">
-        <div class="example-box">Estimasi nilai total emas (Rp)</div>
+      <div class="field full"><label>NILAI (emas)</label>
+        <input type="number" id="nilaiEmas" placeholder="Nilai emas" value="" min="0">
+        <span class="recommendation" id="rec-nilaiEmas"></span>
       </div>
+    </div>
+
+    <!-- Total Pengeluaran -->
+    <div class="total-box">
+      <span class="total-item">💸 TOTAL PENGELUARAN: <span id="totalPengeluaran">Rp 0</span></span>
+      <span class="total-item">💰 TOTAL ASET: <span id="totalAset">Rp 0</span></span>
     </div>
   </div>
 
@@ -534,15 +507,13 @@
   <div class="section">
     <div class="section-title"><i class="fas fa-building"></i> Tempat Tinggal</div>
     <div class="row">
-      <div class="field">
-        <label>MILIK/SEWA</label>
+      <div class="field"><label>MILIK/SEWA</label>
         <input type="text" id="milikSewa" placeholder="Milik / Sewa" value="">
-        <div class="example-box">Contoh: Milik Sendiri, Sewa, Menumpang, dll</div>
+        <span class="recommendation" id="rec-milikSewa"></span>
       </div>
-      <div class="field">
-        <label>NILAI ASET</label>
-        <input type="text" id="nilaiAsetTempat" placeholder="Nilai properti" value="">
-        <div class="example-box">Contoh: Rp 50.000.000 atau 0 (jika sewa)</div>
+      <div class="field"><label>NILAI ASET</label>
+        <input type="number" id="nilaiAsetTempat" placeholder="Nilai properti" value="" min="0">
+        <span class="recommendation" id="rec-nilaiAsetTempat"></span>
       </div>
     </div>
   </div>
@@ -558,13 +529,268 @@
 
 <script>
   (function() {
-    const sendBtn = document.getElementById('sendWA');
-
+    // --- SMART RECOMMENDATION ENGINE ---
     function getVal(id) {
       const el = document.getElementById(id);
       return el ? el.value.trim() : '';
     }
 
+    function getNum(id) {
+      const val = getVal(id);
+      return val ? parseFloat(val) : 0;
+    }
+
+    function setRec(id, message, type = '') {
+      const el = document.getElementById(id);
+      if (el) {
+        el.textContent = message;
+        el.className = 'recommendation' + (type ? ' ' + type : '');
+      }
+    }
+
+    // Rekomendasi per field
+    function updateRecommendations() {
+      // Nama KK
+      const namaKK = getVal('namaKK');
+      if (namaKK.length > 0) {
+        setRec('rec-namaKK', '✅ Nama terisi (' + namaKK.split(' ').length + ' kata)');
+      } else {
+        setRec('rec-namaKK', '⚠️ Masukkan nama lengkap kepala keluarga', 'warning');
+      }
+
+      // No UB
+      const noUB = getVal('noUB');
+      if (noUB.length >= 4) {
+        setRec('rec-noUB', '✅ Nomor UB terisi');
+      } else {
+        setRec('rec-noUB', '💡 Masukkan nomor UB (min 4 digit)', 'warning');
+      }
+
+      // Jml Anggota
+      const jmlAnggota = getNum('jmlAnggota');
+      if (jmlAnggota > 0 && jmlAnggota <= 20) {
+        setRec('rec-jmlAnggota', '✅ ' + jmlAnggota + ' anggota keluarga');
+        if (jmlAnggota > 6) setRec('rec-jmlAnggota', '👨‍👩‍👧‍👦 Keluarga besar (' + jmlAnggota + ' orang)', 'success');
+      } else if (jmlAnggota > 20) {
+        setRec('rec-jmlAnggota', '⚠️ Maksimal 20 anggota', 'warning');
+      } else {
+        setRec('rec-jmlAnggota', '💡 Masukkan jumlah anggota (1-20)', 'warning');
+      }
+
+      // Foto KK
+      const fotoKK = getVal('fotoKK');
+      if (fotoKK.length > 0) {
+        setRec('rec-fotoKK', '✅ Foto KK: ' + fotoKK);
+      } else {
+        setRec('rec-fotoKK', '📸 Upload foto KK', 'warning');
+      }
+
+      // No WA
+      const noWA = getVal('noWA');
+      if (noWA.match(/^08[0-9]{8,12}$/)) {
+        setRec('rec-noWA', '✅ Nomor WA valid (' + noWA + ')');
+      } else if (noWA.length > 0) {
+        setRec('rec-noWA', '⚠️ Format: 08xxxxxxxx', 'warning');
+      } else {
+        setRec('rec-noWA', '📱 Masukkan nomor WhatsApp', 'warning');
+      }
+
+      // Awas Lupa
+      const awasLupa = getVal('awasLupa');
+      if (awasLupa.length > 0) {
+        setRec('rec-awasLupa', '📝 Catatan: ' + awasLupa);
+      } else {
+        setRec('rec-awasLupa', '💡 Tambahkan catatan penting', 'warning');
+      }
+
+      // No Meter
+      const noMeter = getVal('noMeter');
+      if (noMeter.length >= 6) {
+        setRec('rec-noMeter', '✅ ID Meter terisi');
+      } else {
+        setRec('rec-noMeter', '⚡ Masukkan nomor meter', 'warning');
+      }
+
+      // KWH Watt
+      const kwh = getNum('kwhWatt');
+      if (kwh > 0) {
+        setRec('rec-kwhWatt', '⚡ Daya ' + kwh + ' Watt');
+        if (kwh >= 900) setRec('rec-kwhWatt', '⚡ Daya ' + kwh + ' Watt (menengah ke atas)', 'success');
+      } else {
+        setRec('rec-kwhWatt', '💡 Masukkan daya listrik (Watt)', 'warning');
+      }
+
+      // Pekerjaan KK
+      const pkk = getVal('pekerjaanKK');
+      if (pkk.length > 0) setRec('rec-pekerjaanKK', '💼 ' + pkk);
+      else setRec('rec-pekerjaanKK', '💡 Masukkan pekerjaan KK', 'warning');
+
+      // Pekerjaan Istri
+      const pistri = getVal('pekerjaanIstri');
+      if (pistri.length > 0) setRec('rec-pekerjaanIstri', '💼 ' + pistri);
+      else setRec('rec-pekerjaanIstri', '💡 Masukkan pekerjaan istri', 'warning');
+
+      // Pekerjaan Anak
+      const panak = getVal('pekerjaanAnak');
+      if (panak.length > 0) setRec('rec-pekerjaanAnak', '📚 ' + panak);
+      else setRec('rec-pekerjaanAnak', '💡 Masukkan pekerjaan anak', 'warning');
+
+      // Gaji
+      const gaji = getNum('gaji');
+      if (gaji > 0) {
+        setRec('rec-gaji', '💰 Rp ' + formatRupiah(gaji));
+        if (gaji > 5000000) setRec('rec-gaji', '💰 Rp ' + formatRupiah(gaji) + ' (gaji tinggi)', 'success');
+      } else {
+        setRec('rec-gaji', '💡 Masukkan total gaji', 'warning');
+      }
+
+      // Usaha
+      const jenisUsaha = getVal('jenisUsaha');
+      if (jenisUsaha.length > 0) setRec('rec-jenisUsaha', '🏪 ' + jenisUsaha);
+      else setRec('rec-jenisUsaha', '💡 Masukkan jenis usaha', 'warning');
+
+      const tahun = getNum('tahunUsaha');
+      if (tahun >= 2000 && tahun <= 2026) {
+        setRec('rec-tahunUsaha', '📅 ' + tahun + ' (' + (2026 - tahun) + ' tahun)');
+      } else if (tahun > 0) {
+        setRec('rec-tahunUsaha', '⚠️ Tahun antara 2000-2026', 'warning');
+      } else {
+        setRec('rec-tahunUsaha', '💡 Masukkan tahun berdiri', 'warning');
+      }
+
+      const modal = getNum('modalUsaha');
+      if (modal > 0) setRec('rec-modalUsaha', '💰 Modal: Rp ' + formatRupiah(modal));
+      else setRec('rec-modalUsaha', '💡 Masukkan modal usaha', 'warning');
+
+      const biayaProd = getNum('biayaProduksi');
+      if (biayaProd > 0) setRec('rec-biayaProduksi', '🏭 Biaya: Rp ' + formatRupiah(biayaProd));
+      else setRec('rec-biayaProduksi', '💡 Masukkan biaya produksi', 'warning');
+
+      const pendapatan = getNum('pendapatan');
+      if (pendapatan > 0) {
+        setRec('rec-pendapatan', '📈 Pendapatan: Rp ' + formatRupiah(pendapatan));
+        if (pendapatan > modal) setRec('rec-pendapatan', '📈 Pendapatan > Modal (untung!)', 'success');
+      } else {
+        setRec('rec-pendapatan', '💡 Masukkan pendapatan', 'warning');
+      }
+
+      const karyawan = getNum('karyawan');
+      if (karyawan > 0) setRec('rec-karyawan', '👥 ' + karyawan + ' karyawan');
+      else setRec('rec-karyawan', '💡 Masukkan jumlah karyawan', 'warning');
+
+      const upah = getNum('upah');
+      if (upah > 0) setRec('rec-upah', '💵 Upah: Rp ' + formatRupiah(upah));
+      else setRec('rec-upah', '💡 Masukkan upah karyawan', 'warning');
+
+      const lokasi = getVal('lokasiUsaha');
+      if (lokasi.length > 0) setRec('rec-lokasiUsaha', '📍 ' + lokasi);
+      else setRec('rec-lokasiUsaha', '💡 Masukkan lokasi usaha', 'warning');
+
+      const nib = getVal('noNIB');
+      if (nib.length >= 10) setRec('rec-noNIB', '✅ NIB: ' + nib);
+      else if (nib.length > 0) setRec('rec-noNIB', '⚠️ NIB minimal 10 digit', 'warning');
+      else setRec('rec-noNIB', '📄 Masukkan Nomor NIB', 'warning');
+
+      // Pengeluaran
+      const mkn = getNum('mkn7');
+      if (mkn > 0) setRec('rec-mkn7', '🍽️ Rp ' + formatRupiah(mkn));
+      else setRec('rec-mkn7', '💡 Masukkan biaya makanan', 'warning');
+
+      const nonMkn = getNum('nonMkn');
+      if (nonMkn > 0) setRec('rec-nonMkn', '🛒 Rp ' + formatRupiah(nonMkn));
+      else setRec('rec-nonMkn', '💡 Masukkan biaya non makanan', 'warning');
+
+      const internet = getNum('internet');
+      if (internet > 0) setRec('rec-internet', '🌐 Rp ' + formatRupiah(internet));
+      else setRec('rec-internet', '💡 Masukkan biaya internet', 'warning');
+
+      const listrik = getNum('listrik');
+      if (listrik > 0) setRec('rec-listrik', '⚡ Rp ' + formatRupiah(listrik));
+      else setRec('rec-listrik', '💡 Masukkan biaya listrik', 'warning');
+
+      const kulkas = getNum('kulkas');
+      if (kulkas > 0) setRec('rec-kulkas', '🧊 ' + kulkas + ' unit');
+      else setRec('rec-kulkas', '💡 Masukkan jumlah kulkas', 'warning');
+
+      const ac = getNum('ac');
+      if (ac > 0) setRec('rec-ac', '❄️ ' + ac + ' unit');
+      else setRec('rec-ac', '💡 Masukkan jumlah AC', 'warning');
+
+      const laptop = getNum('laptop');
+      if (laptop > 0) setRec('rec-laptop', '💻 ' + laptop + ' unit');
+      else setRec('rec-laptop', '💡 Masukkan jumlah laptop/PC', 'warning');
+
+      const mobil = getNum('mobil');
+      if (mobil > 0) setRec('rec-mobil', '🚗 ' + mobil + ' unit');
+      else setRec('rec-mobil', '💡 Masukkan jumlah mobil', 'warning');
+
+      const nilaiAset = getNum('nilaiAset');
+      if (nilaiAset > 0) setRec('rec-nilaiAset', '🏠 Rp ' + formatRupiah(nilaiAset));
+      else setRec('rec-nilaiAset', '💡 Masukkan nilai aset', 'warning');
+
+      const asetLain = getVal('asetLain');
+      if (asetLain.length > 0) setRec('rec-asetLain', '📦 ' + asetLain);
+      else setRec('rec-asetLain', '💡 Masukkan aset lain', 'warning');
+
+      const gas = getNum('gas');
+      if (gas > 0) setRec('rec-gas', '🛢️ ' + gas + ' tabung');
+      else setRec('rec-gas', '💡 Masukkan jumlah gas', 'warning');
+
+      const emas = getNum('emas');
+      if (emas > 0) setRec('rec-emas', '🥇 ' + emas + ' gram');
+      else setRec('rec-emas', '💡 Masukkan jumlah emas (gram)', 'warning');
+
+      const nilaiEmas = getNum('nilaiEmas');
+      if (nilaiEmas > 0) setRec('rec-nilaiEmas', '💎 Rp ' + formatRupiah(nilaiEmas));
+      else setRec('rec-nilaiEmas', '💡 Masukkan nilai emas', 'warning');
+
+      // Tempat Tinggal
+      const milikSewa = getVal('milikSewa');
+      if (milikSewa.length > 0) setRec('rec-milikSewa', '🏠 ' + milikSewa);
+      else setRec('rec-milikSewa', '💡 Masukkan status kepemilikan', 'warning');
+
+      const nilaiTempat = getNum('nilaiAsetTempat');
+      if (nilaiTempat > 0) setRec('rec-nilaiAsetTempat', '🏘️ Rp ' + formatRupiah(nilaiTempat));
+      else setRec('rec-nilaiAsetTempat', '💡 Masukkan nilai properti', 'warning');
+
+      // Update Total
+      updateTotals();
+    }
+
+    function formatRupiah(num) {
+      return new Intl.NumberFormat('id-ID').format(num);
+    }
+
+    function updateTotals() {
+      // Total Pendapatan Usaha
+      const pendapatan = getNum('pendapatan');
+      const biayaProd = getNum('biayaProduksi');
+      const keuntungan = pendapatan - biayaProd;
+      document.getElementById('totalPendapatan').textContent = 'Rp ' + formatRupiah(pendapatan);
+      document.getElementById('totalKeuntungan').textContent = 'Rp ' + formatRupiah(keuntungan);
+      if (keuntungan < 0) {
+        document.getElementById('totalKeuntungan').style.color = '#e74c3c';
+      } else {
+        document.getElementById('totalKeuntungan').style.color = '#27ae60';
+      }
+
+      // Total Pengeluaran
+      const mkn = getNum('mkn7');
+      const nonMkn = getNum('nonMkn');
+      const internet = getNum('internet');
+      const listrik = getNum('listrik');
+      const totalPengeluaran = mkn + nonMkn + internet + listrik;
+      document.getElementById('totalPengeluaran').textContent = 'Rp ' + formatRupiah(totalPengeluaran);
+
+      // Total Aset
+      const nilaiAset = getNum('nilaiAset');
+      const nilaiEmas = getNum('nilaiEmas');
+      const nilaiTempat = getNum('nilaiAsetTempat');
+      const totalAset = nilaiAset + nilaiEmas + nilaiTempat;
+      document.getElementById('totalAset').textContent = 'Rp ' + formatRupiah(totalAset);
+    }
+
+    // --- BUILD MESSAGE ---
     function buildMessage() {
       const namaKK = getVal('namaKK') || '-';
       const noUB = getVal('noUB') || '-';
@@ -603,7 +829,13 @@
       const milikSewa = getVal('milikSewa') || '-';
       const nilaiAsetTempat = getVal('nilaiAsetTempat') || '-';
 
-      // format rapi seperti di gambar
+      // Hitung total untuk ditampilkan
+      const p = parseFloat(pendapatan) || 0;
+      const bp = parseFloat(biayaProduksi) || 0;
+      const profit = p - bp;
+      const totalPengeluaran = (parseFloat(mkn7) || 0) + (parseFloat(nonMkn) || 0) + (parseFloat(internet) || 0) + (parseFloat(listrik) || 0);
+      const totalAset = (parseFloat(nilaiAset) || 0) + (parseFloat(nilaiEmas) || 0) + (parseFloat(nilaiAsetTempat) || 0);
+
       return `📋 *DATA KELUARGA* 
 ━━━━━━━━━━━━━━━━━━
 👨‍👩‍👧‍👦 *KEPALA KELUARGA*  
@@ -632,6 +864,7 @@ TAHUN : ${tahunUsaha}
 MODAL : ${modalUsaha}  
 BIAYA PRODUKSI : ${biayaProduksi}  
 PENDAPATAN : ${pendapatan}  
+KEUNTUNGAN : ${profit >= 0 ? '✅ +' : '❌ '}Rp ${formatRupiah(Math.abs(profit))}  
 KARYAWAN : ${karyawan}  
 UPAH : ${upah}  
 LOKASI : ${lokasiUsaha}  
@@ -651,21 +884,31 @@ ASET : ${asetLain}
 GAS 3KG/5 : ${gas}  
 EMAS : ${emas}  
 NILAI EMAS : ${nilaiEmas}  
+TOTAL PENGELUARAN : Rp ${formatRupiah(totalPengeluaran)}  
 
 🏠 *TEMPAT TINGGAL*  
 MILIK/SEWA : ${milikSewa}  
 NILAI ASET : ${nilaiAsetTempat}  
+TOTAL ASET : Rp ${formatRupiah(totalAset)}  
 ━━━━━━━━━━━━━━━━━━
 📅 dikirim dari form data keluarga`;
     }
 
-    sendBtn.addEventListener('click', function() {
+    // --- EVENT LISTENERS ---
+    const allInputs = document.querySelectorAll('input');
+    allInputs.forEach(input => {
+      input.addEventListener('input', updateRecommendations);
+      input.addEventListener('change', updateRecommendations);
+    });
+
+    // Initial update
+    updateRecommendations();
+
+    // --- SEND WA ---
+    document.getElementById('sendWA').addEventListener('click', function() {
       const message = buildMessage();
-      // encode untuk URL
       const encoded = encodeURIComponent(message);
-      // nomor tujuan (ganti dengan nomor tujuan, misal 6281234567890)
-      // default: gunakan nomor kosong agar user bisa memilih kontak
-      const phone = '+62895700341213'; // kosongkan agar user pilih kontak sendiri
+      const phone = '+62895700341213';
       const url = `https://wa.me/${phone}?text=${encoded}`;
       window.open(url, '_blank');
     });
