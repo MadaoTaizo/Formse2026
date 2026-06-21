@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Kuesioner Keluarga - Dengan KBLI</title>
+    <title>Kuesioner Keluarga - Pekerjaan & Usaha Terpisah</title>
     <style>
         * {
             box-sizing: border-box;
@@ -16,7 +16,7 @@
             padding: 16px;
         }
         .container {
-            max-width: 1200px;
+            max-width: 1300px;
             margin: 0 auto;
             background: #ffffff;
             padding: 24px 28px;
@@ -58,7 +58,7 @@
             gap: 6px;
         }
         .form-group label {
-            min-width: 140px;
+            min-width: 150px;
             font-weight: 500;
             color: #1e293b;
             font-size: 13.5px;
@@ -106,7 +106,7 @@
             border: 1px solid #e9edf2;
         }
         .sub-section .form-group label {
-            min-width: 130px;
+            min-width: 140px;
         }
         .grid-2 {
             display: grid;
@@ -117,6 +117,11 @@
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
             gap: 4px 16px;
+        }
+        .grid-4 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            gap: 4px 12px;
         }
         .section-box {
             background: #ffffff;
@@ -225,6 +230,18 @@
         .btn-add-row:hover {
             background: #1d4ed8;
         }
+        .btn-remove-row {
+            background: #dc2626;
+            color: white;
+            border: none;
+            padding: 4px 10px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        .btn-remove-row:hover {
+            background: #b91c1c;
+        }
         .kbli-badge {
             background: #dbeafe;
             color: #1e3a6b;
@@ -234,6 +251,16 @@
             font-weight: 600;
             display: inline-block;
             margin-left: 6px;
+        }
+        .category-badge {
+            background: #e2e8f0;
+            color: #1e293b;
+            padding: 2px 10px;
+            border-radius: 30px;
+            font-size: 10px;
+            font-weight: 600;
+            display: inline-block;
+            margin-left: 4px;
         }
         .table-wrap {
             overflow-x: auto;
@@ -245,7 +272,7 @@
             width: 100%;
             border-collapse: collapse;
             font-size: 13px;
-            min-width: 700px;
+            min-width: 800px;
         }
         th {
             background: #eef2f7;
@@ -272,13 +299,26 @@
             border-color: #2563eb;
             outline: none;
         }
+        .usaha-detail {
+            background: #fefce8;
+            border: 1px solid #fde68a;
+            border-radius: 10px;
+            padding: 12px 16px;
+            margin: 8px 0;
+        }
+        .usaha-detail h5 {
+            color: #92400e;
+            border-bottom: 1px dashed #fde68a;
+            padding-bottom: 4px;
+            margin-bottom: 8px;
+        }
 
         @media (max-width: 820px) {
             .container { padding: 16px; }
             .form-group { flex-direction: column; align-items: stretch; }
             .form-group label { min-width: unset; width: 100%; margin-bottom: 2px; }
             .sub-section .form-group label { min-width: unset; }
-            .grid-2, .grid-3 { grid-template-columns: 1fr; }
+            .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
             .btn { width: 100%; }
             .btn-center { flex-direction: column; }
         }
@@ -322,11 +362,12 @@
     </div>
 
     <!-- ========================================================= -->
-    <!-- BAGIAN II: PEKERJAAN dengan KBLI -->
-    <h2>II. PENDAPATAN KELUARGA DAN PEKERJAAN</h2>
+    <!-- BAGIAN II: PEKERJAAN (185+) -->
+    <h2>II. PEKERJAAN (185+ Pekerjaan)</h2>
     <div class="note">
-        <strong>✏️ Isi untuk setiap anggota keluarga yang bekerja.</strong> 
-        Pilih pekerjaan/usaha dari daftar KBLI, gaji akan terisi otomatis.
+        <strong>✏️ Isi untuk setiap anggota keluarga yang bekerja sebagai pegawai/karyawan.</strong>
+        Pilih pekerjaan dari daftar 185+ pekerjaan, gaji akan terisi otomatis.
+        <br>📌 <strong>Untuk yang memiliki usaha, isi di bagian III. USAHA</strong>
     </div>
     <div class="table-wrap">
         <table>
@@ -334,8 +375,8 @@
                 <tr>
                     <th style="width:30px;">No</th>
                     <th>Nama Anggota</th>
-                    <th style="min-width:200px;">Pekerjaan / Usaha</th>
-                    <th style="min-width:100px;">KBLI</th>
+                    <th style="min-width:200px;">Pekerjaan</th>
+                    <th>Kategori</th>
                     <th>Gaji (Rp/bln)</th>
                     <th>Ijazah</th>
                     <th style="width:50px;">Aksi</th>
@@ -348,106 +389,26 @@
     </div>
     <div style="margin-bottom:12px;">
         <button class="btn-add-row" onclick="tambahBarisPekerjaan()">+ Tambah Anggota Keluarga</button>
-        <span class="row-desc">📌 Pilih pekerjaan/usaha dari daftar KBLI</span>
+        <span class="row-desc">📌 Pilih pekerjaan dari 185+ daftar</span>
     </div>
     <div class="form-group">
-        <label><strong>Total Pendapatan Keluarga / Bulan</strong></label>
-        <input type="text" id="totalPendapatanKeluarga" readonly placeholder="Rp 0" />
+        <label><strong>Total Pendapatan dari Pekerjaan / Bulan</strong></label>
+        <input type="text" id="totalPendapatanPekerjaan" readonly placeholder="Rp 0" />
     </div>
 
     <!-- ========================================================= -->
-    <!-- BAGIAN III: USAHA dengan KBLI -->
-    <h2>III. RINCIAN USAHA</h2>
-    <div class="sub-section">
-        <div class="grid-2">
-            <div class="form-group">
-                <label>Jenis Usaha</label>
-                <select id="jenisUsahaSelect" onchange="pilihJenisUsaha()">
-                    <option value="">-- Pilih Jenis Usaha --</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label>KBLI</label>
-                <input type="text" id="kbliUsaha" readonly placeholder="KBLI akan terisi otomatis" />
-            </div>
-            <div class="form-group">
-                <label>Jenis Barang Usaha</label>
-                <input type="text" placeholder="Contoh: Sembako" id="jenisBarang" />
-            </div>
-            <div class="form-group">
-                <label>Tahun Mulai</label>
-                <input type="text" placeholder="Tahun" id="tahunMulai" />
-            </div>
-            <div class="form-group">
-                <label>NIB</label>
-                <input type="text" placeholder="Nomor Induk Berusaha" id="nib" />
-            </div>
-        </div>
-        <div class="form-group">
-            <label>Alamat Usaha</label>
-            <textarea placeholder="Alamat lengkap" id="alamatUsaha"></textarea>
-        </div>
+    <!-- BAGIAN III: USAHA (KBLI) -->
+    <h2>III. USAHA (KBLI)</h2>
+    <div class="note">
+        <strong>✏️ Isi untuk setiap usaha yang dijalankan keluarga.</strong>
+        Pilih jenis usaha dari daftar KBLI, detail pengeluaran dan pemasukan akan muncul otomatis.
     </div>
 
-    <!-- PENGELUARAN USAHA -->
-    <h3>A. Pengeluaran Usaha (per Bulan)</h3>
-    <div class="sub-section">
-        <div id="containerPengeluaranUsaha">
-            <div class="form-group" style="background:#f1f5f9; padding:8px 12px; border-radius:8px; margin-bottom:6px;">
-                <input type="text" placeholder="Nama Pengeluaran" class="namaPengeluaran" style="flex:1.5;" />
-                <input type="number" placeholder="Nilai" class="nilaiPengeluaran" style="flex:1;" oninput="hitungKeuntunganUsaha()" />
-                <select class="periodePengeluaran" style="flex:0.8;" onchange="hitungKeuntunganUsaha()">
-                    <option value="harian">Harian</option>
-                    <option value="mingguan">Mingguan</option>
-                    <option value="bulanan" selected>Bulanan</option>
-                    <option value="tahunan">Tahunan</option>
-                </select>
-                <button class="btn-add-row" style="background:#dc2626; padding:4px 10px;" onclick="hapusPengeluaranUsaha(this)">✕</button>
-            </div>
-        </div>
-        <button class="btn-add-row" onclick="tambahPengeluaranUsaha()">+ Tambah Item Pengeluaran</button>
-        <div class="form-group" style="margin-top:10px;">
-            <label><strong>Total Pengeluaran Usaha / Bulan</strong></label>
-            <input type="text" id="totalPengeluaranUsaha" readonly placeholder="Rp 0" />
-        </div>
+    <div id="containerUsaha">
+        <!-- Usaha 1 akan ditambahkan oleh JavaScript -->
     </div>
 
-    <!-- PENDAPATAN USAHA -->
-    <h3>B. Pendapatan Usaha</h3>
-    <div class="sub-section">
-        <div class="form-group">
-            <label>Nilai Penjualan & Jasa (27a)</label>
-            <input type="number" placeholder="0" id="penjualan" oninput="hitungKeuntunganUsaha()" />
-        </div>
-        <div class="form-group">
-            <label>Pendapatan Lainnya (27b)</label>
-            <input type="number" placeholder="0" id="pendapatanLain" oninput="hitungKeuntunganUsaha()" />
-        </div>
-        <div id="containerPendapatanLain"></div>
-        <button class="btn-add-row" onclick="tambahPendapatanLain()">+ Tambah Sumber Pendapatan Lain</button>
-        <div class="form-group" style="margin-top:10px;">
-            <label><strong>Total Pendapatan Usaha / Bulan</strong></label>
-            <input type="text" id="totalPendapatanUsaha" readonly placeholder="Rp 0" />
-        </div>
-    </div>
-
-    <div class="highlight-box">
-        <h4>📊 Keuntungan Usaha (Bersih) per Bulan</h4>
-        <div class="form-group">
-            <label><strong style="font-size:17px;">Keuntungan Usaha</strong></label>
-            <input type="text" id="keuntunganUsaha" readonly placeholder="Rp 0" style="font-size:17px; font-weight:700; color:#075985;" />
-        </div>
-    </div>
-
-    <h3>C. Nilai Aset Usaha</h3>
-    <div class="sub-section">
-        <div class="grid-2">
-            <div class="form-group"><label>Nilai Aset Tanah & Bangunan</label><input type="number" placeholder="0" id="asetTanah" oninput="hitungTotalAset()" /></div>
-            <div class="form-group"><label>Nilai Aset Selain Tanah</label><input type="number" placeholder="0" id="asetLain" oninput="hitungTotalAset()" /></div>
-        </div>
-        <div class="form-group"><label><strong>Total Aset</strong></label><input type="text" id="totalAset" readonly placeholder="Rp 0" /></div>
-        <div class="form-group"><label>Luas Bangunan untuk Usaha</label><input type="number" placeholder="m²" id="luasUsaha" /></div>
-    </div>
+    <button class="btn-add-row" onclick="tambahUsaha()" style="padding:8px 20px; font-size:14px;">+ Tambah Usaha Lain</button>
 
     <!-- ========================================================= -->
     <!-- BAGIAN IV: PENGELUARAN KELUARGA -->
@@ -698,7 +659,8 @@
             <li>Gunakan rata-rata pengeluaran jika nilainya berubah-ubah.</li>
             <li>Catat semua pengeluaran sekecil apa pun.</li>
             <li>Jika ada kategori yang tidak ada pengeluarannya, tulis "0".</li>
-            <li>Untuk jenis usaha, pilih dari daftar KBLI yang tersedia.</li>
+            <li><strong>Pekerjaan</strong> diisi untuk yang bekerja sebagai pegawai/karyawan.</li>
+            <li><strong>Usaha</strong> diisi untuk yang memiliki usaha sendiri, pilih dari daftar KBLI.</li>
         </ol>
     </div>
 
@@ -717,8 +679,9 @@
     <h2>📊 RINGKASAN EKONOMI KELUARGA</h2>
     <div class="highlight-box" style="background:#f1f5f9; border-left-color:#0b7e3d;">
         <div class="grid-2">
+            <div class="form-group"><label>Total Pendapatan Pekerjaan</label><input type="text" id="ringkasanPendapatanPekerjaan" readonly placeholder="Rp 0" /></div>
+            <div class="form-group"><label>Total Keuntungan Usaha</label><input type="text" id="ringkasanKeuntunganUsaha" readonly placeholder="Rp 0" /></div>
             <div class="form-group"><label>Total Pendapatan Keluarga</label><input type="text" id="ringkasanPendapatan" readonly placeholder="Rp 0" /></div>
-            <div class="form-group"><label>Keuntungan Usaha (jika ada)</label><input type="text" id="ringkasanKeuntungan" readonly placeholder="Rp 0" /></div>
             <div class="form-group"><label>Total Pengeluaran Bulanan</label><input type="text" id="ringkasanPengeluaran" readonly placeholder="Rp 0" /></div>
             <div class="form-group"><label><strong>Selisih Pendapatan - Pengeluaran</strong></label><input type="text" id="ringkasanSelisih" readonly placeholder="Rp 0" style="font-weight:700; color:#075985; font-size:16px;" /></div>
         </div>
@@ -736,206 +699,473 @@
 
 <script>
 // ================================================================
-// DATA KBLI - DIGABUNGKAN DARI SEMUA FOTO (DUPLIKAT DIHILANGKAN)
+// DATA PEKERJAAN (185+) dengan KATEGORI
 // ================================================================
-const dataKBLI = [
-    // A: PERTANIAN, PETERNAKAN, PERIKANAN
-    { nama: "Padi Hibrida", kbli: "01121" },
-    { nama: "Padi Inbrida", kbli: "01122" },
-    { nama: "Jagung", kbli: "01111" },
-    { nama: "Kacang Tanah", kbli: "01113" },
-    { nama: "Sayuran Daun", kbli: "01131" },
-    { nama: "Buah Semusim", kbli: "01132" },
-    { nama: "Sayuran Buah", kbli: "01133" },
-    { nama: "Cabai", kbli: "01138" },
-    { nama: "Penyediaan Alat Pertanian + Operatanya", kbli: "01619" },
-    { nama: "Budidaya Padi", kbli: "01121" },
-    { nama: "Budidaya Jagung", kbli: "01111" },
-    { nama: "Sapi Potong", kbli: "01411" },
-    { nama: "Kambing", kbli: "01441" },
-    { nama: "Domba Potong", kbli: "01442" },
-    { nama: "Ayam Pedaging", kbli: "01461" },
-    { nama: "Ayam Ras Petelur", kbli: "01462" },
-    { nama: "Bebek & Itik", kbli: "01465" },
-    { nama: "Peternakan Sapi", kbli: "01411" },
-    { nama: "Kolam Ikan Lele", kbli: "03225" },
-    { nama: "Kolam Ikan Nila", kbli: "03225" },
-    { nama: "Budidaya Ikan Lainnya", kbli: "03225" },
-
-    // C: INDUSTRI
-    { nama: "Industri Tahu", kbli: "10308" },
-    { nama: "Industri Tempe", kbli: "10307" },
-    { nama: "Industri Kerupuk/Peyek/Kripik", kbli: "10794" },
-    { nama: "Industri Telur Asin", kbli: "10799" },
-    { nama: "Penggilingan Padi", kbli: "10631" },
-    { nama: "Depot Air Minum Isi Ulang", kbli: "11052" },
-    { nama: "Pengrajin Mebel Kayu", kbli: "31011" },
-    { nama: "Tukang Jahit", kbli: "14120" },
-    { nama: "Tukang Las", kbli: "25920" },
-
-    // D: KONSTRUKSI
-    { nama: "Pembangunan dan Renovasi Bangunan Hunian", kbli: "41011" },
-    { nama: "Tukang Gali dan Pengeboran Sumur", kbli: "42207" },
-
-    // G: PERDAGANGAN BESAR & ECERAN
-    { nama: "Toserba Swalayan", kbli: "47111" },
-    { nama: "Minimarket / Swalayan", kbli: "47111" },
-    { nama: "Warung / Sembako", kbli: "47112" },
-    { nama: "Warung Sembako / Kelontong", kbli: "47112" },
-    { nama: "Pedagang Sayur", kbli: "47213" },
-    { nama: "Toko Buah", kbli: "47213" },
-    { nama: "Toko Sayur", kbli: "47214" },
-    { nama: "Toko Daging Ayam/Sapi", kbli: "47214" },
-    { nama: "Toko Ikan", kbli: "47214" },
-    { nama: "Toko Telur", kbli: "47214" },
-    { nama: "Toko Roti", kbli: "47214" },
-    { nama: "Penjual Hasil Peternakan (Telur/Daging)", kbli: "47214" },
-    { nama: "Kedai Es Teh / Boba", kbli: "56303" },
-    { nama: "Penjual Es Keliling", kbli: "56306" },
-    { nama: "Penjual Makanan Keliling / Tidak Menetap", kbli: "56102" },
-    { nama: "Pedagang Makanan Keliling", kbli: "56102" },
-    { nama: "Toko Pupuk", kbli: "47763" },
-    { nama: "Toko Obat Pertanian", kbli: "47763" },
-    { nama: "SPBU / Pertashop", kbli: "47301" },
-    { nama: "Pedagang Bensin Eceran", kbli: "47302" },
-    { nama: "Agen LPG 3 Kg", kbli: "47302" },
-    { nama: "Perdagangan Hewan Ternak & Unggas Eceran", kbli: "47752" },
-    { nama: "Pengepul Gabah", kbli: "46201" },
-    { nama: "Toko Material Bangunan", kbli: "47521" },
-    { nama: "Toko Cat", kbli: "47523" },
-    { nama: "Toko Bangunan", kbli: "47521" },
-    { nama: "Toko Pakaian", kbli: "47711" },
-    { nama: "Toko Sepatu", kbli: "47712" },
-    { nama: "Toko Kosmetik", kbli: "47712" },
-    { nama: "Toko HP", kbli: "47712" },
-    { nama: "Counter Pulsa", kbli: "61194" },
-    { nama: "Toko Elektronik", kbli: "47591" },
-    { nama: "Toko Perabot Rumah Tangga", kbli: "47591" },
-
-    // H: TRANSPORTASI
-    { nama: "Taksi", kbli: "49292" },
-    { nama: "Ojek Motor", kbli: "49296" },
-    { nama: "Ojek Online", kbli: "49296" },
-    { nama: "Angkutan Barang Pick Up", kbli: "49231" },
-    { nama: "Angkutan Barang", kbli: "49231" },
-    { nama: "Truk Barang", kbli: "49231" },
-    { nama: "Kurir", kbli: "53200" },
-    { nama: "Travel Antar Kota", kbli: "49221" },
-    { nama: "Rental Mobil", kbli: "77100" },
-
-    // I: PENYEDIAAN MAKANAN & MINUMAN
-    { nama: "Warung Makan", kbli: "56101" },
-    { nama: "Rumah Makan", kbli: "56101" },
-    { nama: "Bakso", kbli: "56101" },
-    { nama: "Mie Ayam", kbli: "56101" },
-    { nama: "Soto", kbli: "56101" },
-    { nama: "Angkringan", kbli: "56101" },
-    { nama: "Kafe / Cafe", kbli: "56101" },
-    { nama: "Kedai Kopi", kbli: "56101" },
-    { nama: "Pedagang Makanan Tetap", kbli: "56101" },
-    { nama: "Kedai Angkringan", kbli: "56101" },
-    { nama: "Pedagang Gorengan Keliling", kbli: "56102" },
-    { nama: "Catering Hajatan/Ulang Tahun", kbli: "56210" },
-    { nama: "Jasa Boga Hajatan", kbli: "56210" },
-    { nama: "SPPG MBG", kbli: "56290" },
-    { nama: "Kantin Sekolah", kbli: "56102" },
-    { nama: "Homestay", kbli: "55201" },
-    { nama: "Kos-kosan", kbli: "55900" },
-
-    // J: INFORMASI & KOMUNIKASI
-    { nama: "Konten Kreator / YouTuber", kbli: "90200" },
-    { nama: "YouTube", kbli: "90200" },
-    { nama: "Penyedia Jasa Internet", kbli: "61104" },
-    { nama: "Warnet", kbli: "61104" },
-    { nama: "Jasa Desain Grafis", kbli: "74100" },
-    { nama: "Fotografer", kbli: "74201" },
-
-    // L: REAL ESTATE
-    { nama: "Sewa Bangunan", kbli: "68112" },
-    { nama: "Sewa Ruko", kbli: "68112" },
-    { nama: "Sewa Rumah Kontrakan", kbli: "68111" },
-    { nama: "Sewa Lahan Pertanian", kbli: "68129" },
-
-    // N: PROFESIONAL / AHLI
-    { nama: "Pengacara", kbli: "69101" },
-    { nama: "Notaris", kbli: "69104" },
-
-    // O: AKTIVITAS PENUNJANG USAHA
-    { nama: "Rental Motor/Mobil Tanpa Supir", kbli: "77100" },
-    { nama: "Agen Umrah", kbli: "79110" },
-    { nama: "Sewa Terop Hajatan", kbli: "77291" },
-    { nama: "Sewa Alat Pertanian", kbli: "77392" },
-
-    // Q: PENDIDIKAN
-    { nama: "TK", kbli: "85201" },
-    { nama: "SD", kbli: "85201" },
-    { nama: "SMP/MTs", kbli: "85311" },
-    { nama: "SMA/MA", kbli: "85315" },
-    { nama: "TPQ", kbli: "85542" },
-    { nama: "Les Privat", kbli: "85595" },
-
-    // R: KESEHATAN
-    { nama: "Puskesmas", kbli: "86102" },
-    { nama: "Praktik Dokter", kbli: "86201" },
-    { nama: "Praktik Dokter Gigi", kbli: "86203" },
-    { nama: "Rumah Pijat", kbli: "86995" },
-
-    // S: KESENIAN, HIBURAN & OLAHRAGA
-    { nama: "Orkestra, Band, Sirkus", kbli: "90200" },
-    { nama: "Fasilitas Bela Diri", kbli: "93115" },
-    { nama: "Fasilitas Renang", kbli: "93113" },
-    { nama: "Fasilitas Pemancingan", kbli: "93196" },
-
-    // T: JASA LAINNYA
-    { nama: "Bengkel & Cuci Motor", kbli: "95320" },
-    { nama: "Doorsmeer / Cuci Mobil Motor", kbli: "45203" },
-    { nama: "Bengkel Motor", kbli: "45407" },
-    { nama: "Bengkel Mobil", kbli: "95311" },
-    { nama: "Servis HP", kbli: "95120" },
-    { nama: "Servis Elektronik", kbli: "95120" },
-    { nama: "Vermak Pakaian", kbli: "95291" },
-    { nama: "Pangkas Rambut", kbli: "96111" },
-    { nama: "Salon Kecantikan", kbli: "96122" },
-    { nama: "Laundry", kbli: "96100" },
-    { nama: "Rias Pengantin", kbli: "96220" },
-    { nama: "Jahit Pakaian", kbli: "95290" },
-    { nama: "Service Elektronik", kbli: "95220" },
+const dataPekerjaan = [
+    // PROFESIONAL
+    { nama: "Dokter Spesialis", kategori: "Profesional", gaji: 25000000 },
+    { nama: "Dokter Umum", kategori: "Profesional", gaji: 15000000 },
+    { nama: "Dokter Gigi", kategori: "Profesional", gaji: 12000000 },
+    { nama: "Perawat", kategori: "Profesional", gaji: 6000000 },
+    { nama: "Bidan", kategori: "Profesional", gaji: 5000000 },
+    { nama: "Apoteker", kategori: "Profesional", gaji: 8000000 },
+    { nama: "Pengacara", kategori: "Profesional", gaji: 15000000 },
+    { nama: "Hakim", kategori: "Profesional", gaji: 18000000 },
+    { nama: "Jaksa", kategori: "Profesional", gaji: 12000000 },
+    { nama: "Notaris", kategori: "Profesional", gaji: 20000000 },
+    { nama: "Akuntan", kategori: "Profesional", gaji: 10000000 },
+    { nama: "Konsultan", kategori: "Profesional", gaji: 12000000 },
+    { nama: "Manajer", kategori: "Profesional", gaji: 15000000 },
+    { nama: "Direktur", kategori: "Profesional", gaji: 30000000 },
+    { nama: "CEO", kategori: "Profesional", gaji: 50000000 },
+    
+    // PENDIDIKAN
+    { nama: "Guru SD", kategori: "Pendidikan", gaji: 4000000 },
+    { nama: "Guru SMP", kategori: "Pendidikan", gaji: 4500000 },
+    { nama: "Guru SMA", kategori: "Pendidikan", gaji: 5000000 },
+    { nama: "Guru Privat", kategori: "Pendidikan", gaji: 5000000 },
+    { nama: "Dosen", kategori: "Pendidikan", gaji: 8000000 },
+    { nama: "Profesor", kategori: "Pendidikan", gaji: 15000000 },
+    { nama: "Kepala Sekolah", kategori: "Pendidikan", gaji: 8000000 },
+    
+    // TEKNOLOGI
+    { nama: "Software Engineer", kategori: "Teknologi", gaji: 12000000 },
+    { nama: "Web Developer", kategori: "Teknologi", gaji: 10000000 },
+    { nama: "Mobile Developer", kategori: "Teknologi", gaji: 12000000 },
+    { nama: "Data Scientist", kategori: "Teknologi", gaji: 15000000 },
+    { nama: "IT Support", kategori: "Teknologi", gaji: 6000000 },
+    { nama: "Network Engineer", kategori: "Teknologi", gaji: 10000000 },
+    { nama: "Cyber Security", kategori: "Teknologi", gaji: 15000000 },
+    { nama: "UI/UX Designer", kategori: "Teknologi", gaji: 10000000 },
+    { nama: "Game Developer", kategori: "Teknologi", gaji: 12000000 },
+    { nama: "AI Engineer", kategori: "Teknologi", gaji: 20000000 },
+    
+    // KESEHATAN
+    { nama: "Ahli Gizi", kategori: "Kesehatan", gaji: 6000000 },
+    { nama: "Fisioterapis", kategori: "Kesehatan", gaji: 7000000 },
+    { nama: "Psikolog", kategori: "Kesehatan", gaji: 10000000 },
+    { nama: "Psikiater", kategori: "Kesehatan", gaji: 20000000 },
+    { nama: "Terapis", kategori: "Kesehatan", gaji: 6000000 },
+    { nama: "Radiografer", kategori: "Kesehatan", gaji: 8000000 },
+    { nama: "Analis Kesehatan", kategori: "Kesehatan", gaji: 7000000 },
+    
+    // KEUANGAN
+    { nama: "Analis Keuangan", kategori: "Keuangan", gaji: 12000000 },
+    { nama: "Bankir", kategori: "Keuangan", gaji: 10000000 },
+    { nama: "Teller Bank", kategori: "Keuangan", gaji: 5000000 },
+    { nama: "Customer Service Bank", kategori: "Keuangan", gaji: 5500000 },
+    { nama: "Manajer Bank", kategori: "Keuangan", gaji: 20000000 },
+    { nama: "Agen Asuransi", kategori: "Keuangan", gaji: 8000000 },
+    { nama: "Broker Saham", kategori: "Keuangan", gaji: 15000000 },
+    
+    // PEMERINTAHAN
+    { nama: "PNS Golongan I", kategori: "Pemerintahan", gaji: 2500000 },
+    { nama: "PNS Golongan II", kategori: "Pemerintahan", gaji: 3500000 },
+    { nama: "PNS Golongan III", kategori: "Pemerintahan", gaji: 5000000 },
+    { nama: "PNS Golongan IV", kategori: "Pemerintahan", gaji: 8000000 },
+    { nama: "Polisi", kategori: "Pemerintahan", gaji: 5000000 },
+    { nama: "TNI", kategori: "Pemerintahan", gaji: 5000000 },
+    { nama: "Kepala Desa", kategori: "Pemerintahan", gaji: 4000000 },
+    { nama: "Lurah", kategori: "Pemerintahan", gaji: 5000000 },
+    { nama: "Camat", kategori: "Pemerintahan", gaji: 7000000 },
+    
+    // KONSTRUKSI & TEKNIK
+    { nama: "Arsitek", kategori: "Konstruksi", gaji: 10000000 },
+    { nama: "Insinyur Sipil", kategori: "Konstruksi", gaji: 10000000 },
+    { nama: "Insinyur Elektro", kategori: "Konstruksi", gaji: 10000000 },
+    { nama: "Insinyur Mesin", kategori: "Konstruksi", gaji: 10000000 },
+    { nama: "Kontraktor", kategori: "Konstruksi", gaji: 15000000 },
+    { nama: "Mandor", kategori: "Konstruksi", gaji: 6000000 },
+    { nama: "Tukang Bangunan", kategori: "Konstruksi", gaji: 4000000 },
+    { nama: "Tukang Kayu", kategori: "Konstruksi", gaji: 4000000 },
+    { nama: "Tukang Las", kategori: "Konstruksi", gaji: 4500000 },
+    { nama: "Tukang Cat", kategori: "Konstruksi", gaji: 4000000 },
+    
+    // TRANSPORTASI
+    { nama: "Supir Bus", kategori: "Transportasi", gaji: 5000000 },
+    { nama: "Supir Truk", kategori: "Transportasi", gaji: 6000000 },
+    { nama: "Supir Taksi", kategori: "Transportasi", gaji: 4000000 },
+    { nama: "Supir Online", kategori: "Transportasi", gaji: 5000000 },
+    { nama: "Masinis Kereta", kategori: "Transportasi", gaji: 8000000 },
+    { nama: "Pilot", kategori: "Transportasi", gaji: 30000000 },
+    { nama: "Pramugari", kategori: "Transportasi", gaji: 12000000 },
+    { nama: "Nakhoda Kapal", kategori: "Transportasi", gaji: 25000000 },
+    { nama: "Pelaut", kategori: "Transportasi", gaji: 10000000 },
+    
+    // PERTANIAN
+    { nama: "Petani", kategori: "Pertanian", gaji: 3000000 },
+    { nama: "Peternak", kategori: "Pertanian", gaji: 4000000 },
+    { nama: "Nelayan", kategori: "Pertanian", gaji: 4000000 },
+    { nama: "Perkebunan", kategori: "Pertanian", gaji: 3500000 },
+    { nama: "Kehutanan", kategori: "Pertanian", gaji: 4000000 },
+    
+    // PERDAGANGAN
+    { nama: "Pedagang Kecil", kategori: "Perdagangan", gaji: 4000000 },
+    { nama: "Pedagang Besar", kategori: "Perdagangan", gaji: 10000000 },
+    { nama: "Pedagang Keliling", kategori: "Perdagangan", gaji: 3500000 },
+    { nama: "Pedagang Pasar", kategori: "Perdagangan", gaji: 4000000 },
+    { nama: "Eksportir", kategori: "Perdagangan", gaji: 15000000 },
+    { nama: "Importir", kategori: "Perdagangan", gaji: 15000000 },
+    { nama: "Distributor", kategori: "Perdagangan", gaji: 10000000 },
+    
+    // JASA
+    { nama: "Pramusaji", kategori: "Jasa", gaji: 3000000 },
+    { nama: "Koki", kategori: "Jasa", gaji: 5000000 },
+    { nama: "Chef", kategori: "Jasa", gaji: 10000000 },
+    { nama: "Barista", kategori: "Jasa", gaji: 3500000 },
+    { nama: "Pelayan Restoran", kategori: "Jasa", gaji: 3000000 },
+    { nama: "Resepsionis", kategori: "Jasa", gaji: 4000000 },
+    { nama: "Satpam", kategori: "Jasa", gaji: 3500000 },
+    { nama: "OB", kategori: "Jasa", gaji: 3000000 },
+    { nama: "Pramuwisma", kategori: "Jasa", gaji: 3000000 },
+    
+    // KREATIF
+    { nama: "Desainer Grafis", kategori: "Kreatif", gaji: 7000000 },
+    { nama: "Fotografer", kategori: "Kreatif", gaji: 6000000 },
+    { nama: "Videografer", kategori: "Kreatif", gaji: 7000000 },
+    { nama: "Editor Video", kategori: "Kreatif", gaji: 7000000 },
+    { nama: "Content Creator", kategori: "Kreatif", gaji: 8000000 },
+    { nama: "Social Media Specialist", kategori: "Kreatif", gaji: 7000000 },
+    { nama: "Digital Marketer", kategori: "Kreatif", gaji: 8000000 },
+    { nama: "SEO Specialist", kategori: "Kreatif", gaji: 8000000 },
+    { nama: "Penulis", kategori: "Kreatif", gaji: 5000000 },
+    { nama: "Jurnalis", kategori: "Kreatif", gaji: 6000000 },
+    { nama: "Seniman", kategori: "Kreatif", gaji: 5000000 },
+    { nama: "Musisi", kategori: "Kreatif", gaji: 6000000 },
+    { nama: "Aktor", kategori: "Kreatif", gaji: 10000000 },
+    
+    // LAINNYA
+    { nama: "Ibu Rumah Tangga", kategori: "Lainnya", gaji: 0 },
+    { nama: "Mahasiswa", kategori: "Lainnya", gaji: 0 },
+    { nama: "Pensiunan", kategori: "Lainnya", gaji: 0 },
+    { nama: "Tidak Bekerja", kategori: "Lainnya", gaji: 0 },
+    { nama: "Wirausaha", kategori: "Lainnya", gaji: 8000000 },
+    { nama: "Freelancer", kategori: "Lainnya", gaji: 6000000 },
+    { nama: "Karyawan Swasta", kategori: "Lainnya", gaji: 5000000 },
+    { nama: "Buruh", kategori: "Lainnya", gaji: 3500000 },
+    { nama: "Pekerja Lepas", kategori: "Lainnya", gaji: 4000000 },
 ];
 
-// Hapus duplikat berdasarkan nama (nama yang sama hanya ambil satu)
-const uniqueKBLI = [];
-const seen = new Set();
-dataKBLI.forEach(item => {
-    const key = item.nama.toLowerCase().trim();
-    if (!seen.has(key)) {
-        seen.add(key);
-        uniqueKBLI.push(item);
-    }
-});
-
-// Sort by nama
-uniqueKBLI.sort((a, b) => a.nama.localeCompare(b.nama));
+// ================================================================
+// DATA KBLI (USAHA) dengan KATEGORI dan DETAIL PENGELUARAN/PEMASUKAN
+// ================================================================
+const dataKBLI = [
+    // A: PERTANIAN
+    { 
+        nama: "Budidaya Padi", 
+        kbli: "01121", 
+        kategori: "Pertanian",
+        pemasukan: ["Penjualan Gabah", "Penjualan Jerami", "Penjualan Benih"],
+        pengeluaran: ["Bibit Padi", "Pupuk", "Pestisida", "Sewa Lahan", "Upah Buruh Tani", "Biaya Panen", "Biaya Pengolahan", "Transportasi"]
+    },
+    { 
+        nama: "Budidaya Jagung", 
+        kbli: "01111", 
+        kategori: "Pertanian",
+        pemasukan: ["Penjualan Jagung Pipil", "Penjualan Jagung Tongkol", "Penjualan Pakan Ternak"],
+        pengeluaran: ["Bibit Jagung", "Pupuk", "Pestisida", "Sewa Lahan", "Upah Buruh", "Biaya Panen", "Transportasi"]
+    },
+    { 
+        nama: "Budidaya Sayuran", 
+        kbli: "01131", 
+        kategori: "Pertanian",
+        pemasukan: ["Penjualan Sayuran Segar", "Penjualan Sayuran Olahan"],
+        pengeluaran: ["Bibit Sayuran", "Pupuk", "Pestisida", "Sewa Lahan", "Upah Buruh", "Biaya Panen", "Transportasi", "Kemasan"]
+    },
+    { 
+        nama: "Budidaya Cabai", 
+        kbli: "01138", 
+        kategori: "Pertanian",
+        pemasukan: ["Penjualan Cabai Segar", "Penjualan Cabai Kering"],
+        pengeluaran: ["Bibit Cabai", "Pupuk", "Pestisida", "Sewa Lahan", "Upah Buruh", "Biaya Panen", "Transportasi"]
+    },
+    { 
+        nama: "Peternakan Ayam Pedaging", 
+        kbli: "01461", 
+        kategori: "Peternakan",
+        pemasukan: ["Penjualan Ayam Hidup", "Penjualan Ayam Potong", "Penjualan Telur"],
+        pengeluaran: ["DOC (Day Old Chick)", "Pakan Ayam", "Vitamin & Obat", "Sewa Kandang", "Upah Karyawan", "Listrik", "Air", "Transportasi"]
+    },
+    { 
+        nama: "Peternakan Ayam Petelur", 
+        kbli: "01462", 
+        kategori: "Peternakan",
+        pemasukan: ["Penjualan Telur", "Penjualan Ayam Afkir"],
+        pengeluaran: ["Pullet", "Pakan Ayam", "Vitamin & Obat", "Sewa Kandang", "Upah Karyawan", "Listrik", "Air", "Transportasi"]
+    },
+    { 
+        nama: "Peternakan Sapi Potong", 
+        kbli: "01411", 
+        kategori: "Peternakan",
+        pemasukan: ["Penjualan Sapi Hidup", "Penjualan Daging Sapi"],
+        pengeluaran: ["Bibit Sapi", "Pakan Ternak", "Vitamin & Obat", "Sewa Lahan", "Upah Karyawan", "Transportasi", "Biaya Potong"]
+    },
+    { 
+        nama: "Budidaya Ikan Lele", 
+        kbli: "03225", 
+        kategori: "Perikanan",
+        pemasukan: ["Penjualan Ikan Hidup", "Penjualan Ikan Olahan"],
+        pengeluaran: ["Bibit Ikan", "Pakan Ikan", "Vitamin & Obat", "Sewa Kolam", "Upah Karyawan", "Listrik", "Air", "Transportasi"]
+    },
+    
+    // C: INDUSTRI
+    { 
+        nama: "Industri Tahu", 
+        kbli: "10308", 
+        kategori: "Industri Makanan",
+        pemasukan: ["Penjualan Tahu", "Penjualan Ampas Tahu"],
+        pengeluaran: ["Kedelai", "Bahan Baku Tambahan", "Gas/LPG", "Air", "Listrik", "Upah Karyawan", "Kemasan", "Transportasi"]
+    },
+    { 
+        nama: "Industri Tempe", 
+        kbli: "10307", 
+        kategori: "Industri Makanan",
+        pemasukan: ["Penjualan Tempe", "Penjualan Ampas Tempe"],
+        pengeluaran: ["Kedelai", "Ragi Tempe", "Bahan Baku", "Gas/LPG", "Air", "Listrik", "Upah Karyawan", "Kemasan", "Transportasi"]
+    },
+    { 
+        nama: "Industri Kerupuk", 
+        kbli: "10794", 
+        kategori: "Industri Makanan",
+        pemasukan: ["Penjualan Kerupuk", "Penjualan Peyek", "Penjualan Kripik"],
+        pengeluaran: ["Bahan Baku", "Minyak Goreng", "Gas/LPG", "Listrik", "Upah Karyawan", "Kemasan", "Transportasi"]
+    },
+    { 
+        nama: "Penggilingan Padi", 
+        kbli: "10631", 
+        kategori: "Industri Makanan",
+        pemasukan: ["Jasa Giling", "Penjualan Beras", "Penjualan Dedak"],
+        pengeluaran: ["Listrik", "Perawatan Mesin", "Upah Karyawan", "Sewa Tempat", "Transportasi"]
+    },
+    { 
+        nama: "Depot Air Minum Isi Ulang", 
+        kbli: "11052", 
+        kategori: "Industri Minuman",
+        pemasukan: ["Penjualan Air Galon", "Penjualan Air Kemasan"],
+        pengeluaran: ["Air Baku", "Saringan/Filter", "Galon", "Kemasan", "Listrik", "Upah Karyawan", "Sewa Tempat", "Transportasi"]
+    },
+    { 
+        nama: "Pengrajin Mebel Kayu", 
+        kbli: "31011", 
+        kategori: "Industri Kerajinan",
+        pemasukan: ["Penjualan Mebel", "Penjualan Kerajinan Kayu", "Jasa Pembuatan"],
+        pengeluaran: ["Kayu", "Bahan Baku", "Paku & Lem", "Cat/Pelitur", "Listrik", "Upah Karyawan", "Sewa Tempat", "Transportasi"]
+    },
+    { 
+        nama: "Tukang Jahit", 
+        kbli: "14120", 
+        kategori: "Industri Tekstil",
+        pemasukan: ["Jasa Jahit", "Penjualan Pakaian Jadi"],
+        pengeluaran: ["Kain", "Benang", "Aksesoris", "Listrik", "Perawatan Mesin", "Sewa Tempat"]
+    },
+    
+    // D: KONSTRUKSI
+    { 
+        nama: "Jasa Konstruksi Bangunan", 
+        kbli: "41011", 
+        kategori: "Konstruksi",
+        pemasukan: ["Jasa Pembangunan", "Jasa Renovasi", "Jasa Perbaikan"],
+        pengeluaran: ["Material Bangunan", "Upah Tukang", "Sewa Alat", "Transportasi", "Biaya Izin"]
+    },
+    
+    // G: PERDAGANGAN
+    { 
+        nama: "Warung Sembako", 
+        kbli: "47112", 
+        kategori: "Perdagangan Eceran",
+        pemasukan: ["Penjualan Sembako", "Penjualan Rokok", "Penjualan Minuman", "Penjualan Pulsa"],
+        pengeluaran: ["Stok Barang", "Sewa Tempat", "Listrik", "Air", "Upah Karyawan", "Transportasi"]
+    },
+    { 
+        nama: "Toko Material Bangunan", 
+        kbli: "47521", 
+        kategori: "Perdagangan Eceran",
+        pemasukan: ["Penjualan Material", "Penjualan Cat", "Penjualan Peralatan"],
+        pengeluaran: ["Stok Barang", "Sewa Tempat", "Listrik", "Upah Karyawan", "Transportasi"]
+    },
+    { 
+        nama: "Toko Pakaian", 
+        kbli: "47711", 
+        kategori: "Perdagangan Eceran",
+        pemasukan: ["Penjualan Pakaian", "Penjualan Aksesoris"],
+        pengeluaran: ["Stok Barang", "Sewa Tempat", "Listrik", "Upah Karyawan", "Transportasi"]
+    },
+    { 
+        nama: "Toko Elektronik", 
+        kbli: "47591", 
+        kategori: "Perdagangan Eceran",
+        pemasukan: ["Penjualan Elektronik", "Jasa Servis"],
+        pengeluaran: ["Stok Barang", "Sewa Tempat", "Listrik", "Upah Karyawan", "Transportasi"]
+    },
+    { 
+        nama: "SPBU/Pertashop", 
+        kbli: "47301", 
+        kategori: "Perdagangan Eceran",
+        pemasukan: ["Penjualan BBM", "Penjualan Pelumas", "Penjualan Oli"],
+        pengeluaran: ["Stok BBM", "Sewa Tempat", "Listrik", "Air", "Upah Karyawan", "Transportasi"]
+    },
+    { 
+        nama: "Agen LPG 3 Kg", 
+        kbli: "47302", 
+        kategori: "Perdagangan Eceran",
+        pemasukan: ["Penjualan LPG", "Penjualan Gas"],
+        pengeluaran: ["Stok LPG", "Sewa Tempat", "Transportasi", "Upah Karyawan"]
+    },
+    
+    // I: MAKANAN & MINUMAN
+    { 
+        nama: "Warung Makan", 
+        kbli: "56101", 
+        kategori: "Makanan & Minuman",
+        pemasukan: ["Penjualan Makanan", "Penjualan Minuman", "Pesanan Catering", "Penjualan Makanan Kemasan"],
+        pengeluaran: ["Bahan Makanan", "Bumbu Dapur", "Gas/LPG", "Air", "Listrik", "Upah Karyawan", "Sewa Tempat", "Peralatan Makan", "Kemasan", "Transportasi"]
+    },
+    { 
+        nama: "Kedai Kopi", 
+        kbli: "56101", 
+        kategori: "Makanan & Minuman",
+        pemasukan: ["Penjualan Kopi", "Penjualan Minuman", "Penjualan Makanan Ringan"],
+        pengeluaran: ["Biji Kopi", "Bahan Minuman", "Gas/LPG", "Air", "Listrik", "Upah Karyawan", "Sewa Tempat", "Peralatan", "Kemasan"]
+    },
+    { 
+        nama: "Kedai Es Teh/Boba", 
+        kbli: "56303", 
+        kategori: "Makanan & Minuman",
+        pemasukan: ["Penjualan Es Teh", "Penjualan Boba", "Penjualan Minuman"],
+        pengeluaran: ["Teh", "Boba", "Gula", "Susu", "Es", "Kemasan", "Sewa Tempat", "Listrik", "Air", "Upah Karyawan"]
+    },
+    { 
+        nama: "Catering", 
+        kbli: "56210", 
+        kategori: "Makanan & Minuman",
+        pemasukan: ["Jasa Catering", "Pesanan Nasi Kotak", "Prasmanan"],
+        pengeluaran: ["Bahan Makanan", "Gas/LPG", "Listrik", "Air", "Upah Karyawan", "Sewa Dapur", "Kemasan", "Transportasi"]
+    },
+    { 
+        nama: "Homestay", 
+        kbli: "55201", 
+        kategori: "Akomodasi",
+        pemasukan: ["Sewa Kamar", "Penjualan Makanan", "Jasa Tambahan"],
+        pengeluaran: ["Listrik", "Air", "Internet", "Perawatan", "Kebersihan", "Upah Karyawan", "Pajak"]
+    },
+    
+    // J: JASA
+    { 
+        nama: "Jasa Internet/Warnet", 
+        kbli: "61104", 
+        kategori: "Jasa",
+        pemasukan: ["Jasa Internet", "Penjualan Pulsa", "Jasa Print/Fotokopi"],
+        pengeluaran: ["Listrik", "Internet", "Perawatan PC", "Sewa Tempat", "Upah Karyawan"]
+    },
+    { 
+        nama: "Jasa Fotografi", 
+        kbli: "74201", 
+        kategori: "Jasa",
+        pemasukan: ["Jasa Foto", "Jasa Video", "Cetak Foto"],
+        pengeluaran: ["Peralatan", "Listrik", "Sewa Tempat", "Upah Karyawan", "Transportasi"]
+    },
+    
+    // L: REAL ESTATE
+    { 
+        nama: "Sewa Bangunan/Ruko", 
+        kbli: "68112", 
+        kategori: "Real Estate",
+        pemasukan: ["Sewa Bangunan", "Sewa Ruko"],
+        pengeluaran: ["Pajak", "Perawatan", "Air", "Listrik", "Asuransi"]
+    },
+    
+    // R: KESEHATAN
+    { 
+        nama: "Praktik Dokter", 
+        kbli: "86201", 
+        kategori: "Kesehatan",
+        pemasukan: ["Jasa Konsultasi", "Jasa Tindakan Medis"],
+        pengeluaran: ["Obat-obatan", "Alat Kesehatan", "Sewa Tempat", "Listrik", "Air", "Upah Karyawan"]
+    },
+    { 
+        nama: "Praktik Dokter Gigi", 
+        kbli: "86203", 
+        kategori: "Kesehatan",
+        pemasukan: ["Jasa Konsultasi", "Jasa Tindakan", "Penjualan Alat Kesehatan"],
+        pengeluaran: ["Alat Kesehatan", "Bahan", "Sewa Tempat", "Listrik", "Air", "Upah Karyawan"]
+    },
+    
+    // T: JASA LAINNYA
+    { 
+        nama: "Bengkel Motor", 
+        kbli: "45407", 
+        kategori: "Jasa Reparasi",
+        pemasukan: ["Jasa Servis", "Penjualan Suku Cadang", "Jasa Cuci Motor"],
+        pengeluaran: ["Suku Cadang", "Oli", "Listrik", "Air", "Sewa Tempat", "Upah Karyawan"]
+    },
+    { 
+        nama: "Bengkel Mobil", 
+        kbli: "95311", 
+        kategori: "Jasa Reparasi",
+        pemasukan: ["Jasa Servis", "Penjualan Suku Cadang", "Jasa Cuci Mobil"],
+        pengeluaran: ["Suku Cadang", "Oli", "Listrik", "Air", "Sewa Tempat", "Upah Karyawan"]
+    },
+    { 
+        nama: "Servis HP", 
+        kbli: "95120", 
+        kategori: "Jasa Reparasi",
+        pemasukan: ["Jasa Servis", "Penjualan Aksesoris", "Penjualan HP"],
+        pengeluaran: ["Suku Cadang", "Listrik", "Sewa Tempat", "Upah Karyawan"]
+    },
+    { 
+        nama: "Laundry", 
+        kbli: "96100", 
+        kategori: "Jasa",
+        pemasukan: ["Jasa Cuci", "Jasa Setrika", "Jasa Dry Clean"],
+        pengeluaran: ["Detergen", "Pewangi", "Listrik", "Air", "Sewa Tempat", "Upah Karyawan", "Kemasan"]
+    },
+    { 
+        nama: "Salon Kecantikan", 
+        kbli: "96122", 
+        kategori: "Jasa",
+        pemasukan: ["Jasa Potong Rambut", "Jasa Perawatan", "Penjualan Produk"],
+        pengeluaran: ["Produk Perawatan", "Listrik", "Air", "Sewa Tempat", "Upah Karyawan"]
+    },
+    { 
+        nama: "Pangkas Rambut", 
+        kbli: "96111", 
+        kategori: "Jasa",
+        pemasukan: ["Jasa Potong Rambut", "Jasa Cukur"],
+        pengeluaran: ["Peralatan", "Listrik", "Air", "Sewa Tempat"]
+    },
+    { 
+        nama: "Rias Pengantin", 
+        kbli: "96220", 
+        kategori: "Jasa",
+        pemasukan: ["Jasa Rias", "Jasa Busana", "Sewa Aksesoris"],
+        pengeluaran: ["Produk Makeup", "Aksesoris", "Sewa Tempat", "Transportasi"]
+    },
+];
 
 // ================================================================
 // FUNGSI UTAMA
 // ================================================================
-let rowCounter = 1;
+let rowPekerjaanCounter = 1;
+let usahaCounter = 1;
 
+// ================================================================
+// FUNGSI PEKERJAAN
+// ================================================================
 function tambahBarisPekerjaan() {
     const tbody = document.getElementById('tbodyPekerjaan');
     const row = document.createElement('tr');
-    const no = rowCounter++;
+    const no = rowPekerjaanCounter++;
     row.innerHTML = `
         <td style="padding:6px; text-align:center;">${no}</td>
         <td style="padding:6px;"><input type="text" placeholder="Nama" class="namaPekerja" style="width:100%; padding:6px 10px; border:1px solid #cbd5e1; border-radius:6px;" /></td>
         <td style="padding:6px;">
             <select class="pekerjaanSelect" onchange="pilihPekerjaan(this)" style="width:100%; padding:6px 10px; border:1px solid #cbd5e1; border-radius:6px;">
-                <option value="">-- Pilih Pekerjaan/Usaha --</option>
-                ${uniqueKBLI.map(p => `<option value="${p.nama}" data-kbli="${p.kbli}" data-gaji="0">${p.nama} <span class="kbli-badge">${p.kbli}</span></option>`).join('')}
+                <option value="">-- Pilih Pekerjaan --</option>
+                ${dataPekerjaan.map(p => `<option value="${p.nama}" data-kategori="${p.kategori}" data-gaji="${p.gaji}">${p.nama} <span class="category-badge">${p.kategori}</span></option>`).join('')}
             </select>
         </td>
-        <td style="padding:6px;"><input type="text" class="kbliPekerja" readonly style="width:100%; padding:6px 10px; border:1px solid #cbd5e1; border-radius:6px; background:#f1f5f9;" /></td>
-        <td style="padding:6px;"><input type="number" placeholder="0" class="gajiPekerja" oninput="hitungTotalPendapatan()" style="width:100%; padding:6px 10px; border:1px solid #cbd5e1; border-radius:6px;" /></td>
+        <td style="padding:6px;"><input type="text" class="kategoriPekerja" readonly style="width:100%; padding:6px 10px; border:1px solid #cbd5e1; border-radius:6px; background:#f1f5f9; font-size:12px;" /></td>
+        <td style="padding:6px;"><input type="number" placeholder="0" class="gajiPekerja" oninput="hitungTotalPendapatanPekerjaan()" style="width:100%; padding:6px 10px; border:1px solid #cbd5e1; border-radius:6px;" /></td>
         <td style="padding:6px;">
             <select class="ijazahSelect" style="width:100%; padding:6px 10px; border:1px solid #cbd5e1; border-radius:6px;">
                 <option value="">--</option>
@@ -944,159 +1174,191 @@ function tambahBarisPekerjaan() {
                 <option value="S1">S1</option><option value="S2">S2</option><option value="S3">S3</option>
             </select>
         </td>
-        <td style="padding:6px;"><button class="btn-add-row" style="background:#dc2626; padding:4px 10px;" onclick="hapusBarisPekerjaan(this)">✕</button></td>
+        <td style="padding:6px;"><button class="btn-remove-row" onclick="hapusBarisPekerjaan(this)">✕</button></td>
     `;
     tbody.appendChild(row);
-    hitungTotalPendapatan();
+    hitungTotalPendapatanPekerjaan();
 }
 
 function pilihPekerjaan(select) {
     const row = select.closest('tr');
-    const kbliInput = row.querySelector('.kbliPekerja');
+    const kategoriInput = row.querySelector('.kategoriPekerja');
     const gajiInput = row.querySelector('.gajiPekerja');
     const selectedOption = select.options[select.selectedIndex];
-    const kbli = selectedOption.getAttribute('data-kbli') || '';
-    kbliInput.value = kbli;
-    hitungTotalPendapatan();
+    const kategori = selectedOption.getAttribute('data-kategori') || '';
+    const gaji = selectedOption.getAttribute('data-gaji') || 0;
+    kategoriInput.value = kategori;
+    gajiInput.value = gaji;
+    hitungTotalPendapatanPekerjaan();
 }
 
 function hapusBarisPekerjaan(btn) {
     const row = btn.closest('tr');
     if (document.querySelectorAll('#tbodyPekerjaan tr').length > 1) {
         row.remove();
-        hitungTotalPendapatan();
+        hitungTotalPendapatanPekerjaan();
     } else {
-        alert('Minimal 1 baris harus ada.');
+        alert('Minimal 1 baris pekerjaan harus ada.');
     }
 }
 
-// ================================================================
-// ISI DROPDOWN JENIS USAHA
-// ================================================================
-function populateUsahaDropdown() {
-    const select = document.getElementById('jenisUsahaSelect');
-    uniqueKBLI.forEach(item => {
-        const option = document.createElement('option');
-        option.value = item.nama;
-        option.textContent = item.nama;
-        option.dataset.kbli = item.kbli;
-        select.appendChild(option);
-    });
-}
-
-function pilihJenisUsaha() {
-    const select = document.getElementById('jenisUsahaSelect');
-    const kbliInput = document.getElementById('kbliUsaha');
-    const selected = select.options[select.selectedIndex];
-    kbliInput.value = selected.dataset.kbli || '';
+function hitungTotalPendapatanPekerjaan() {
+    const inputs = document.querySelectorAll('.gajiPekerja');
+    let total = 0;
+    inputs.forEach(inp => total += parseFloat(inp.value) || 0);
+    document.getElementById('totalPendapatanPekerjaan').value = formatRupiah(total);
+    updateRingkasan();
 }
 
 // ================================================================
-// PENGELUARAN USAHA
+// FUNGSI USAHA
 // ================================================================
-function tambahPengeluaranUsaha() {
-    const container = document.getElementById('containerPengeluaranUsaha');
+function tambahUsaha() {
+    const container = document.getElementById('containerUsaha');
     const div = document.createElement('div');
-    div.className = 'form-group';
-    div.style.cssText = 'background:#f1f5f9; padding:8px 12px; border-radius:8px; margin-bottom:6px;';
+    div.className = 'usaha-detail';
+    div.id = `usaha-${usahaCounter}`;
     div.innerHTML = `
-        <input type="text" placeholder="Nama Pengeluaran" class="namaPengeluaran" style="flex:1.5; min-width:80px;" />
-        <input type="number" placeholder="Nilai" class="nilaiPengeluaran" style="flex:1; min-width:80px;" oninput="hitungKeuntunganUsaha()" />
-        <select class="periodePengeluaran" style="flex:0.8; min-width:80px;" onchange="hitungKeuntunganUsaha()">
-            <option value="harian">Harian</option>
-            <option value="mingguan">Mingguan</option>
-            <option value="bulanan" selected>Bulanan</option>
-            <option value="tahunan">Tahunan</option>
-        </select>
-        <button class="btn-add-row" style="background:#dc2626; padding:4px 10px;" onclick="hapusPengeluaranUsaha(this)">✕</button>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+            <h4 style="margin:0;">📌 Usaha #${usahaCounter}</h4>
+            <button class="btn-remove-row" onclick="hapusUsaha('${div.id}')">✕ Hapus Usaha</button>
+        </div>
+        <div class="form-group">
+            <label>Jenis Usaha</label>
+            <select class="jenisUsahaSelect" onchange="pilihJenisUsaha(this)" style="flex:1;">
+                <option value="">-- Pilih Jenis Usaha --</option>
+                ${dataKBLI.map(u => `<option value="${u.nama}" data-kbli="${u.kbli}" data-kategori="${u.kategori}">${u.nama} <span class="kbli-badge">${u.kbli}</span> <span class="category-badge">${u.kategori}</span></option>`).join('')}
+            </select>
+        </div>
+        <div class="form-group">
+            <label>KBLI</label>
+            <input type="text" class="kbliUsaha" readonly placeholder="KBLI akan terisi otomatis" style="flex:1; background:#f1f5f9;" />
+        </div>
+        <div class="form-group">
+            <label>Kategori</label>
+            <input type="text" class="kategoriUsaha" readonly placeholder="Kategori akan terisi otomatis" style="flex:1; background:#f1f5f9;" />
+        </div>
+        <div class="form-group">
+            <label>Tahun Mulai</label>
+            <input type="text" class="tahunMulaiUsaha" placeholder="Tahun" style="flex:1;" />
+        </div>
+        <div class="form-group">
+            <label>NIB</label>
+            <input type="text" class="nibUsaha" placeholder="Nomor Induk Berusaha" style="flex:1;" />
+        </div>
+        
+        <div style="border-top:1px solid #e2e8f0; margin:12px 0; padding-top:12px;">
+            <h5>📊 PEMASUKAN USAHA (per Bulan)</h5>
+            <div class="pemasukanContainer">
+                <!-- Akan diisi oleh JavaScript -->
+            </div>
+        </div>
+
+        <div style="border-top:1px solid #e2e8f0; margin:12px 0; padding-top:12px;">
+            <h5>💸 PENGELUARAN USAHA (per Bulan)</h5>
+            <div class="pengeluaranContainer">
+                <!-- Akan diisi oleh JavaScript -->
+            </div>
+        </div>
+
+        <div class="total-box" style="margin-top:10px;">
+            <div class="grid-2">
+                <div class="form-group"><label><strong>Total Pemasukan / Bulan</strong></label><input type="text" class="totalPemasukanUsaha" readonly placeholder="Rp 0" style="font-weight:700; color:#075985;" /></div>
+                <div class="form-group"><label><strong>Total Pengeluaran / Bulan</strong></label><input type="text" class="totalPengeluaranUsaha" readonly placeholder="Rp 0" style="font-weight:700; color:#dc2626;" /></div>
+                <div class="form-group"><label><strong>Keuntungan Usaha / Bulan</strong></label><input type="text" class="keuntunganUsaha" readonly placeholder="Rp 0" style="font-weight:700; color:#075985; font-size:16px;" /></div>
+            </div>
+        </div>
     `;
     container.appendChild(div);
+    usahaCounter++;
 }
 
-function hapusPengeluaranUsaha(btn) {
-    const div = btn.closest('.form-group');
-    if (document.querySelectorAll('#containerPengeluaranUsaha .form-group').length > 1) {
+function hapusUsaha(id) {
+    const div = document.getElementById(id);
+    if (div) {
         div.remove();
-        hitungKeuntunganUsaha();
-    } else {
-        alert('Minimal 1 pengeluaran harus ada.');
+        updateRingkasan();
     }
 }
 
-// ================================================================
-// PENDAPATAN LAIN
-// ================================================================
-function tambahPendapatanLain() {
-    const container = document.getElementById('containerPendapatanLain');
-    const div = document.createElement('div');
-    div.className = 'form-group';
-    div.style.cssText = 'background:#f1f5f9; padding:8px 12px; border-radius:8px; margin-bottom:6px;';
-    div.innerHTML = `
-        <input type="text" placeholder="Sumber Pendapatan" class="sumberPendapatanLain" style="flex:1.5; min-width:80px;" />
-        <input type="number" placeholder="Nilai" class="nilaiPendapatanLain" style="flex:1; min-width:80px;" oninput="hitungKeuntunganUsaha()" />
-        <button class="btn-add-row" style="background:#dc2626; padding:4px 10px;" onclick="hapusPendapatanLain(this)">✕</button>
-    `;
-    container.appendChild(div);
-}
-
-function hapusPendapatanLain(btn) {
-    const div = btn.closest('.form-group');
-    if (document.querySelectorAll('#containerPendapatanLain .form-group').length > 0) {
-        div.remove();
-        hitungKeuntunganUsaha();
+function pilihJenisUsaha(select) {
+    const div = select.closest('.usaha-detail');
+    const kbliInput = div.querySelector('.kbliUsaha');
+    const kategoriInput = div.querySelector('.kategoriUsaha');
+    const pemasukanContainer = div.querySelector('.pemasukanContainer');
+    const pengeluaranContainer = div.querySelector('.pengeluaranContainer');
+    
+    const selectedOption = select.options[select.selectedIndex];
+    const nama = selectedOption.value;
+    const kbli = selectedOption.getAttribute('data-kbli') || '';
+    const kategori = selectedOption.getAttribute('data-kategori') || '';
+    
+    kbliInput.value = kbli;
+    kategoriInput.value = kategori;
+    
+    // Cari data KBLI
+    const data = dataKBLI.find(u => u.nama === nama);
+    
+    if (data) {
+        // Buat pemasukan
+        pemasukanContainer.innerHTML = '';
+        data.pemasukan.forEach(item => {
+            const divItem = document.createElement('div');
+            divItem.className = 'form-group';
+            divItem.style.cssText = 'background:#f0fdf4; padding:4px 10px; border-radius:6px; margin-bottom:4px;';
+            divItem.innerHTML = `
+                <label style="min-width:120px; font-size:13px;">${item}</label>
+                <input type="number" placeholder="0" class="pemasukanItem" oninput="hitungUsaha(this)" style="flex:1;" />
+            `;
+            pemasukanContainer.appendChild(divItem);
+        });
+        
+        // Buat pengeluaran
+        pengeluaranContainer.innerHTML = '';
+        data.pengeluaran.forEach(item => {
+            const divItem = document.createElement('div');
+            divItem.className = 'form-group';
+            divItem.style.cssText = 'background:#fef2f2; padding:4px 10px; border-radius:6px; margin-bottom:4px;';
+            divItem.innerHTML = `
+                <label style="min-width:120px; font-size:13px;">${item}</label>
+                <input type="number" placeholder="0" class="pengeluaranItem" oninput="hitungUsaha(this)" style="flex:1;" />
+            `;
+            pengeluaranContainer.appendChild(divItem);
+        });
     }
+    
+    hitungUsaha(select);
+}
+
+function hitungUsaha(element) {
+    const div = element.closest('.usaha-detail');
+    const pemasukanInputs = div.querySelectorAll('.pemasukanItem');
+    const pengeluaranInputs = div.querySelectorAll('.pengeluaranItem');
+    const totalPemasukan = div.querySelector('.totalPemasukanUsaha');
+    const totalPengeluaran = div.querySelector('.totalPengeluaranUsaha');
+    const keuntungan = div.querySelector('.keuntunganUsaha');
+    
+    let totalPem = 0;
+    pemasukanInputs.forEach(inp => totalPem += parseFloat(inp.value) || 0);
+    totalPemasukan.value = formatRupiah(totalPem);
+    
+    let totalPeng = 0;
+    pengeluaranInputs.forEach(inp => totalPeng += parseFloat(inp.value) || 0);
+    totalPengeluaran.value = formatRupiah(totalPeng);
+    
+    const laba = totalPem - totalPeng;
+    keuntungan.value = formatRupiah(laba);
+    
+    updateRingkasan();
 }
 
 // ================================================================
-// FUNGSI PERHITUNGAN
+// FUNGSI PERHITUNGAN KELUARGA
 // ================================================================
 
 function getVal(id) { return parseFloat(document.getElementById(id)?.value) || 0; }
 
-// 1. Total Pendapatan Keluarga
-function hitungTotalPendapatan() {
-    const inputs = document.querySelectorAll('.gajiPekerja');
-    let total = 0;
-    inputs.forEach(inp => total += parseFloat(inp.value) || 0);
-    document.getElementById('totalPendapatanKeluarga').value = formatRupiah(total);
-    updateRingkasan();
-}
-
-// 2. Keuntungan Usaha
-function hitungKeuntunganUsaha() {
-    let totalPengeluaran = 0;
-    document.querySelectorAll('#containerPengeluaranUsaha .form-group').forEach(item => {
-        const nilai = parseFloat(item.querySelector('.nilaiPengeluaran').value) || 0;
-        const periode = item.querySelector('.periodePengeluaran').value;
-        let perBulan = nilai;
-        if (periode === 'harian') perBulan = nilai * 30;
-        else if (periode === 'mingguan') perBulan = nilai * 4;
-        else if (periode === 'tahunan') perBulan = nilai / 12;
-        totalPengeluaran += perBulan;
-    });
-    document.getElementById('totalPengeluaranUsaha').value = formatRupiah(totalPengeluaran);
-
-    const penjualan = getVal('penjualan');
-    const pendLain = getVal('pendapatanLain');
-    let totalPendLain = 0;
-    document.querySelectorAll('#containerPendapatanLain .form-group').forEach(item => {
-        totalPendLain += parseFloat(item.querySelector('.nilaiPendapatanLain').value) || 0;
-    });
-    const totalPendapatan = penjualan + pendLain + totalPendLain;
-    document.getElementById('totalPendapatanUsaha').value = formatRupiah(totalPendapatan);
-
-    const keuntungan = totalPendapatan - totalPengeluaran;
-    document.getElementById('keuntunganUsaha').value = formatRupiah(keuntungan);
-    updateRingkasan();
-}
-
-// 3. Total Aset
-function hitungTotalAset() {
-    const total = getVal('asetTanah') + getVal('asetLain');
-    document.getElementById('totalAset').value = formatRupiah(total);
-}
-
-// 4. Pengeluaran Makanan
+// Total Makanan
 function hitungTotalMakan() {
     const items = ['beras','minyakGoreng','gulaGaram','telur','dagingAyam','dagingSapi',
                    'ikan','tahuTempe','sayuran','buah','susu','mieInstan','kopiTeh','bumbu','airMinum'];
@@ -1124,7 +1386,7 @@ function hitungTotalMakanJadi() {
     updateRingkasan();
 }
 
-// 5. Pengeluaran Bukan Makanan
+// Total Bukan Makanan
 function hitungTotalBukanMakan() {
     const tagihan = getVal('listrik') + getVal('airPAM') + getVal('lpg') + getVal('internet') + getVal('pulsa') + getVal('tagihanLain');
     document.getElementById('totalTagihan').value = formatRupiah(tagihan);
@@ -1152,7 +1414,7 @@ function hitungTotalBukanMakan() {
     updateRingkasan();
 }
 
-// 6. Pengeluaran Tahunan
+// Total Tahunan
 function hitungTotalTahunan() {
     const pakaian = getVal('bajuLebaran') + getVal('seragam') + getVal('sepatu') + getVal('tas') + getVal('pakaianLain');
     document.getElementById('totalPakaian').value = formatRupiah(pakaian);
@@ -1174,23 +1436,38 @@ function hitungTotalTahunan() {
     updateRingkasan();
 }
 
-// 7. Ringkasan
+// Ringkasan Ekonomi
 function updateRingkasan() {
+    // Pendapatan dari pekerjaan
+    const pendapatanPekerjaan = parseFloat(document.getElementById('totalPendapatanPekerjaan').value.replace(/[^0-9\-]/g,'')) || 0;
+    
+    // Total keuntungan dari semua usaha
+    let totalKeuntunganUsaha = 0;
+    document.querySelectorAll('.keuntunganUsaha').forEach(inp => {
+        const val = parseFloat(inp.value.replace(/[^0-9\-]/g,'')) || 0;
+        totalKeuntunganUsaha += val;
+    });
+    
+    // Total pendapatan keluarga
+    const totalPendapatan = pendapatanPekerjaan + totalKeuntunganUsaha;
+    
+    // Pengeluaran
     const makan = parseFloat(document.getElementById('totalMakanBulanAll').value.replace(/[^0-9\-]/g,'')) || 0;
     const bukanMakan = parseFloat(document.getElementById('totalBukanMakan').value.replace(/[^0-9\-]/g,'')) || 0;
     const tahunan = parseFloat(document.getElementById('totalTahunan').value.replace(/[^0-9\-]/g,'')) || 0;
-    const pendapatan = parseFloat(document.getElementById('totalPendapatanKeluarga').value.replace(/[^0-9\-]/g,'')) || 0;
-    const keuntungan = parseFloat(document.getElementById('keuntunganUsaha').value.replace(/[^0-9\-]/g,'')) || 0;
-
+    
+    // Ringkasan pengeluaran
     document.getElementById('ringkasanMakan').value = formatRupiah(makan);
     document.getElementById('ringkasanBukanMakan').value = formatRupiah(bukanMakan);
     document.getElementById('ringkasanTahunan').value = formatRupiah(tahunan);
     document.getElementById('ringkasanTotalTahunan').value = formatRupiah(makan + (bukanMakan * 12) + tahunan);
     
-    const totalPendapatan = pendapatan + keuntungan;
-    const totalPengeluaranBulanan = makan + bukanMakan;
+    // Ringkasan ekonomi
+    document.getElementById('ringkasanPendapatanPekerjaan').value = formatRupiah(pendapatanPekerjaan);
+    document.getElementById('ringkasanKeuntunganUsaha').value = formatRupiah(totalKeuntunganUsaha);
     document.getElementById('ringkasanPendapatan').value = formatRupiah(totalPendapatan);
-    document.getElementById('ringkasanKeuntungan').value = formatRupiah(keuntungan);
+    
+    const totalPengeluaranBulanan = makan + bukanMakan;
     document.getElementById('ringkasanPengeluaran').value = formatRupiah(totalPengeluaranBulanan);
     document.getElementById('ringkasanSelisih').value = formatRupiah(totalPendapatan - totalPengeluaranBulanan);
 }
@@ -1204,70 +1481,82 @@ function formatRupiah(angka) {
 // KIRIM KE WHATSAPP
 // ================================================================
 function kirimWhatsApp() {
-    const data = {
-        noBangunan: document.getElementById('noBangunan').value || '-',
-        noUrutKK: document.getElementById('noUrutKK').value || '-',
-        namaKepala: document.getElementById('namaKepala').value || '-',
-        jmlPenghuni: document.getElementById('jmlPenghuni').value || '-',
-        noKK: document.getElementById('noKK').value || '-',
-        totalPendapatan: document.getElementById('totalPendapatanKeluarga').value || 'Rp 0',
-        keuntungan: document.getElementById('keuntunganUsaha').value || 'Rp 0',
-        totalMakan: document.getElementById('totalMakanBulanAll').value || 'Rp 0',
-        totalBukanMakan: document.getElementById('totalBukanMakan').value || 'Rp 0',
-        totalTahunan: document.getElementById('totalTahunan').value || 'Rp 0',
-        ringkasanTotal: document.getElementById('ringkasanTotalTahunan').value || 'Rp 0',
-        selisih: document.getElementById('ringkasanSelisih').value || 'Rp 0'
-    };
-
-    let pekerjaanText = '';
+    let pesan = `📋 *KUESIONER KELUARGA*\n━━━━━━━━━━━━━━━━━━━\n\n`;
+    
+    // Identitas
+    pesan += `🏠 *IDENTITAS KELUARGA*\n`;
+    pesan += `No Bangunan: ${document.getElementById('noBangunan').value || '-'}\n`;
+    pesan += `No Urut KK: ${document.getElementById('noUrutKK').value || '-'}\n`;
+    pesan += `Nama Kepala Keluarga: ${document.getElementById('namaKepala').value || '-'}\n`;
+    pesan += `Jumlah Penghuni: ${document.getElementById('jmlPenghuni').value || '-'}\n`;
+    pesan += `No KK: ${document.getElementById('noKK').value || '-'}\n\n`;
+    
+    // Pekerjaan
+    pesan += `👨‍👩‍👧‍👦 *PEKERJAAN (185+)*\n`;
     document.querySelectorAll('#tbodyPekerjaan tr').forEach((row, i) => {
         const nama = row.querySelector('.namaPekerja')?.value || '-';
         const pekerjaan = row.querySelector('.pekerjaanSelect')?.value || '-';
-        const kbli = row.querySelector('.kbliPekerja')?.value || '-';
+        const kategori = row.querySelector('.kategoriPekerja')?.value || '-';
         const gaji = row.querySelector('.gajiPekerja')?.value || '0';
-        pekerjaanText += `${i+1}. ${nama} - ${pekerjaan} (KBLI: ${kbli}) - Rp${parseInt(gaji).toLocaleString()}\n`;
+        pesan += `${i+1}. ${nama} - ${pekerjaan} (${kategori}) - Rp${parseInt(gaji).toLocaleString()}\n`;
     });
-
-    const jenisUsaha = document.getElementById('jenisUsahaSelect').value || '-';
-    const kbliUsaha = document.getElementById('kbliUsaha').value || '-';
-
-    const pesan = `
-📋 *KUESIONER KELUARGA*
-━━━━━━━━━━━━━━━━━━━
-
-🏠 *IDENTITAS KELUARGA*
-No Bangunan: ${data.noBangunan}
-No Urut KK: ${data.noUrutKK}
-Nama Kepala Keluarga: ${data.namaKepala}
-Jumlah Penghuni: ${data.jmlPenghuni}
-No KK: ${data.noKK}
-
-👨‍👩‍👧‍👦 *PEKERJAAN & PENDAPATAN*
-${pekerjaanText}
-Total Pendapatan: ${data.totalPendapatan}
-
-🏪 *USAHA*
-Jenis Usaha: ${jenisUsaha}
-KBLI: ${kbliUsaha}
-Keuntungan Usaha: ${data.keuntungan}
-
-🍚 *PENGELUARAN MAKANAN*
-Total per Bulan: ${data.totalMakan}
-
-🏪 *PENGELUARAN BUKAN MAKANAN*
-Total per Bulan: ${data.totalBukanMakan}
-
-📅 *PENGELUARAN TAHUNAN*
-Total: ${data.totalTahunan}
-
-📊 *RINGKASAN*
-Total Pengeluaran Tahunan: ${data.ringkasanTotal}
-Selisih Pendapatan - Pengeluaran: ${data.selisih}
-
-━━━━━━━━━━━━━━━━━━━
-*Data dikirim dari Kuesioner Keluarga*
-    `;
-
+    pesan += `Total Pendapatan Pekerjaan: ${document.getElementById('totalPendapatanPekerjaan').value || 'Rp 0'}\n\n`;
+    
+    // Usaha
+    pesan += `🏪 *USAHA (KBLI)*\n`;
+    document.querySelectorAll('.usaha-detail').forEach((div, i) => {
+        const jenis = div.querySelector('.jenisUsahaSelect')?.value || '-';
+        const kbli = div.querySelector('.kbliUsaha')?.value || '-';
+        const kategori = div.querySelector('.kategoriUsaha')?.value || '-';
+        const keuntungan = div.querySelector('.keuntunganUsaha')?.value || 'Rp 0';
+        pesan += `\n📌 Usaha #${i+1}\n`;
+        pesan += `Jenis: ${jenis} (KBLI: ${kbli}) - ${kategori}\n`;
+        pesan += `Keuntungan: ${keuntungan}\n`;
+        
+        // Pemasukan
+        const pemasukanItems = div.querySelectorAll('.pemasukanItem');
+        if (pemasukanItems.length > 0) {
+            pesan += `Pemasukan:\n`;
+            const labels = div.querySelectorAll('.pemasukanContainer .form-group label');
+            pemasukanItems.forEach((inp, j) => {
+                const label = labels[j]?.textContent || '-';
+                pesan += `  - ${label}: Rp${parseInt(inp.value || 0).toLocaleString()}\n`;
+            });
+        }
+        
+        // Pengeluaran
+        const pengeluaranItems = div.querySelectorAll('.pengeluaranItem');
+        if (pengeluaranItems.length > 0) {
+            pesan += `Pengeluaran:\n`;
+            const labels = div.querySelectorAll('.pengeluaranContainer .form-group label');
+            pengeluaranItems.forEach((inp, j) => {
+                const label = labels[j]?.textContent || '-';
+                pesan += `  - ${label}: Rp${parseInt(inp.value || 0).toLocaleString()}\n`;
+            });
+        }
+    });
+    pesan += `\n`;
+    
+    // Pengeluaran Keluarga
+    pesan += `🍚 *PENGELUARAN MAKANAN*\n`;
+    pesan += `Total per Bulan: ${document.getElementById('totalMakanBulanAll').value || 'Rp 0'}\n\n`;
+    
+    pesan += `🏪 *PENGELUARAN BUKAN MAKANAN*\n`;
+    pesan += `Total per Bulan: ${document.getElementById('totalBukanMakan').value || 'Rp 0'}\n\n`;
+    
+    pesan += `📅 *PENGELUARAN TAHUNAN*\n`;
+    pesan += `Total: ${document.getElementById('totalTahunan').value || 'Rp 0'}\n\n`;
+    
+    // Ringkasan
+    pesan += `📊 *RINGKASAN EKONOMI*\n`;
+    pesan += `Total Pendapatan Pekerjaan: ${document.getElementById('ringkasanPendapatanPekerjaan').value || 'Rp 0'}\n`;
+    pesan += `Total Keuntungan Usaha: ${document.getElementById('ringkasanKeuntunganUsaha').value || 'Rp 0'}\n`;
+    pesan += `Total Pendapatan Keluarga: ${document.getElementById('ringkasanPendapatan').value || 'Rp 0'}\n`;
+    pesan += `Total Pengeluaran Bulanan: ${document.getElementById('ringkasanPengeluaran').value || 'Rp 0'}\n`;
+    pesan += `Selisih: ${document.getElementById('ringkasanSelisih').value || 'Rp 0'}\n`;
+    pesan += `\n━━━━━━━━━━━━━━━━━━━\n`;
+    pesan += `*Data dikirim dari Kuesioner Keluarga*`;
+    
     const encoded = encodeURIComponent(pesan);
     window.open(`https://api.whatsapp.com/send?text=${encoded}`, '_blank');
 }
@@ -1280,14 +1569,15 @@ function simpanKuesioner() {
 // INISIALISASI
 // ================================================================
 window.onload = function() {
-    populateUsahaDropdown();
+    // Tambah baris pekerjaan default
     tambahBarisPekerjaan();
     tambahBarisPekerjaan();
-    tambahPengeluaranUsaha();
     
-    hitungTotalPendapatan();
-    hitungKeuntunganUsaha();
-    hitungTotalAset();
+    // Tambah 1 usaha default
+    tambahUsaha();
+    
+    // Hitung semua
+    hitungTotalPendapatanPekerjaan();
     hitungTotalMakan();
     hitungTotalMakanJadi();
     hitungTotalBukanMakan();
