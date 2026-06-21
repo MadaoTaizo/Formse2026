@@ -1,919 +1,479 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-  <title>Form Data Keluarga - Smart</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
-    }
-
-    body {
-      background: #e6e9f0;
-      min-height: 100vh;
-      padding: 16px 12px 40px;
-      display: flex;
-      justify-content: center;
-    }
-
-    .container {
-      max-width: 720px;
-      width: 100%;
-      background: #ffffff;
-      border-radius: 32px;
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
-      padding: 24px 20px 32px;
-      transition: 0.2s;
-    }
-
-    h1 {
-      font-size: 1.8rem;
-      font-weight: 600;
-      color: #0b1a33;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 8px;
-      letter-spacing: -0.3px;
-    }
-
-    h1 small {
-      font-size: 0.9rem;
-      font-weight: 400;
-      color: #4a5b7a;
-      margin-left: 6px;
-    }
-
-    .subhead {
-      color: #4a5b7a;
-      font-size: 0.95rem;
-      border-left: 4px solid #2a7de1;
-      padding-left: 14px;
-      margin-bottom: 28px;
-      background: #f2f6fc;
-      border-radius: 0 12px 12px 0;
-      line-height: 1.4;
-    }
-
-    .section {
-      background: #f9faff;
-      border-radius: 24px;
-      padding: 18px 16px 16px;
-      margin-bottom: 24px;
-      border: 1px solid #eef2f8;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.02);
-    }
-
-    .section-title {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-weight: 600;
-      font-size: 1.1rem;
-      color: #0b1a33;
-      margin-bottom: 16px;
-      border-bottom: 2px dashed #d0dae8;
-      padding-bottom: 10px;
-    }
-
-    .section-title i {
-      color: #2a7de1;
-      width: 24px;
-      font-size: 1.2rem;
-    }
-
-    .row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px 10px;
-      margin-bottom: 8px;
-    }
-
-    .field {
-      flex: 1 1 calc(50% - 10px);
-      min-width: 140px;
-    }
-
-    .field.full {
-      flex: 1 1 100%;
-    }
-
-    .field label {
-      display: block;
-      font-size: 0.78rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.4px;
-      color: #3d4f6e;
-      margin-bottom: 2px;
-    }
-
-    .field input, .field select {
-      width: 100%;
-      padding: 10px 12px;
-      border: 1px solid #d8e0ec;
-      border-radius: 16px;
-      font-size: 0.95rem;
-      background: white;
-      transition: 0.15s;
-      color: #0b1a33;
-    }
-
-    .field input:focus, .field select:focus {
-      outline: 2px solid #2a7de1;
-      border-color: transparent;
-      background: white;
-      box-shadow: 0 4px 10px rgba(42, 125, 225, 0.08);
-    }
-
-    .field input::placeholder {
-      color: #a0b2cc;
-      font-weight: 400;
-      font-size: 0.85rem;
-    }
-
-    .field .recommendation {
-      display: block;
-      font-size: 0.7rem;
-      color: #2a7de1;
-      margin-top: 3px;
-      padding-left: 6px;
-      font-weight: 500;
-      min-height: 18px;
-    }
-
-    .field .recommendation.warning {
-      color: #e67e22;
-    }
-
-    .field .recommendation.success {
-      color: #27ae60;
-    }
-
-    .photo-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin: 6px 0 4px;
-    }
-
-    .photo-item {
-      background: #eef3fc;
-      border-radius: 40px;
-      padding: 6px 18px 6px 14px;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 0.85rem;
-      font-weight: 500;
-      color: #1a2d4a;
-      border: 1px solid #dce5f2;
-    }
-
-    .photo-item i {
-      color: #2a7de1;
-      font-size: 1rem;
-    }
-
-    .warning-tag {
-      background: #fef4e6;
-      border: 1px solid #fadc9f;
-      border-radius: 40px;
-      padding: 6px 16px;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-weight: 600;
-      font-size: 0.8rem;
-      color: #a8681a;
-      margin-top: 4px;
-    }
-
-    .btn-wa {
-      background: #25D366;
-      color: white;
-      border: none;
-      border-radius: 60px;
-      padding: 16px 20px;
-      font-size: 1.2rem;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      width: 100%;
-      margin-top: 12px;
-      transition: 0.15s;
-      box-shadow: 0 8px 18px rgba(37, 211, 102, 0.25);
-      cursor: pointer;
-    }
-
-    .btn-wa i {
-      font-size: 1.6rem;
-    }
-
-    .btn-wa:active {
-      transform: scale(0.97);
-      box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3);
-    }
-
-    .footer-note {
-      text-align: center;
-      font-size: 0.75rem;
-      color: #7a8aa3;
-      margin-top: 20px;
-      border-top: 1px solid #e6edf6;
-      padding-top: 18px;
-      letter-spacing: 0.2px;
-    }
-
-    .total-box {
-      background: #eaf4ff;
-      border-radius: 16px;
-      padding: 12px 16px;
-      margin-top: 10px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      justify-content: space-between;
-    }
-
-    .total-item {
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: #0b1a33;
-    }
-
-    .total-item span {
-      font-weight: 400;
-      color: #2a7de1;
-    }
-
-    .badge-sm {
-      display: inline-block;
-      background: #2a7de1;
-      color: white;
-      font-size: 0.6rem;
-      border-radius: 30px;
-      padding: 2px 10px;
-      margin-left: 6px;
-      font-weight: 700;
-    }
-
-    @media (max-width: 480px) {
-      .container { padding: 16px; }
-      .field { flex: 1 1 100%; }
-      .row .field.half { flex: 1 1 100%; }
-      .photo-item { padding: 4px 12px; font-size: 0.75rem; }
-      h1 { font-size: 1.5rem; }
-    }
-  </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Kuesioner Keluarga</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f4f7fc;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 30px 35px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        h1 {
+            font-size: 28px;
+            border-left: 6px solid #2a7de1;
+            padding-left: 16px;
+            margin-bottom: 30px;
+            color: #1a2b4a;
+        }
+        h2 {
+            font-size: 20px;
+            margin: 30px 0 16px 0;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e2e8f0;
+            color: #1e3a6b;
+        }
+        h3 {
+            font-size: 18px;
+            margin: 20px 0 12px 0;
+            color: #1e3a6b;
+        }
+        .form-group {
+            margin-bottom: 18px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .form-group label {
+            width: 200px;
+            font-weight: 600;
+            color: #2d3748;
+            flex-shrink: 0;
+        }
+        .form-group .desc {
+            width: 100%;
+            font-size: 13px;
+            color: #4a5568;
+            background: #f0f4fa;
+            padding: 6px 12px;
+            border-radius: 8px;
+            margin-top: 4px;
+            margin-left: 0;
+        }
+        .form-group input, .form-group select, .form-group textarea {
+            flex: 1;
+            min-width: 200px;
+            padding: 10px 14px;
+            border: 1px solid #cbd5e0;
+            border-radius: 10px;
+            font-size: 15px;
+            background: #fafcff;
+            transition: 0.2s;
+        }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            border-color: #2a7de1;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(42,125,225,0.2);
+        }
+        .form-group textarea {
+            min-height: 60px;
+            resize: vertical;
+        }
+        .inline-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px 20px;
+            align-items: center;
+        }
+        .inline-group .form-group {
+            flex: 1 1 200px;
+            margin-bottom: 8px;
+        }
+        .inline-group .form-group label {
+            width: auto;
+            min-width: 100px;
+        }
+        .table-wrap {
+            overflow-x: auto;
+            margin: 12px 0 20px 0;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        th {
+            background: #eef2f7;
+            padding: 12px 8px;
+            text-align: left;
+            font-weight: 600;
+            color: #1e3a6b;
+            border-bottom: 2px solid #d0d9e6;
+        }
+        td {
+            padding: 8px 8px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        td input, td select {
+            width: 100%;
+            padding: 8px 10px;
+            border: 1px solid #d0d9e6;
+            border-radius: 8px;
+            font-size: 14px;
+            background: #fafcff;
+        }
+        td input:focus, td select:focus {
+            border-color: #2a7de1;
+            outline: none;
+        }
+        .sub-section {
+            background: #f9fbfd;
+            padding: 16px 20px;
+            border-radius: 14px;
+            margin: 16px 0;
+        }
+        .sub-section .form-group label {
+            width: 180px;
+        }
+        .btn-submit {
+            background: #1e3a6b;
+            color: #fff;
+            border: none;
+            padding: 14px 36px;
+            font-size: 18px;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 30px;
+            transition: 0.25s;
+            font-weight: 600;
+        }
+        .btn-submit:hover {
+            background: #2a4f8a;
+            transform: scale(1.01);
+            box-shadow: 0 6px 14px rgba(30,58,107,0.3);
+        }
+        .note {
+            font-size: 14px;
+            color: #2d3748;
+            background: #edf2f9;
+            padding: 14px 18px;
+            border-radius: 12px;
+            margin-top: 12px;
+        }
+        .row-desc {
+            font-size: 13px;
+            color: #4a5568;
+            background: #f0f4fa;
+            padding: 4px 12px;
+            border-radius: 30px;
+            display: inline-block;
+            margin-left: 8px;
+        }
+        @media (max-width: 700px) {
+            .container { padding: 20px; }
+            .form-group { flex-direction: column; align-items: stretch; }
+            .form-group label { width: 100%; margin-bottom: 4px; }
+            .inline-group .form-group label { width: 100%; }
+        }
+    </style>
 </head>
 <body>
-<div class="container" id="app">
-  <h1>
-    <i class="fas fa-users" style="color:#1f4e8a;"></i> KELUARGA
-    <small>SLS</small>
-  </h1>
-  <div class="subhead">
-    <i class="fas fa-pen-fancy" style="margin-right: 6px;"></i> isi data dengan lengkap & ceklis foto
-  </div>
+<div class="container">
+    <h1>📋 KUESIONER KELUARGA</h1>
+    <p style="color:#2d3748; margin-bottom: 20px;">Isi semua data dengan benar. Kolom bertanda <span style="color:#c53030;">*</span> wajib diisi.</p>
 
-  <!-- KELUARGA -->
-  <div class="section">
-    <div class="section-title"><i class="fas fa-user-circle"></i> Kepala Keluarga</div>
-    <div class="row">
-      <div class="field full"><label>NAMA KEPALA KELUARGA</label>
-        <input type="text" id="namaKK" placeholder="Nama lengkap" value="">
-        <span class="recommendation" id="rec-namaKK"></span>
-      </div>
-    </div>
-    <div class="row">
-      <div class="field"><label>NO. UB</label>
-        <input type="text" id="noUB" placeholder="Nomor UB" value="">
-        <span class="recommendation" id="rec-noUB"></span>
-      </div>
-      <div class="field"><label>JML ANGGOTA</label>
-        <input type="number" id="jmlAnggota" placeholder="Jumlah" value="" min="1" max="20">
-        <span class="recommendation" id="rec-jmlAnggota"></span>
-      </div>
-    </div>
-    <div class="row">
-      <div class="field full"><label><i class="fas fa-camera" style="margin-right: 6px;"></i> FOTO KK</label>
-        <input type="text" id="fotoKK" placeholder="Nama file / keterangan" value="">
-        <span class="recommendation" id="rec-fotoKK"></span>
-      </div>
-    </div>
-    <div class="row">
-      <div class="field"><label><i class="fas fa-phone-alt"></i> NO TLP/WA</label>
-        <input type="text" id="noWA" placeholder="08xx" value="">
-        <span class="recommendation" id="rec-noWA"></span>
-      </div>
-      <div class="field"><label>AWAS LUPA</label>
-        <input type="text" id="awasLupa" placeholder="catatan" value="">
-        <span class="recommendation" id="rec-awasLupa"></span>
-      </div>
+    <!-- ===== BAGIAN I: IDENTITAS ===== -->
+    <h2>I. IDENTITAS KELUARGA</h2>
+
+    <div class="form-group">
+        <label>NO BANGUNAN <span style="color:#c53030;">*</span></label>
+        <input type="text" placeholder="Contoh: B-01" />
+        <div class="desc">⚠️ Nomor unik bangunan tempat tinggal (bisa dari RT/RW atau nomor rumah).</div>
     </div>
 
-    <div style="margin-top: 10px; background: #f2f6fd; border-radius: 40px; padding: 12px 16px;">
-      <div style="display: flex; flex-wrap: wrap; gap: 8px 16px;">
-        <span style="font-weight: 600; color:#1a2d4a;"><i class="fas fa-map-pin"></i> GEOTAGGING</span>
-        <span style="font-weight: 600; color:#1a2d4a;"><i class="fas fa-image"></i> FOTO RUANG TAMU</span>
-        <span style="font-weight: 600; color:#1a2d4a;"><i class="fas fa-home"></i> FOTO DEPAN RMH</span>
-        <span style="font-weight: 600; color:#1a2d4a;"><i class="fas fa-bolt"></i> FOTO METERAN LISTRIK</span>
-      </div>
-      <div class="photo-grid" style="margin-top: 8px;">
-        <span class="photo-item"><i class="fas fa-check-circle" style="color:#25a56a;"></i> geo</span>
-        <span class="photo-item"><i class="fas fa-check-circle" style="color:#25a56a;"></i> ruang tamu</span>
-        <span class="photo-item"><i class="fas fa-check-circle" style="color:#25a56a;"></i> depan rumah</span>
-        <span class="photo-item"><i class="fas fa-check-circle" style="color:#25a56a;"></i> meteran</span>
-      </div>
-      <div class="warning-tag"><i class="fas fa-exclamation-triangle"></i> pastikan semua foto tersimpan</div>
+    <div class="form-group">
+        <label>NO URUT KK <span style="color:#c53030;">*</span></label>
+        <input type="text" placeholder="Contoh: 001" />
+        <div class="desc">⚠️ Nomor urut keluarga dalam bangunan (jika lebih dari 1 KK).</div>
     </div>
 
-    <div class="row" style="margin-top: 12px;">
-      <div class="field"><label>NO. METER/ID</label>
-        <input type="text" id="noMeter" placeholder="ID meter" value="">
-        <span class="recommendation" id="rec-noMeter"></span>
-      </div>
-      <div class="field"><label>KWH WATT</label>
-        <input type="number" id="kwhWatt" placeholder="Daya terpasang" value="" min="0">
-        <span class="recommendation" id="rec-kwhWatt"></span>
-      </div>
+    <div class="form-group">
+        <label>Nama Kepala Keluarga <span style="color:#c53030;">*</span></label>
+        <input type="text" placeholder="Nama lengkap" />
+        <div class="desc">⚠️ Nama sesuai KTP/Kartu Keluarga.</div>
     </div>
-  </div>
 
-  <!-- PEKERJAAN & USAHA -->
-  <div class="section">
-    <div class="section-title"><i class="fas fa-briefcase"></i> Pekerjaan & Usaha</div>
-    <div class="row">
-      <div class="field"><label>KK</label>
-        <input type="text" id="pekerjaanKK" placeholder="Pekerjaan KK" value="">
-        <span class="recommendation" id="rec-pekerjaanKK"></span>
-      </div>
-      <div class="field"><label>ISTRI</label>
-        <input type="text" id="pekerjaanIstri" placeholder="Pekerjaan Istri" value="">
-        <span class="recommendation" id="rec-pekerjaanIstri"></span>
-      </div>
+    <div class="form-group">
+        <label>Jumlah Penghuni Dalam Bangunan <span style="color:#c53030;">*</span></label>
+        <input type="number" placeholder="Jumlah orang" min="1" />
+        <div class="desc">⚠️ Total semua orang yang tinggal tetap di bangunan ini.</div>
     </div>
-    <div class="row">
-      <div class="field"><label>ANAK</label>
-        <input type="text" id="pekerjaanAnak" placeholder="Pekerjaan anak" value="">
-        <span class="recommendation" id="rec-pekerjaanAnak"></span>
-      </div>
-      <div class="field"><label>GAJI</label>
-        <input type="number" id="gaji" placeholder="Total gaji" value="" min="0">
-        <span class="recommendation" id="rec-gaji"></span>
-      </div>
+
+    <div class="form-group">
+        <label>No.KK <span style="color:#c53030;">*</span></label>
+        <input type="text" placeholder="Nomor Kartu Keluarga" />
+        <div class="desc">⚠️ Nomor KK sesuai kartu keluarga.</div>
     </div>
-    <div style="border-top: 1px dashed #d0dae8; margin: 12px 0 12px;"></div>
-    <div class="row">
-      <div class="field"><label>JENIS USAHA</label>
-        <input type="text" id="jenisUsaha" placeholder="Jenis" value="">
-        <span class="recommendation" id="rec-jenisUsaha"></span>
-      </div>
-      <div class="field"><label>TAHUN</label>
-        <input type="number" id="tahunUsaha" placeholder="Tahun berdiri" value="" min="1900" max="2026">
-        <span class="recommendation" id="rec-tahunUsaha"></span>
-      </div>
+
+    <!-- ===== BAGIAN II: PENDAPATAN & PEKERJAAN ===== -->
+    <h2>II. PENDAPATAN KELUARGA DAN PEKERJAAN</h2>
+    <div class="note">
+        <strong>✏️ Isi untuk setiap anggota keluarga yang bekerja.</strong> 
+        Tambahkan baris sesuai kebutuhan.
     </div>
-    <div class="row">
-      <div class="field"><label>MODAL</label>
-        <input type="number" id="modalUsaha" placeholder="Modal" value="" min="0">
-        <span class="recommendation" id="rec-modalUsaha"></span>
-      </div>
-      <div class="field"><label>BIAYA PRODUKSI</label>
-        <input type="number" id="biayaProduksi" placeholder="Biaya" value="" min="0">
-        <span class="recommendation" id="rec-biayaProduksi"></span>
-      </div>
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width:50px;">No</th>
+                    <th>Nama</th>
+                    <th>Pekerjaan</th>
+                    <th>Gaji (Rp/bulan)</th>
+                    <th>Ijazah</th>
+                    <th>Rekening</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><input type="text" value="1" style="width:50px;" /></td>
+                    <td><input type="text" placeholder="Nama" /></td>
+                    <td><input type="text" placeholder="Pekerjaan" /></td>
+                    <td><input type="text" placeholder="0" /></td>
+                    <td><input type="text" placeholder="Terakhir" /></td>
+                    <td><input type="text" placeholder="No Rekening" /></td>
+                </tr>
+                <tr>
+                    <td><input type="text" value="2" style="width:50px;" /></td>
+                    <td><input type="text" placeholder="Nama" /></td>
+                    <td><input type="text" placeholder="Pekerjaan" /></td>
+                    <td><input type="text" placeholder="0" /></td>
+                    <td><input type="text" placeholder="Terakhir" /></td>
+                    <td><input type="text" placeholder="No Rekening" /></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
-    <div class="row">
-      <div class="field"><label>PENDAPATAN</label>
-        <input type="number" id="pendapatan" placeholder="Pendapatan" value="" min="0">
-        <span class="recommendation" id="rec-pendapatan"></span>
-      </div>
-      <div class="field"><label>KARYAWAN</label>
-        <input type="number" id="karyawan" placeholder="Jumlah" value="" min="0">
-        <span class="recommendation" id="rec-karyawan"></span>
-      </div>
+    <div style="margin-bottom: 8px; font-size:14px; color:#2d3748;">
+        <span class="row-desc">📌 Pekerjaan: jabatan/pekerjaan utama.</span>
+        <span class="row-desc">📌 Ijazah: pendidikan terakhir (SD/SMP/SMA/D3/S1/dll).</span>
+        <span class="row-desc">📌 Rekening: nomor rekening bank (jika ada).</span>
     </div>
-    <div class="row">
-      <div class="field"><label>UPAH</label>
-        <input type="number" id="upah" placeholder="Upah karyawan" value="" min="0">
-        <span class="recommendation" id="rec-upah"></span>
-      </div>
-      <div class="field"><label>LOKASI</label>
-        <input type="text" id="lokasiUsaha" placeholder="Lokasi" value="">
-        <span class="recommendation" id="rec-lokasiUsaha"></span>
-      </div>
+
+    <!-- ===== BAGIAN III: RINCIAN USAHA ===== -->
+    <h2>III. RINCIAN USAHA</h2>
+    <div class="sub-section">
+        <div class="form-group">
+            <label>Jenis Usaha</label>
+            <input type="text" placeholder="Contoh: Dagang, Pertanian" />
+            <div class="desc">⚠️ Jenis usaha utama yang dijalankan keluarga.</div>
+        </div>
+        <div class="form-group">
+            <label>Jenis Barang Usaha</label>
+            <input type="text" placeholder="Contoh: Sembako, Sayuran" />
+            <div class="desc">⚠️ Komoditas atau barang yang diperjualbelikan.</div>
+        </div>
+        <div class="form-group">
+            <label>Tahun Mulai</label>
+            <input type="text" placeholder="Tahun (contoh: 2018)" />
+            <div class="desc">⚠️ Tahun pertama kali usaha ini dimulai.</div>
+        </div>
+        <div class="form-group">
+            <label>NIB</label>
+            <input type="text" placeholder="Nomor Induk Berusaha" />
+            <div class="desc">⚠️ NIB jika sudah memiliki (opsional).</div>
+        </div>
+        <div class="form-group">
+            <label>Alamat Usaha</label>
+            <textarea placeholder="Alamat lengkap usaha"></textarea>
+            <div class="desc">⚠️ Alamat tempat usaha beroperasi.</div>
+        </div>
     </div>
-    <div class="row">
-      <div class="field full"><label>NO NIB</label>
-        <input type="text" id="noNIB" placeholder="Nomor NIB" value="">
-        <span class="recommendation" id="rec-noNIB"></span>
-      </div>
+
+    <h3>A. Pengeluaran Usaha</h3>
+    <div class="sub-section">
+        <div class="form-group">
+            <label>Total Upah</label>
+            <input type="text" placeholder="Rp / bulan" />
+            <div class="desc">⚠️ Total upah untuk karyawan (jika ada).</div>
+        </div>
+        <div class="form-group">
+            <label>Biaya Produksi</label>
+            <input type="text" placeholder="Bahan Baku, Pupuk, Pakan / bulan" />
+            <div class="desc">⚠️ Biaya bahan baku, pupuk, pakan per bulan.</div>
+        </div>
+        <div class="form-group">
+            <label>Biaya Operasional</label>
+            <input type="text" placeholder="Listrik, BBM, Sewa, Transport / bulan" />
+            <div class="desc">⚠️ Biaya operasional rutin per bulan.</div>
+        </div>
+        <div class="form-group">
+            <label>Non Operasional</label>
+            <input type="text" placeholder="Pajak, dll / bulan" />
+            <div class="desc">⚠️ Biaya non-operasional seperti pajak per bulan.</div>
+        </div>
     </div>
+
+    <h3>B. Pendapatan Usaha</h3>
+    <div class="sub-section">
+        <div class="form-group">
+            <label>Nilai Penjualan & Jasa (27a)</label>
+            <input type="text" placeholder="Rp / bulan" />
+            <div class="desc">⚠️ Pendapatan dari penjualan barang/jasa per bulan.</div>
+        </div>
+        <div class="form-group">
+            <label>Pendapatan Lainnya (27b)</label>
+            <input type="text" placeholder="Rp / bulan" />
+            <div class="desc">⚠️ Pendapatan lain dari usaha (sewa, bunga, dll).</div>
+        </div>
+    </div>
+
+    <h3>C. Nilai Aset Usaha</h3>
+    <div class="sub-section">
+        <div class="form-group">
+            <label>Nilai Aset Tanah & Bangunan</label>
+            <input type="text" placeholder="Rp" />
+            <div class="desc">⚠️ Perkiraan nilai tanah dan bangunan untuk usaha.</div>
+        </div>
+        <div class="form-group">
+            <label>Nilai Aset Selain Tanah</label>
+            <input type="text" placeholder="Rp" />
+            <div class="desc">⚠️ Peralatan, kendaraan, mesin, dll.</div>
+        </div>
+        <div class="form-group">
+            <label>Total Aset</label>
+            <input type="text" placeholder="Otomatis / isi total" />
+            <div class="desc">⚠️ Total nilai aset (tanah+bangunan + selain tanah).</div>
+        </div>
+        <div class="form-group">
+            <label>Luas Bangunan untuk Usaha</label>
+            <input type="text" placeholder="m²" />
+            <div class="desc">⚠️ Luas bangunan yang digunakan khusus untuk usaha.</div>
+        </div>
+    </div>
+
+    <!-- ===== BAGIAN IV: PENGELUARAN KELUARGA ===== -->
+    <h2>IV. PENGELUARAN KELUARGA</h2>
     
-    <!-- Total Pendapatan & Keuntungan -->
-    <div class="total-box">
-      <span class="total-item">💹 PENDAPATAN USAHA: <span id="totalPendapatan">Rp 0</span></span>
-      <span class="total-item">📈 KEUNTUNGAN: <span id="totalKeuntungan">Rp 0</span></span>
-    </div>
-  </div>
-
-  <!-- PENGELUARAN & ASET -->
-  <div class="section">
-    <div class="section-title"><i class="fas fa-wallet"></i> Pengeluaran & Aset</div>
-    <div class="row">
-      <div class="field"><label>MKN 7 HARI</label>
-        <input type="number" id="mkn7" placeholder="Makanan 7 hari" value="" min="0">
-        <span class="recommendation" id="rec-mkn7"></span>
-      </div>
-      <div class="field"><label>NON MKN</label>
-        <input type="number" id="nonMkn" placeholder="Non makanan" value="" min="0">
-        <span class="recommendation" id="rec-nonMkn"></span>
-      </div>
-    </div>
-    <div class="row">
-      <div class="field"><label>INTERNET</label>
-        <input type="number" id="internet" placeholder="Biaya internet" value="" min="0">
-        <span class="recommendation" id="rec-internet"></span>
-      </div>
-      <div class="field"><label>LISTRIK</label>
-        <input type="number" id="listrik" placeholder="Biaya listrik" value="" min="0">
-        <span class="recommendation" id="rec-listrik"></span>
-      </div>
-    </div>
-    <div class="row">
-      <div class="field"><label>KULKAS</label>
-        <input type="number" id="kulkas" placeholder="Jumlah / biaya" value="" min="0">
-        <span class="recommendation" id="rec-kulkas"></span>
-      </div>
-      <div class="field"><label>AC</label>
-        <input type="number" id="ac" placeholder="Jumlah / biaya" value="" min="0">
-        <span class="recommendation" id="rec-ac"></span>
-      </div>
-    </div>
-    <div class="row">
-      <div class="field"><label>LAPTOP/PC</label>
-        <input type="number" id="laptop" placeholder="Jumlah" value="" min="0">
-        <span class="recommendation" id="rec-laptop"></span>
-      </div>
-      <div class="field"><label>MOBIL</label>
-        <input type="number" id="mobil" placeholder="Jumlah" value="" min="0">
-        <span class="recommendation" id="rec-mobil"></span>
-      </div>
-    </div>
-    <div class="row">
-      <div class="field"><label>NILAI (aset)</label>
-        <input type="number" id="nilaiAset" placeholder="Nilai aset" value="" min="0">
-        <span class="recommendation" id="rec-nilaiAset"></span>
-      </div>
-      <div class="field"><label>ASET</label>
-        <input type="text" id="asetLain" placeholder="Aset lain" value="">
-        <span class="recommendation" id="rec-asetLain"></span>
-      </div>
-    </div>
-    <div class="row">
-      <div class="field"><label>GAS 3KG/5</label>
-        <input type="number" id="gas" placeholder="Jumlah tabung" value="" min="0">
-        <span class="recommendation" id="rec-gas"></span>
-      </div>
-      <div class="field"><label>EMAS</label>
-        <input type="number" id="emas" placeholder="Gram / nilai" value="" min="0">
-        <span class="recommendation" id="rec-emas"></span>
-      </div>
-    </div>
-    <div class="row">
-      <div class="field full"><label>NILAI (emas)</label>
-        <input type="number" id="nilaiEmas" placeholder="Nilai emas" value="" min="0">
-        <span class="recommendation" id="rec-nilaiEmas"></span>
-      </div>
+    <h3>A. Pengeluaran Makan</h3>
+    <div class="sub-section">
+        <div class="form-group">
+            <label>Beras</label>
+            <input type="text" placeholder="Rp / hari / minggu / bulan" />
+            <div class="desc">⚠️ Biaya beras per hari (atau minggu/bulan, sesuaikan).</div>
+        </div>
+        <div class="form-group">
+            <label>Sayuran</label>
+            <input type="text" placeholder="Rp / hari" />
+            <div class="desc">⚠️ Pengeluaran sayuran per hari.</div>
+        </div>
+        <div class="form-group">
+            <label>Lauk Pauk</label>
+            <input type="text" placeholder="Rp / hari" />
+            <div class="desc">⚠️ Biaya lauk pauk per hari.</div>
+        </div>
+        <div class="form-group">
+            <label>Total per Hari</label>
+            <input type="text" placeholder="Total makan per hari" />
+            <div class="desc">⚠️ Total pengeluaran makan per hari.</div>
+        </div>
+        <div class="form-group">
+            <label>Minyak Goreng</label>
+            <input type="text" placeholder="Rp / minggu" />
+            <div class="desc">⚠️ Biaya minyak goreng per minggu.</div>
+        </div>
+        <div class="form-group">
+            <label>Total per Minggu</label>
+            <input type="text" placeholder="Total per minggu" />
+            <div class="desc">⚠️ Total pengeluaran makan per minggu (opsional).</div>
+        </div>
+        <div class="form-group">
+            <label>Air Minum (Galon)</label>
+            <input type="text" placeholder="Rp / bulan" />
+            <div class="desc">⚠️ Biaya air minum galon per bulan.</div>
+        </div>
+        <div class="form-group">
+            <label>Total per Bulan</label>
+            <input type="text" placeholder="Total makan per bulan" />
+            <div class="desc">⚠️ Total pengeluaran makan per bulan.</div>
+        </div>
     </div>
 
-    <!-- Total Pengeluaran -->
-    <div class="total-box">
-      <span class="total-item">💸 TOTAL PENGELUARAN: <span id="totalPengeluaran">Rp 0</span></span>
-      <span class="total-item">💰 TOTAL ASET: <span id="totalAset">Rp 0</span></span>
+    <h3>B. Pengeluaran Bukan Makan (Bulanan)</h3>
+    <div class="sub-section">
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px 20px;">
+            <div class="form-group"><label>Listrik</label><input placeholder="Rp" /></div>
+            <div class="form-group"><label>Internet/Wifi</label><input placeholder="Rp" /></div>
+            <div class="form-group"><label>Air PAM</label><input placeholder="Rp" /></div>
+            <div class="form-group"><label>LPG/Gas</label><input placeholder="Rp" /></div>
+            <div class="form-group"><label>Pulsa & Paket Data</label><input placeholder="Rp" /></div>
+            <div class="form-group"><label>Bensin</label><input placeholder="Rp" /></div>
+            <div class="form-group"><label>Ongkos Angkutan</label><input placeholder="Rp" /></div>
+            <div class="form-group"><label>Alat Mandi</label><input placeholder="Rp" /></div>
+            <div class="form-group"><label>Alat Cuci Baju</label><input placeholder="Rp" /></div>
+            <div class="form-group"><label>Alat Cuci Piring</label><input placeholder="Rp" /></div>
+            <div class="form-group"><label>Lainnya (bulanan)</label><input placeholder="Rp" /></div>
+        </div>
+        <div class="form-group" style="margin-top:8px;">
+            <label>Total Bukan Makan / Bulan</label>
+            <input type="text" placeholder="Total semua pengeluaran bukan makan" />
+            <div class="desc">⚠️ Jumlahkan semua pengeluaran bukan makan per bulan.</div>
+        </div>
     </div>
-  </div>
 
-  <!-- TEMPAT TINGGAL -->
-  <div class="section">
-    <div class="section-title"><i class="fas fa-building"></i> Tempat Tinggal</div>
-    <div class="row">
-      <div class="field"><label>MILIK/SEWA</label>
-        <input type="text" id="milikSewa" placeholder="Milik / Sewa" value="">
-        <span class="recommendation" id="rec-milikSewa"></span>
-      </div>
-      <div class="field"><label>NILAI ASET</label>
-        <input type="number" id="nilaiAsetTempat" placeholder="Nilai properti" value="" min="0">
-        <span class="recommendation" id="rec-nilaiAsetTempat"></span>
-      </div>
+    <h3>Pendidikan & Jasa</h3>
+    <div class="sub-section">
+        <div class="form-group"><label>Uang SPP Anak</label><input placeholder="Rp / bulan" /></div>
+        <div class="form-group"><label>Uang Jajan</label><input placeholder="Rp / bulan" /></div>
+        <div class="form-group"><label>Potong Rambut</label><input placeholder="Rp / bulan" /></div>
+        <div class="form-group"><label>Jahit/Raju/Permak</label><input placeholder="Rp / bulan" /></div>
+        <div class="form-group"><label>Lainnya (Pendidikan/Jasa)</label><input placeholder="Rp / bulan" /></div>
+        <div class="form-group"><label>Total Pendidikan & Jasa / Bulan</label><input placeholder="Total" /></div>
     </div>
-  </div>
 
-  <!-- KIRIM WA -->
-  <button class="btn-wa" id="sendWA">
-    <i class="fab fa-whatsapp"></i> Kirim ke WhatsApp
-  </button>
-  <div class="footer-note">
-    <i class="fas fa-check-circle" style="color:#25a56a;"></i> data akan diformat rapi & dikirim via WhatsApp
-  </div>
+    <h3>PENGELUARAN TAHUNAN</h3>
+    <div class="sub-section">
+        <div class="form-group"><label>Beli Baju</label><input placeholder="Rp / bulan" /></div>
+        <div class="form-group"><label>Seragam Sekolah</label><input placeholder="Rp / bulan" /></div>
+        <div class="form-group"><label>Pajak STNK</label><input placeholder="Rp / tahun" /></div>
+        <div class="form-group"><label>Pajak SPPT</label><input placeholder="Rp / tahun" /></div>
+        <div class="form-group"><label>Service Kendaraan</label><input placeholder="Rp / tahun" /></div>
+        <div class="form-group"><label>Perbaikan Rumah/Cat</label><input placeholder="Rp / tahun" /></div>
+        <div class="form-group"><label>Buku & Perlengkapan Sekolah</label><input placeholder="Rp / tahun" /></div>
+        <div class="form-group"><label>Hajatan</label><input placeholder="Rp / tahun" /></div>
+        <div class="form-group"><label>Iuran Hari Besar</label><input placeholder="Rp / tahun" /></div>
+        <div class="form-group"><label>Lainnya (Tahunan)</label><input placeholder="Rp / tahun" /></div>
+        <div class="form-group"><label><strong>TOTAL PENGELUARAN TAHUNAN</strong></label>
+            <input type="text" placeholder="Total semua pengeluaran tahunan" />
+        </div>
+    </div>
+
+    <!-- ===== DATA ASET DAN KONDISI ===== -->
+    <h2>DATA ASET DAN KONDISI RUMAH TANGGA</h2>
+    <div class="sub-section">
+        <div class="form-group"><label>Luas Bangunan Tempat Tinggal</label><input placeholder="m²" /></div>
+        <div class="form-group"><label>Luas Tanah yang Ditempati</label><input placeholder="m²" /></div>
+        <div class="form-group"><label>Tanah Selain yang Ditempati</label><input placeholder="m²" /></div>
+        <div class="form-group"><label>Nilai Aset Tanah dan Bangunan</label><input placeholder="Rp" /></div>
+        <div class="form-group"><label>Jumlah Motor</label><input type="number" placeholder="0" /></div>
+        <div class="form-group"><label>Jumlah Mobil</label><input type="number" placeholder="0" /></div>
+        <div class="form-group"><label>Jumlah Emas</label><input type="text" placeholder="gram / jumlah" /></div>
+        <div class="form-group"><label>Riwayat Penyakit</label><textarea placeholder="Sebutkan penyakit kronis/riwayat"></textarea></div>
+        <div class="form-group"><label>Disabilitas Keluarga</label><textarea placeholder="Jenis disabilitas jika ada"></textarea></div>
+    </div>
+
+    <!-- ===== SUBMIT ===== -->
+    <div style="display:flex; justify-content:center; margin-top:30px;">
+        <button class="btn-submit" type="submit">Simpan Kuesioner</button>
+    </div>
+    <p style="text-align:center; margin-top:16px; color:#4a5568; font-size:14px;">
+        Pastikan semua data terisi dengan benar sebelum menyimpan.
+    </p>
 </div>
-
-<script>
-  (function() {
-    // --- SMART RECOMMENDATION ENGINE ---
-    function getVal(id) {
-      const el = document.getElementById(id);
-      return el ? el.value.trim() : '';
-    }
-
-    function getNum(id) {
-      const val = getVal(id);
-      return val ? parseFloat(val) : 0;
-    }
-
-    function setRec(id, message, type = '') {
-      const el = document.getElementById(id);
-      if (el) {
-        el.textContent = message;
-        el.className = 'recommendation' + (type ? ' ' + type : '');
-      }
-    }
-
-    // Rekomendasi per field
-    function updateRecommendations() {
-      // Nama KK
-      const namaKK = getVal('namaKK');
-      if (namaKK.length > 0) {
-        setRec('rec-namaKK', '✅ Nama terisi (' + namaKK.split(' ').length + ' kata)');
-      } else {
-        setRec('rec-namaKK', '⚠️ Masukkan nama lengkap kepala keluarga', 'warning');
-      }
-
-      // No UB
-      const noUB = getVal('noUB');
-      if (noUB.length >= 4) {
-        setRec('rec-noUB', '✅ Nomor UB terisi');
-      } else {
-        setRec('rec-noUB', '💡 Masukkan nomor UB (min 4 digit)', 'warning');
-      }
-
-      // Jml Anggota
-      const jmlAnggota = getNum('jmlAnggota');
-      if (jmlAnggota > 0 && jmlAnggota <= 20) {
-        setRec('rec-jmlAnggota', '✅ ' + jmlAnggota + ' anggota keluarga');
-        if (jmlAnggota > 6) setRec('rec-jmlAnggota', '👨‍👩‍👧‍👦 Keluarga besar (' + jmlAnggota + ' orang)', 'success');
-      } else if (jmlAnggota > 20) {
-        setRec('rec-jmlAnggota', '⚠️ Maksimal 20 anggota', 'warning');
-      } else {
-        setRec('rec-jmlAnggota', '💡 Masukkan jumlah anggota (1-20)', 'warning');
-      }
-
-      // Foto KK
-      const fotoKK = getVal('fotoKK');
-      if (fotoKK.length > 0) {
-        setRec('rec-fotoKK', '✅ Foto KK: ' + fotoKK);
-      } else {
-        setRec('rec-fotoKK', '📸 Upload foto KK', 'warning');
-      }
-
-      // No WA
-      const noWA = getVal('noWA');
-      if (noWA.match(/^08[0-9]{8,12}$/)) {
-        setRec('rec-noWA', '✅ Nomor WA valid (' + noWA + ')');
-      } else if (noWA.length > 0) {
-        setRec('rec-noWA', '⚠️ Format: 08xxxxxxxx', 'warning');
-      } else {
-        setRec('rec-noWA', '📱 Masukkan nomor WhatsApp', 'warning');
-      }
-
-      // Awas Lupa
-      const awasLupa = getVal('awasLupa');
-      if (awasLupa.length > 0) {
-        setRec('rec-awasLupa', '📝 Catatan: ' + awasLupa);
-      } else {
-        setRec('rec-awasLupa', '💡 Tambahkan catatan penting', 'warning');
-      }
-
-      // No Meter
-      const noMeter = getVal('noMeter');
-      if (noMeter.length >= 6) {
-        setRec('rec-noMeter', '✅ ID Meter terisi');
-      } else {
-        setRec('rec-noMeter', '⚡ Masukkan nomor meter', 'warning');
-      }
-
-      // KWH Watt
-      const kwh = getNum('kwhWatt');
-      if (kwh > 0) {
-        setRec('rec-kwhWatt', '⚡ Daya ' + kwh + ' Watt');
-        if (kwh >= 900) setRec('rec-kwhWatt', '⚡ Daya ' + kwh + ' Watt (menengah ke atas)', 'success');
-      } else {
-        setRec('rec-kwhWatt', '💡 Masukkan daya listrik (Watt)', 'warning');
-      }
-
-      // Pekerjaan KK
-      const pkk = getVal('pekerjaanKK');
-      if (pkk.length > 0) setRec('rec-pekerjaanKK', '💼 ' + pkk);
-      else setRec('rec-pekerjaanKK', '💡 Masukkan pekerjaan KK', 'warning');
-
-      // Pekerjaan Istri
-      const pistri = getVal('pekerjaanIstri');
-      if (pistri.length > 0) setRec('rec-pekerjaanIstri', '💼 ' + pistri);
-      else setRec('rec-pekerjaanIstri', '💡 Masukkan pekerjaan istri', 'warning');
-
-      // Pekerjaan Anak
-      const panak = getVal('pekerjaanAnak');
-      if (panak.length > 0) setRec('rec-pekerjaanAnak', '📚 ' + panak);
-      else setRec('rec-pekerjaanAnak', '💡 Masukkan pekerjaan anak', 'warning');
-
-      // Gaji
-      const gaji = getNum('gaji');
-      if (gaji > 0) {
-        setRec('rec-gaji', '💰 Rp ' + formatRupiah(gaji));
-        if (gaji > 5000000) setRec('rec-gaji', '💰 Rp ' + formatRupiah(gaji) + ' (gaji tinggi)', 'success');
-      } else {
-        setRec('rec-gaji', '💡 Masukkan total gaji', 'warning');
-      }
-
-      // Usaha
-      const jenisUsaha = getVal('jenisUsaha');
-      if (jenisUsaha.length > 0) setRec('rec-jenisUsaha', '🏪 ' + jenisUsaha);
-      else setRec('rec-jenisUsaha', '💡 Masukkan jenis usaha', 'warning');
-
-      const tahun = getNum('tahunUsaha');
-      if (tahun >= 2000 && tahun <= 2026) {
-        setRec('rec-tahunUsaha', '📅 ' + tahun + ' (' + (2026 - tahun) + ' tahun)');
-      } else if (tahun > 0) {
-        setRec('rec-tahunUsaha', '⚠️ Tahun antara 2000-2026', 'warning');
-      } else {
-        setRec('rec-tahunUsaha', '💡 Masukkan tahun berdiri', 'warning');
-      }
-
-      const modal = getNum('modalUsaha');
-      if (modal > 0) setRec('rec-modalUsaha', '💰 Modal: Rp ' + formatRupiah(modal));
-      else setRec('rec-modalUsaha', '💡 Masukkan modal usaha', 'warning');
-
-      const biayaProd = getNum('biayaProduksi');
-      if (biayaProd > 0) setRec('rec-biayaProduksi', '🏭 Biaya: Rp ' + formatRupiah(biayaProd));
-      else setRec('rec-biayaProduksi', '💡 Masukkan biaya produksi', 'warning');
-
-      const pendapatan = getNum('pendapatan');
-      if (pendapatan > 0) {
-        setRec('rec-pendapatan', '📈 Pendapatan: Rp ' + formatRupiah(pendapatan));
-        if (pendapatan > modal) setRec('rec-pendapatan', '📈 Pendapatan > Modal (untung!)', 'success');
-      } else {
-        setRec('rec-pendapatan', '💡 Masukkan pendapatan', 'warning');
-      }
-
-      const karyawan = getNum('karyawan');
-      if (karyawan > 0) setRec('rec-karyawan', '👥 ' + karyawan + ' karyawan');
-      else setRec('rec-karyawan', '💡 Masukkan jumlah karyawan', 'warning');
-
-      const upah = getNum('upah');
-      if (upah > 0) setRec('rec-upah', '💵 Upah: Rp ' + formatRupiah(upah));
-      else setRec('rec-upah', '💡 Masukkan upah karyawan', 'warning');
-
-      const lokasi = getVal('lokasiUsaha');
-      if (lokasi.length > 0) setRec('rec-lokasiUsaha', '📍 ' + lokasi);
-      else setRec('rec-lokasiUsaha', '💡 Masukkan lokasi usaha', 'warning');
-
-      const nib = getVal('noNIB');
-      if (nib.length >= 10) setRec('rec-noNIB', '✅ NIB: ' + nib);
-      else if (nib.length > 0) setRec('rec-noNIB', '⚠️ NIB minimal 10 digit', 'warning');
-      else setRec('rec-noNIB', '📄 Masukkan Nomor NIB', 'warning');
-
-      // Pengeluaran
-      const mkn = getNum('mkn7');
-      if (mkn > 0) setRec('rec-mkn7', '🍽️ Rp ' + formatRupiah(mkn));
-      else setRec('rec-mkn7', '💡 Masukkan biaya makanan', 'warning');
-
-      const nonMkn = getNum('nonMkn');
-      if (nonMkn > 0) setRec('rec-nonMkn', '🛒 Rp ' + formatRupiah(nonMkn));
-      else setRec('rec-nonMkn', '💡 Masukkan biaya non makanan', 'warning');
-
-      const internet = getNum('internet');
-      if (internet > 0) setRec('rec-internet', '🌐 Rp ' + formatRupiah(internet));
-      else setRec('rec-internet', '💡 Masukkan biaya internet', 'warning');
-
-      const listrik = getNum('listrik');
-      if (listrik > 0) setRec('rec-listrik', '⚡ Rp ' + formatRupiah(listrik));
-      else setRec('rec-listrik', '💡 Masukkan biaya listrik', 'warning');
-
-      const kulkas = getNum('kulkas');
-      if (kulkas > 0) setRec('rec-kulkas', '🧊 ' + kulkas + ' unit');
-      else setRec('rec-kulkas', '💡 Masukkan jumlah kulkas', 'warning');
-
-      const ac = getNum('ac');
-      if (ac > 0) setRec('rec-ac', '❄️ ' + ac + ' unit');
-      else setRec('rec-ac', '💡 Masukkan jumlah AC', 'warning');
-
-      const laptop = getNum('laptop');
-      if (laptop > 0) setRec('rec-laptop', '💻 ' + laptop + ' unit');
-      else setRec('rec-laptop', '💡 Masukkan jumlah laptop/PC', 'warning');
-
-      const mobil = getNum('mobil');
-      if (mobil > 0) setRec('rec-mobil', '🚗 ' + mobil + ' unit');
-      else setRec('rec-mobil', '💡 Masukkan jumlah mobil', 'warning');
-
-      const nilaiAset = getNum('nilaiAset');
-      if (nilaiAset > 0) setRec('rec-nilaiAset', '🏠 Rp ' + formatRupiah(nilaiAset));
-      else setRec('rec-nilaiAset', '💡 Masukkan nilai aset', 'warning');
-
-      const asetLain = getVal('asetLain');
-      if (asetLain.length > 0) setRec('rec-asetLain', '📦 ' + asetLain);
-      else setRec('rec-asetLain', '💡 Masukkan aset lain', 'warning');
-
-      const gas = getNum('gas');
-      if (gas > 0) setRec('rec-gas', '🛢️ ' + gas + ' tabung');
-      else setRec('rec-gas', '💡 Masukkan jumlah gas', 'warning');
-
-      const emas = getNum('emas');
-      if (emas > 0) setRec('rec-emas', '🥇 ' + emas + ' gram');
-      else setRec('rec-emas', '💡 Masukkan jumlah emas (gram)', 'warning');
-
-      const nilaiEmas = getNum('nilaiEmas');
-      if (nilaiEmas > 0) setRec('rec-nilaiEmas', '💎 Rp ' + formatRupiah(nilaiEmas));
-      else setRec('rec-nilaiEmas', '💡 Masukkan nilai emas', 'warning');
-
-      // Tempat Tinggal
-      const milikSewa = getVal('milikSewa');
-      if (milikSewa.length > 0) setRec('rec-milikSewa', '🏠 ' + milikSewa);
-      else setRec('rec-milikSewa', '💡 Masukkan status kepemilikan', 'warning');
-
-      const nilaiTempat = getNum('nilaiAsetTempat');
-      if (nilaiTempat > 0) setRec('rec-nilaiAsetTempat', '🏘️ Rp ' + formatRupiah(nilaiTempat));
-      else setRec('rec-nilaiAsetTempat', '💡 Masukkan nilai properti', 'warning');
-
-      // Update Total
-      updateTotals();
-    }
-
-    function formatRupiah(num) {
-      return new Intl.NumberFormat('id-ID').format(num);
-    }
-
-    function updateTotals() {
-      // Total Pendapatan Usaha
-      const pendapatan = getNum('pendapatan');
-      const biayaProd = getNum('biayaProduksi');
-      const keuntungan = pendapatan - biayaProd;
-      document.getElementById('totalPendapatan').textContent = 'Rp ' + formatRupiah(pendapatan);
-      document.getElementById('totalKeuntungan').textContent = 'Rp ' + formatRupiah(keuntungan);
-      if (keuntungan < 0) {
-        document.getElementById('totalKeuntungan').style.color = '#e74c3c';
-      } else {
-        document.getElementById('totalKeuntungan').style.color = '#27ae60';
-      }
-
-      // Total Pengeluaran
-      const mkn = getNum('mkn7');
-      const nonMkn = getNum('nonMkn');
-      const internet = getNum('internet');
-      const listrik = getNum('listrik');
-      const totalPengeluaran = mkn + nonMkn + internet + listrik;
-      document.getElementById('totalPengeluaran').textContent = 'Rp ' + formatRupiah(totalPengeluaran);
-
-      // Total Aset
-      const nilaiAset = getNum('nilaiAset');
-      const nilaiEmas = getNum('nilaiEmas');
-      const nilaiTempat = getNum('nilaiAsetTempat');
-      const totalAset = nilaiAset + nilaiEmas + nilaiTempat;
-      document.getElementById('totalAset').textContent = 'Rp ' + formatRupiah(totalAset);
-    }
-
-    // --- BUILD MESSAGE ---
-    function buildMessage() {
-      const namaKK = getVal('namaKK') || '-';
-      const noUB = getVal('noUB') || '-';
-      const jmlAnggota = getVal('jmlAnggota') || '-';
-      const fotoKK = getVal('fotoKK') || '-';
-      const noWA = getVal('noWA') || '-';
-      const awasLupa = getVal('awasLupa') || '-';
-      const noMeter = getVal('noMeter') || '-';
-      const kwhWatt = getVal('kwhWatt') || '-';
-      const pekerjaanKK = getVal('pekerjaanKK') || '-';
-      const pekerjaanIstri = getVal('pekerjaanIstri') || '-';
-      const pekerjaanAnak = getVal('pekerjaanAnak') || '-';
-      const gaji = getVal('gaji') || '-';
-      const jenisUsaha = getVal('jenisUsaha') || '-';
-      const tahunUsaha = getVal('tahunUsaha') || '-';
-      const modalUsaha = getVal('modalUsaha') || '-';
-      const biayaProduksi = getVal('biayaProduksi') || '-';
-      const pendapatan = getVal('pendapatan') || '-';
-      const karyawan = getVal('karyawan') || '-';
-      const upah = getVal('upah') || '-';
-      const lokasiUsaha = getVal('lokasiUsaha') || '-';
-      const noNIB = getVal('noNIB') || '-';
-      const mkn7 = getVal('mkn7') || '-';
-      const nonMkn = getVal('nonMkn') || '-';
-      const internet = getVal('internet') || '-';
-      const listrik = getVal('listrik') || '-';
-      const kulkas = getVal('kulkas') || '-';
-      const ac = getVal('ac') || '-';
-      const laptop = getVal('laptop') || '-';
-      const mobil = getVal('mobil') || '-';
-      const nilaiAset = getVal('nilaiAset') || '-';
-      const asetLain = getVal('asetLain') || '-';
-      const gas = getVal('gas') || '-';
-      const emas = getVal('emas') || '-';
-      const nilaiEmas = getVal('nilaiEmas') || '-';
-      const milikSewa = getVal('milikSewa') || '-';
-      const nilaiAsetTempat = getVal('nilaiAsetTempat') || '-';
-
-      // Hitung total untuk ditampilkan
-      const p = parseFloat(pendapatan) || 0;
-      const bp = parseFloat(biayaProduksi) || 0;
-      const profit = p - bp;
-      const totalPengeluaran = (parseFloat(mkn7) || 0) + (parseFloat(nonMkn) || 0) + (parseFloat(internet) || 0) + (parseFloat(listrik) || 0);
-      const totalAset = (parseFloat(nilaiAset) || 0) + (parseFloat(nilaiEmas) || 0) + (parseFloat(nilaiAsetTempat) || 0);
-
-      return `📋 *DATA KELUARGA* 
-━━━━━━━━━━━━━━━━━━
-👨‍👩‍👧‍👦 *KEPALA KELUARGA*  
-NAMA : ${namaKK}  
-NO. UB : ${noUB}  
-JML ANGGOTA : ${jmlAnggota}  
-FOTO KK : ${fotoKK}  
-NO TLP/WA : ${noWA}  
-AWAS LUPA : ${awasLupa}  
-
-📍 *GEOTAGGING & FOTO*  
-✅ Geotagging | Foto ruang tamu  
-✅ Foto depan rmh | Foto meteran  
-NO. METER/ID : ${noMeter}  
-KWH WATT : ${kwhWatt}  
-
-💼 *PEKERJAAN*  
-KK : ${pekerjaanKK}  
-ISTRI : ${pekerjaanIstri}  
-ANAK : ${pekerjaanAnak}  
-GAJI : ${gaji}  
-
-🏪 *USAHA*  
-JENIS : ${jenisUsaha}  
-TAHUN : ${tahunUsaha}  
-MODAL : ${modalUsaha}  
-BIAYA PRODUKSI : ${biayaProduksi}  
-PENDAPATAN : ${pendapatan}  
-KEUNTUNGAN : ${profit >= 0 ? '✅ +' : '❌ '}Rp ${formatRupiah(Math.abs(profit))}  
-KARYAWAN : ${karyawan}  
-UPAH : ${upah}  
-LOKASI : ${lokasiUsaha}  
-NO NIB : ${noNIB}  
-
-💸 *PENGELUARAN*  
-MKN 7 HARI : ${mkn7}  
-NON MKN : ${nonMkn}  
-INTERNET : ${internet}  
-LISTRIK : ${listrik}  
-KULKAS : ${kulkas}  
-AC : ${ac}  
-LAPTOP/PC : ${laptop}  
-MOBIL : ${mobil}  
-NILAI ASET : ${nilaiAset}  
-ASET : ${asetLain}  
-GAS 3KG/5 : ${gas}  
-EMAS : ${emas}  
-NILAI EMAS : ${nilaiEmas}  
-TOTAL PENGELUARAN : Rp ${formatRupiah(totalPengeluaran)}  
-
-🏠 *TEMPAT TINGGAL*  
-MILIK/SEWA : ${milikSewa}  
-NILAI ASET : ${nilaiAsetTempat}  
-TOTAL ASET : Rp ${formatRupiah(totalAset)}  
-━━━━━━━━━━━━━━━━━━
-📅 dikirim dari form data keluarga`;
-    }
-
-    // --- EVENT LISTENERS ---
-    const allInputs = document.querySelectorAll('input');
-    allInputs.forEach(input => {
-      input.addEventListener('input', updateRecommendations);
-      input.addEventListener('change', updateRecommendations);
-    });
-
-    // Initial update
-    updateRecommendations();
-
-    // --- SEND WA ---
-    document.getElementById('sendWA').addEventListener('click', function() {
-      const message = buildMessage();
-      const encoded = encodeURIComponent(message);
-      const phone = '+62895700341213';
-      const url = `https://wa.me/${phone}?text=${encoded}`;
-      window.open(url, '_blank');
-    });
-
-  })();
-</script>
 </body>
 </html>
