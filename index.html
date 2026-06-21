@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Kuesioner Keluarga - Lengkap</title>
+    <title>Kuesioner Keluarga - Detail Pengeluaran</title>
     <style>
         * {
             box-sizing: border-box;
@@ -42,43 +42,51 @@
             margin: 18px 0 10px 0;
             color: #1e3a6b;
         }
+        h4 {
+            font-size: 15px;
+            margin: 12px 0 8px 0;
+            color: #1e3a6b;
+            background: #eef2f7;
+            padding: 6px 14px;
+            border-radius: 8px;
+        }
         .form-group {
-            margin-bottom: 14px;
+            margin-bottom: 8px;
             display: flex;
             flex-wrap: wrap;
             align-items: center;
             gap: 6px;
         }
         .form-group label {
-            min-width: 170px;
-            font-weight: 600;
+            min-width: 140px;
+            font-weight: 500;
             color: #1e293b;
-            font-size: 14px;
+            font-size: 13.5px;
             flex-shrink: 0;
         }
         .form-group .desc {
             width: 100%;
-            font-size: 12.5px;
+            font-size: 12px;
             color: #475569;
             background: #f1f5f9;
-            padding: 5px 12px;
+            padding: 4px 12px;
             border-radius: 8px;
-            margin-top: 3px;
+            margin-top: 2px;
         }
         .form-group input, .form-group select, .form-group textarea {
             flex: 1;
-            min-width: 180px;
-            padding: 10px 14px;
+            min-width: 140px;
+            padding: 8px 12px;
             border: 1px solid #cbd5e1;
-            border-radius: 10px;
-            font-size: 15px;
+            border-radius: 8px;
+            font-size: 14px;
             background: #fafcff;
             transition: 0.2s;
         }
         .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
             border-color: #2563eb;
             outline: none;
-            box-shadow: 0 0 0 3px rgba(37,99,235,0.15);
+            box-shadow: 0 0 0 3px rgba(37,99,235,0.12);
         }
         .form-group input[readonly] {
             background: #eef2f6;
@@ -87,88 +95,79 @@
             border-color: #b9c7da;
         }
         .form-group textarea {
-            min-height: 50px;
+            min-height: 40px;
             resize: vertical;
-        }
-        .inline-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px 16px;
-            align-items: center;
-        }
-        .inline-group .form-group {
-            flex: 1 1 180px;
-            margin-bottom: 6px;
-        }
-        .inline-group .form-group label {
-            min-width: 100px;
-        }
-        .table-wrap {
-            overflow-x: auto;
-            margin: 12px 0 18px 0;
-            border-radius: 12px;
-            border: 1px solid #e2e8f0;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 14px;
-            min-width: 700px;
-        }
-        th {
-            background: #eef2f7;
-            padding: 10px 8px;
-            text-align: left;
-            font-weight: 600;
-            color: #1e3a6b;
-            border-bottom: 2px solid #d0d9e6;
-            white-space: nowrap;
-        }
-        td {
-            padding: 6px 6px;
-            border-bottom: 1px solid #e2e8f0;
-        }
-        td input, td select {
-            width: 100%;
-            padding: 7px 10px;
-            border: 1px solid #d0d9e6;
-            border-radius: 8px;
-            font-size: 13px;
-            background: #fafcff;
-        }
-        td input:focus, td select:focus {
-            border-color: #2563eb;
-            outline: none;
         }
         .sub-section {
             background: #f8fafc;
-            padding: 16px 20px;
-            border-radius: 14px;
-            margin: 12px 0 16px 0;
+            padding: 14px 18px;
+            border-radius: 12px;
+            margin: 8px 0 14px 0;
             border: 1px solid #e9edf2;
         }
         .sub-section .form-group label {
-            min-width: 160px;
+            min-width: 130px;
         }
         .grid-2 {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 6px 24px;
+            gap: 4px 20px;
         }
         .grid-3 {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
-            gap: 6px 16px;
+            gap: 4px 16px;
+        }
+        .grid-4 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            gap: 4px 12px;
+        }
+        .section-box {
+            background: #ffffff;
+            padding: 12px 16px;
+            border-radius: 10px;
+            border: 1px solid #e2e8f0;
+            margin-bottom: 10px;
+        }
+        .section-box h5 {
+            font-size: 14px;
+            color: #1e3a6b;
+            margin-bottom: 6px;
+            border-bottom: 1px dashed #d0d9e6;
+            padding-bottom: 4px;
+        }
+        .total-box {
+            background: #dbeafe;
+            border-radius: 10px;
+            padding: 10px 16px;
+            margin: 8px 0;
+            border-left: 4px solid #2563eb;
+        }
+        .total-box label {
+            font-weight: 700;
+            color: #1e3a6b;
+        }
+        .total-box input {
+            font-weight: 700;
+            color: #075985;
+        }
+        .highlight-box {
+            background: #dbeafe;
+            border-left: 4px solid #2563eb;
+            padding: 14px 20px;
+            border-radius: 12px;
+            margin: 16px 0;
         }
         .btn {
             background: #1e3a6b;
             color: #fff;
             border: none;
-            padding: 14px 30px;
-            font-size: 16px;
+            padding: 12px 28px;
+            font-size: 15px;
             border-radius: 50px;
             cursor: pointer;
-            margin-top: 16px;
+            margin-top: 12px;
             transition: 0.25s;
             font-weight: 600;
             display: inline-flex;
@@ -194,41 +193,27 @@
             flex-wrap: wrap;
         }
         .note {
-            font-size: 14px;
+            font-size: 13px;
             color: #1e293b;
             background: #edf2f9;
-            padding: 12px 18px;
-            border-radius: 12px;
-            margin: 8px 0 14px 0;
+            padding: 10px 16px;
+            border-radius: 10px;
+            margin: 6px 0 12px 0;
         }
         .tag {
-            font-size: 12px;
+            font-size: 11px;
             color: #475569;
             background: #e9edf2;
-            padding: 2px 12px;
+            padding: 2px 10px;
             border-radius: 30px;
             display: inline-block;
-            margin-right: 6px;
-        }
-        .highlight-box {
-            background: #dbeafe;
-            border-left: 4px solid #2563eb;
-            padding: 14px 20px;
-            border-radius: 12px;
-            margin: 16px 0;
-        }
-        .highlight-box h4 {
-            color: #1e3a6b;
-            font-size: 17px;
-        }
-        .highlight-box .form-group label {
-            min-width: 200px;
+            margin-right: 4px;
         }
         .row-desc {
-            font-size: 12.5px;
+            font-size: 12px;
             color: #475569;
             background: #f1f5f9;
-            padding: 3px 14px;
+            padding: 2px 12px;
             border-radius: 30px;
             display: inline-block;
             margin: 2px 4px 2px 0;
@@ -237,61 +222,29 @@
             background: #2563eb;
             color: white;
             border: none;
-            padding: 6px 16px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 13px;
-            margin: 4px 0;
-        }
-        .btn-add-row:hover {
-            background: #1d4ed8;
-        }
-        .btn-remove-row {
-            background: #dc2626;
-            color: white;
-            border: none;
-            padding: 4px 12px;
+            padding: 5px 14px;
             border-radius: 20px;
             cursor: pointer;
             font-size: 12px;
         }
-        .btn-remove-row:hover {
-            background: #b91c1c;
-        }
-        .flex-between {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-        .period-select {
-            padding: 4px 8px;
-            border-radius: 6px;
-            border: 1px solid #cbd5e1;
-            background: white;
-            font-size: 13px;
+        .btn-add-row:hover {
+            background: #1d4ed8;
         }
 
         @media (max-width: 820px) {
             .container { padding: 16px; }
             .form-group { flex-direction: column; align-items: stretch; }
             .form-group label { min-width: unset; width: 100%; margin-bottom: 2px; }
-            .inline-group .form-group { flex: 1 1 100%; }
-            .inline-group .form-group label { min-width: unset; }
             .sub-section .form-group label { min-width: unset; }
-            .grid-2, .grid-3 { grid-template-columns: 1fr; }
-            .highlight-box .form-group label { min-width: unset; }
+            .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
             .btn { width: 100%; }
             .btn-center { flex-direction: column; }
-            th, td { font-size: 12px; }
-            td input { font-size: 12px; padding: 6px 8px; }
         }
         @media (max-width: 480px) {
             body { padding: 8px; }
             .container { padding: 12px; }
             h1 { font-size: 20px; }
-            .sub-section { padding: 12px 14px; }
+            .sub-section { padding: 10px 12px; }
         }
     </style>
 </head>
@@ -299,8 +252,7 @@
 <div class="container" id="app">
     <h1>📋 KUESIONER KELUARGA</h1>
     <p style="color:#334155; margin-bottom: 16px; font-size: 15px;">
-        Isi semua data dengan benar. Kolom bertanda <span style="color:#b91c1c;">*</span> wajib diisi. 
-        Total akan dihitung otomatis.
+        Isi semua data dengan benar. Total akan dihitung otomatis.
     </p>
 
     <!-- ========================================================= -->
@@ -309,267 +261,427 @@
     <div class="form-group">
         <label>NO BANGUNAN <span style="color:#b91c1c;">*</span></label>
         <input type="text" placeholder="Contoh: B-01" id="noBangunan" />
-        <div class="desc">⚠️ Nomor unik bangunan tempat tinggal.</div>
     </div>
     <div class="form-group">
         <label>NO URUT KK <span style="color:#b91c1c;">*</span></label>
         <input type="text" placeholder="Contoh: 001" id="noUrutKK" />
-        <div class="desc">⚠️ Nomor urut keluarga dalam bangunan.</div>
     </div>
     <div class="form-group">
         <label>Nama Kepala Keluarga <span style="color:#b91c1c;">*</span></label>
         <input type="text" placeholder="Nama lengkap" id="namaKepala" />
-        <div class="desc">⚠️ Nama sesuai KTP/Kartu Keluarga.</div>
     </div>
     <div class="form-group">
         <label>Jumlah Penghuni <span style="color:#b91c1c;">*</span></label>
         <input type="number" placeholder="Jumlah orang" min="1" id="jmlPenghuni" />
-        <div class="desc">⚠️ Total semua orang yang tinggal tetap.</div>
     </div>
     <div class="form-group">
         <label>No.KK <span style="color:#b91c1c;">*</span></label>
         <input type="text" placeholder="Nomor Kartu Keluarga" id="noKK" />
-        <div class="desc">⚠️ Nomor KK sesuai kartu keluarga.</div>
     </div>
 
     <!-- ========================================================= -->
-    <!-- BAGIAN II: PEKERJAAN dengan 185+ Pekerjaan -->
+    <!-- BAGIAN II: PEKERJAAN -->
     <h2>II. PENDAPATAN KELUARGA DAN PEKERJAAN</h2>
     <div class="note">
         <strong>✏️ Isi untuk setiap anggota keluarga yang bekerja.</strong> 
-        Pilih pekerjaan dari daftar, gaji akan terisi otomatis (dapat disesuaikan).
-        Total pendapatan keluarga akan dihitung otomatis.
+        Pilih pekerjaan dari daftar, gaji akan terisi otomatis.
     </div>
-    <div class="table-wrap">
-        <table id="tabelPekerjaan">
+    <div class="table-wrap" style="overflow-x:auto; margin:12px 0 18px 0; border-radius:12px; border:1px solid #e2e8f0;">
+        <table style="width:100%; border-collapse:collapse; font-size:13px; min-width:600px;">
             <thead>
-                <tr>
-                    <th style="width:30px;">No</th>
-                    <th>Nama Anggota</th>
-                    <th style="min-width:180px;">Pekerjaan</th>
-                    <th>Gaji (Rp/bln)</th>
-                    <th>Ijazah</th>
-                    <th style="width:60px;">Aksi</th>
+                <tr style="background:#eef2f7;">
+                    <th style="padding:8px; text-align:left; width:30px;">No</th>
+                    <th style="padding:8px; text-align:left;">Nama Anggota</th>
+                    <th style="padding:8px; text-align:left; min-width:180px;">Pekerjaan</th>
+                    <th style="padding:8px; text-align:left;">Gaji (Rp/bln)</th>
+                    <th style="padding:8px; text-align:left;">Ijazah</th>
+                    <th style="padding:8px; text-align:left; width:60px;">Aksi</th>
                 </tr>
             </thead>
             <tbody id="tbodyPekerjaan">
-                <!-- Baris akan ditambahkan oleh JavaScript -->
+                <!-- JavaScript akan mengisi -->
             </tbody>
         </table>
     </div>
-    <div style="margin-bottom: 12px;">
+    <div style="margin-bottom:12px;">
         <button class="btn-add-row" onclick="tambahBarisPekerjaan()">+ Tambah Anggota Keluarga</button>
-        <span class="row-desc">📌 Pilih pekerjaan dari daftar, gaji otomatis terisi.</span>
-        <span class="row-desc">📌 Ijazah: pendidikan terakhir.</span>
+        <span class="row-desc">📌 Pilih pekerjaan, gaji otomatis terisi.</span>
     </div>
     <div class="form-group">
         <label><strong>Total Pendapatan Keluarga / Bulan</strong></label>
         <input type="text" id="totalPendapatanKeluarga" readonly placeholder="Rp 0" />
-        <div class="desc">✅ Otomatis dihitung dari jumlah gaji semua anggota.</div>
     </div>
 
     <!-- ========================================================= -->
-    <!-- BAGIAN III: USAHA dengan periode fleksibel -->
+    <!-- BAGIAN III: USAHA -->
     <h2>III. RINCIAN USAHA</h2>
     <div class="sub-section">
-        <div class="form-group">
-            <label>Jenis Usaha</label>
-            <input type="text" placeholder="Contoh: Dagang, Pertanian" id="jenisUsaha" />
-            <div class="desc">⚠️ Jenis usaha utama keluarga.</div>
+        <div class="grid-2">
+            <div class="form-group"><label>Jenis Usaha</label><input type="text" placeholder="Contoh: Dagang" id="jenisUsaha" /></div>
+            <div class="form-group"><label>Jenis Barang Usaha</label><input type="text" placeholder="Contoh: Sembako" id="jenisBarang" /></div>
+            <div class="form-group"><label>Tahun Mulai</label><input type="text" placeholder="Tahun" id="tahunMulai" /></div>
+            <div class="form-group"><label>NIB</label><input type="text" placeholder="Nomor Induk Berusaha" id="nib" /></div>
         </div>
-        <div class="form-group">
-            <label>Jenis Barang Usaha</label>
-            <input type="text" placeholder="Contoh: Sembako, Sayuran" id="jenisBarang" />
-            <div class="desc">⚠️ Komoditas yang diperjualbelikan.</div>
-        </div>
-        <div class="form-group">
-            <label>Tahun Mulai</label>
-            <input type="text" placeholder="Tahun" id="tahunMulai" />
-            <div class="desc">⚠️ Tahun pertama usaha dimulai.</div>
-        </div>
-        <div class="form-group">
-            <label>NIB</label>
-            <input type="text" placeholder="Nomor Induk Berusaha" id="nib" />
-            <div class="desc">⚠️ NIB (opsional).</div>
-        </div>
-        <div class="form-group">
-            <label>Alamat Usaha</label>
-            <textarea placeholder="Alamat lengkap" id="alamatUsaha"></textarea>
-            <div class="desc">⚠️ Alamat tempat usaha.</div>
-        </div>
+        <div class="form-group"><label>Alamat Usaha</label><textarea placeholder="Alamat lengkap" id="alamatUsaha"></textarea></div>
     </div>
 
-    <h3>A. Pengeluaran Usaha (Fleksibel Periode)</h3>
+    <h3>A. Pengeluaran Usaha (per Bulan)</h3>
     <div class="sub-section">
-        <div class="note" style="margin-bottom:12px;">
-            <strong>📌 Pilih periode untuk setiap pengeluaran:</strong> Harian, Mingguan, Bulanan, atau Tahunan.
-            Sistem akan otomatis mengkonversi ke nilai per bulan.
-        </div>
         <div id="containerPengeluaranUsaha">
-            <!-- Pengeluaran akan ditambahkan oleh JavaScript -->
+            <div class="form-group" style="background:#f1f5f9; padding:8px 12px; border-radius:8px; margin-bottom:6px;">
+                <input type="text" placeholder="Nama Pengeluaran" class="namaPengeluaran" style="flex:1.5;" />
+                <input type="number" placeholder="Nilai" class="nilaiPengeluaran" style="flex:1;" oninput="hitungKeuntunganUsaha()" />
+                <select class="periodePengeluaran" style="flex:0.8;" onchange="hitungKeuntunganUsaha()">
+                    <option value="harian">Harian</option>
+                    <option value="mingguan">Mingguan</option>
+                    <option value="bulanan" selected>Bulanan</option>
+                    <option value="tahunan">Tahunan</option>
+                </select>
+                <button class="btn-add-row" style="background:#dc2626; padding:4px 10px;" onclick="hapusPengeluaranUsaha(this)">✕</button>
+            </div>
+            <div class="form-group" style="background:#f1f5f9; padding:8px 12px; border-radius:8px; margin-bottom:6px;">
+                <input type="text" placeholder="Nama Pengeluaran" class="namaPengeluaran" style="flex:1.5;" />
+                <input type="number" placeholder="Nilai" class="nilaiPengeluaran" style="flex:1;" oninput="hitungKeuntunganUsaha()" />
+                <select class="periodePengeluaran" style="flex:0.8;" onchange="hitungKeuntunganUsaha()">
+                    <option value="harian">Harian</option>
+                    <option value="mingguan">Mingguan</option>
+                    <option value="bulanan">Bulanan</option>
+                    <option value="tahunan" selected>Tahunan</option>
+                </select>
+                <button class="btn-add-row" style="background:#dc2626; padding:4px 10px;" onclick="hapusPengeluaranUsaha(this)">✕</button>
+            </div>
         </div>
-        <div style="margin-top:10px;">
-            <button class="btn-add-row" onclick="tambahPengeluaranUsaha()">+ Tambah Item Pengeluaran</button>
-        </div>
-        <div class="form-group" style="margin-top:12px;">
+        <button class="btn-add-row" onclick="tambahPengeluaranUsaha()">+ Tambah Item Pengeluaran</button>
+        <div class="form-group" style="margin-top:10px;">
             <label><strong>Total Pengeluaran Usaha / Bulan</strong></label>
             <input type="text" id="totalPengeluaranUsaha" readonly placeholder="Rp 0" />
-            <div class="desc">✅ Otomatis dihitung dari semua pengeluaran (dikonversi ke bulanan).</div>
         </div>
     </div>
 
     <h3>B. Pendapatan Usaha</h3>
     <div class="sub-section">
-        <div class="note" style="margin-bottom:12px;">
-            <strong>📌 Untuk mendapatkan pendapatan usaha yang akurat, isikan:</strong>
-            <br>1. Nilai Penjualan/Jasa per bulan (omzet)
-            <br>2. Pendapatan Lainnya (sewa, bunga, dll)
-            <br>3. Jika ada sumber pendapatan lain, tambahkan di "Pendapatan Lainnya"
-        </div>
         <div class="form-group">
-            <label>Nilai Penjualan & Jasa (27a) <span style="color:#b91c1c;">*</span></label>
+            <label>Nilai Penjualan & Jasa (27a)</label>
             <input type="number" placeholder="0" id="penjualan" oninput="hitungKeuntunganUsaha()" />
-            <div class="desc">⚠️ Pendapatan dari penjualan barang/jasa per bulan.</div>
         </div>
         <div class="form-group">
             <label>Pendapatan Lainnya (27b)</label>
             <input type="number" placeholder="0" id="pendapatanLain" oninput="hitungKeuntunganUsaha()" />
-            <div class="desc">⚠️ Pendapatan lain dari usaha (sewa, bunga, dll) per bulan.</div>
         </div>
-        <div id="containerPendapatanLain">
-            <!-- Pendapatan tambahan -->
-        </div>
-        <div style="margin-top:8px;">
-            <button class="btn-add-row" onclick="tambahPendapatanLain()">+ Tambah Sumber Pendapatan Lain</button>
-        </div>
-        <div class="form-group" style="margin-top:12px;">
+        <div id="containerPendapatanLain"></div>
+        <button class="btn-add-row" onclick="tambahPendapatanLain()">+ Tambah Sumber Pendapatan Lain</button>
+        <div class="form-group" style="margin-top:10px;">
             <label><strong>Total Pendapatan Usaha / Bulan</strong></label>
             <input type="text" id="totalPendapatanUsaha" readonly placeholder="Rp 0" />
-            <div class="desc">✅ Otomatis dihitung dari penjualan + semua pendapatan lain.</div>
         </div>
     </div>
 
-    <!-- KEUNTUNGAN USAHA -->
     <div class="highlight-box">
         <h4>📊 Keuntungan Usaha (Bersih) per Bulan</h4>
         <div class="form-group">
-            <label><strong style="font-size:18px;">Keuntungan Usaha</strong></label>
-            <input type="text" id="keuntunganUsaha" readonly placeholder="Rp 0" style="font-size:18px; font-weight:700; color:#075985;" />
-            <div class="desc">✅ Keuntungan = Total Pendapatan Usaha − Total Pengeluaran Usaha.</div>
+            <label><strong style="font-size:17px;">Keuntungan Usaha</strong></label>
+            <input type="text" id="keuntunganUsaha" readonly placeholder="Rp 0" style="font-size:17px; font-weight:700; color:#075985;" />
         </div>
     </div>
 
     <h3>C. Nilai Aset Usaha</h3>
     <div class="sub-section">
-        <div class="form-group"><label>Nilai Aset Tanah & Bangunan</label><input type="number" placeholder="0" id="asetTanah" oninput="hitungTotalAset()" /></div>
-        <div class="form-group"><label>Nilai Aset Selain Tanah</label><input type="number" placeholder="0" id="asetLain" oninput="hitungTotalAset()" /></div>
+        <div class="grid-2">
+            <div class="form-group"><label>Nilai Aset Tanah & Bangunan</label><input type="number" placeholder="0" id="asetTanah" oninput="hitungTotalAset()" /></div>
+            <div class="form-group"><label>Nilai Aset Selain Tanah</label><input type="number" placeholder="0" id="asetLain" oninput="hitungTotalAset()" /></div>
+        </div>
         <div class="form-group"><label><strong>Total Aset</strong></label><input type="text" id="totalAset" readonly placeholder="Rp 0" /></div>
         <div class="form-group"><label>Luas Bangunan untuk Usaha</label><input type="number" placeholder="m²" id="luasUsaha" /></div>
     </div>
 
     <!-- ========================================================= -->
-    <!-- BAGIAN IV: PENGELUARAN KELUARGA -->
+    <!-- BAGIAN IV: PENGELUARAN KELUARGA (DETAIL) -->
     <h2>IV. PENGELUARAN KELUARGA</h2>
 
-    <h3>A. Pengeluaran Makanan</h3>
+    <!-- PENGELUARAN MAKANAN -->
+    <h3>PENGELUARAN MAKANAN</h3>
     <div class="sub-section">
-        <div class="grid-2">
-            <div class="form-group"><label>Beras (per hari)</label><input type="number" placeholder="0" id="beras" oninput="hitungTotalMakan()" /></div>
-            <div class="form-group"><label>Sayuran (per hari)</label><input type="number" placeholder="0" id="sayuran" oninput="hitungTotalMakan()" /></div>
-            <div class="form-group"><label>Lauk Pauk (per hari)</label><input type="number" placeholder="0" id="lauk" oninput="hitungTotalMakan()" /></div>
-            <div class="form-group"><label>Minyak Goreng (per minggu)</label><input type="number" placeholder="0" id="minyak" oninput="hitungTotalMakan()" /></div>
-            <div class="form-group"><label>Air Minum Galon (per bulan)</label><input type="number" placeholder="0" id="airGalon" oninput="hitungTotalMakan()" /></div>
+        <div class="section-box">
+            <h5>A. BELANJA BAHAN MAKANAN (Per Minggu)</h5>
+            <div class="grid-2">
+                <div class="form-group"><label>1. Beras</label><input type="number" placeholder="0" id="beras" oninput="hitungTotalMakan()" /></div>
+                <div class="form-group"><label>2. Minyak Goreng</label><input type="number" placeholder="0" id="minyakGoreng" oninput="hitungTotalMakan()" /></div>
+                <div class="form-group"><label>3. Gula, Garam</label><input type="number" placeholder="0" id="gulaGaram" oninput="hitungTotalMakan()" /></div>
+                <div class="form-group"><label>4. Telur</label><input type="number" placeholder="0" id="telur" oninput="hitungTotalMakan()" /></div>
+                <div class="form-group"><label>5. Daging Ayam</label><input type="number" placeholder="0" id="dagingAyam" oninput="hitungTotalMakan()" /></div>
+                <div class="form-group"><label>6. Daging Sapi</label><input type="number" placeholder="0" id="dagingSapi" oninput="hitungTotalMakan()" /></div>
+                <div class="form-group"><label>7. Ikan</label><input type="number" placeholder="0" id="ikan" oninput="hitungTotalMakan()" /></div>
+                <div class="form-group"><label>8. Tahu, Tempe</label><input type="number" placeholder="0" id="tahuTempe" oninput="hitungTotalMakan()" /></div>
+                <div class="form-group"><label>9. Sayuran</label><input type="number" placeholder="0" id="sayuran" oninput="hitungTotalMakan()" /></div>
+                <div class="form-group"><label>10. Buah-buahan</label><input type="number" placeholder="0" id="buah" oninput="hitungTotalMakan()" /></div>
+                <div class="form-group"><label>11. Susu</label><input type="number" placeholder="0" id="susu" oninput="hitungTotalMakan()" /></div>
+                <div class="form-group"><label>12. Mie Instan</label><input type="number" placeholder="0" id="mieInstan" oninput="hitungTotalMakan()" /></div>
+                <div class="form-group"><label>13. Kopi/Teh</label><input type="number" placeholder="0" id="kopiTeh" oninput="hitungTotalMakan()" /></div>
+                <div class="form-group"><label>14. Bumbu Dapur</label><input type="number" placeholder="0" id="bumbu" oninput="hitungTotalMakan()" /></div>
+                <div class="form-group"><label>15. Air Minum Isi Ulang</label><input type="number" placeholder="0" id="airMinum" oninput="hitungTotalMakan()" /></div>
+                <div class="form-group"><label>16. Lainnya (sebutkan)</label><input type="text" placeholder="Nama" id="makanLainNama" style="flex:0.8;" /><input type="number" placeholder="0" id="makanLain" oninput="hitungTotalMakan()" style="flex:0.8;" /></div>
+            </div>
+            <div class="total-box">
+                <div class="grid-3">
+                    <div class="form-group"><label><strong>TOTAL A. BELANJA BAHAN MAKANAN (per Minggu)</strong></label><input type="text" id="totalBelanjaMakanan" readonly placeholder="Rp 0" /></div>
+                    <div class="form-group"><label><strong>Total per Minggu</strong></label><input type="text" id="totalMakanMinggu" readonly placeholder="Rp 0" /></div>
+                    <div class="form-group"><label><strong>Total per Bulan (×4)</strong></label><input type="text" id="totalMakanBulan" readonly placeholder="Rp 0" /></div>
+                </div>
+            </div>
         </div>
-        <div class="grid-3" style="margin-top:10px;">
-            <div class="form-group">
-                <label><strong>Total per Hari</strong></label>
-                <input type="text" id="totalMakanHari" readonly placeholder="Rp 0" />
+
+        <div class="section-box">
+            <h5>B. MAKANAN & MINUMAN JADI (Per Minggu)</h5>
+            <div class="grid-2">
+                <div class="form-group"><label>1. Nasi Bungkus</label><input type="number" placeholder="0" id="nasiBungkus" oninput="hitungTotalMakanJadi()" /></div>
+                <div class="form-group"><label>2. Warteg</label><input type="number" placeholder="0" id="warteg" oninput="hitungTotalMakanJadi()" /></div>
+                <div class="form-group"><label>3. Bakso</label><input type="number" placeholder="0" id="bakso" oninput="hitungTotalMakanJadi()" /></div>
+                <div class="form-group"><label>4. Mie Ayam</label><input type="number" placeholder="0" id="mieAyam" oninput="hitungTotalMakanJadi()" /></div>
+                <div class="form-group"><label>5. Sate</label><input type="number" placeholder="0" id="sate" oninput="hitungTotalMakanJadi()" /></div>
+                <div class="form-group"><label>6. Seblak</label><input type="number" placeholder="0" id="seblak" oninput="hitungTotalMakanJadi()" /></div>
+                <div class="form-group"><label>7. Gorengan</label><input type="number" placeholder="0" id="gorengan" oninput="hitungTotalMakanJadi()" /></div>
+                <div class="form-group"><label>8. Jajanan Anak</label><input type="number" placeholder="0" id="jajanan" oninput="hitungTotalMakanJadi()" /></div>
+                <div class="form-group"><label>9. Roti, Kue</label><input type="number" placeholder="0" id="roti" oninput="hitungTotalMakanJadi()" /></div>
+                <div class="form-group"><label>10. Es Teh, Es Kopi</label><input type="number" placeholder="0" id="esTeh" oninput="hitungTotalMakanJadi()" /></div>
+                <div class="form-group"><label>11. Minuman Kemasan</label><input type="number" placeholder="0" id="minumanKemasan" oninput="hitungTotalMakanJadi()" /></div>
+                <div class="form-group"><label>12. Lainnya (sebutkan)</label><input type="text" placeholder="Nama" id="makanJadiLainNama" style="flex:0.8;" /><input type="number" placeholder="0" id="makanJadiLain" oninput="hitungTotalMakanJadi()" style="flex:0.8;" /></div>
             </div>
-            <div class="form-group">
-                <label><strong>Total per Minggu</strong></label>
-                <input type="text" id="totalMakanMinggu" readonly placeholder="Rp 0" />
-            </div>
-            <div class="form-group">
-                <label><strong>Total per Bulan</strong></label>
-                <input type="text" id="totalMakanBulan" readonly placeholder="Rp 0" />
+            <div class="total-box">
+                <div class="grid-2">
+                    <div class="form-group"><label><strong>TOTAL B. MAKANAN & MINUMAN JADI (per Minggu)</strong></label><input type="text" id="totalMakanJadi" readonly placeholder="Rp 0" /></div>
+                    <div class="form-group"><label><strong>Total per Bulan (×4)</strong></label><input type="text" id="totalMakanJadiBulan" readonly placeholder="Rp 0" /></div>
+                </div>
             </div>
         </div>
-        <div class="desc">
-            ✅ Perhitungan: (Beras+Sayuran+Lauk) = per hari, ×7 = per minggu, ×30 + (Minyak×4) + Air Galon = per bulan.
+
+        <div class="section-box">
+            <h5>C. CATATAN PENGELUARAN MAKANAN</h5>
+            <div class="grid-2">
+                <div class="form-group"><label><strong>Total Pengeluaran Makanan per Minggu</strong></label><input type="text" id="totalMakanMingguAll" readonly placeholder="Rp 0" /></div>
+                <div class="form-group"><label><strong>Total Pengeluaran Makanan per Bulan (±)</strong></label><input type="text" id="totalMakanBulanAll" readonly placeholder="Rp 0" style="font-weight:700; color:#075985;" /></div>
+            </div>
         </div>
     </div>
 
-    <h3>B. Pengeluaran Bukan Makan (Bulanan)</h3>
+    <!-- PENGELUARAN BUKAN MAKANAN -->
+    <h3>PENGELUARAN BUKAN MAKANAN</h3>
     <div class="sub-section">
-        <div class="grid-2">
-            <div class="form-group"><label>Listrik</label><input type="number" placeholder="0" id="listrik" oninput="hitungTotalBukanMakan()" /></div>
-            <div class="form-group"><label>Internet/Wifi</label><input type="number" placeholder="0" id="internet" oninput="hitungTotalBukanMakan()" /></div>
-            <div class="form-group"><label>Air PAM</label><input type="number" placeholder="0" id="airPAM" oninput="hitungTotalBukanMakan()" /></div>
-            <div class="form-group"><label>LPG/Gas</label><input type="number" placeholder="0" id="lpg" oninput="hitungTotalBukanMakan()" /></div>
-            <div class="form-group"><label>Pulsa & Paket Data</label><input type="number" placeholder="0" id="pulsa" oninput="hitungTotalBukanMakan()" /></div>
-            <div class="form-group"><label>Bensin</label><input type="number" placeholder="0" id="bensin" oninput="hitungTotalBukanMakan()" /></div>
-            <div class="form-group"><label>Ongkos Angkutan</label><input type="number" placeholder="0" id="ongkos" oninput="hitungTotalBukanMakan()" /></div>
-            <div class="form-group"><label>Alat Mandi</label><input type="number" placeholder="0" id="alatMandi" oninput="hitungTotalBukanMakan()" /></div>
-            <div class="form-group"><label>Alat Cuci Baju</label><input type="number" placeholder="0" id="cuciBaju" oninput="hitungTotalBukanMakan()" /></div>
-            <div class="form-group"><label>Alat Cuci Piring</label><input type="number" placeholder="0" id="cuciPiring" oninput="hitungTotalBukanMakan()" /></div>
-            <div class="form-group"><label>Lainnya (Bukan Makan)</label><input type="number" placeholder="0" id="lainBukanMakan" oninput="hitungTotalBukanMakan()" /></div>
+        <div class="section-box">
+            <h5>A. TAGIHAN RUMAH TANGGA (Per Bulan)</h5>
+            <div class="grid-2">
+                <div class="form-group"><label>1. Listrik</label><input type="number" placeholder="0" id="listrik" oninput="hitungTotalBukanMakan()" /></div>
+                <div class="form-group"><label>2. Air PAM</label><input type="number" placeholder="0" id="airPAM" oninput="hitungTotalBukanMakan()" /></div>
+                <div class="form-group"><label>3. LPG/Gas</label><input type="number" placeholder="0" id="lpg" oninput="hitungTotalBukanMakan()" /></div>
+                <div class="form-group"><label>4. Internet/WiFi</label><input type="number" placeholder="0" id="internet" oninput="hitungTotalBukanMakan()" /></div>
+                <div class="form-group"><label>5. Pulsa & Paket Data</label><input type="number" placeholder="0" id="pulsa" oninput="hitungTotalBukanMakan()" /></div>
+                <div class="form-group"><label>Lainnya (sebutkan)</label><input type="text" placeholder="Nama" id="tagihanLainNama" style="flex:0.8;" /><input type="number" placeholder="0" id="tagihanLain" oninput="hitungTotalBukanMakan()" style="flex:0.8;" /></div>
+            </div>
+            <div class="total-box">
+                <div class="form-group"><label><strong>TOTAL A. TAGIHAN RUMAH TANGGA / Bulan</strong></label><input type="text" id="totalTagihan" readonly placeholder="Rp 0" /></div>
+            </div>
         </div>
-        <div class="form-group">
-            <label><strong>Total Bukan Makan / Bulan</strong></label>
-            <input type="text" id="totalBukanMakan" readonly placeholder="Rp 0" />
+
+        <div class="section-box">
+            <h5>B. TRANSPORTASI (Per Bulan)</h5>
+            <div class="grid-2">
+                <div class="form-group"><label>1. Bensin/Solar</label><input type="number" placeholder="0" id="bensin" oninput="hitungTotalBukanMakan()" /></div>
+                <div class="form-group"><label>2. Ongkos Angkutan</label><input type="number" placeholder="0" id="ongkos" oninput="hitungTotalBukanMakan()" /></div>
+                <div class="form-group"><label>3. Parkir</label><input type="number" placeholder="0" id="parkir" oninput="hitungTotalBukanMakan()" /></div>
+                <div class="form-group"><label>Lainnya (sebutkan)</label><input type="text" placeholder="Nama" id="transportLainNama" style="flex:0.8;" /><input type="number" placeholder="0" id="transportLain" oninput="hitungTotalBukanMakan()" style="flex:0.8;" /></div>
+            </div>
+            <div class="total-box">
+                <div class="form-group"><label><strong>TOTAL B. TRANSPORTASI / Bulan</strong></label><input type="text" id="totalTransport" readonly placeholder="Rp 0" /></div>
+            </div>
+        </div>
+
+        <div class="section-box">
+            <h5>C. KEBUTUHAN HARIAN (Per Bulan)</h5>
+            <div class="grid-2">
+                <div class="form-group"><label>1. Sabun Mandi</label><input type="number" placeholder="0" id="sabunMandi" oninput="hitungTotalBukanMakan()" /></div>
+                <div class="form-group"><label>2. Sabun Cuci</label><input type="number" placeholder="0" id="sabunCuci" oninput="hitungTotalBukanMakan()" /></div>
+                <div class="form-group"><label>3. Shampoo</label><input type="number" placeholder="0" id="shampoo" oninput="hitungTotalBukanMakan()" /></div>
+                <div class="form-group"><label>4. Pasta Gigi</label><input type="number" placeholder="0" id="pastaGigi" oninput="hitungTotalBukanMakan()" /></div>
+                <div class="form-group"><label>5. Popok Bayi</label><input type="number" placeholder="0" id="popok" oninput="hitungTotalBukanMakan()" /></div>
+                <div class="form-group"><label>6. Pembalut</label><input type="number" placeholder="0" id="pembalut" oninput="hitungTotalBukanMakan()" /></div>
+                <div class="form-group"><label>Lainnya (sebutkan)</label><input type="text" placeholder="Nama" id="kebutuhanLainNama" style="flex:0.8;" /><input type="number" placeholder="0" id="kebutuhanLain" oninput="hitungTotalBukanMakan()" style="flex:0.8;" /></div>
+            </div>
+            <div class="total-box">
+                <div class="form-group"><label><strong>TOTAL C. KEBUTUHAN HARIAN / Bulan</strong></label><input type="text" id="totalKebutuhan" readonly placeholder="Rp 0" /></div>
+            </div>
+        </div>
+
+        <div class="section-box">
+            <h5>D. PENDIDIKAN (Per Bulan)</h5>
+            <div class="grid-2">
+                <div class="form-group"><label>1. Uang Sekolah/SPP</label><input type="number" placeholder="0" id="spp" oninput="hitungTotalBukanMakan()" /></div>
+                <div class="form-group"><label>2. Les/Kursus</label><input type="number" placeholder="0" id="les" oninput="hitungTotalBukanMakan()" /></div>
+                <div class="form-group"><label>3. Fotokopi & ATK</label><input type="number" placeholder="0" id="atk" oninput="hitungTotalBukanMakan()" /></div>
+                <div class="form-group"><label>4. Lainnya (sebutkan)</label><input type="text" placeholder="Nama" id="pendidikanLainNama" style="flex:0.8;" /><input type="number" placeholder="0" id="pendidikanLain" oninput="hitungTotalBukanMakan()" style="flex:0.8;" /></div>
+            </div>
+            <div class="total-box">
+                <div class="form-group"><label><strong>TOTAL D. PENDIDIKAN / Bulan</strong></label><input type="text" id="totalPendidikan" readonly placeholder="Rp 0" /></div>
+            </div>
+        </div>
+
+        <div class="section-box">
+            <h5>E. KESEHATAN (Per Bulan)</h5>
+            <div class="grid-2">
+                <div class="form-group"><label>1. Obat-obatan</label><input type="number" placeholder="0" id="obat" oninput="hitungTotalBukanMakan()" /></div>
+                <div class="form-group"><label>2. Vitamin</label><input type="number" placeholder="0" id="vitamin" oninput="hitungTotalBukanMakan()" /></div>
+                <div class="form-group"><label>3. Biaya Berobat</label><input type="number" placeholder="0" id="berobat" oninput="hitungTotalBukanMakan()" /></div>
+                <div class="form-group"><label>4. Lainnya (sebutkan)</label><input type="text" placeholder="Nama" id="kesehatanLainNama" style="flex:0.8;" /><input type="number" placeholder="0" id="kesehatanLain" oninput="hitungTotalBukanMakan()" style="flex:0.8;" /></div>
+            </div>
+            <div class="total-box">
+                <div class="form-group"><label><strong>TOTAL E. KESEHATAN / Bulan</strong></label><input type="text" id="totalKesehatan" readonly placeholder="Rp 0" /></div>
+            </div>
+        </div>
+
+        <div class="section-box">
+            <h5>F. JASA (Per Bulan)</h5>
+            <div class="grid-2">
+                <div class="form-group"><label>1. Potong Rambut</label><input type="number" placeholder="0" id="potongRambut" oninput="hitungTotalBukanMakan()" /></div>
+                <div class="form-group"><label>2. Cuci Pakaian</label><input type="number" placeholder="0" id="cuciPakaian" oninput="hitungTotalBukanMakan()" /></div>
+                <div class="form-group"><label>3. Penjahit/Permes</label><input type="number" placeholder="0" id="penjahit" oninput="hitungTotalBukanMakan()" /></div>
+                <div class="form-group"><label>4. Lainnya (sebutkan)</label><input type="text" placeholder="Nama" id="jasaLainNama" style="flex:0.8;" /><input type="number" placeholder="0" id="jasaLain" oninput="hitungTotalBukanMakan()" style="flex:0.8;" /></div>
+            </div>
+            <div class="total-box">
+                <div class="form-group"><label><strong>TOTAL F. JASA / Bulan</strong></label><input type="text" id="totalJasa" readonly placeholder="Rp 0" /></div>
+            </div>
+        </div>
+
+        <div class="section-box">
+            <h5>G. SOSIAL & KOMUNIKASI (Per Bulan)</h5>
+            <div class="grid-2">
+                <div class="form-group"><label>1. Iuran RT/RW/Organisasi</label><input type="number" placeholder="0" id="iuranRT" oninput="hitungTotalBukanMakan()" /></div>
+                <div class="form-group"><label>2. Sumbangan</label><input type="number" placeholder="0" id="sumbangan" oninput="hitungTotalBukanMakan()" /></div>
+                <div class="form-group"><label>3. Paket Kiriman</label><input type="number" placeholder="0" id="paket" oninput="hitungTotalBukanMakan()" /></div>
+                <div class="form-group"><label>4. Lainnya (sebutkan)</label><input type="text" placeholder="Nama" id="sosialLainNama" style="flex:0.8;" /><input type="number" placeholder="0" id="sosialLain" oninput="hitungTotalBukanMakan()" style="flex:0.8;" /></div>
+            </div>
+            <div class="total-box">
+                <div class="form-group"><label><strong>TOTAL G. SOSIAL & KOMUNIKASI / Bulan</strong></label><input type="text" id="totalSosial" readonly placeholder="Rp 0" /></div>
+            </div>
+        </div>
+
+        <!-- TOTAL BUKAN MAKANAN -->
+        <div class="total-box" style="background:#d1e7dd; border-left-color:#0b7e3d;">
+            <div class="form-group"><label style="font-size:16px;"><strong>TOTAL PENGELUARAN BUKAN MAKANAN / Bulan</strong></label>
+                <input type="text" id="totalBukanMakan" readonly placeholder="Rp 0" style="font-size:16px; font-weight:700;" />
+            </div>
         </div>
     </div>
 
-    <h3>Pendidikan & Jasa (Bulanan)</h3>
-    <div class="sub-section">
-        <div class="grid-2">
-            <div class="form-group"><label>Uang SPP Anak</label><input type="number" placeholder="0" id="spp" oninput="hitungTotalPendidikan()" /></div>
-            <div class="form-group"><label>Uang Jajan</label><input type="number" placeholder="0" id="jajan" oninput="hitungTotalPendidikan()" /></div>
-            <div class="form-group"><label>Potong Rambut</label><input type="number" placeholder="0" id="potongRambut" oninput="hitungTotalPendidikan()" /></div>
-            <div class="form-group"><label>Jahit/Permak</label><input type="number" placeholder="0" id="jahit" oninput="hitungTotalPendidikan()" /></div>
-            <div class="form-group"><label>Lainnya (Pendidikan/Jasa)</label><input type="number" placeholder="0" id="lainPendidikan" oninput="hitungTotalPendidikan()" /></div>
-        </div>
-        <div class="form-group">
-            <label><strong>Total Pendidikan & Jasa / Bulan</strong></label>
-            <input type="text" id="totalPendidikan" readonly placeholder="Rp 0" />
-        </div>
-    </div>
-
+    <!-- PENGELUARAN TAHUNAN -->
     <h3>PENGELUARAN TAHUNAN</h3>
     <div class="sub-section">
-        <div class="grid-2">
-            <div class="form-group"><label>Beli Baju</label><input type="number" placeholder="0" id="beliBaju" oninput="hitungTotalTahunan()" /></div>
-            <div class="form-group"><label>Seragam Sekolah</label><input type="number" placeholder="0" id="seragam" oninput="hitungTotalTahunan()" /></div>
-            <div class="form-group"><label>Pajak STNK</label><input type="number" placeholder="0" id="pajakSTNK" oninput="hitungTotalTahunan()" /></div>
-            <div class="form-group"><label>Pajak SPPT</label><input type="number" placeholder="0" id="pajakSPPT" oninput="hitungTotalTahunan()" /></div>
-            <div class="form-group"><label>Service Kendaraan</label><input type="number" placeholder="0" id="service" oninput="hitungTotalTahunan()" /></div>
-            <div class="form-group"><label>Perbaikan Rumah/Cat</label><input type="number" placeholder="0" id="perbaikan" oninput="hitungTotalTahunan()" /></div>
-            <div class="form-group"><label>Buku & Perlengkapan Sekolah</label><input type="number" placeholder="0" id="buku" oninput="hitungTotalTahunan()" /></div>
-            <div class="form-group"><label>Hajatan</label><input type="number" placeholder="0" id="hajatan" oninput="hitungTotalTahunan()" /></div>
-            <div class="form-group"><label>Iuran Hari Besar</label><input type="number" placeholder="0" id="iuran" oninput="hitungTotalTahunan()" /></div>
-            <div class="form-group"><label>Lainnya (Tahunan)</label><input type="number" placeholder="0" id="lainTahunan" oninput="hitungTotalTahunan()" /></div>
+        <div class="section-box">
+            <h5>A. PAKAIAN</h5>
+            <div class="grid-2">
+                <div class="form-group"><label>1. Baju Lebaran</label><input type="number" placeholder="0" id="bajuLebaran" oninput="hitungTotalTahunan()" /></div>
+                <div class="form-group"><label>2. Seragam Sekolah</label><input type="number" placeholder="0" id="seragam" oninput="hitungTotalTahunan()" /></div>
+                <div class="form-group"><label>3. Sepatu</label><input type="number" placeholder="0" id="sepatu" oninput="hitungTotalTahunan()" /></div>
+                <div class="form-group"><label>4. Tas</label><input type="number" placeholder="0" id="tas" oninput="hitungTotalTahunan()" /></div>
+                <div class="form-group"><label>Lainnya (sebutkan)</label><input type="text" placeholder="Nama" id="pakaianLainNama" style="flex:0.8;" /><input type="number" placeholder="0" id="pakaianLain" oninput="hitungTotalTahunan()" style="flex:0.8;" /></div>
+            </div>
+            <div class="total-box">
+                <div class="form-group"><label><strong>TOTAL A. PAKAIAN</strong></label><input type="text" id="totalPakaian" readonly placeholder="Rp 0" /></div>
+            </div>
         </div>
-        <div class="form-group">
-            <label><strong>TOTAL PENGELUARAN TAHUNAN</strong></label>
-            <input type="text" id="totalTahunan" readonly placeholder="Rp 0" />
+
+        <div class="section-box">
+            <h5>B. KENDARAAN</h5>
+            <div class="grid-2">
+                <div class="form-group"><label>1. STNK</label><input type="number" placeholder="0" id="stnk" oninput="hitungTotalTahunan()" /></div>
+                <div class="form-group"><label>2. Pajak Kendaraan</label><input type="number" placeholder="0" id="pajakKendaraan" oninput="hitungTotalTahunan()" /></div>
+                <div class="form-group"><label>3. Servis Besar</label><input type="number" placeholder="0" id="servisBesar" oninput="hitungTotalTahunan()" /></div>
+                <div class="form-group"><label>4. Ban</label><input type="number" placeholder="0" id="ban" oninput="hitungTotalTahunan()" /></div>
+                <div class="form-group"><label>5. Servis Kendaraan</label><input type="number" placeholder="0" id="service" oninput="hitungTotalTahunan()" /></div>
+                <div class="form-group"><label>Lainnya (sebutkan)</label><input type="text" placeholder="Nama" id="kendaraanLainNama" style="flex:0.8;" /><input type="number" placeholder="0" id="kendaraanLain" oninput="hitungTotalTahunan()" style="flex:0.8;" /></div>
+            </div>
+            <div class="total-box">
+                <div class="form-group"><label><strong>TOTAL B. KENDARAAN</strong></label><input type="text" id="totalKendaraan" readonly placeholder="Rp 0" /></div>
+            </div>
+        </div>
+
+        <div class="section-box">
+            <h5>C. RUMAH</h5>
+            <div class="grid-2">
+                <div class="form-group"><label>1. PBB</label><input type="number" placeholder="0" id="pbb" oninput="hitungTotalTahunan()" /></div>
+                <div class="form-group"><label>2. Perbaikan Rumah</label><input type="number" placeholder="0" id="perbaikanRumah" oninput="hitungTotalTahunan()" /></div>
+                <div class="form-group"><label>3. Cat Rumah</label><input type="number" placeholder="0" id="catRumah" oninput="hitungTotalTahunan()" /></div>
+                <div class="form-group"><label>Lainnya (sebutkan)</label><input type="text" placeholder="Nama" id="rumahLainNama" style="flex:0.8;" /><input type="number" placeholder="0" id="rumahLain" oninput="hitungTotalTahunan()" style="flex:0.8;" /></div>
+            </div>
+            <div class="total-box">
+                <div class="form-group"><label><strong>TOTAL C. RUMAH</strong></label><input type="text" id="totalRumah" readonly placeholder="Rp 0" /></div>
+            </div>
+        </div>
+
+        <div class="section-box">
+            <h5>D. PENDIDIKAN (Tahunan)</h5>
+            <div class="grid-2">
+                <div class="form-group"><label>1. Daftar Ulang Sekolah</label><input type="number" placeholder="0" id="daftarUlang" oninput="hitungTotalTahunan()" /></div>
+                <div class="form-group"><label>2. Uang Gedung</label><input type="number" placeholder="0" id="uangGedung" oninput="hitungTotalTahunan()" /></div>
+                <div class="form-group"><label>3. Buku Paket</label><input type="number" placeholder="0" id="bukuPaket" oninput="hitungTotalTahunan()" /></div>
+                <div class="form-group"><label>4. Lainnya (sebutkan)</label><input type="text" placeholder="Nama" id="pendidikanTahunanLainNama" style="flex:0.8;" /><input type="number" placeholder="0" id="pendidikanTahunanLain" oninput="hitungTotalTahunan()" style="flex:0.8;" /></div>
+            </div>
+            <div class="total-box">
+                <div class="form-group"><label><strong>TOTAL D. PENDIDIKAN (Tahunan)</strong></label><input type="text" id="totalPendidikanTahunan" readonly placeholder="Rp 0" /></div>
+            </div>
+        </div>
+
+        <div class="section-box">
+            <h5>E. ACARA KHUSUS</h5>
+            <div class="grid-2">
+                <div class="form-group"><label>1. Hajatan</label><input type="number" placeholder="0" id="hajatan" oninput="hitungTotalTahunan()" /></div>
+                <div class="form-group"><label>2. Khitanan</label><input type="number" placeholder="0" id="khitanan" oninput="hitungTotalTahunan()" /></div>
+                <div class="form-group"><label>3. Pernikahan</label><input type="number" placeholder="0" id="pernikahan" oninput="hitungTotalTahunan()" /></div>
+                <div class="form-group"><label>4. Perayaan Hari Besar</label><input type="number" placeholder="0" id="hariBesar" oninput="hitungTotalTahunan()" /></div>
+                <div class="form-group"><label>5. Lainnya (sebutkan)</label><input type="text" placeholder="Nama" id="acaraLainNama" style="flex:0.8;" /><input type="number" placeholder="0" id="acaraLain" oninput="hitungTotalTahunan()" style="flex:0.8;" /></div>
+            </div>
+            <div class="total-box">
+                <div class="form-group"><label><strong>TOTAL E. ACARA KHUSUS</strong></label><input type="text" id="totalAcara" readonly placeholder="Rp 0" /></div>
+            </div>
+        </div>
+
+        <!-- TOTAL TAHUNAN -->
+        <div class="total-box" style="background:#d1e7dd; border-left-color:#0b7e3d;">
+            <div class="form-group"><label style="font-size:16px;"><strong>TOTAL PENGELUARAN TAHUNAN (±)</strong></label>
+                <input type="text" id="totalTahunan" readonly placeholder="Rp 0" style="font-size:16px; font-weight:700;" />
+            </div>
         </div>
     </div>
 
-    <!-- ========================================================= -->
-    <!-- DATA ASET DAN KONDISI -->
-    <h2>DATA ASET DAN KONDISI RUMAH TANGGA</h2>
+    <!-- RINGKASAN TOTAL PENGELUARAN -->
+    <h3>RINGKASAN TOTAL PENGELUARAN</h3>
+    <div class="sub-section" style="background:#eef2f7;">
+        <div class="grid-2">
+            <div class="form-group"><label><strong>1. Total Pengeluaran Makanan per Bulan (±)</strong></label><input type="text" id="ringkasanMakan" readonly placeholder="Rp 0" style="font-weight:600;" /></div>
+            <div class="form-group"><label><strong>2. Total Pengeluaran Bukan Makanan per Bulan</strong></label><input type="text" id="ringkasanBukanMakan" readonly placeholder="Rp 0" style="font-weight:600;" /></div>
+            <div class="form-group"><label><strong>3. Perkiraan Pengeluaran Tahunan (±)</strong></label><input type="text" id="ringkasanTahunan" readonly placeholder="Rp 0" style="font-weight:600;" /></div>
+            <div class="form-group"><label><strong>Total = (1 + (2×12) + 3)</strong></label><input type="text" id="ringkasanTotalTahunan" readonly placeholder="Rp 0" style="font-weight:700; color:#075985; font-size:16px;" /></div>
+        </div>
+    </div>
+
+    <!-- PETUNJUK PENGISIAN -->
+    <h3>PETUNJUK PENGISIAN</h3>
+    <div class="sub-section">
+        <ol style="padding-left:20px; color:#1e293b; font-size:14px; line-height:1.8;">
+            <li>Isilah semua kolom dengan angka yang sebenarnya dikeluarkan.</li>
+            <li>Gunakan rata-rata pengeluaran jika nilainya berubah-ubah.</li>
+            <li>Catat semua pengeluaran sekecil apa pun.</li>
+            <li>Lampirkan bukti (nota/struk/foto) jika memungkinkan.</li>
+            <li>Jika ada kategori yang tidak ada pengeluarannya, tulis "0".</li>
+        </ol>
+    </div>
+
+    <!-- INFORMASI TAMBAHAN -->
+    <h3>INFORMASI TAMBAHAN (OPSIONAL)</h3>
     <div class="sub-section">
         <div class="grid-2">
-            <div class="form-group"><label>Luas Bangunan Tempat Tinggal</label><input type="number" placeholder="m²" id="luasBangunan" /></div>
-            <div class="form-group"><label>Luas Tanah yang Ditempati</label><input type="number" placeholder="m²" id="luasTanah" /></div>
-            <div class="form-group"><label>Tanah Selain yang Ditempati</label><input type="number" placeholder="m²" id="tanahLain" /></div>
-            <div class="form-group"><label>Nilai Aset Tanah & Bangunan</label><input type="number" placeholder="Rp" id="nilaiProperti" /></div>
-            <div class="form-group"><label>Jumlah Motor</label><input type="number" placeholder="0" id="jmlMotor" /></div>
-            <div class="form-group"><label>Jumlah Mobil</label><input type="number" placeholder="0" id="jmlMobil" /></div>
-            <div class="form-group"><label>Jumlah Emas</label><input type="text" placeholder="gram" id="jmlEmas" /></div>
+            <div class="form-group"><label>Jumlah Anggota Keluarga</label><input type="number" placeholder="0" id="infoAnggota" /></div>
+            <div class="form-group"><label>Sumber Penghasilan Utama</label><input type="text" placeholder="Sumber utama" id="infoSumber" /></div>
+            <div class="form-group"><label>Penghasilan per Bulan (±)</label><input type="number" placeholder="0" id="infoPenghasilan" /></div>
+            <div class="form-group"><label>Keterangan Lain</label><input type="text" placeholder="Catatan tambahan" id="infoKeterangan" /></div>
         </div>
-        <div class="form-group"><label>Riwayat Penyakit</label><textarea placeholder="Sebutkan penyakit kronis" id="riwayatPenyakit"></textarea></div>
-        <div class="form-group"><label>Disabilitas Keluarga</label><textarea placeholder="Jenis disabilitas" id="disabilitas"></textarea></div>
     </div>
 
     <!-- ========================================================= -->
@@ -580,12 +692,11 @@
             <div class="form-group"><label>Total Pendapatan Keluarga</label><input type="text" id="ringkasanPendapatan" readonly placeholder="Rp 0" /></div>
             <div class="form-group"><label>Keuntungan Usaha (jika ada)</label><input type="text" id="ringkasanKeuntungan" readonly placeholder="Rp 0" /></div>
             <div class="form-group"><label>Total Pengeluaran Bulanan</label><input type="text" id="ringkasanPengeluaran" readonly placeholder="Rp 0" /></div>
-            <div class="form-group"><label><strong>Selisih Pendapatan - Pengeluaran</strong></label><input type="text" id="ringkasanSelisih" readonly placeholder="Rp 0" style="font-weight:700; color:#075985;" /></div>
+            <div class="form-group"><label><strong>Selisih Pendapatan - Pengeluaran</strong></label><input type="text" id="ringkasanSelisih" readonly placeholder="Rp 0" style="font-weight:700; color:#075985; font-size:16px;" /></div>
         </div>
     </div>
 
-    <!-- ========================================================= -->
-    <!-- TOMBOL KIRIM -->
+    <!-- TOMBOL -->
     <div class="btn-center">
         <button class="btn" type="button" onclick="simpanKuesioner()">💾 Simpan Kuesioner</button>
         <button class="btn btn-wa" type="button" onclick="kirimWhatsApp()">📱 Kirim ke WhatsApp</button>
@@ -597,190 +708,80 @@
 
 <script>
 // ================================================================
-// DATA PEKERJAAN INDONESIA (185+ Pekerjaan dengan Gaji Rata-rata)
+// DATA PEKERJAAN
 // ================================================================
 const dataPekerjaan = [
-    // Profesional
-    { nama: "Dokter Spesialis", gaji: 25000000 },
-    { nama: "Dokter Umum", gaji: 15000000 },
-    { nama: "Dokter Gigi", gaji: 12000000 },
-    { nama: "Perawat", gaji: 6000000 },
-    { nama: "Bidan", gaji: 5000000 },
-    { nama: "Apoteker", gaji: 8000000 },
-    { nama: "Pengacara", gaji: 15000000 },
-    { nama: "Hakim", gaji: 18000000 },
-    { nama: "Jaksa", gaji: 12000000 },
-    { nama: "Notaris", gaji: 20000000 },
-    { nama: "Akuntan", gaji: 10000000 },
-    { nama: "Konsultan", gaji: 12000000 },
-    { nama: "Manajer", gaji: 15000000 },
-    { nama: "Direktur", gaji: 30000000 },
-    { nama: "CEO", gaji: 50000000 },
-    
-    // Pendidikan
-    { nama: "Guru SD", gaji: 4000000 },
-    { nama: "Guru SMP", gaji: 4500000 },
-    { nama: "Guru SMA", gaji: 5000000 },
-    { nama: "Dosen", gaji: 8000000 },
-    { nama: "Profesor", gaji: 15000000 },
-    { nama: "Kepala Sekolah", gaji: 8000000 },
-    { nama: "Pengajar Privat", gaji: 5000000 },
-    
-    // Teknologi
-    { nama: "Software Engineer", gaji: 12000000 },
-    { nama: "Web Developer", gaji: 10000000 },
-    { nama: "Mobile Developer", gaji: 12000000 },
-    { nama: "Data Scientist", gaji: 15000000 },
-    { nama: "IT Support", gaji: 6000000 },
-    { nama: "Network Engineer", gaji: 10000000 },
-    { nama: "Cyber Security", gaji: 15000000 },
-    { nama: "UI/UX Designer", gaji: 10000000 },
-    { nama: "Game Developer", gaji: 12000000 },
-    { nama: "AI Engineer", gaji: 20000000 },
-    
-    // Kesehatan
-    { nama: "Ahli Gizi", gaji: 6000000 },
-    { nama: "Fisioterapis", gaji: 7000000 },
-    { nama: "Psikolog", gaji: 10000000 },
-    { nama: "Psikiater", gaji: 20000000 },
-    { nama: "Terapis", gaji: 6000000 },
-    { nama: "Radiografer", gaji: 8000000 },
-    { nama: "Analis Kesehatan", gaji: 7000000 },
-    
-    // Keuangan
-    { nama: "Analis Keuangan", gaji: 12000000 },
-    { nama: "Bankir", gaji: 10000000 },
-    { nama: "Teller Bank", gaji: 5000000 },
-    { nama: "Customer Service Bank", gaji: 5500000 },
-    { nama: "Manajer Bank", gaji: 20000000 },
-    { nama: "Agen Asuransi", gaji: 8000000 },
-    { nama: "Broker Saham", gaji: 15000000 },
-    
-    // Pemerintahan
-    { nama: "PNS Golongan I", gaji: 2500000 },
-    { nama: "PNS Golongan II", gaji: 3500000 },
-    { nama: "PNS Golongan III", gaji: 5000000 },
-    { nama: "PNS Golongan IV", gaji: 8000000 },
-    { nama: "Polisi", gaji: 5000000 },
-    { nama: "TNI", gaji: 5000000 },
-    { nama: "Kepala Desa", gaji: 4000000 },
-    { nama: "Lurah", gaji: 5000000 },
-    { nama: "Camat", gaji: 7000000 },
-    
-    // Konstruksi & Teknik
-    { nama: "Arsitek", gaji: 10000000 },
-    { nama: "Insinyur Sipil", gaji: 10000000 },
-    { nama: "Insinyur Elektro", gaji: 10000000 },
-    { nama: "Insinyur Mesin", gaji: 10000000 },
-    { nama: "Kontraktor", gaji: 15000000 },
-    { nama: "Mandor", gaji: 6000000 },
-    { nama: "Tukang Bangunan", gaji: 4000000 },
-    { nama: "Tukang Kayu", gaji: 4000000 },
-    { nama: "Tukang Las", gaji: 4500000 },
-    { nama: "Tukang Cat", gaji: 4000000 },
-    
-    // Transportasi
-    { nama: "Supir Bus", gaji: 5000000 },
-    { nama: "Supir Truk", gaji: 6000000 },
-    { nama: "Supir Taksi", gaji: 4000000 },
-    { nama: "Supir Gojek/Grab", gaji: 5000000 },
-    { nama: "Masinis Kereta", gaji: 8000000 },
-    { nama: "Pilot", gaji: 30000000 },
-    { nama: "Pramugari", gaji: 12000000 },
-    { nama: "Nakhoda Kapal", gaji: 25000000 },
-    { nama: "Pelaut", gaji: 10000000 },
-    
-    // Pertanian & Perikanan
-    { nama: "Petani", gaji: 3000000 },
-    { nama: "Peternak", gaji: 4000000 },
-    { nama: "Nelayan", gaji: 4000000 },
-    { nama: "Perkebunan", gaji: 3500000 },
-    { nama: "Kehutanan", gaji: 4000000 },
-    { nama: "Agraris", gaji: 3500000 },
-    
-    // Perdagangan
-    { nama: "Pedagang Kecil", gaji: 4000000 },
-    { nama: "Pedagang Besar", gaji: 10000000 },
-    { nama: "Pedagang Keliling", gaji: 3500000 },
-    { nama: "Pedagang Pasar", gaji: 4000000 },
-    { nama: "Eksportir", gaji: 15000000 },
-    { nama: "Importir", gaji: 15000000 },
-    { nama: "Distributor", gaji: 10000000 },
-    
-    // Jasa
-    { nama: "Pramusaji", gaji: 3000000 },
-    { nama: "Koki", gaji: 5000000 },
-    { nama: "Chef", gaji: 10000000 },
-    { nama: "Barista", gaji: 3500000 },
-    { nama: "Pelayan Restoran", gaji: 3000000 },
-    { nama: "Resepsionis", gaji: 4000000 },
-    { nama: "Satpam", gaji: 3500000 },
-    { nama: "OB", gaji: 3000000 },
-    { nama: "Pramuwisma", gaji: 3000000 },
-    { nama: "Laundry", gaji: 3000000 },
-    
-    // Kreatif
-    { nama: "Desainer Grafis", gaji: 7000000 },
-    { nama: "Fotografer", gaji: 6000000 },
-    { nama: "Videografer", gaji: 7000000 },
-    { nama: "Editor Video", gaji: 7000000 },
-    { nama: "Content Creator", gaji: 8000000 },
-    { nama: "Social Media Specialist", gaji: 7000000 },
-    { nama: "Digital Marketer", gaji: 8000000 },
-    { nama: "SEO Specialist", gaji: 8000000 },
-    { nama: "Penulis", gaji: 5000000 },
-    { nama: "Jurnalis", gaji: 6000000 },
-    { nama: "Seniman", gaji: 5000000 },
-    { nama: "Musisi", gaji: 6000000 },
-    { nama: "Aktor", gaji: 10000000 },
-    
-    // Lainnya
-    { nama: "Ibu Rumah Tangga", gaji: 0 },
-    { nama: "Mahasiswa", gaji: 0 },
-    { nama: "Pensiunan", gaji: 0 },
-    { nama: "Tidak Bekerja", gaji: 0 },
-    { nama: "Wirausaha", gaji: 8000000 },
-    { nama: "Freelancer", gaji: 6000000 },
-    { nama: "Karyawan Swasta", gaji: 5000000 },
-    { nama: "Buruh", gaji: 3500000 },
-    { nama: "Pekerja Lepas", gaji: 4000000 },
+    { nama: "Dokter Spesialis", gaji: 25000000 }, { nama: "Dokter Umum", gaji: 15000000 },
+    { nama: "Dokter Gigi", gaji: 12000000 }, { nama: "Perawat", gaji: 6000000 },
+    { nama: "Bidan", gaji: 5000000 }, { nama: "Apoteker", gaji: 8000000 },
+    { nama: "Pengacara", gaji: 15000000 }, { nama: "Hakim", gaji: 18000000 },
+    { nama: "Jaksa", gaji: 12000000 }, { nama: "Notaris", gaji: 20000000 },
+    { nama: "Akuntan", gaji: 10000000 }, { nama: "Konsultan", gaji: 12000000 },
+    { nama: "Manajer", gaji: 15000000 }, { nama: "Direktur", gaji: 30000000 },
+    { nama: "CEO", gaji: 50000000 }, { nama: "Guru SD", gaji: 4000000 },
+    { nama: "Guru SMP", gaji: 4500000 }, { nama: "Guru SMA", gaji: 5000000 },
+    { nama: "Dosen", gaji: 8000000 }, { nama: "Profesor", gaji: 15000000 },
+    { nama: "Software Engineer", gaji: 12000000 }, { nama: "Web Developer", gaji: 10000000 },
+    { nama: "Mobile Developer", gaji: 12000000 }, { nama: "Data Scientist", gaji: 15000000 },
+    { nama: "IT Support", gaji: 6000000 }, { nama: "Network Engineer", gaji: 10000000 },
+    { nama: "UI/UX Designer", gaji: 10000000 }, { nama: "Game Developer", gaji: 12000000 },
+    { nama: "Ahli Gizi", gaji: 6000000 }, { nama: "Fisioterapis", gaji: 7000000 },
+    { nama: "Psikolog", gaji: 10000000 }, { nama: "Psikiater", gaji: 20000000 },
+    { nama: "Analis Keuangan", gaji: 12000000 }, { nama: "Bankir", gaji: 10000000 },
+    { nama: "Teller Bank", gaji: 5000000 }, { nama: "Manajer Bank", gaji: 20000000 },
+    { nama: "PNS Golongan I", gaji: 2500000 }, { nama: "PNS Golongan II", gaji: 3500000 },
+    { nama: "PNS Golongan III", gaji: 5000000 }, { nama: "PNS Golongan IV", gaji: 8000000 },
+    { nama: "Polisi", gaji: 5000000 }, { nama: "TNI", gaji: 5000000 },
+    { nama: "Kepala Desa", gaji: 4000000 }, { nama: "Lurah", gaji: 5000000 },
+    { nama: "Arsitek", gaji: 10000000 }, { nama: "Insinyur Sipil", gaji: 10000000 },
+    { nama: "Kontraktor", gaji: 15000000 }, { nama: "Mandor", gaji: 6000000 },
+    { nama: "Tukang Bangunan", gaji: 4000000 }, { nama: "Supir Bus", gaji: 5000000 },
+    { nama: "Supir Truk", gaji: 6000000 }, { nama: "Supir Gojek/Grab", gaji: 5000000 },
+    { nama: "Masinis Kereta", gaji: 8000000 }, { nama: "Pilot", gaji: 30000000 },
+    { nama: "Pramugari", gaji: 12000000 }, { nama: "Petani", gaji: 3000000 },
+    { nama: "Peternak", gaji: 4000000 }, { nama: "Nelayan", gaji: 4000000 },
+    { nama: "Pedagang Kecil", gaji: 4000000 }, { nama: "Pedagang Besar", gaji: 10000000 },
+    { nama: "Koki", gaji: 5000000 }, { nama: "Chef", gaji: 10000000 },
+    { nama: "Barista", gaji: 3500000 }, { nama: "Satpam", gaji: 3500000 },
+    { nama: "Desainer Grafis", gaji: 7000000 }, { nama: "Fotografer", gaji: 6000000 },
+    { nama: "Videografer", gaji: 7000000 }, { nama: "Content Creator", gaji: 8000000 },
+    { nama: "Digital Marketer", gaji: 8000000 }, { nama: "Penulis", gaji: 5000000 },
+    { nama: "Jurnalis", gaji: 6000000 }, { nama: "Seniman", gaji: 5000000 },
+    { nama: "Musisi", gaji: 6000000 }, { nama: "Ibu Rumah Tangga", gaji: 0 },
+    { nama: "Mahasiswa", gaji: 0 }, { nama: "Pensiunan", gaji: 0 },
+    { nama: "Tidak Bekerja", gaji: 0 }, { nama: "Wirausaha", gaji: 8000000 },
+    { nama: "Freelancer", gaji: 6000000 }, { nama: "Karyawan Swasta", gaji: 5000000 },
+    { nama: "Buruh", gaji: 3500000 }, { nama: "Pekerja Lepas", gaji: 4000000 },
 ];
 
 // ================================================================
-// INISIALISASI
+// INISIALISASI & FUNGSI
 // ================================================================
 let rowCounter = 1;
-let pengeluaranCounter = 1;
-let pendapatanLainCounter = 1;
 
-// Tambah baris pekerjaan
 function tambahBarisPekerjaan() {
     const tbody = document.getElementById('tbodyPekerjaan');
     const row = document.createElement('tr');
     const no = rowCounter++;
     row.innerHTML = `
-        <td><input type="text" value="${no}" style="width:30px;text-align:center;" readonly /></td>
-        <td><input type="text" placeholder="Nama" class="namaPekerja" /></td>
-        <td>
-            <select class="pekerjaanSelect" onchange="pilihPekerjaan(this)">
+        <td style="padding:6px; text-align:center;">${no}</td>
+        <td style="padding:6px;"><input type="text" placeholder="Nama" class="namaPekerja" style="width:100%; padding:6px 10px; border:1px solid #cbd5e1; border-radius:6px;" /></td>
+        <td style="padding:6px;">
+            <select class="pekerjaanSelect" onchange="pilihPekerjaan(this)" style="width:100%; padding:6px 10px; border:1px solid #cbd5e1; border-radius:6px;">
                 <option value="">-- Pilih Pekerjaan --</option>
                 ${dataPekerjaan.map(p => `<option value="${p.nama}" data-gaji="${p.gaji}">${p.nama}</option>`).join('')}
             </select>
         </td>
-        <td><input type="number" placeholder="0" class="gajiPekerja" oninput="hitungTotalPendapatan()" /></td>
-        <td>
-            <select class="ijazahSelect">
-                <option value="">-- Pilih --</option>
-                <option value="SD">SD</option>
-                <option value="SMP">SMP</option>
-                <option value="SMA">SMA</option>
-                <option value="D3">D3</option>
-                <option value="S1">S1</option>
-                <option value="S2">S2</option>
-                <option value="S3">S3</option>
+        <td style="padding:6px;"><input type="number" placeholder="0" class="gajiPekerja" oninput="hitungTotalPendapatan()" style="width:100%; padding:6px 10px; border:1px solid #cbd5e1; border-radius:6px;" /></td>
+        <td style="padding:6px;">
+            <select class="ijazahSelect" style="width:100%; padding:6px 10px; border:1px solid #cbd5e1; border-radius:6px;">
+                <option value="">--</option>
+                <option value="SD">SD</option><option value="SMP">SMP</option>
+                <option value="SMA">SMA</option><option value="D3">D3</option>
+                <option value="S1">S1</option><option value="S2">S2</option><option value="S3">S3</option>
             </select>
         </td>
-        <td><button class="btn-remove-row" onclick="hapusBarisPekerjaan(this)">✕</button></td>
+        <td style="padding:6px;"><button class="btn-add-row" style="background:#dc2626; padding:4px 10px;" onclick="hapusBarisPekerjaan(this)">✕</button></td>
     `;
     tbody.appendChild(row);
     hitungTotalPendapatan();
@@ -789,8 +790,7 @@ function tambahBarisPekerjaan() {
 function pilihPekerjaan(select) {
     const row = select.closest('tr');
     const gajiInput = row.querySelector('.gajiPekerja');
-    const selectedOption = select.options[select.selectedIndex];
-    const gaji = selectedOption.getAttribute('data-gaji') || 0;
+    const gaji = select.options[select.selectedIndex].getAttribute('data-gaji') || 0;
     gajiInput.value = gaji;
     hitungTotalPendapatan();
 }
@@ -806,23 +806,23 @@ function hapusBarisPekerjaan(btn) {
 }
 
 // ================================================================
-// PENGELUARAN USAHA FLEKSIBEL
+// PENGELUARAN USAHA
 // ================================================================
 function tambahPengeluaranUsaha() {
     const container = document.getElementById('containerPengeluaranUsaha');
     const div = document.createElement('div');
     div.className = 'form-group';
-    div.style.cssText = 'background:#f1f5f9; padding:10px 14px; border-radius:10px; margin-bottom:8px;';
+    div.style.cssText = 'background:#f1f5f9; padding:8px 12px; border-radius:8px; margin-bottom:6px;';
     div.innerHTML = `
-        <input type="text" placeholder="Nama Pengeluaran" class="namaPengeluaran" style="flex:1.5; min-width:120px;" />
-        <input type="number" placeholder="Nilai" class="nilaiPengeluaran" style="flex:1; min-width:100px;" oninput="hitungKeuntunganUsaha()" />
-        <select class="periodePengeluaran" style="flex:0.8; min-width:100px;" onchange="hitungKeuntunganUsaha()">
+        <input type="text" placeholder="Nama Pengeluaran" class="namaPengeluaran" style="flex:1.5; min-width:80px;" />
+        <input type="number" placeholder="Nilai" class="nilaiPengeluaran" style="flex:1; min-width:80px;" oninput="hitungKeuntunganUsaha()" />
+        <select class="periodePengeluaran" style="flex:0.8; min-width:80px;" onchange="hitungKeuntunganUsaha()">
             <option value="harian">Harian</option>
             <option value="mingguan">Mingguan</option>
             <option value="bulanan" selected>Bulanan</option>
             <option value="tahunan">Tahunan</option>
         </select>
-        <button class="btn-remove-row" onclick="hapusPengeluaranUsaha(this)" style="flex:0.3;">✕</button>
+        <button class="btn-add-row" style="background:#dc2626; padding:4px 10px;" onclick="hapusPengeluaranUsaha(this)">✕</button>
     `;
     container.appendChild(div);
 }
@@ -844,11 +844,11 @@ function tambahPendapatanLain() {
     const container = document.getElementById('containerPendapatanLain');
     const div = document.createElement('div');
     div.className = 'form-group';
-    div.style.cssText = 'background:#f1f5f9; padding:10px 14px; border-radius:10px; margin-bottom:8px;';
+    div.style.cssText = 'background:#f1f5f9; padding:8px 12px; border-radius:8px; margin-bottom:6px;';
     div.innerHTML = `
-        <input type="text" placeholder="Sumber Pendapatan" class="sumberPendapatanLain" style="flex:1.5; min-width:120px;" />
-        <input type="number" placeholder="Nilai" class="nilaiPendapatanLain" style="flex:1; min-width:100px;" oninput="hitungKeuntunganUsaha()" />
-        <button class="btn-remove-row" onclick="hapusPendapatanLain(this)" style="flex:0.3;">✕</button>
+        <input type="text" placeholder="Sumber Pendapatan" class="sumberPendapatanLain" style="flex:1.5; min-width:80px;" />
+        <input type="number" placeholder="Nilai" class="nilaiPendapatanLain" style="flex:1; min-width:80px;" oninput="hitungKeuntunganUsaha()" />
+        <button class="btn-add-row" style="background:#dc2626; padding:4px 10px;" onclick="hapusPendapatanLain(this)">✕</button>
     `;
     container.appendChild(div);
 }
@@ -865,24 +865,22 @@ function hapusPendapatanLain(btn) {
 // FUNGSI PERHITUNGAN
 // ================================================================
 
+function getVal(id) { return parseFloat(document.getElementById(id)?.value) || 0; }
+
 // 1. Total Pendapatan Keluarga
 function hitungTotalPendapatan() {
-    const gajiInputs = document.querySelectorAll('.gajiPekerja');
+    const inputs = document.querySelectorAll('.gajiPekerja');
     let total = 0;
-    gajiInputs.forEach(inp => {
-        const val = parseFloat(inp.value) || 0;
-        total += val;
-    });
+    inputs.forEach(inp => total += parseFloat(inp.value) || 0);
     document.getElementById('totalPendapatanKeluarga').value = formatRupiah(total);
     updateRingkasan();
 }
 
 // 2. Keuntungan Usaha
 function hitungKeuntunganUsaha() {
-    // Hitung pengeluaran usaha
-    const pengeluaranItems = document.querySelectorAll('#containerPengeluaranUsaha .form-group');
+    // Pengeluaran
     let totalPengeluaran = 0;
-    pengeluaranItems.forEach(item => {
+    document.querySelectorAll('#containerPengeluaranUsaha .form-group').forEach(item => {
         const nilai = parseFloat(item.querySelector('.nilaiPengeluaran').value) || 0;
         const periode = item.querySelector('.periodePengeluaran').value;
         let perBulan = nilai;
@@ -893,22 +891,16 @@ function hitungKeuntunganUsaha() {
     });
     document.getElementById('totalPengeluaranUsaha').value = formatRupiah(totalPengeluaran);
 
-    // Hitung pendapatan usaha
-    const penjualan = parseFloat(document.getElementById('penjualan').value) || 0;
-    const pendLain = parseFloat(document.getElementById('pendapatanLain').value) || 0;
-    
-    // Pendapatan lain tambahan
-    let totalPendapatanLain = 0;
-    const pendLainItems = document.querySelectorAll('#containerPendapatanLain .form-group');
-    pendLainItems.forEach(item => {
-        const nilai = parseFloat(item.querySelector('.nilaiPendapatanLain').value) || 0;
-        totalPendapatanLain += nilai;
+    // Pendapatan
+    const penjualan = getVal('penjualan');
+    const pendLain = getVal('pendapatanLain');
+    let totalPendLain = 0;
+    document.querySelectorAll('#containerPendapatanLain .form-group').forEach(item => {
+        totalPendLain += parseFloat(item.querySelector('.nilaiPendapatanLain').value) || 0;
     });
-    
-    const totalPendapatan = penjualan + pendLain + totalPendapatanLain;
+    const totalPendapatan = penjualan + pendLain + totalPendLain;
     document.getElementById('totalPendapatanUsaha').value = formatRupiah(totalPendapatan);
 
-    // Keuntungan
     const keuntungan = totalPendapatan - totalPengeluaran;
     document.getElementById('keuntunganUsaha').value = formatRupiah(keuntungan);
     updateRingkasan();
@@ -916,91 +908,145 @@ function hitungKeuntunganUsaha() {
 
 // 3. Total Aset
 function hitungTotalAset() {
-    const tanah = parseFloat(document.getElementById('asetTanah').value) || 0;
-    const lain = parseFloat(document.getElementById('asetLain').value) || 0;
-    const total = tanah + lain;
+    const total = getVal('asetTanah') + getVal('asetLain');
     document.getElementById('totalAset').value = formatRupiah(total);
 }
 
-// 4. Pengeluaran Makan (Hari, Minggu, Bulan)
+// 4. Pengeluaran Makanan
 function hitungTotalMakan() {
-    const beras = parseFloat(document.getElementById('beras').value) || 0;
-    const sayur = parseFloat(document.getElementById('sayuran').value) || 0;
-    const lauk = parseFloat(document.getElementById('lauk').value) || 0;
-    const minyak = parseFloat(document.getElementById('minyak').value) || 0;
-    const galon = parseFloat(document.getElementById('airGalon').value) || 0;
+    const items = ['beras','minyakGoreng','gulaGaram','telur','dagingAyam','dagingSapi',
+                   'ikan','tahuTempe','sayuran','buah','susu','mieInstan','kopiTeh','bumbu','airMinum'];
+    let total = 0;
+    items.forEach(id => total += getVal(id));
+    total += getVal('makanLain');
+    document.getElementById('totalBelanjaMakanan').value = formatRupiah(total);
+    document.getElementById('totalMakanMinggu').value = formatRupiah(total);
+    document.getElementById('totalMakanBulan').value = formatRupiah(total * 4);
+    hitungTotalMakanJadi();
+}
 
-    const perHari = beras + sayur + lauk;
-    const perMinggu = perHari * 7;
-    const perBulan = perHari * 30 + (minyak * 4) + galon;
-
-    document.getElementById('totalMakanHari').value = formatRupiah(perHari);
-    document.getElementById('totalMakanMinggu').value = formatRupiah(perMinggu);
-    document.getElementById('totalMakanBulan').value = formatRupiah(perBulan);
+function hitungTotalMakanJadi() {
+    const items = ['nasiBungkus','warteg','bakso','mieAyam','sate','seblak','gorengan','jajanan','roti','esTeh','minumanKemasan'];
+    let total = 0;
+    items.forEach(id => total += getVal(id));
+    total += getVal('makanJadiLain');
+    document.getElementById('totalMakanJadi').value = formatRupiah(total);
+    document.getElementById('totalMakanJadiBulan').value = formatRupiah(total * 4);
+    
+    // Total semua makanan
+    const belanja = getValFromText('totalBelanjaMakanan');
+    const jadi = total;
+    const totalMinggu = belanja + jadi;
+    document.getElementById('totalMakanMingguAll').value = formatRupiah(totalMinggu);
+    document.getElementById('totalMakanBulanAll').value = formatRupiah(totalMinggu * 4);
     updateRingkasan();
 }
 
-// 5. Total Bukan Makan
+// 5. Pengeluaran Bukan Makanan
 function hitungTotalBukanMakan() {
-    const ids = ['listrik','internet','airPAM','lpg','pulsa','bensin','ongkos','alatMandi','cuciBaju','cuciPiring','lainBukanMakan'];
-    let total = 0;
-    ids.forEach(id => {
-        total += parseFloat(document.getElementById(id).value) || 0;
-    });
+    // A. Tagihan
+    const tagihan = getVal('listrik') + getVal('airPAM') + getVal('lpg') + getVal('internet') + getVal('pulsa') + getVal('tagihanLain');
+    document.getElementById('totalTagihan').value = formatRupiah(tagihan);
+    
+    // B. Transportasi
+    const transport = getVal('bensin') + getVal('ongkos') + getVal('parkir') + getVal('transportLain');
+    document.getElementById('totalTransport').value = formatRupiah(transport);
+    
+    // C. Kebutuhan
+    const kebutuhan = getVal('sabunMandi') + getVal('sabunCuci') + getVal('shampoo') + getVal('pastaGigi') + getVal('popok') + getVal('pembalut') + getVal('kebutuhanLain');
+    document.getElementById('totalKebutuhan').value = formatRupiah(kebutuhan);
+    
+    // D. Pendidikan
+    const pendidikan = getVal('spp') + getVal('les') + getVal('atk') + getVal('pendidikanLain');
+    document.getElementById('totalPendidikan').value = formatRupiah(pendidikan);
+    
+    // E. Kesehatan
+    const kesehatan = getVal('obat') + getVal('vitamin') + getVal('berobat') + getVal('kesehatanLain');
+    document.getElementById('totalKesehatan').value = formatRupiah(kesehatan);
+    
+    // F. Jasa
+    const jasa = getVal('potongRambut') + getVal('cuciPakaian') + getVal('penjahit') + getVal('jasaLain');
+    document.getElementById('totalJasa').value = formatRupiah(jasa);
+    
+    // G. Sosial
+    const sosial = getVal('iuranRT') + getVal('sumbangan') + getVal('paket') + getVal('sosialLain');
+    document.getElementById('totalSosial').value = formatRupiah(sosial);
+    
+    const total = tagihan + transport + kebutuhan + pendidikan + kesehatan + jasa + sosial;
     document.getElementById('totalBukanMakan').value = formatRupiah(total);
     updateRingkasan();
 }
 
-// 6. Total Pendidikan
-function hitungTotalPendidikan() {
-    const ids = ['spp','jajan','potongRambut','jahit','lainPendidikan'];
-    let total = 0;
-    ids.forEach(id => {
-        total += parseFloat(document.getElementById(id).value) || 0;
-    });
-    document.getElementById('totalPendidikan').value = formatRupiah(total);
+// 6. Pengeluaran Tahunan
+function hitungTotalTahunan() {
+    // A. Pakaian
+    const pakaian = getVal('bajuLebaran') + getVal('seragam') + getVal('sepatu') + getVal('tas') + getVal('pakaianLain');
+    document.getElementById('totalPakaian').value = formatRupiah(pakaian);
+    
+    // B. Kendaraan
+    const kendaraan = getVal('stnk') + getVal('pajakKendaraan') + getVal('servisBesar') + getVal('ban') + getVal('service') + getVal('kendaraanLain');
+    document.getElementById('totalKendaraan').value = formatRupiah(kendaraan);
+    
+    // C. Rumah
+    const rumah = getVal('pbb') + getVal('perbaikanRumah') + getVal('catRumah') + getVal('rumahLain');
+    document.getElementById('totalRumah').value = formatRupiah(rumah);
+    
+    // D. Pendidikan Tahunan
+    const pendTahunan = getVal('daftarUlang') + getVal('uangGedung') + getVal('bukuPaket') + getVal('pendidikanTahunanLain');
+    document.getElementById('totalPendidikanTahunan').value = formatRupiah(pendTahunan);
+    
+    // E. Acara Khusus
+    const acara = getVal('hajatan') + getVal('khitanan') + getVal('pernikahan') + getVal('hariBesar') + getVal('acaraLain');
+    document.getElementById('totalAcara').value = formatRupiah(acara);
+    
+    const total = pakaian + kendaraan + rumah + pendTahunan + acara;
+    document.getElementById('totalTahunan').value = formatRupiah(total);
     updateRingkasan();
 }
 
-// 7. Total Tahunan
-function hitungTotalTahunan() {
-    const ids = ['beliBaju','seragam','pajakSTNK','pajakSPPT','service','perbaikan','buku','hajatan','iuran','lainTahunan'];
-    let total = 0;
-    ids.forEach(id => {
-        total += parseFloat(document.getElementById(id).value) || 0;
-    });
-    document.getElementById('totalTahunan').value = formatRupiah(total);
-}
-
-// 8. Ringkasan
+// 7. Ringkasan
 function updateRingkasan() {
+    // Makanan per bulan
+    const makanStr = document.getElementById('totalMakanBulanAll').value.replace(/[^0-9\-]/g,'') || '0';
+    const makan = parseFloat(makanStr) || 0;
+    
+    // Bukan makanan
+    const bukanMakanStr = document.getElementById('totalBukanMakan').value.replace(/[^0-9\-]/g,'') || '0';
+    const bukanMakan = parseFloat(bukanMakanStr) || 0;
+    
+    // Tahunan
+    const tahunanStr = document.getElementById('totalTahunan').value.replace(/[^0-9\-]/g,'') || '0';
+    const tahunan = parseFloat(tahunanStr) || 0;
+    
+    // Pendapatan
     const pendapatanStr = document.getElementById('totalPendapatanKeluarga').value.replace(/[^0-9\-]/g,'') || '0';
     const pendapatan = parseFloat(pendapatanStr) || 0;
     
     const keuntunganStr = document.getElementById('keuntunganUsaha').value.replace(/[^0-9\-]/g,'') || '0';
     const keuntungan = parseFloat(keuntunganStr) || 0;
     
-    const makanStr = document.getElementById('totalMakanBulan').value.replace(/[^0-9\-]/g,'') || '0';
-    const makan = parseFloat(makanStr) || 0;
+    // Ringkasan pengeluaran
+    document.getElementById('ringkasanMakan').value = formatRupiah(makan);
+    document.getElementById('ringkasanBukanMakan').value = formatRupiah(bukanMakan);
+    document.getElementById('ringkasanTahunan').value = formatRupiah(tahunan);
+    const totalTahunan = makan + (bukanMakan * 12) + tahunan;
+    document.getElementById('ringkasanTotalTahunan').value = formatRupiah(totalTahunan);
     
-    const bukanMakanStr = document.getElementById('totalBukanMakan').value.replace(/[^0-9\-]/g,'') || '0';
-    const bukanMakan = parseFloat(bukanMakanStr) || 0;
-    
-    const pendidikanStr = document.getElementById('totalPendidikan').value.replace(/[^0-9\-]/g,'') || '0';
-    const pendidikan = parseFloat(pendidikanStr) || 0;
-
-    const totalPengeluaran = makan + bukanMakan + pendidikan;
+    // Ringkasan ekonomi
     const totalPendapatan = pendapatan + keuntungan;
-
+    const totalPengeluaranBulanan = makan + bukanMakan;
     document.getElementById('ringkasanPendapatan').value = formatRupiah(totalPendapatan);
     document.getElementById('ringkasanKeuntungan').value = formatRupiah(keuntungan);
-    document.getElementById('ringkasanPengeluaran').value = formatRupiah(totalPengeluaran);
-    document.getElementById('ringkasanSelisih').value = formatRupiah(totalPendapatan - totalPengeluaran);
+    document.getElementById('ringkasanPengeluaran').value = formatRupiah(totalPengeluaranBulanan);
+    document.getElementById('ringkasanSelisih').value = formatRupiah(totalPendapatan - totalPengeluaranBulanan);
 }
 
-// ================================================================
-// UTILITY
-// ================================================================
+// Helper
+function getValFromText(id) {
+    const val = document.getElementById(id)?.value.replace(/[^0-9\-]/g,'') || '0';
+    return parseFloat(val) || 0;
+}
+
 function formatRupiah(angka) {
     if (angka < 0) return '- Rp ' + Math.abs(angka).toLocaleString('id-ID');
     return 'Rp ' + angka.toLocaleString('id-ID');
@@ -1010,231 +1056,79 @@ function formatRupiah(angka) {
 // KIRIM KE WHATSAPP
 // ================================================================
 function kirimWhatsApp() {
-    // Kumpulkan semua data
-    const noBangunan = document.getElementById('noBangunan').value || '-';
-    const noUrutKK = document.getElementById('noUrutKK').value || '-';
-    const namaKepala = document.getElementById('namaKepala').value || '-';
-    const jmlPenghuni = document.getElementById('jmlPenghuni').value || '-';
-    const noKK = document.getElementById('noKK').value || '-';
-
-    // Data pekerjaan
-    let dataPekerjaanText = '';
-    const rows = document.querySelectorAll('#tbodyPekerjaan tr');
-    rows.forEach((row, index) => {
-        const nama = row.querySelector('.namaPekerja')?.value || '-';
-        const pekerjaanSelect = row.querySelector('.pekerjaanSelect');
-        const pekerjaan = pekerjaanSelect ? pekerjaanSelect.value : '-';
-        const gaji = row.querySelector('.gajiPekerja')?.value || '0';
-        const ijazah = row.querySelector('.ijazahSelect')?.value || '-';
-        dataPekerjaanText += `${index+1}. ${nama} - ${pekerjaan} - Rp${parseInt(gaji).toLocaleString()} - ${ijazah}\n`;
-    });
-
-    // Data usaha
-    const jenisUsaha = document.getElementById('jenisUsaha').value || '-';
-    const jenisBarang = document.getElementById('jenisBarang').value || '-';
-    const tahunMulai = document.getElementById('tahunMulai').value || '-';
-    const nib = document.getElementById('nib').value || '-';
-    const alamatUsaha = document.getElementById('alamatUsaha').value || '-';
-
-    // Pengeluaran usaha
-    let pengeluaranText = '';
-    const pengeluaranItems = document.querySelectorAll('#containerPengeluaranUsaha .form-group');
-    pengeluaranItems.forEach(item => {
-        const nama = item.querySelector('.namaPengeluaran')?.value || '-';
-        const nilai = item.querySelector('.nilaiPengeluaran')?.value || '0';
-        const periode = item.querySelector('.periodePengeluaran')?.value || 'bulanan';
-        pengeluaranText += `- ${nama}: Rp${parseInt(nilai).toLocaleString()} (${periode})\n`;
-    });
-
-    // Pendapatan usaha
-    const penjualan = document.getElementById('penjualan').value || '0';
-    const pendLain = document.getElementById('pendapatanLain').value || '0';
-    let pendLainText = '';
-    const pendLainItems = document.querySelectorAll('#containerPendapatanLain .form-group');
-    pendLainItems.forEach(item => {
-        const sumber = item.querySelector('.sumberPendapatanLain')?.value || '-';
-        const nilai = item.querySelector('.nilaiPendapatanLain')?.value || '0';
-        pendLainText += `- ${sumber}: Rp${parseInt(nilai).toLocaleString()}\n`;
-    });
-
-    // Aset usaha
-    const asetTanah = document.getElementById('asetTanah').value || '0';
-    const asetLain = document.getElementById('asetLain').value || '0';
-    const totalAset = document.getElementById('totalAset').value || 'Rp 0';
-    const luasUsaha = document.getElementById('luasUsaha').value || '-';
-
-    // Pengeluaran keluarga
-    const beras = document.getElementById('beras').value || '0';
-    const sayuran = document.getElementById('sayuran').value || '0';
-    const lauk = document.getElementById('lauk').value || '0';
-    const minyak = document.getElementById('minyak').value || '0';
-    const airGalon = document.getElementById('airGalon').value || '0';
-    const totalMakan = document.getElementById('totalMakanBulan').value || 'Rp 0';
-
-    // Bukan makan
-    const listrik = document.getElementById('listrik').value || '0';
-    const internet = document.getElementById('internet').value || '0';
-    const airPAM = document.getElementById('airPAM').value || '0';
-    const lpg = document.getElementById('lpg').value || '0';
-    const totalBukanMakan = document.getElementById('totalBukanMakan').value || 'Rp 0';
-
-    // Pendidikan
-    const spp = document.getElementById('spp').value || '0';
-    const jajan = document.getElementById('jajan').value || '0';
-    const totalPendidikan = document.getElementById('totalPendidikan').value || 'Rp 0';
-
-    // Tahunan
-    const totalTahunan = document.getElementById('totalTahunan').value || 'Rp 0';
-
-    // Aset rumah
-    const luasBangunan = document.getElementById('luasBangunan').value || '-';
-    const luasTanah = document.getElementById('luasTanah').value || '-';
-    const jmlMotor = document.getElementById('jmlMotor').value || '0';
-    const jmlMobil = document.getElementById('jmlMobil').value || '0';
-    const jmlEmas = document.getElementById('jmlEmas').value || '-';
-    const riwayatPenyakit = document.getElementById('riwayatPenyakit').value || '-';
-    const disabilitas = document.getElementById('disabilitas').value || '-';
-
-    // Ringkasan
-    const totalPendapatan = document.getElementById('ringkasanPendapatan').value || 'Rp 0';
-    const keuntungan = document.getElementById('ringkasanKeuntungan').value || 'Rp 0';
-    const totalPengeluaran = document.getElementById('ringkasanPengeluaran').value || 'Rp 0';
-    const selisih = document.getElementById('ringkasanSelisih').value || 'Rp 0';
-
-    // Buat pesan WhatsApp
+    const data = {
+        noBangunan: document.getElementById('noBangunan').value || '-',
+        noUrutKK: document.getElementById('noUrutKK').value || '-',
+        namaKepala: document.getElementById('namaKepala').value || '-',
+        jmlPenghuni: document.getElementById('jmlPenghuni').value || '-',
+        noKK: document.getElementById('noKK').value || '-',
+        totalPendapatan: document.getElementById('totalPendapatanKeluarga').value || 'Rp 0',
+        keuntungan: document.getElementById('keuntunganUsaha').value || 'Rp 0',
+        totalMakan: document.getElementById('totalMakanBulanAll').value || 'Rp 0',
+        totalBukanMakan: document.getElementById('totalBukanMakan').value || 'Rp 0',
+        totalTahunan: document.getElementById('totalTahunan').value || 'Rp 0',
+        ringkasanTotal: document.getElementById('ringkasanTotalTahunan').value || 'Rp 0',
+        selisih: document.getElementById('ringkasanSelisih').value || 'Rp 0'
+    };
+    
     const pesan = `
 📋 *KUESIONER KELUARGA*
 ━━━━━━━━━━━━━━━━━━━
 
 🏠 *IDENTITAS KELUARGA*
-No Bangunan: ${noBangunan}
-No Urut KK: ${noUrutKK}
-Nama Kepala Keluarga: ${namaKepala}
-Jumlah Penghuni: ${jmlPenghuni}
-No KK: ${noKK}
+No Bangunan: ${data.noBangunan}
+No Urut KK: ${data.noUrutKK}
+Nama Kepala Keluarga: ${data.namaKepala}
+Jumlah Penghuni: ${data.jmlPenghuni}
+No KK: ${data.noKK}
 
-👨‍👩‍👧‍👦 *PEKERJAAN & PENDAPATAN*
-${dataPekerjaanText}
-Total Pendapatan Keluarga: ${document.getElementById('totalPendapatanKeluarga').value || 'Rp 0'}
-
-🏪 *RINCIAN USAHA*
-Jenis Usaha: ${jenisUsaha}
-Jenis Barang: ${jenisBarang}
-Tahun Mulai: ${tahunMulai}
-NIB: ${nib}
-Alamat: ${alamatUsaha}
-
-📊 *PENGELUARAN USAHA*
-${pengeluaranText}
-Total Pengeluaran Usaha: ${document.getElementById('totalPengeluaranUsaha').value || 'Rp 0'}
-
-💰 *PENDAPATAN USAHA*
-Penjualan/Jasa: Rp${parseInt(penjualan).toLocaleString()}
-Pendapatan Lain: Rp${parseInt(pendLain).toLocaleString()}
-${pendLainText}
-Total Pendapatan Usaha: ${document.getElementById('totalPendapatanUsaha').value || 'Rp 0'}
-
-📈 *KEUNTUNGAN USAHA*
-Keuntungan Bersih: ${document.getElementById('keuntunganUsaha').value || 'Rp 0'}
-
-🏗️ *ASET USAHA*
-Nilai Tanah & Bangunan: Rp${parseInt(asetTanah).toLocaleString()}
-Nilai Aset Lain: Rp${parseInt(asetLain).toLocaleString()}
-Total Aset: ${totalAset}
-Luas Usaha: ${luasUsaha} m²
+💰 *PENDAPATAN*
+Total Pendapatan Keluarga: ${data.totalPendapatan}
+Keuntungan Usaha: ${data.keuntungan}
 
 🍚 *PENGELUARAN MAKANAN*
-Beras (per hari): Rp${parseInt(beras).toLocaleString()}
-Sayuran (per hari): Rp${parseInt(sayuran).toLocaleString()}
-Lauk (per hari): Rp${parseInt(lauk).toLocaleString()}
-Minyak (per minggu): Rp${parseInt(minyak).toLocaleString()}
-Air Galon (per bulan): Rp${parseInt(airGalon).toLocaleString()}
-Total Makanan per Bulan: ${totalMakan}
+Total per Bulan: ${data.totalMakan}
 
-⚡ *PENGELUARAN BUKAN MAKAN*
-Listrik: Rp${parseInt(listrik).toLocaleString()}
-Internet: Rp${parseInt(internet).toLocaleString()}
-Air PAM: Rp${parseInt(airPAM).toLocaleString()}
-LPG/Gas: Rp${parseInt(lpg).toLocaleString()}
-Total Bukan Makan: ${totalBukanMakan}
-
-📚 *PENDIDIKAN & JASA*
-SPP: Rp${parseInt(spp).toLocaleString()}
-Uang Jajan: Rp${parseInt(jajan).toLocaleString()}
-Total Pendidikan: ${totalPendidikan}
+🏪 *PENGELUARAN BUKAN MAKANAN*
+Total per Bulan: ${data.totalBukanMakan}
 
 📅 *PENGELUARAN TAHUNAN*
-Total Tahunan: ${totalTahunan}
+Total: ${data.totalTahunan}
 
-🏡 *ASET & KONDISI RUMAH*
-Luas Bangunan: ${luasBangunan} m²
-Luas Tanah: ${luasTanah} m²
-Jumlah Motor: ${jmlMotor}
-Jumlah Mobil: ${jmlMobil}
-Jumlah Emas: ${jmlEmas}
-Riwayat Penyakit: ${riwayatPenyakit}
-Disabilitas: ${disabilitas}
-
-📊 *RINGKASAN EKONOMI*
-Total Pendapatan: ${totalPendapatan}
-Keuntungan Usaha: ${keuntungan}
-Total Pengeluaran: ${totalPengeluaran}
-Selisih: ${selisih}
+📊 *RINGKASAN*
+Total Pengeluaran Tahunan: ${data.ringkasanTotal}
+Selisih Pendapatan - Pengeluaran: ${data.selisih}
 
 ━━━━━━━━━━━━━━━━━━━
 *Data dikirim dari Kuesioner Keluarga*
     `;
-
-    // Encode pesan untuk URL
-    const encodedPesan = encodeURIComponent(pesan);
-    const waUrl = `https://api.whatsapp.com/send?text=${encodedPesan}`;
     
-    // Buka WhatsApp
-    window.open(waUrl, '_blank');
+    const encoded = encodeURIComponent(pesan);
+    window.open(`https://api.whatsapp.com/send?text=${encoded}`, '_blank');
 }
 
-// ================================================================
-// SIMPAN (Simulasi)
-// ================================================================
 function simpanKuesioner() {
-    alert('✅ Data kuesioner berhasil disimpan (simulasi).\n\n' +
-          'Total Pendapatan Keluarga: ' + document.getElementById('totalPendapatanKeluarga').value + '\n' +
-          'Keuntungan Usaha: ' + document.getElementById('keuntunganUsaha').value + '\n' +
-          'Selisih: ' + document.getElementById('ringkasanSelisih').value);
+    alert('✅ Data kuesioner berhasil disimpan (simulasi).');
 }
 
 // ================================================================
-// INISIALISASI HALAMAN
+// INISIALISASI
 // ================================================================
 window.onload = function() {
-    // Tambahkan 2 baris pekerjaan default
+    // Tambah 2 baris pekerjaan
     tambahBarisPekerjaan();
     tambahBarisPekerjaan();
-    
-    // Tambahkan 3 pengeluaran usaha default
-    tambahPengeluaranUsaha();
-    tambahPengeluaranUsaha();
-    tambahPengeluaranUsaha();
-    
-    // Set default periode
-    document.querySelectorAll('.periodePengeluaran').forEach((sel, i) => {
-        const defaults = ['bulanan', 'mingguan', 'harian'];
-        if (i < defaults.length) sel.value = defaults[i];
-    });
-    
-    // Tambahkan 1 pendapatan lain default
-    tambahPendapatanLain();
     
     // Hitung semua
     hitungTotalPendapatan();
     hitungKeuntunganUsaha();
     hitungTotalAset();
     hitungTotalMakan();
+    hitungTotalMakanJadi();
     hitungTotalBukanMakan();
-    hitungTotalPendidikan();
     hitungTotalTahunan();
     updateRingkasan();
 };
 </script>
 </body>
-</html> 
+</html>
