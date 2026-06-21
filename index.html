@@ -312,6 +312,20 @@
             padding-bottom: 4px;
             margin-bottom: 8px;
         }
+        .periode-box {
+            background: #f8fafc;
+            border-radius: 8px;
+            padding: 8px 12px;
+            margin: 4px 0;
+        }
+        .periode-box .form-group label {
+            min-width: 100px;
+            font-size: 12px;
+        }
+        .periode-box .form-group input {
+            font-size: 13px;
+            padding: 6px 10px;
+        }
 
         @media (max-width: 820px) {
             .container { padding: 16px; }
@@ -401,7 +415,8 @@
     <h2>III. USAHA (KBLI)</h2>
     <div class="note">
         <strong>✏️ Isi untuk setiap usaha yang dijalankan keluarga.</strong>
-        Pilih jenis usaha dari daftar KBLI, detail pengeluaran dan pemasukan akan muncul otomatis.
+        Pilih jenis usaha dari daftar KBLI, lalu isi pemasukan dan pengeluaran <strong>per HARI</strong>.
+        Sistem akan otomatis menghitung per Minggu, Bulan, dan Tahun.
     </div>
 
     <div id="containerUsaha">
@@ -418,7 +433,7 @@
     <h3>PENGELUARAN MAKANAN</h3>
     <div class="sub-section">
         <div class="section-box">
-            <h5>A. BELANJA BAHAN MAKANAN (Per Minggu)</h5>
+            <h5>A. BELANJA BAHAN MAKANAN (Per Hari)</h5>
             <div class="grid-2">
                 <div class="form-group"><label>1. Beras</label><input type="number" placeholder="0" id="beras" oninput="hitungTotalMakan()" /></div>
                 <div class="form-group"><label>2. Minyak Goreng</label><input type="number" placeholder="0" id="minyakGoreng" oninput="hitungTotalMakan()" /></div>
@@ -439,15 +454,15 @@
             </div>
             <div class="total-box">
                 <div class="grid-3">
-                    <div class="form-group"><label><strong>TOTAL A. (per Minggu)</strong></label><input type="text" id="totalBelanjaMakanan" readonly placeholder="Rp 0" /></div>
-                    <div class="form-group"><label><strong>Total per Minggu</strong></label><input type="text" id="totalMakanMinggu" readonly placeholder="Rp 0" /></div>
-                    <div class="form-group"><label><strong>Total per Bulan (×4)</strong></label><input type="text" id="totalMakanBulan" readonly placeholder="Rp 0" /></div>
+                    <div class="form-group"><label><strong>TOTAL per Hari</strong></label><input type="text" id="totalBelanjaMakanan" readonly placeholder="Rp 0" /></div>
+                    <div class="form-group"><label><strong>Total per Minggu (×7)</strong></label><input type="text" id="totalMakanMinggu" readonly placeholder="Rp 0" /></div>
+                    <div class="form-group"><label><strong>Total per Bulan (×30)</strong></label><input type="text" id="totalMakanBulan" readonly placeholder="Rp 0" /></div>
                 </div>
             </div>
         </div>
 
         <div class="section-box">
-            <h5>B. MAKANAN & MINUMAN JADI (Per Minggu)</h5>
+            <h5>B. MAKANAN & MINUMAN JADI (Per Hari)</h5>
             <div class="grid-2">
                 <div class="form-group"><label>1. Nasi Bungkus</label><input type="number" placeholder="0" id="nasiBungkus" oninput="hitungTotalMakanJadi()" /></div>
                 <div class="form-group"><label>2. Warteg</label><input type="number" placeholder="0" id="warteg" oninput="hitungTotalMakanJadi()" /></div>
@@ -464,17 +479,18 @@
             </div>
             <div class="total-box">
                 <div class="grid-2">
-                    <div class="form-group"><label><strong>TOTAL B. (per Minggu)</strong></label><input type="text" id="totalMakanJadi" readonly placeholder="Rp 0" /></div>
-                    <div class="form-group"><label><strong>Total per Bulan (×4)</strong></label><input type="text" id="totalMakanJadiBulan" readonly placeholder="Rp 0" /></div>
+                    <div class="form-group"><label><strong>TOTAL per Hari</strong></label><input type="text" id="totalMakanJadi" readonly placeholder="Rp 0" /></div>
+                    <div class="form-group"><label><strong>Total per Bulan (×30)</strong></label><input type="text" id="totalMakanJadiBulan" readonly placeholder="Rp 0" /></div>
                 </div>
             </div>
         </div>
 
         <div class="section-box">
             <h5>C. CATATAN PENGELUARAN MAKANAN</h5>
-            <div class="grid-2">
-                <div class="form-group"><label><strong>Total Pengeluaran Makanan per Minggu</strong></label><input type="text" id="totalMakanMingguAll" readonly placeholder="Rp 0" /></div>
-                <div class="form-group"><label><strong>Total Pengeluaran Makanan per Bulan (±)</strong></label><input type="text" id="totalMakanBulanAll" readonly placeholder="Rp 0" style="font-weight:700; color:#075985;" /></div>
+            <div class="grid-3">
+                <div class="form-group"><label><strong>Total per Hari</strong></label><input type="text" id="totalMakanHariAll" readonly placeholder="Rp 0" /></div>
+                <div class="form-group"><label><strong>Total per Minggu</strong></label><input type="text" id="totalMakanMingguAll" readonly placeholder="Rp 0" /></div>
+                <div class="form-group"><label><strong>Total per Bulan (±)</strong></label><input type="text" id="totalMakanBulanAll" readonly placeholder="Rp 0" style="font-weight:700; color:#075985;" /></div>
             </div>
         </div>
     </div>
@@ -661,6 +677,7 @@
             <li>Jika ada kategori yang tidak ada pengeluarannya, tulis "0".</li>
             <li><strong>Pekerjaan</strong> diisi untuk yang bekerja sebagai pegawai/karyawan.</li>
             <li><strong>Usaha</strong> diisi untuk yang memiliki usaha sendiri, pilih dari daftar KBLI.</li>
+            <li><strong>Pemasukan dan Pengeluaran Usaha</strong> diisi per HARI, otomatis dihitung ke Minggu, Bulan, dan Tahun.</li>
         </ol>
     </div>
 
@@ -718,7 +735,6 @@ const dataPekerjaan = [
     { nama: "Manajer", kategori: "Profesional", gaji: 15000000 },
     { nama: "Direktur", kategori: "Profesional", gaji: 30000000 },
     { nama: "CEO", kategori: "Profesional", gaji: 50000000 },
-    
     // PENDIDIKAN
     { nama: "Guru SD", kategori: "Pendidikan", gaji: 4000000 },
     { nama: "Guru SMP", kategori: "Pendidikan", gaji: 4500000 },
@@ -727,7 +743,6 @@ const dataPekerjaan = [
     { nama: "Dosen", kategori: "Pendidikan", gaji: 8000000 },
     { nama: "Profesor", kategori: "Pendidikan", gaji: 15000000 },
     { nama: "Kepala Sekolah", kategori: "Pendidikan", gaji: 8000000 },
-    
     // TEKNOLOGI
     { nama: "Software Engineer", kategori: "Teknologi", gaji: 12000000 },
     { nama: "Web Developer", kategori: "Teknologi", gaji: 10000000 },
@@ -739,7 +754,6 @@ const dataPekerjaan = [
     { nama: "UI/UX Designer", kategori: "Teknologi", gaji: 10000000 },
     { nama: "Game Developer", kategori: "Teknologi", gaji: 12000000 },
     { nama: "AI Engineer", kategori: "Teknologi", gaji: 20000000 },
-    
     // KESEHATAN
     { nama: "Ahli Gizi", kategori: "Kesehatan", gaji: 6000000 },
     { nama: "Fisioterapis", kategori: "Kesehatan", gaji: 7000000 },
@@ -748,7 +762,6 @@ const dataPekerjaan = [
     { nama: "Terapis", kategori: "Kesehatan", gaji: 6000000 },
     { nama: "Radiografer", kategori: "Kesehatan", gaji: 8000000 },
     { nama: "Analis Kesehatan", kategori: "Kesehatan", gaji: 7000000 },
-    
     // KEUANGAN
     { nama: "Analis Keuangan", kategori: "Keuangan", gaji: 12000000 },
     { nama: "Bankir", kategori: "Keuangan", gaji: 10000000 },
@@ -757,7 +770,6 @@ const dataPekerjaan = [
     { nama: "Manajer Bank", kategori: "Keuangan", gaji: 20000000 },
     { nama: "Agen Asuransi", kategori: "Keuangan", gaji: 8000000 },
     { nama: "Broker Saham", kategori: "Keuangan", gaji: 15000000 },
-    
     // PEMERINTAHAN
     { nama: "PNS Golongan I", kategori: "Pemerintahan", gaji: 2500000 },
     { nama: "PNS Golongan II", kategori: "Pemerintahan", gaji: 3500000 },
@@ -768,8 +780,7 @@ const dataPekerjaan = [
     { nama: "Kepala Desa", kategori: "Pemerintahan", gaji: 4000000 },
     { nama: "Lurah", kategori: "Pemerintahan", gaji: 5000000 },
     { nama: "Camat", kategori: "Pemerintahan", gaji: 7000000 },
-    
-    // KONSTRUKSI & TEKNIK
+    // KONSTRUKSI
     { nama: "Arsitek", kategori: "Konstruksi", gaji: 10000000 },
     { nama: "Insinyur Sipil", kategori: "Konstruksi", gaji: 10000000 },
     { nama: "Insinyur Elektro", kategori: "Konstruksi", gaji: 10000000 },
@@ -780,7 +791,6 @@ const dataPekerjaan = [
     { nama: "Tukang Kayu", kategori: "Konstruksi", gaji: 4000000 },
     { nama: "Tukang Las", kategori: "Konstruksi", gaji: 4500000 },
     { nama: "Tukang Cat", kategori: "Konstruksi", gaji: 4000000 },
-    
     // TRANSPORTASI
     { nama: "Supir Bus", kategori: "Transportasi", gaji: 5000000 },
     { nama: "Supir Truk", kategori: "Transportasi", gaji: 6000000 },
@@ -791,14 +801,12 @@ const dataPekerjaan = [
     { nama: "Pramugari", kategori: "Transportasi", gaji: 12000000 },
     { nama: "Nakhoda Kapal", kategori: "Transportasi", gaji: 25000000 },
     { nama: "Pelaut", kategori: "Transportasi", gaji: 10000000 },
-    
     // PERTANIAN
     { nama: "Petani", kategori: "Pertanian", gaji: 3000000 },
     { nama: "Peternak", kategori: "Pertanian", gaji: 4000000 },
     { nama: "Nelayan", kategori: "Pertanian", gaji: 4000000 },
     { nama: "Perkebunan", kategori: "Pertanian", gaji: 3500000 },
     { nama: "Kehutanan", kategori: "Pertanian", gaji: 4000000 },
-    
     // PERDAGANGAN
     { nama: "Pedagang Kecil", kategori: "Perdagangan", gaji: 4000000 },
     { nama: "Pedagang Besar", kategori: "Perdagangan", gaji: 10000000 },
@@ -807,7 +815,6 @@ const dataPekerjaan = [
     { nama: "Eksportir", kategori: "Perdagangan", gaji: 15000000 },
     { nama: "Importir", kategori: "Perdagangan", gaji: 15000000 },
     { nama: "Distributor", kategori: "Perdagangan", gaji: 10000000 },
-    
     // JASA
     { nama: "Pramusaji", kategori: "Jasa", gaji: 3000000 },
     { nama: "Koki", kategori: "Jasa", gaji: 5000000 },
@@ -818,7 +825,6 @@ const dataPekerjaan = [
     { nama: "Satpam", kategori: "Jasa", gaji: 3500000 },
     { nama: "OB", kategori: "Jasa", gaji: 3000000 },
     { nama: "Pramuwisma", kategori: "Jasa", gaji: 3000000 },
-    
     // KREATIF
     { nama: "Desainer Grafis", kategori: "Kreatif", gaji: 7000000 },
     { nama: "Fotografer", kategori: "Kreatif", gaji: 6000000 },
@@ -833,7 +839,6 @@ const dataPekerjaan = [
     { nama: "Seniman", kategori: "Kreatif", gaji: 5000000 },
     { nama: "Musisi", kategori: "Kreatif", gaji: 6000000 },
     { nama: "Aktor", kategori: "Kreatif", gaji: 10000000 },
-    
     // LAINNYA
     { nama: "Ibu Rumah Tangga", kategori: "Lainnya", gaji: 0 },
     { nama: "Mahasiswa", kategori: "Lainnya", gaji: 0 },
@@ -1247,25 +1252,45 @@ function tambahUsaha() {
             <input type="text" class="nibUsaha" placeholder="Nomor Induk Berusaha" style="flex:1;" />
         </div>
         
+        <!-- PEMASUKAN per HARI -->
         <div style="border-top:1px solid #e2e8f0; margin:12px 0; padding-top:12px;">
-            <h5>📊 PEMASUKAN USAHA (per Bulan)</h5>
+            <h5>📊 PEMASUKAN USAHA (per HARI)</h5>
             <div class="pemasukanContainer">
                 <!-- Akan diisi oleh JavaScript -->
             </div>
-        </div>
-
-        <div style="border-top:1px solid #e2e8f0; margin:12px 0; padding-top:12px;">
-            <h5>💸 PENGELUARAN USAHA (per Bulan)</h5>
-            <div class="pengeluaranContainer">
-                <!-- Akan diisi oleh JavaScript -->
+            <div class="total-box" style="margin-top:8px; background:#d1fae5; border-left-color:#0b7e3d;">
+                <div class="grid-4">
+                    <div class="form-group"><label><strong>Total per Hari</strong></label><input type="text" class="totalPemasukanHari" readonly placeholder="Rp 0" style="font-weight:600;" /></div>
+                    <div class="form-group"><label><strong>Total per Minggu (×7)</strong></label><input type="text" class="totalPemasukanMinggu" readonly placeholder="Rp 0" style="font-weight:600;" /></div>
+                    <div class="form-group"><label><strong>Total per Bulan (×30)</strong></label><input type="text" class="totalPemasukanBulan" readonly placeholder="Rp 0" style="font-weight:600; color:#075985;" /></div>
+                    <div class="form-group"><label><strong>Total per Tahun (×365)</strong></label><input type="text" class="totalPemasukanTahun" readonly placeholder="Rp 0" style="font-weight:600; color:#075985;" /></div>
+                </div>
             </div>
         </div>
 
-        <div class="total-box" style="margin-top:10px;">
-            <div class="grid-2">
-                <div class="form-group"><label><strong>Total Pemasukan / Bulan</strong></label><input type="text" class="totalPemasukanUsaha" readonly placeholder="Rp 0" style="font-weight:700; color:#075985;" /></div>
-                <div class="form-group"><label><strong>Total Pengeluaran / Bulan</strong></label><input type="text" class="totalPengeluaranUsaha" readonly placeholder="Rp 0" style="font-weight:700; color:#dc2626;" /></div>
-                <div class="form-group"><label><strong>Keuntungan Usaha / Bulan</strong></label><input type="text" class="keuntunganUsaha" readonly placeholder="Rp 0" style="font-weight:700; color:#075985; font-size:16px;" /></div>
+        <!-- PENGELUARAN per HARI -->
+        <div style="border-top:1px solid #e2e8f0; margin:12px 0; padding-top:12px;">
+            <h5>💸 PENGELUARAN USAHA (per HARI)</h5>
+            <div class="pengeluaranContainer">
+                <!-- Akan diisi oleh JavaScript -->
+            </div>
+            <div class="total-box" style="margin-top:8px; background:#fee2e2; border-left-color:#dc2626;">
+                <div class="grid-4">
+                    <div class="form-group"><label><strong>Total per Hari</strong></label><input type="text" class="totalPengeluaranHari" readonly placeholder="Rp 0" style="font-weight:600;" /></div>
+                    <div class="form-group"><label><strong>Total per Minggu (×7)</strong></label><input type="text" class="totalPengeluaranMinggu" readonly placeholder="Rp 0" style="font-weight:600;" /></div>
+                    <div class="form-group"><label><strong>Total per Bulan (×30)</strong></label><input type="text" class="totalPengeluaranBulan" readonly placeholder="Rp 0" style="font-weight:600; color:#dc2626;" /></div>
+                    <div class="form-group"><label><strong>Total per Tahun (×365)</strong></label><input type="text" class="totalPengeluaranTahun" readonly placeholder="Rp 0" style="font-weight:600; color:#dc2626;" /></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- KEUNTUNGAN -->
+        <div class="total-box" style="background:#dbeafe; border-left-color:#2563eb; margin-top:10px;">
+            <div class="grid-4">
+                <div class="form-group"><label><strong>Keuntungan per Hari</strong></label><input type="text" class="keuntunganHari" readonly placeholder="Rp 0" style="font-weight:700; color:#075985;" /></div>
+                <div class="form-group"><label><strong>Keuntungan per Minggu</strong></label><input type="text" class="keuntunganMinggu" readonly placeholder="Rp 0" style="font-weight:700; color:#075985;" /></div>
+                <div class="form-group"><label><strong>Keuntungan per Bulan</strong></label><input type="text" class="keuntunganBulan" readonly placeholder="Rp 0" style="font-weight:700; color:#075985; font-size:16px;" /></div>
+                <div class="form-group"><label><strong>Keuntungan per Tahun</strong></label><input type="text" class="keuntunganTahun" readonly placeholder="Rp 0" style="font-weight:700; color:#075985; font-size:16px;" /></div>
             </div>
         </div>
     `;
@@ -1307,7 +1332,7 @@ function pilihJenisUsaha(select) {
             divItem.className = 'form-group';
             divItem.style.cssText = 'background:#f0fdf4; padding:4px 10px; border-radius:6px; margin-bottom:4px;';
             divItem.innerHTML = `
-                <label style="min-width:120px; font-size:13px;">${item}</label>
+                <label style="min-width:140px; font-size:13px;">${item}</label>
                 <input type="number" placeholder="0" class="pemasukanItem" oninput="hitungUsaha(this)" style="flex:1;" />
             `;
             pemasukanContainer.appendChild(divItem);
@@ -1320,7 +1345,7 @@ function pilihJenisUsaha(select) {
             divItem.className = 'form-group';
             divItem.style.cssText = 'background:#fef2f2; padding:4px 10px; border-radius:6px; margin-bottom:4px;';
             divItem.innerHTML = `
-                <label style="min-width:120px; font-size:13px;">${item}</label>
+                <label style="min-width:140px; font-size:13px;">${item}</label>
                 <input type="number" placeholder="0" class="pengeluaranItem" oninput="hitungUsaha(this)" style="flex:1;" />
             `;
             pengeluaranContainer.appendChild(divItem);
@@ -1332,22 +1357,45 @@ function pilihJenisUsaha(select) {
 
 function hitungUsaha(element) {
     const div = element.closest('.usaha-detail');
+    
+    // Hitung Pemasukan
     const pemasukanInputs = div.querySelectorAll('.pemasukanItem');
+    let totalPemHari = 0;
+    pemasukanInputs.forEach(inp => totalPemHari += parseFloat(inp.value) || 0);
+    
+    const totalPemMinggu = totalPemHari * 7;
+    const totalPemBulan = totalPemHari * 30;
+    const totalPemTahun = totalPemHari * 365;
+    
+    div.querySelector('.totalPemasukanHari').value = formatRupiah(totalPemHari);
+    div.querySelector('.totalPemasukanMinggu').value = formatRupiah(totalPemMinggu);
+    div.querySelector('.totalPemasukanBulan').value = formatRupiah(totalPemBulan);
+    div.querySelector('.totalPemasukanTahun').value = formatRupiah(totalPemTahun);
+    
+    // Hitung Pengeluaran
     const pengeluaranInputs = div.querySelectorAll('.pengeluaranItem');
-    const totalPemasukan = div.querySelector('.totalPemasukanUsaha');
-    const totalPengeluaran = div.querySelector('.totalPengeluaranUsaha');
-    const keuntungan = div.querySelector('.keuntunganUsaha');
+    let totalPengHari = 0;
+    pengeluaranInputs.forEach(inp => totalPengHari += parseFloat(inp.value) || 0);
     
-    let totalPem = 0;
-    pemasukanInputs.forEach(inp => totalPem += parseFloat(inp.value) || 0);
-    totalPemasukan.value = formatRupiah(totalPem);
+    const totalPengMinggu = totalPengHari * 7;
+    const totalPengBulan = totalPengHari * 30;
+    const totalPengTahun = totalPengHari * 365;
     
-    let totalPeng = 0;
-    pengeluaranInputs.forEach(inp => totalPeng += parseFloat(inp.value) || 0);
-    totalPengeluaran.value = formatRupiah(totalPeng);
+    div.querySelector('.totalPengeluaranHari').value = formatRupiah(totalPengHari);
+    div.querySelector('.totalPengeluaranMinggu').value = formatRupiah(totalPengMinggu);
+    div.querySelector('.totalPengeluaranBulan').value = formatRupiah(totalPengBulan);
+    div.querySelector('.totalPengeluaranTahun').value = formatRupiah(totalPengTahun);
     
-    const laba = totalPem - totalPeng;
-    keuntungan.value = formatRupiah(laba);
+    // Hitung Keuntungan
+    const labaHari = totalPemHari - totalPengHari;
+    const labaMinggu = labaHari * 7;
+    const labaBulan = labaHari * 30;
+    const labaTahun = labaHari * 365;
+    
+    div.querySelector('.keuntunganHari').value = formatRupiah(labaHari);
+    div.querySelector('.keuntunganMinggu').value = formatRupiah(labaMinggu);
+    div.querySelector('.keuntunganBulan').value = formatRupiah(labaBulan);
+    div.querySelector('.keuntunganTahun').value = formatRupiah(labaTahun);
     
     updateRingkasan();
 }
@@ -1358,7 +1406,7 @@ function hitungUsaha(element) {
 
 function getVal(id) { return parseFloat(document.getElementById(id)?.value) || 0; }
 
-// Total Makanan
+// Total Makanan (per Hari)
 function hitungTotalMakan() {
     const items = ['beras','minyakGoreng','gulaGaram','telur','dagingAyam','dagingSapi',
                    'ikan','tahuTempe','sayuran','buah','susu','mieInstan','kopiTeh','bumbu','airMinum'];
@@ -1366,8 +1414,8 @@ function hitungTotalMakan() {
     items.forEach(id => total += getVal(id));
     total += getVal('makanLain');
     document.getElementById('totalBelanjaMakanan').value = formatRupiah(total);
-    document.getElementById('totalMakanMinggu').value = formatRupiah(total);
-    document.getElementById('totalMakanBulan').value = formatRupiah(total * 4);
+    document.getElementById('totalMakanMinggu').value = formatRupiah(total * 7);
+    document.getElementById('totalMakanBulan').value = formatRupiah(total * 30);
     hitungTotalMakanJadi();
 }
 
@@ -1377,12 +1425,13 @@ function hitungTotalMakanJadi() {
     items.forEach(id => total += getVal(id));
     total += getVal('makanJadiLain');
     document.getElementById('totalMakanJadi').value = formatRupiah(total);
-    document.getElementById('totalMakanJadiBulan').value = formatRupiah(total * 4);
+    document.getElementById('totalMakanJadiBulan').value = formatRupiah(total * 30);
     
     const belanja = parseFloat(document.getElementById('totalBelanjaMakanan').value.replace(/[^0-9\-]/g,'')) || 0;
-    const totalMinggu = belanja + total;
-    document.getElementById('totalMakanMingguAll').value = formatRupiah(totalMinggu);
-    document.getElementById('totalMakanBulanAll').value = formatRupiah(totalMinggu * 4);
+    const totalHari = belanja + total;
+    document.getElementById('totalMakanHariAll').value = formatRupiah(totalHari);
+    document.getElementById('totalMakanMingguAll').value = formatRupiah(totalHari * 7);
+    document.getElementById('totalMakanBulanAll').value = formatRupiah(totalHari * 30);
     updateRingkasan();
 }
 
@@ -1441,9 +1490,9 @@ function updateRingkasan() {
     // Pendapatan dari pekerjaan
     const pendapatanPekerjaan = parseFloat(document.getElementById('totalPendapatanPekerjaan').value.replace(/[^0-9\-]/g,'')) || 0;
     
-    // Total keuntungan dari semua usaha
+    // Total keuntungan dari semua usaha (per Bulan)
     let totalKeuntunganUsaha = 0;
-    document.querySelectorAll('.keuntunganUsaha').forEach(inp => {
+    document.querySelectorAll('.keuntunganBulan').forEach(inp => {
         const val = parseFloat(inp.value.replace(/[^0-9\-]/g,'')) || 0;
         totalKeuntunganUsaha += val;
     });
@@ -1508,37 +1557,51 @@ function kirimWhatsApp() {
         const jenis = div.querySelector('.jenisUsahaSelect')?.value || '-';
         const kbli = div.querySelector('.kbliUsaha')?.value || '-';
         const kategori = div.querySelector('.kategoriUsaha')?.value || '-';
-        const keuntungan = div.querySelector('.keuntunganUsaha')?.value || 'Rp 0';
+        const keuntunganHari = div.querySelector('.keuntunganHari')?.value || 'Rp 0';
+        const keuntunganMinggu = div.querySelector('.keuntunganMinggu')?.value || 'Rp 0';
+        const keuntunganBulan = div.querySelector('.keuntunganBulan')?.value || 'Rp 0';
+        const keuntunganTahun = div.querySelector('.keuntunganTahun')?.value || 'Rp 0';
+        
         pesan += `\n📌 Usaha #${i+1}\n`;
         pesan += `Jenis: ${jenis} (KBLI: ${kbli}) - ${kategori}\n`;
-        pesan += `Keuntungan: ${keuntungan}\n`;
+        pesan += `Keuntungan:\n`;
+        pesan += `  - per Hari: ${keuntunganHari}\n`;
+        pesan += `  - per Minggu: ${keuntunganMinggu}\n`;
+        pesan += `  - per Bulan: ${keuntunganBulan}\n`;
+        pesan += `  - per Tahun: ${keuntunganTahun}\n`;
         
         // Pemasukan
         const pemasukanItems = div.querySelectorAll('.pemasukanItem');
         if (pemasukanItems.length > 0) {
-            pesan += `Pemasukan:\n`;
+            pesan += `Pemasukan (per Hari):\n`;
             const labels = div.querySelectorAll('.pemasukanContainer .form-group label');
             pemasukanItems.forEach((inp, j) => {
                 const label = labels[j]?.textContent || '-';
                 pesan += `  - ${label}: Rp${parseInt(inp.value || 0).toLocaleString()}\n`;
             });
+            const totalPem = div.querySelector('.totalPemasukanHari')?.value || 'Rp 0';
+            pesan += `  Total Pemasukan per Hari: ${totalPem}\n`;
         }
         
         // Pengeluaran
         const pengeluaranItems = div.querySelectorAll('.pengeluaranItem');
         if (pengeluaranItems.length > 0) {
-            pesan += `Pengeluaran:\n`;
+            pesan += `Pengeluaran (per Hari):\n`;
             const labels = div.querySelectorAll('.pengeluaranContainer .form-group label');
             pengeluaranItems.forEach((inp, j) => {
                 const label = labels[j]?.textContent || '-';
                 pesan += `  - ${label}: Rp${parseInt(inp.value || 0).toLocaleString()}\n`;
             });
+            const totalPeng = div.querySelector('.totalPengeluaranHari')?.value || 'Rp 0';
+            pesan += `  Total Pengeluaran per Hari: ${totalPeng}\n`;
         }
     });
     pesan += `\n`;
     
     // Pengeluaran Keluarga
     pesan += `🍚 *PENGELUARAN MAKANAN*\n`;
+    pesan += `Total per Hari: ${document.getElementById('totalMakanHariAll').value || 'Rp 0'}\n`;
+    pesan += `Total per Minggu: ${document.getElementById('totalMakanMingguAll').value || 'Rp 0'}\n`;
     pesan += `Total per Bulan: ${document.getElementById('totalMakanBulanAll').value || 'Rp 0'}\n\n`;
     
     pesan += `🏪 *PENGELUARAN BUKAN MAKANAN*\n`;
