@@ -464,9 +464,9 @@
     <h2>III. USAHA (KBLI) - Dengan Periode Fleksibel</h2>
     <div class="note">
         <strong>✏️ Isi untuk setiap usaha yang dijalankan keluarga.</strong>
-        Pilih jenis usaha dari daftar KBLI, lalu isi pemasukan dan pengeluaran dengan periode yang sesuai
-        <strong>(Harian, Mingguan, Bulanan, atau Tahunan)</strong>.
-        <br>📌 Sistem akan otomatis mengkonversi semua ke <strong>Bulanan</strong> dan <strong>Tahunan</strong>.
+        Pilih jenis usaha dari daftar KBLI, <strong>sistem akan otomatis menampilkan</strong>
+        daftar pemasukan dan pengeluaran yang relevan dengan usaha tersebut.
+        <br>📌 Setiap item bisa memilih periode <strong>(Harian, Mingguan, Bulanan, atau Tahunan)</strong>.
     </div>
 
     <div id="containerUsaha">
@@ -707,6 +707,7 @@
             <li>Jika ada kategori yang tidak ada pengeluarannya, tulis "0".</li>
             <li><strong>Pekerjaan</strong> diisi untuk yang bekerja sebagai pegawai/karyawan.</li>
             <li><strong>Usaha</strong> diisi untuk yang memiliki usaha sendiri, pilih dari daftar KBLI.</li>
+            <li>Setelah memilih jenis usaha, <strong>daftar pemasukan dan pengeluaran akan muncul otomatis</strong>.</li>
         </ol>
     </div>
 
@@ -882,48 +883,738 @@ const dataPekerjaan = [
 ];
 
 // ================================================================
-// DATA KBLI (USAHA)
+// DATA KBLI (USAHA) dengan DETAIL PEMASUKAN & PENGELUARAN
 // ================================================================
 const dataKBLI = [
-    { nama: "Budidaya Padi", kbli: "01121", kategori: "Pertanian" },
-    { nama: "Budidaya Jagung", kbli: "01111", kategori: "Pertanian" },
-    { nama: "Budidaya Sayuran", kbli: "01131", kategori: "Pertanian" },
-    { nama: "Budidaya Cabai", kbli: "01138", kategori: "Pertanian" },
-    { nama: "Peternakan Ayam Pedaging", kbli: "01461", kategori: "Peternakan" },
-    { nama: "Peternakan Ayam Petelur", kbli: "01462", kategori: "Peternakan" },
-    { nama: "Peternakan Sapi Potong", kbli: "01411", kategori: "Peternakan" },
-    { nama: "Budidaya Ikan Lele", kbli: "03225", kategori: "Perikanan" },
-    { nama: "Industri Tahu", kbli: "10308", kategori: "Industri Makanan" },
-    { nama: "Industri Tempe", kbli: "10307", kategori: "Industri Makanan" },
-    { nama: "Industri Kerupuk", kbli: "10794", kategori: "Industri Makanan" },
-    { nama: "Penggilingan Padi", kbli: "10631", kategori: "Industri Makanan" },
-    { nama: "Depot Air Minum Isi Ulang", kbli: "11052", kategori: "Industri Minuman" },
-    { nama: "Pengrajin Mebel Kayu", kbli: "31011", kategori: "Industri Kerajinan" },
-    { nama: "Tukang Jahit", kbli: "14120", kategori: "Industri Tekstil" },
-    { nama: "Jasa Konstruksi Bangunan", kbli: "41011", kategori: "Konstruksi" },
-    { nama: "Warung Sembako", kbli: "47112", kategori: "Perdagangan Eceran" },
-    { nama: "Toko Material Bangunan", kbli: "47521", kategori: "Perdagangan Eceran" },
-    { nama: "Toko Pakaian", kbli: "47711", kategori: "Perdagangan Eceran" },
-    { nama: "Toko Elektronik", kbli: "47591", kategori: "Perdagangan Eceran" },
-    { nama: "SPBU/Pertashop", kbli: "47301", kategori: "Perdagangan Eceran" },
-    { nama: "Agen LPG 3 Kg", kbli: "47302", kategori: "Perdagangan Eceran" },
-    { nama: "Warung Makan", kbli: "56101", kategori: "Makanan & Minuman" },
-    { nama: "Kedai Kopi", kbli: "56101", kategori: "Makanan & Minuman" },
-    { nama: "Kedai Es Teh/Boba", kbli: "56303", kategori: "Makanan & Minuman" },
-    { nama: "Catering", kbli: "56210", kategori: "Makanan & Minuman" },
-    { nama: "Homestay", kbli: "55201", kategori: "Akomodasi" },
-    { nama: "Jasa Internet/Warnet", kbli: "61104", kategori: "Jasa" },
-    { nama: "Jasa Fotografi", kbli: "74201", kategori: "Jasa" },
-    { nama: "Sewa Bangunan/Ruko", kbli: "68112", kategori: "Real Estate" },
-    { nama: "Praktik Dokter", kbli: "86201", kategori: "Kesehatan" },
-    { nama: "Praktik Dokter Gigi", kbli: "86203", kategori: "Kesehatan" },
-    { nama: "Bengkel Motor", kbli: "45407", kategori: "Jasa Reparasi" },
-    { nama: "Bengkel Mobil", kbli: "95311", kategori: "Jasa Reparasi" },
-    { nama: "Servis HP", kbli: "95120", kategori: "Jasa Reparasi" },
-    { nama: "Laundry", kbli: "96100", kategori: "Jasa" },
-    { nama: "Salon Kecantikan", kbli: "96122", kategori: "Jasa" },
-    { nama: "Pangkas Rambut", kbli: "96111", kategori: "Jasa" },
-    { nama: "Rias Pengantin", kbli: "96220", kategori: "Jasa" },
+    // A: PERTANIAN
+    { 
+        nama: "Budidaya Padi", 
+        kbli: "01121", 
+        kategori: "Pertanian",
+        pemasukan: [
+            { nama: "Penjualan Gabah", periode: "bulanan" },
+            { nama: "Penjualan Jerami", periode: "tahunan" },
+            { nama: "Penjualan Benih", periode: "tahunan" },
+            { nama: "Jasa Panen", periode: "bulanan" }
+        ],
+        pengeluaran: [
+            { nama: "Bibit Padi", periode: "tahunan" },
+            { nama: "Pupuk", periode: "bulanan" },
+            { nama: "Pestisida", periode: "bulanan" },
+            { nama: "Sewa Lahan", periode: "tahunan" },
+            { nama: "Upah Buruh Tani", periode: "harian" },
+            { nama: "Biaya Panen", periode: "tahunan" },
+            { nama: "Biaya Pengolahan", periode: "bulanan" },
+            { nama: "Transportasi", periode: "mingguan" }
+        ]
+    },
+    { 
+        nama: "Budidaya Jagung", 
+        kbli: "01111", 
+        kategori: "Pertanian",
+        pemasukan: [
+            { nama: "Penjualan Jagung Pipil", periode: "bulanan" },
+            { nama: "Penjualan Jagung Tongkol", periode: "bulanan" },
+            { nama: "Penjualan Pakan Ternak", periode: "bulanan" }
+        ],
+        pengeluaran: [
+            { nama: "Bibit Jagung", periode: "tahunan" },
+            { nama: "Pupuk", periode: "bulanan" },
+            { nama: "Pestisida", periode: "bulanan" },
+            { nama: "Sewa Lahan", periode: "tahunan" },
+            { nama: "Upah Buruh", periode: "harian" },
+            { nama: "Biaya Panen", periode: "tahunan" },
+            { nama: "Transportasi", periode: "mingguan" }
+        ]
+    },
+    { 
+        nama: "Budidaya Sayuran", 
+        kbli: "01131", 
+        kategori: "Pertanian",
+        pemasukan: [
+            { nama: "Penjualan Sayuran Segar", periode: "harian" },
+            { nama: "Penjualan Sayuran Olahan", periode: "mingguan" }
+        ],
+        pengeluaran: [
+            { nama: "Bibit Sayuran", periode: "bulanan" },
+            { nama: "Pupuk", periode: "mingguan" },
+            { nama: "Pestisida", periode: "mingguan" },
+            { nama: "Sewa Lahan", periode: "tahunan" },
+            { nama: "Upah Buruh", periode: "harian" },
+            { nama: "Biaya Panen", periode: "mingguan" },
+            { nama: "Transportasi", periode: "harian" },
+            { nama: "Kemasan", periode: "harian" }
+        ]
+    },
+    { 
+        nama: "Budidaya Cabai", 
+        kbli: "01138", 
+        kategori: "Pertanian",
+        pemasukan: [
+            { nama: "Penjualan Cabai Segar", periode: "harian" },
+            { nama: "Penjualan Cabai Kering", periode: "mingguan" }
+        ],
+        pengeluaran: [
+            { nama: "Bibit Cabai", periode: "bulanan" },
+            { nama: "Pupuk", periode: "mingguan" },
+            { nama: "Pestisida", periode: "mingguan" },
+            { nama: "Sewa Lahan", periode: "tahunan" },
+            { nama: "Upah Buruh", periode: "harian" },
+            { nama: "Biaya Panen", periode: "mingguan" },
+            { nama: "Transportasi", periode: "harian" }
+        ]
+    },
+    { 
+        nama: "Peternakan Ayam Pedaging", 
+        kbli: "01461", 
+        kategori: "Peternakan",
+        pemasukan: [
+            { nama: "Penjualan Ayam Hidup", periode: "bulanan" },
+            { nama: "Penjualan Ayam Potong", periode: "harian" },
+            { nama: "Penjualan Telur", periode: "harian" }
+        ],
+        pengeluaran: [
+            { nama: "DOC (Day Old Chick)", periode: "bulanan" },
+            { nama: "Pakan Ayam", periode: "harian" },
+            { nama: "Vitamin & Obat", periode: "mingguan" },
+            { nama: "Sewa Kandang", periode: "bulanan" },
+            { nama: "Upah Karyawan", periode: "bulanan" },
+            { nama: "Listrik", periode: "bulanan" },
+            { nama: "Air", periode: "bulanan" },
+            { nama: "Transportasi", periode: "mingguan" }
+        ]
+    },
+    { 
+        nama: "Peternakan Ayam Petelur", 
+        kbli: "01462", 
+        kategori: "Peternakan",
+        pemasukan: [
+            { nama: "Penjualan Telur", periode: "harian" },
+            { nama: "Penjualan Ayam Afkir", periode: "bulanan" }
+        ],
+        pengeluaran: [
+            { nama: "Pullet", periode: "tahunan" },
+            { nama: "Pakan Ayam", periode: "harian" },
+            { nama: "Vitamin & Obat", periode: "mingguan" },
+            { nama: "Sewa Kandang", periode: "bulanan" },
+            { nama: "Upah Karyawan", periode: "bulanan" },
+            { nama: "Listrik", periode: "bulanan" },
+            { nama: "Air", periode: "bulanan" },
+            { nama: "Transportasi", periode: "mingguan" }
+        ]
+    },
+    { 
+        nama: "Peternakan Sapi Potong", 
+        kbli: "01411", 
+        kategori: "Peternakan",
+        pemasukan: [
+            { nama: "Penjualan Sapi Hidup", periode: "bulanan" },
+            { nama: "Penjualan Daging Sapi", periode: "harian" },
+            { nama: "Penjualan Susu", periode: "harian" }
+        ],
+        pengeluaran: [
+            { nama: "Bibit Sapi", periode: "tahunan" },
+            { nama: "Pakan Ternak", periode: "harian" },
+            { nama: "Vitamin & Obat", periode: "mingguan" },
+            { nama: "Sewa Lahan", periode: "tahunan" },
+            { nama: "Upah Karyawan", periode: "bulanan" },
+            { nama: "Transportasi", periode: "mingguan" },
+            { nama: "Biaya Potong", periode: "bulanan" }
+        ]
+    },
+    { 
+        nama: "Budidaya Ikan Lele", 
+        kbli: "03225", 
+        kategori: "Perikanan",
+        pemasukan: [
+            { nama: "Penjualan Ikan Hidup", periode: "bulanan" },
+            { nama: "Penjualan Ikan Olahan", periode: "mingguan" }
+        ],
+        pengeluaran: [
+            { nama: "Bibit Ikan", periode: "bulanan" },
+            { nama: "Pakan Ikan", periode: "harian" },
+            { nama: "Vitamin & Obat", periode: "mingguan" },
+            { nama: "Sewa Kolam", periode: "bulanan" },
+            { nama: "Upah Karyawan", periode: "bulanan" },
+            { nama: "Listrik", periode: "bulanan" },
+            { nama: "Air", periode: "bulanan" },
+            { nama: "Transportasi", periode: "mingguan" }
+        ]
+    },
+    
+    // C: INDUSTRI
+    { 
+        nama: "Industri Tahu", 
+        kbli: "10308", 
+        kategori: "Industri Makanan",
+        pemasukan: [
+            { nama: "Penjualan Tahu", periode: "harian" },
+            { nama: "Penjualan Ampas Tahu", periode: "harian" }
+        ],
+        pengeluaran: [
+            { nama: "Kedelai", periode: "harian" },
+            { nama: "Bahan Baku Tambahan", periode: "mingguan" },
+            { nama: "Gas/LPG", periode: "mingguan" },
+            { nama: "Air", periode: "harian" },
+            { nama: "Listrik", periode: "bulanan" },
+            { nama: "Upah Karyawan", periode: "bulanan" },
+            { nama: "Kemasan", periode: "harian" },
+            { nama: "Transportasi", periode: "harian" }
+        ]
+    },
+    { 
+        nama: "Industri Tempe", 
+        kbli: "10307", 
+        kategori: "Industri Makanan",
+        pemasukan: [
+            { nama: "Penjualan Tempe", periode: "harian" },
+            { nama: "Penjualan Ampas Tempe", periode: "harian" }
+        ],
+        pengeluaran: [
+            { nama: "Kedelai", periode: "harian" },
+            { nama: "Ragi Tempe", periode: "mingguan" },
+            { nama: "Bahan Baku", periode: "mingguan" },
+            { nama: "Gas/LPG", periode: "mingguan" },
+            { nama: "Air", periode: "harian" },
+            { nama: "Listrik", periode: "bulanan" },
+            { nama: "Upah Karyawan", periode: "bulanan" },
+            { nama: "Kemasan", periode: "harian" },
+            { nama: "Transportasi", periode: "harian" }
+        ]
+    },
+    { 
+        nama: "Industri Kerupuk", 
+        kbli: "10794", 
+        kategori: "Industri Makanan",
+        pemasukan: [
+            { nama: "Penjualan Kerupuk", periode: "harian" },
+            { nama: "Penjualan Peyek", periode: "harian" },
+            { nama: "Penjualan Kripik", periode: "harian" }
+        ],
+        pengeluaran: [
+            { nama: "Bahan Baku", periode: "harian" },
+            { nama: "Minyak Goreng", periode: "harian" },
+            { nama: "Gas/LPG", periode: "mingguan" },
+            { nama: "Listrik", periode: "bulanan" },
+            { nama: "Upah Karyawan", periode: "bulanan" },
+            { nama: "Kemasan", periode: "harian" },
+            { nama: "Transportasi", periode: "harian" }
+        ]
+    },
+    { 
+        nama: "Penggilingan Padi", 
+        kbli: "10631", 
+        kategori: "Industri Makanan",
+        pemasukan: [
+            { nama: "Jasa Giling", periode: "harian" },
+            { nama: "Penjualan Beras", periode: "harian" },
+            { nama: "Penjualan Dedak", periode: "harian" }
+        ],
+        pengeluaran: [
+            { nama: "Listrik", periode: "bulanan" },
+            { nama: "Perawatan Mesin", periode: "bulanan" },
+            { nama: "Upah Karyawan", periode: "bulanan" },
+            { nama: "Sewa Tempat", periode: "bulanan" },
+            { nama: "Transportasi", periode: "harian" }
+        ]
+    },
+    { 
+        nama: "Depot Air Minum Isi Ulang", 
+        kbli: "11052", 
+        kategori: "Industri Minuman",
+        pemasukan: [
+            { nama: "Penjualan Air Galon", periode: "harian" },
+            { nama: "Penjualan Air Kemasan", periode: "harian" }
+        ],
+        pengeluaran: [
+            { nama: "Air Baku", periode: "harian" },
+            { nama: "Saringan/Filter", periode: "bulanan" },
+            { nama: "Galon", periode: "harian" },
+            { nama: "Kemasan", periode: "harian" },
+            { nama: "Listrik", periode: "bulanan" },
+            { nama: "Upah Karyawan", periode: "bulanan" },
+            { nama: "Sewa Tempat", periode: "bulanan" },
+            { nama: "Transportasi", periode: "harian" }
+        ]
+    },
+    { 
+        nama: "Pengrajin Mebel Kayu", 
+        kbli: "31011", 
+        kategori: "Industri Kerajinan",
+        pemasukan: [
+            { nama: "Penjualan Mebel", periode: "bulanan" },
+            { nama: "Penjualan Kerajinan Kayu", periode: "bulanan" },
+            { nama: "Jasa Pembuatan", periode: "bulanan" }
+        ],
+        pengeluaran: [
+            { nama: "Kayu", periode: "bulanan" },
+            { nama: "Bahan Baku", periode: "bulanan" },
+            { nama: "Paku & Lem", periode: "bulanan" },
+            { nama: "Cat/Pelitur", periode: "bulanan" },
+            { nama: "Listrik", periode: "bulanan" },
+            { nama: "Upah Karyawan", periode: "bulanan" },
+            { nama: "Sewa Tempat", periode: "bulanan" },
+            { nama: "Transportasi", periode: "mingguan" }
+        ]
+    },
+    { 
+        nama: "Tukang Jahit", 
+        kbli: "14120", 
+        kategori: "Industri Tekstil",
+        pemasukan: [
+            { nama: "Jasa Jahit", periode: "harian" },
+            { nama: "Penjualan Pakaian Jadi", periode: "harian" }
+        ],
+        pengeluaran: [
+            { nama: "Kain", periode: "bulanan" },
+            { nama: "Benang", periode: "mingguan" },
+            { nama: "Aksesoris", periode: "bulanan" },
+            { nama: "Listrik", periode: "bulanan" },
+            { nama: "Perawatan Mesin", periode: "bulanan" },
+            { nama: "Sewa Tempat", periode: "bulanan" }
+        ]
+    },
+    
+    // D: KONSTRUKSI
+    { 
+        nama: "Jasa Konstruksi Bangunan", 
+        kbli: "41011", 
+        kategori: "Konstruksi",
+        pemasukan: [
+            { nama: "Jasa Pembangunan", periode: "bulanan" },
+            { nama: "Jasa Renovasi", periode: "bulanan" },
+            { nama: "Jasa Perbaikan", periode: "harian" }
+        ],
+        pengeluaran: [
+            { nama: "Material Bangunan", periode: "harian" },
+            { nama: "Upah Tukang", periode: "harian" },
+            { nama: "Sewa Alat", periode: "harian" },
+            { nama: "Transportasi", periode: "harian" },
+            { nama: "Biaya Izin", periode: "tahunan" }
+        ]
+    },
+    
+    // G: PERDAGANGAN
+    { 
+        nama: "Warung Sembako", 
+        kbli: "47112", 
+        kategori: "Perdagangan Eceran",
+        pemasukan: [
+            { nama: "Penjualan Sembako", periode: "harian" },
+            { nama: "Penjualan Rokok", periode: "harian" },
+            { nama: "Penjualan Minuman", periode: "harian" },
+            { nama: "Penjualan Pulsa", periode: "harian" }
+        ],
+        pengeluaran: [
+            { nama: "Stok Barang", periode: "mingguan" },
+            { nama: "Sewa Tempat", periode: "bulanan" },
+            { nama: "Listrik", periode: "bulanan" },
+            { nama: "Air", periode: "bulanan" },
+            { nama: "Upah Karyawan", periode: "bulanan" },
+            { nama: "Transportasi", periode: "harian" }
+        ]
+    },
+    { 
+        nama: "Toko Material Bangunan", 
+        kbli: "47521", 
+        kategori: "Perdagangan Eceran",
+        pemasukan: [
+            { nama: "Penjualan Material", periode: "harian" },
+            { nama: "Penjualan Cat", periode: "harian" },
+            { nama: "Penjualan Peralatan", periode: "harian" }
+        ],
+        pengeluaran: [
+            { nama: "Stok Barang", periode: "bulanan" },
+            { nama: "Sewa Tempat", periode: "bulanan" },
+            { nama: "Listrik", periode: "bulanan" },
+            { nama: "Upah Karyawan", periode: "bulanan" },
+            { nama: "Transportasi", periode: "harian" }
+        ]
+    },
+    { 
+        nama: "Toko Pakaian", 
+        kbli: "47711", 
+        kategori: "Perdagangan Eceran",
+        pemasukan: [
+            { nama: "Penjualan Pakaian", periode: "harian" },
+            { nama: "Penjualan Aksesoris", periode: "harian" }
+        ],
+        pengeluaran: [
+            { nama: "Stok Barang", periode: "bulanan" },
+            { nama: "Sewa Tempat", periode: "bulanan" },
+            { nama: "Listrik", periode: "bulanan" },
+            { nama: "Upah Karyawan", periode: "bulanan" },
+            { nama: "Transportasi", periode: "mingguan" }
+        ]
+    },
+    { 
+        nama: "Toko Elektronik", 
+        kbli: "47591", 
+        kategori: "Perdagangan Eceran",
+        pemasukan: [
+            { nama: "Penjualan Elektronik", periode: "harian" },
+            { nama: "Jasa Servis", periode: "harian" }
+        ],
+        pengeluaran: [
+            { nama: "Stok Barang", periode: "bulanan" },
+            { nama: "Sewa Tempat", periode: "bulanan" },
+            { nama: "Listrik", periode: "bulanan" },
+            { nama: "Upah Karyawan", periode: "bulanan" },
+            { nama: "Transportasi", periode: "mingguan" }
+        ]
+    },
+    { 
+        nama: "SPBU/Pertashop", 
+        kbli: "47301", 
+        kategori: "Perdagangan Eceran",
+        pemasukan: [
+            { nama: "Penjualan BBM", periode: "harian" },
+            { nama: "Penjualan Pelumas", periode: "harian" },
+            { nama: "Penjualan Oli", periode: "harian" }
+        ],
+        pengeluaran: [
+            { nama: "Stok BBM", periode: "harian" },
+            { nama: "Sewa Tempat", periode: "bulanan" },
+            { nama: "Listrik", periode: "bulanan" },
+            { nama: "Air", periode: "bulanan" },
+            { nama: "Upah Karyawan", periode: "bulanan" },
+            { nama: "Transportasi", periode: "harian" }
+        ]
+    },
+    { 
+        nama: "Agen LPG 3 Kg", 
+        kbli: "47302", 
+        kategori: "Perdagangan Eceran",
+        pemasukan: [
+            { nama: "Penjualan LPG", periode: "harian" },
+            { nama: "Penjualan Gas", periode: "harian" }
+        ],
+        pengeluaran: [
+            { nama: "Stok LPG", periode: "mingguan" },
+            { nama: "Sewa Tempat", periode: "bulanan" },
+            { nama: "Transportasi", periode: "harian" },
+            { nama: "Upah Karyawan", periode: "bulanan" }
+        ]
+    },
+    
+    // I: MAKANAN & MINUMAN
+    { 
+        nama: "Warung Makan", 
+        kbli: "56101", 
+        kategori: "Makanan & Minuman",
+        pemasukan: [
+            { nama: "Penjualan Makanan", periode: "harian" },
+            { nama: "Penjualan Minuman", periode: "harian" },
+            { nama: "Pesanan Catering", periode: "mingguan" },
+            { nama: "Penjualan Makanan Kemasan", periode: "harian" }
+        ],
+        pengeluaran: [
+            { nama: "Bahan Makanan", periode: "harian" },
+            { nama: "Bumbu Dapur", periode: "harian" },
+            { nama: "Gas/LPG", periode: "mingguan" },
+            { nama: "Air", periode: "harian" },
+            { nama: "Listrik", periode: "bulanan" },
+            { nama: "Upah Karyawan", periode: "bulanan" },
+            { nama: "Sewa Tempat", periode: "bulanan" },
+            { nama: "Peralatan Makan", periode: "bulanan" },
+            { nama: "Kemasan", periode: "harian" },
+            { nama: "Transportasi", periode: "harian" }
+        ]
+    },
+    { 
+        nama: "Kedai Kopi", 
+        kbli: "56101", 
+        kategori: "Makanan & Minuman",
+        pemasukan: [
+            { nama: "Penjualan Kopi", periode: "harian" },
+            { nama: "Penjualan Minuman", periode: "harian" },
+            { nama: "Penjualan Makanan Ringan", periode: "harian" }
+        ],
+        pengeluaran: [
+            { nama: "Biji Kopi", periode: "mingguan" },
+            { nama: "Bahan Minuman", periode: "harian" },
+            { nama: "Gas/LPG", periode: "mingguan" },
+            { nama: "Air", periode: "harian" },
+            { nama: "Listrik", periode: "bulanan" },
+            { nama: "Upah Karyawan", periode: "bulanan" },
+            { nama: "Sewa Tempat", periode: "bulanan" },
+            { nama: "Peralatan", periode: "bulanan" },
+            { nama: "Kemasan", periode: "harian" }
+        ]
+    },
+    { 
+        nama: "Kedai Es Teh/Boba", 
+        kbli: "56303", 
+        kategori: "Makanan & Minuman",
+        pemasukan: [
+            { nama: "Penjualan Es Teh", periode: "harian" },
+            { nama: "Penjualan Boba", periode: "harian" },
+            { nama: "Penjualan Minuman", periode: "harian" }
+        ],
+        pengeluaran: [
+            { nama: "Teh", periode: "harian" },
+            { nama: "Boba", periode: "harian" },
+            { nama: "Gula", periode: "harian" },
+            { nama: "Susu", periode: "harian" },
+            { nama: "Es", periode: "harian" },
+            { nama: "Kemasan", periode: "harian" },
+            { nama: "Sewa Tempat", periode: "bulanan" },
+            { nama: "Listrik", periode: "bulanan" },
+            { nama: "Air", periode: "harian" },
+            { nama: "Upah Karyawan", periode: "bulanan" }
+        ]
+    },
+    { 
+        nama: "Catering", 
+        kbli: "56210", 
+        kategori: "Makanan & Minuman",
+        pemasukan: [
+            { nama: "Jasa Catering", periode: "mingguan" },
+            { nama: "Pesanan Nasi Kotak", periode: "harian" },
+            { nama: "Prasmanan", periode: "mingguan" }
+        ],
+        pengeluaran: [
+            { nama: "Bahan Makanan", periode: "harian" },
+            { nama: "Gas/LPG", periode: "mingguan" },
+            { nama: "Listrik", periode: "bulanan" },
+            { nama: "Air", periode: "harian" },
+            { nama: "Upah Karyawan", periode: "bulanan" },
+            { nama: "Sewa Dapur", periode: "bulanan" },
+            { nama: "Kemasan", periode: "harian" },
+            { nama: "Transportasi", periode: "harian" }
+        ]
+    },
+    { 
+        nama: "Homestay", 
+        kbli: "55201", 
+        kategori: "Akomodasi",
+        pemasukan: [
+            { nama: "Sewa Kamar", periode: "harian" },
+            { nama: "Penjualan Makanan", periode: "harian" },
+            { nama: "Jasa Tambahan", periode: "mingguan" }
+        ],
+        pengeluaran: [
+            { nama: "Listrik", periode: "bulanan" },
+            { nama: "Air", periode: "bulanan" },
+            { nama: "Internet", periode: "bulanan" },
+            { nama: "Perawatan", periode: "bulanan" },
+            { nama: "Kebersihan", periode: "harian" },
+            { nama: "Upah Karyawan", periode: "bulanan" },
+            { nama: "Pajak", periode: "tahunan" }
+        ]
+    },
+    
+    // J: JASA
+    { 
+        nama: "Jasa Internet/Warnet", 
+        kbli: "61104", 
+        kategori: "Jasa",
+        pemasukan: [
+            { nama: "Jasa Internet", periode: "harian" },
+            { nama: "Penjualan Pulsa", periode: "harian" },
+            { nama: "Jasa Print/Fotokopi", periode: "harian" }
+        ],
+        pengeluaran: [
+            { nama: "Listrik", periode: "bulanan" },
+            { nama: "Internet", periode: "bulanan" },
+            { nama: "Perawatan PC", periode: "bulanan" },
+            { nama: "Sewa Tempat", periode: "bulanan" },
+            { nama: "Upah Karyawan", periode: "bulanan" }
+        ]
+    },
+    { 
+        nama: "Jasa Fotografi", 
+        kbli: "74201", 
+        kategori: "Jasa",
+        pemasukan: [
+            { nama: "Jasa Foto", periode: "harian" },
+            { nama: "Jasa Video", periode: "mingguan" },
+            { nama: "Cetak Foto", periode: "harian" }
+        ],
+        pengeluaran: [
+            { nama: "Peralatan", periode: "bulanan" },
+            { nama: "Listrik", periode: "bulanan" },
+            { nama: "Sewa Tempat", periode: "bulanan" },
+            { nama: "Upah Karyawan", periode: "bulanan" },
+            { nama: "Transportasi", periode: "mingguan" }
+        ]
+    },
+    
+    // L: REAL ESTATE
+    { 
+        nama: "Sewa Bangunan/Ruko", 
+        kbli: "68112", 
+        kategori: "Real Estate",
+        pemasukan: [
+            { nama: "Sewa Bangunan", periode: "bulanan" },
+            { nama: "Sewa Ruko", periode: "bulanan" }
+        ],
+        pengeluaran: [
+            { nama: "Pajak", periode: "tahunan" },
+            { nama: "Perawatan", periode: "bulanan" },
+            { nama: "Air", periode: "bulanan" },
+            { nama: "Listrik", periode: "bulanan" },
+            { nama: "Asuransi", periode: "tahunan" }
+        ]
+    },
+    
+    // R: KESEHATAN
+    { 
+        nama: "Praktik Dokter", 
+        kbli: "86201", 
+        kategori: "Kesehatan",
+        pemasukan: [
+            { nama: "Jasa Konsultasi", periode: "harian" },
+            { nama: "Jasa Tindakan Medis", periode: "harian" }
+        ],
+        pengeluaran: [
+            { nama: "Obat-obatan", periode: "mingguan" },
+            { nama: "Alat Kesehatan", periode: "bulanan" },
+            { nama: "Sewa Tempat", periode: "bulanan" },
+            { nama: "Listrik", periode: "bulanan" },
+            { nama: "Air", periode: "bulanan" },
+            { nama: "Upah Karyawan", periode: "bulanan" }
+        ]
+    },
+    { 
+        nama: "Praktik Dokter Gigi", 
+        kbli: "86203", 
+        kategori: "Kesehatan",
+        pemasukan: [
+            { nama: "Jasa Konsultasi", periode: "harian" },
+            { nama: "Jasa Tindakan", periode: "harian" },
+            { nama: "Penjualan Alat Kesehatan", periode: "harian" }
+        ],
+        pengeluaran: [
+            { nama: "Alat Kesehatan", periode: "bulanan" },
+            { nama: "Bahan", periode: "bulanan" },
+            { nama: "Sewa Tempat", periode: "bulanan" },
+            { nama: "Listrik", periode: "bulanan" },
+            { nama: "Air", periode: "bulanan" },
+            { nama: "Upah Karyawan", periode: "bulanan" }
+        ]
+    },
+    
+    // T: JASA LAINNYA
+    { 
+        nama: "Bengkel Motor", 
+        kbli: "45407", 
+        kategori: "Jasa Reparasi",
+        pemasukan: [
+            { nama: "Jasa Servis", periode: "harian" },
+            { nama: "Penjualan Suku Cadang", periode: "harian" },
+            { nama: "Jasa Cuci Motor", periode: "harian" }
+        ],
+        pengeluaran: [
+            { nama: "Suku Cadang", periode: "mingguan" },
+            { nama: "Oli", periode: "mingguan" },
+            { nama: "Listrik", periode: "bulanan" },
+            { nama: "Air", periode: "bulanan" },
+            { nama: "Sewa Tempat", periode: "bulanan" },
+            { nama: "Upah Karyawan", periode: "bulanan" }
+        ]
+    },
+    { 
+        nama: "Bengkel Mobil", 
+        kbli: "95311", 
+        kategori: "Jasa Reparasi",
+        pemasukan: [
+            { nama: "Jasa Servis", periode: "harian" },
+            { nama: "Penjualan Suku Cadang", periode: "harian" },
+            { nama: "Jasa Cuci Mobil", periode: "harian" }
+        ],
+        pengeluaran: [
+            { nama: "Suku Cadang", periode: "mingguan" },
+            { nama: "Oli", periode: "mingguan" },
+            { nama: "Listrik", periode: "bulanan" },
+            { nama: "Air", periode: "bulanan" },
+            { nama: "Sewa Tempat", periode: "bulanan" },
+            { nama: "Upah Karyawan", periode: "bulanan" }
+        ]
+    },
+    { 
+        nama: "Servis HP", 
+        kbli: "95120", 
+        kategori: "Jasa Reparasi",
+        pemasukan: [
+            { nama: "Jasa Servis", periode: "harian" },
+            { nama: "Penjualan Aksesoris", periode: "harian" },
+            { nama: "Penjualan HP", periode: "harian" }
+        ],
+        pengeluaran: [
+            { nama: "Suku Cadang", periode: "mingguan" },
+            { nama: "Listrik", periode: "bulanan" },
+            { nama: "Sewa Tempat", periode: "bulanan" },
+            { nama: "Upah Karyawan", periode: "bulanan" }
+        ]
+    },
+    { 
+        nama: "Laundry", 
+        kbli: "96100", 
+        kategori: "Jasa",
+        pemasukan: [
+            { nama: "Jasa Cuci", periode: "harian" },
+            { nama: "Jasa Setrika", periode: "harian" },
+            { nama: "Jasa Dry Clean", periode: "harian" }
+        ],
+        pengeluaran: [
+            { nama: "Detergen", periode: "mingguan" },
+            { nama: "Pewangi", periode: "mingguan" },
+            { nama: "Listrik", periode: "bulanan" },
+            { nama: "Air", periode: "bulanan" },
+            { nama: "Sewa Tempat", periode: "bulanan" },
+            { nama: "Upah Karyawan", periode: "bulanan" },
+            { nama: "Kemasan", periode: "harian" }
+        ]
+    },
+    { 
+        nama: "Salon Kecantikan", 
+        kbli: "96122", 
+        kategori: "Jasa",
+        pemasukan: [
+            { nama: "Jasa Potong Rambut", periode: "harian" },
+            { nama: "Jasa Perawatan", periode: "harian" },
+            { nama: "Penjualan Produk", periode: "harian" }
+        ],
+        pengeluaran: [
+            { nama: "Produk Perawatan", periode: "mingguan" },
+            { nama: "Listrik", periode: "bulanan" },
+            { nama: "Air", periode: "bulanan" },
+            { nama: "Sewa Tempat", periode: "bulanan" },
+            { nama: "Upah Karyawan", periode: "bulanan" }
+        ]
+    },
+    { 
+        nama: "Pangkas Rambut", 
+        kbli: "96111", 
+        kategori: "Jasa",
+        pemasukan: [
+            { nama: "Jasa Potong Rambut", periode: "harian" },
+            { nama: "Jasa Cukur", periode: "harian" }
+        ],
+        pengeluaran: [
+            { nama: "Peralatan", periode: "bulanan" },
+            { nama: "Listrik", periode: "bulanan" },
+            { nama: "Air", periode: "bulanan" },
+            { nama: "Sewa Tempat", periode: "bulanan" }
+        ]
+    },
+    { 
+        nama: "Rias Pengantin", 
+        kbli: "96220", 
+        kategori: "Jasa",
+        pemasukan: [
+            { nama: "Jasa Rias", periode: "mingguan" },
+            { nama: "Jasa Busana", periode: "mingguan" },
+            { nama: "Sewa Aksesoris", periode: "mingguan" }
+        ],
+        pengeluaran: [
+            { nama: "Produk Makeup", periode: "bulanan" },
+            { nama: "Aksesoris", periode: "bulanan" },
+            { nama: "Sewa Tempat", periode: "bulanan" },
+            { nama: "Transportasi", periode: "mingguan" }
+        ]
+    },
 ];
 
 // ================================================================
@@ -1024,7 +1715,7 @@ function hitungTotalPendapatanPekerjaan() {
 }
 
 // ================================================================
-// FUNGSI USAHA dengan Periode Fleksibel
+// FUNGSI USAHA
 // ================================================================
 let usahaCounter = 1;
 
@@ -1039,7 +1730,7 @@ function tambahUsaha() {
             <button class="btn-remove-row" onclick="hapusUsaha('${div.id}')">✕ Hapus Usaha</button>
         </div>
         <div class="form-group">
-            <label>Jenis Usaha</label>
+            <label>Jenis Usaha <span style="color:#b91c1c;">*</span></label>
             <select class="jenisUsahaSelect" onchange="pilihJenisUsaha(this)" style="flex:1;">
                 <option value="">-- Pilih Jenis Usaha --</option>
                 ${dataKBLI.map(u => `<option value="${u.nama}" data-kbli="${u.kbli}" data-kategori="${u.kategori}">${u.nama} <span class="kbli-badge">${u.kbli}</span> <span class="category-badge">${u.kategori}</span></option>`).join('')}
@@ -1062,32 +1753,36 @@ function tambahUsaha() {
             <input type="text" class="nibUsaha" placeholder="Nomor Induk Berusaha" style="flex:1;" />
         </div>
         
-        <!-- PEMASUKAN dengan Periode -->
+        <!-- PEMASUKAN -->
         <div style="border-top:1px solid #e2e8f0; margin:12px 0; padding-top:12px;">
             <h5>📊 PEMASUKAN USAHA</h5>
             <div class="pemasukanContainer">
-                <!-- Akan diisi oleh JavaScript -->
+                <!-- Akan diisi oleh JavaScript saat memilih usaha -->
             </div>
-            <button class="btn-add-row" onclick="tambahItemUsaha(this.closest('.usaha-detail'), 'pemasukan')">+ Tambah Item Pemasukan</button>
+            <div style="margin-top:4px;">
+                <button class="btn-add-row" onclick="tambahItemUsaha(this.closest('.usaha-detail'), 'pemasukan')">+ Tambah Item Pemasukan</button>
+            </div>
             <div class="total-box" style="margin-top:8px; background:#d1fae5; border-left-color:#0b7e3d;">
                 <div class="grid-2">
-                    <div class="form-group"><label><strong>Total per Bulan</strong></label><input type="text" class="totalPemasukanBulan" readonly placeholder="Rp 0" style="font-weight:700; color:#075985;" /></div>
-                    <div class="form-group"><label><strong>Total per Tahun (×12)</strong></label><input type="text" class="totalPemasukanTahun" readonly placeholder="Rp 0" style="font-weight:700; color:#075985;" /></div>
+                    <div class="form-group"><label><strong>Total Pemasukan / Bulan</strong></label><input type="text" class="totalPemasukanBulan" readonly placeholder="Rp 0" style="font-weight:700; color:#075985;" /></div>
+                    <div class="form-group"><label><strong>Total Pemasukan / Tahun</strong></label><input type="text" class="totalPemasukanTahun" readonly placeholder="Rp 0" style="font-weight:700; color:#075985;" /></div>
                 </div>
             </div>
         </div>
 
-        <!-- PENGELUARAN dengan Periode -->
+        <!-- PENGELUARAN -->
         <div style="border-top:1px solid #e2e8f0; margin:12px 0; padding-top:12px;">
             <h5>💸 PENGELUARAN USAHA</h5>
             <div class="pengeluaranContainer">
-                <!-- Akan diisi oleh JavaScript -->
+                <!-- Akan diisi oleh JavaScript saat memilih usaha -->
             </div>
-            <button class="btn-add-row" onclick="tambahItemUsaha(this.closest('.usaha-detail'), 'pengeluaran')">+ Tambah Item Pengeluaran</button>
+            <div style="margin-top:4px;">
+                <button class="btn-add-row" onclick="tambahItemUsaha(this.closest('.usaha-detail'), 'pengeluaran')">+ Tambah Item Pengeluaran</button>
+            </div>
             <div class="total-box" style="margin-top:8px; background:#fee2e2; border-left-color:#dc2626;">
                 <div class="grid-2">
-                    <div class="form-group"><label><strong>Total per Bulan</strong></label><input type="text" class="totalPengeluaranBulan" readonly placeholder="Rp 0" style="font-weight:700; color:#dc2626;" /></div>
-                    <div class="form-group"><label><strong>Total per Tahun (×12)</strong></label><input type="text" class="totalPengeluaranTahun" readonly placeholder="Rp 0" style="font-weight:700; color:#dc2626;" /></div>
+                    <div class="form-group"><label><strong>Total Pengeluaran / Bulan</strong></label><input type="text" class="totalPengeluaranBulan" readonly placeholder="Rp 0" style="font-weight:700; color:#dc2626;" /></div>
+                    <div class="form-group"><label><strong>Total Pengeluaran / Tahun</strong></label><input type="text" class="totalPengeluaranTahun" readonly placeholder="Rp 0" style="font-weight:700; color:#dc2626;" /></div>
                 </div>
             </div>
         </div>
@@ -1095,8 +1790,8 @@ function tambahUsaha() {
         <!-- KEUNTUNGAN -->
         <div class="total-box" style="background:#dbeafe; border-left-color:#2563eb; margin-top:10px;">
             <div class="grid-2">
-                <div class="form-group"><label><strong>Keuntungan per Bulan</strong></label><input type="text" class="keuntunganBulan" readonly placeholder="Rp 0" style="font-weight:700; color:#075985; font-size:16px;" /></div>
-                <div class="form-group"><label><strong>Keuntungan per Tahun</strong></label><input type="text" class="keuntunganTahun" readonly placeholder="Rp 0" style="font-weight:700; color:#075985; font-size:16px;" /></div>
+                <div class="form-group"><label><strong>Keuntungan / Bulan</strong></label><input type="text" class="keuntunganBulan" readonly placeholder="Rp 0" style="font-weight:700; color:#075985; font-size:16px;" /></div>
+                <div class="form-group"><label><strong>Keuntungan / Tahun</strong></label><input type="text" class="keuntunganTahun" readonly placeholder="Rp 0" style="font-weight:700; color:#075985; font-size:16px;" /></div>
             </div>
         </div>
     `;
@@ -1120,6 +1815,7 @@ function pilihJenisUsaha(select) {
     const pengeluaranContainer = div.querySelector('.pengeluaranContainer');
     
     const selectedOption = select.options[select.selectedIndex];
+    const nama = selectedOption.value;
     const kbli = selectedOption.getAttribute('data-kbli') || '';
     const kategori = selectedOption.getAttribute('data-kategori') || '';
     
@@ -1130,33 +1826,45 @@ function pilihJenisUsaha(select) {
     pemasukanContainer.innerHTML = '';
     pengeluaranContainer.innerHTML = '';
     
-    // Tambah item default
-    tambahItemUsaha(div, 'pemasukan');
-    tambahItemUsaha(div, 'pemasukan');
-    tambahItemUsaha(div, 'pengeluaran');
-    tambahItemUsaha(div, 'pengeluaran');
+    // Cari data KBLI yang dipilih
+    const data = dataKBLI.find(u => u.nama === nama);
+    
+    if (data) {
+        // Tambahkan item pemasukan dari data
+        data.pemasukan.forEach(item => {
+            tambahItemUsahaWithData(div, 'pemasukan', item.nama, item.periode);
+        });
+        
+        // Tambahkan item pengeluaran dari data
+        data.pengeluaran.forEach(item => {
+            tambahItemUsahaWithData(div, 'pengeluaran', item.nama, item.periode);
+        });
+    }
     
     hitungUsaha(div);
 }
 
 function tambahItemUsaha(div, jenis) {
+    tambahItemUsahaWithData(div, jenis, '', 'bulanan');
+}
+
+function tambahItemUsahaWithData(div, jenis, nama, periode) {
     const container = div.querySelector(`.${jenis}Container`);
     const itemDiv = document.createElement('div');
     itemDiv.className = 'item-row';
     itemDiv.style.cssText = jenis === 'pemasukan' ? 'background:#f0fdf4;' : 'background:#fef2f2;';
     itemDiv.innerHTML = `
-        <input type="text" placeholder="Nama Item" class="${jenis}Nama" style="flex:1.5; min-width:100px;" />
+        <input type="text" placeholder="Nama Item" class="${jenis}Nama" value="${nama}" style="flex:1.5; min-width:100px;" />
         <input type="number" placeholder="Nilai" class="${jenis}Nilai" style="flex:1; min-width:80px;" oninput="hitungUsaha(this.closest('.usaha-detail'))" />
         <select class="${jenis}Periode" style="flex:0.8; min-width:80px;" onchange="hitungUsaha(this.closest('.usaha-detail'))">
-            <option value="harian">Harian</option>
-            <option value="mingguan">Mingguan</option>
-            <option value="bulanan" selected>Bulanan</option>
-            <option value="tahunan">Tahunan</option>
+            <option value="harian" ${periode === 'harian' ? 'selected' : ''}>Harian</option>
+            <option value="mingguan" ${periode === 'mingguan' ? 'selected' : ''}>Mingguan</option>
+            <option value="bulanan" ${periode === 'bulanan' ? 'selected' : ''}>Bulanan</option>
+            <option value="tahunan" ${periode === 'tahunan' ? 'selected' : ''}>Tahunan</option>
         </select>
         <button class="btn-remove-row" onclick="hapusItemUsaha(this)">✕</button>
     `;
     container.appendChild(itemDiv);
-    hitungUsaha(div);
 }
 
 function hapusItemUsaha(btn) {
@@ -1178,7 +1886,8 @@ function hitungUsaha(div) {
     let totalPemTahun = 0;
     pemasukanItems.forEach(item => {
         const nilai = parseFloat(item.value) || 0;
-        const periode = item.closest('.item-row').querySelector('.pemasukanPeriode').value;
+        const row = item.closest('.item-row');
+        const periode = row.querySelector('.pemasukanPeriode').value;
         totalPemBulan += konversiKeBulanan(nilai, periode);
         totalPemTahun += konversiKeTahunan(nilai, periode);
     });
@@ -1192,7 +1901,8 @@ function hitungUsaha(div) {
     let totalPengTahun = 0;
     pengeluaranItems.forEach(item => {
         const nilai = parseFloat(item.value) || 0;
-        const periode = item.closest('.item-row').querySelector('.pengeluaranPeriode').value;
+        const row = item.closest('.item-row');
+        const periode = row.querySelector('.pengeluaranPeriode').value;
         totalPengBulan += konversiKeBulanan(nilai, periode);
         totalPengTahun += konversiKeTahunan(nilai, periode);
     });
@@ -1212,8 +1922,10 @@ function hitungUsaha(div) {
 // ================================================================
 // FUNGSI PENGELUARAN MAKANAN - Periode Fleksibel
 // ================================================================
-const makananItems = {
-    belanja: [
+function initMakananContainer() {
+    const container = document.getElementById('containerBelanjaMakanan');
+    container.innerHTML = '';
+    const defaultItems = [
         { nama: "Beras", periode: "harian" },
         { nama: "Minyak Goreng", periode: "mingguan" },
         { nama: "Gula, Garam", periode: "mingguan" },
@@ -1228,9 +1940,15 @@ const makananItems = {
         { nama: "Mie Instan", periode: "mingguan" },
         { nama: "Kopi/Teh", periode: "mingguan" },
         { nama: "Bumbu Dapur", periode: "mingguan" },
-        { nama: "Air Minum", periode: "harian" },
-    ],
-    jadi: [
+        { nama: "Air Minum", periode: "harian" }
+    ];
+    defaultItems.forEach(item => {
+        tambahItemMakananRow(container, 'belanja', item.nama, item.periode);
+    });
+    
+    const containerJadi = document.getElementById('containerMakananJadi');
+    containerJadi.innerHTML = '';
+    const defaultJadi = [
         { nama: "Nasi Bungkus", periode: "harian" },
         { nama: "Warteg", periode: "harian" },
         { nama: "Bakso", periode: "mingguan" },
@@ -1240,20 +1958,9 @@ const makananItems = {
         { nama: "Jajanan Anak", periode: "harian" },
         { nama: "Roti, Kue", periode: "mingguan" },
         { nama: "Es Teh/Kopi", periode: "harian" },
-        { nama: "Minuman Kemasan", periode: "harian" },
-    ]
-};
-
-function initMakananContainer() {
-    const container = document.getElementById('containerBelanjaMakanan');
-    container.innerHTML = '';
-    makananItems.belanja.forEach(item => {
-        tambahItemMakananRow(container, 'belanja', item.nama, item.periode);
-    });
-    
-    const containerJadi = document.getElementById('containerMakananJadi');
-    containerJadi.innerHTML = '';
-    makananItems.jadi.forEach(item => {
+        { nama: "Minuman Kemasan", periode: "harian" }
+    ];
+    defaultJadi.forEach(item => {
         tambahItemMakananRow(containerJadi, 'jadi', item.nama, item.periode);
     });
 }
@@ -1326,56 +2033,56 @@ function hitungTotalMakanan() {
 }
 
 // ================================================================
-// FUNGSI PENGELUARAN BUKAN MAKANAN - Periode Fleksibel
+// FUNGSI PENGELUARAN BUKAN MAKANAN
 // ================================================================
-const bukanMakanItems = {
-    tagihan: [
-        { nama: "Listrik", periode: "bulanan" },
-        { nama: "Air PAM", periode: "bulanan" },
-        { nama: "LPG/Gas", periode: "bulanan" },
-        { nama: "Internet/WiFi", periode: "bulanan" },
-        { nama: "Pulsa & Paket Data", periode: "bulanan" },
-    ],
-    transportasi: [
-        { nama: "Bensin/Solar", periode: "mingguan" },
-        { nama: "Ongkos Angkutan", periode: "harian" },
-        { nama: "Parkir", periode: "harian" },
-    ],
-    kebutuhan: [
-        { nama: "Sabun Mandi", periode: "bulanan" },
-        { nama: "Sabun Cuci", periode: "bulanan" },
-        { nama: "Shampoo", periode: "bulanan" },
-        { nama: "Pasta Gigi", periode: "bulanan" },
-        { nama: "Popok Bayi", periode: "mingguan" },
-        { nama: "Pembalut", periode: "bulanan" },
-    ],
-    pendidikan: [
-        { nama: "Uang Sekolah/SPP", periode: "bulanan" },
-        { nama: "Les/Kursus", periode: "bulanan" },
-        { nama: "Fotokopi & ATK", periode: "bulanan" },
-    ],
-    kesehatan: [
-        { nama: "Obat-obatan", periode: "bulanan" },
-        { nama: "Vitamin", periode: "bulanan" },
-        { nama: "Biaya Berobat", periode: "bulanan" },
-    ],
-    jasa: [
-        { nama: "Potong Rambut", periode: "bulanan" },
-        { nama: "Cuci Pakaian", periode: "bulanan" },
-        { nama: "Penjahit/Permes", periode: "bulanan" },
-    ],
-    sosial: [
-        { nama: "Iuran RT/RW", periode: "bulanan" },
-        { nama: "Sumbangan", periode: "bulanan" },
-        { nama: "Paket Kiriman", periode: "bulanan" },
-    ]
-};
-
 function initBukanMakanContainer() {
-    Object.keys(bukanMakanItems).forEach(key => {
+    const items = {
+        tagihan: [
+            { nama: "Listrik", periode: "bulanan" },
+            { nama: "Air PAM", periode: "bulanan" },
+            { nama: "LPG/Gas", periode: "bulanan" },
+            { nama: "Internet/WiFi", periode: "bulanan" },
+            { nama: "Pulsa & Paket Data", periode: "bulanan" }
+        ],
+        transportasi: [
+            { nama: "Bensin/Solar", periode: "mingguan" },
+            { nama: "Ongkos Angkutan", periode: "harian" },
+            { nama: "Parkir", periode: "harian" }
+        ],
+        kebutuhan: [
+            { nama: "Sabun Mandi", periode: "bulanan" },
+            { nama: "Sabun Cuci", periode: "bulanan" },
+            { nama: "Shampoo", periode: "bulanan" },
+            { nama: "Pasta Gigi", periode: "bulanan" },
+            { nama: "Popok Bayi", periode: "mingguan" },
+            { nama: "Pembalut", periode: "bulanan" }
+        ],
+        pendidikan: [
+            { nama: "Uang Sekolah/SPP", periode: "bulanan" },
+            { nama: "Les/Kursus", periode: "bulanan" },
+            { nama: "Fotokopi & ATK", periode: "bulanan" }
+        ],
+        kesehatan: [
+            { nama: "Obat-obatan", periode: "bulanan" },
+            { nama: "Vitamin", periode: "bulanan" },
+            { nama: "Biaya Berobat", periode: "bulanan" }
+        ],
+        jasa: [
+            { nama: "Potong Rambut", periode: "bulanan" },
+            { nama: "Cuci Pakaian", periode: "bulanan" },
+            { nama: "Penjahit/Permes", periode: "bulanan" }
+        ],
+        sosial: [
+            { nama: "Iuran RT/RW", periode: "bulanan" },
+            { nama: "Sumbangan", periode: "bulanan" },
+            { nama: "Paket Kiriman", periode: "bulanan" }
+        ]
+    };
+    
+    Object.keys(items).forEach(key => {
         const container = document.getElementById(`container${capitalize(key)}`);
         container.innerHTML = '';
-        bukanMakanItems[key].forEach(item => {
+        items[key].forEach(item => {
             tambahItemBukanMakanRow(container, key, item.nama, item.periode);
         });
     });
@@ -1420,7 +2127,6 @@ function hapusItemBukanMakan(btn, jenis) {
 }
 
 function hitungTotalBukanMakan() {
-    const totals = {};
     const jenisList = ['tagihan', 'transportasi', 'kebutuhan', 'pendidikan', 'kesehatan', 'jasa', 'sosial'];
     let grandTotalBulan = 0;
     let grandTotalTahun = 0;
@@ -1447,45 +2153,45 @@ function hitungTotalBukanMakan() {
 }
 
 // ================================================================
-// FUNGSI PENGELUARAN TAHUNAN - Periode Fleksibel
+// FUNGSI PENGELUARAN TAHUNAN
 // ================================================================
-const tahunanItems = {
-    pakaian: [
-        { nama: "Baju Lebaran", periode: "tahunan" },
-        { nama: "Seragam Sekolah", periode: "tahunan" },
-        { nama: "Sepatu", periode: "tahunan" },
-        { nama: "Tas", periode: "tahunan" },
-    ],
-    kendaraan: [
-        { nama: "STNK", periode: "tahunan" },
-        { nama: "Pajak Kendaraan", periode: "tahunan" },
-        { nama: "Servis Besar", periode: "tahunan" },
-        { nama: "Ban", periode: "tahunan" },
-        { nama: "Servis Kendaraan", periode: "tahunan" },
-    ],
-    rumah: [
-        { nama: "PBB", periode: "tahunan" },
-        { nama: "Perbaikan Rumah", periode: "tahunan" },
-        { nama: "Cat Rumah", periode: "tahunan" },
-    ],
-    pendidikanTahunan: [
-        { nama: "Daftar Ulang", periode: "tahunan" },
-        { nama: "Uang Gedung", periode: "tahunan" },
-        { nama: "Buku Paket", periode: "tahunan" },
-    ],
-    acara: [
-        { nama: "Hajatan", periode: "tahunan" },
-        { nama: "Khitanan", periode: "tahunan" },
-        { nama: "Pernikahan", periode: "tahunan" },
-        { nama: "Hari Besar", periode: "tahunan" },
-    ]
-};
-
 function initTahunanContainer() {
-    Object.keys(tahunanItems).forEach(key => {
+    const items = {
+        pakaian: [
+            { nama: "Baju Lebaran", periode: "tahunan" },
+            { nama: "Seragam Sekolah", periode: "tahunan" },
+            { nama: "Sepatu", periode: "tahunan" },
+            { nama: "Tas", periode: "tahunan" }
+        ],
+        kendaraan: [
+            { nama: "STNK", periode: "tahunan" },
+            { nama: "Pajak Kendaraan", periode: "tahunan" },
+            { nama: "Servis Besar", periode: "tahunan" },
+            { nama: "Ban", periode: "tahunan" },
+            { nama: "Servis Kendaraan", periode: "tahunan" }
+        ],
+        rumah: [
+            { nama: "PBB", periode: "tahunan" },
+            { nama: "Perbaikan Rumah", periode: "tahunan" },
+            { nama: "Cat Rumah", periode: "tahunan" }
+        ],
+        pendidikanTahunan: [
+            { nama: "Daftar Ulang", periode: "tahunan" },
+            { nama: "Uang Gedung", periode: "tahunan" },
+            { nama: "Buku Paket", periode: "tahunan" }
+        ],
+        acara: [
+            { nama: "Hajatan", periode: "tahunan" },
+            { nama: "Khitanan", periode: "tahunan" },
+            { nama: "Pernikahan", periode: "tahunan" },
+            { nama: "Hari Besar", periode: "tahunan" }
+        ]
+    };
+    
+    Object.keys(items).forEach(key => {
         const container = document.getElementById(`container${capitalize(key)}`);
         container.innerHTML = '';
-        tahunanItems[key].forEach(item => {
+        items[key].forEach(item => {
             tambahItemTahunanRow(container, key, item.nama, item.periode);
         });
     });
@@ -1625,8 +2331,8 @@ function kirimWhatsApp() {
         
         pesan += `\n📌 Usaha #${i+1}\n`;
         pesan += `Jenis: ${jenis} (KBLI: ${kbli}) - ${kategori}\n`;
-        pesan += `Keuntungan per Bulan: ${keuntunganBulan}\n`;
-        pesan += `Keuntungan per Tahun: ${keuntunganTahun}\n`;
+        pesan += `Keuntungan / Bulan: ${keuntunganBulan}\n`;
+        pesan += `Keuntungan / Tahun: ${keuntunganTahun}\n`;
         
         // Pemasukan
         const pemasukanItems = div.querySelectorAll('.pemasukanItem');
@@ -1640,7 +2346,7 @@ function kirimWhatsApp() {
                 pesan += `  - ${nama}: Rp${parseInt(nilai).toLocaleString()} (${getPeriodeLabel(periode)})\n`;
             });
             const total = div.querySelector('.totalPemasukanBulan')?.value || 'Rp 0';
-            pesan += `  Total per Bulan: ${total}\n`;
+            pesan += `  Total Pemasukan / Bulan: ${total}\n`;
         }
         
         // Pengeluaran
@@ -1655,19 +2361,19 @@ function kirimWhatsApp() {
                 pesan += `  - ${nama}: Rp${parseInt(nilai).toLocaleString()} (${getPeriodeLabel(periode)})\n`;
             });
             const total = div.querySelector('.totalPengeluaranBulan')?.value || 'Rp 0';
-            pesan += `  Total per Bulan: ${total}\n`;
+            pesan += `  Total Pengeluaran / Bulan: ${total}\n`;
         }
     });
     pesan += `\n`;
     
     // Pengeluaran Keluarga
     pesan += `🍚 *PENGELUARAN MAKANAN*\n`;
-    pesan += `Total per Bulan: ${document.getElementById('totalMakanBulanAll').value || 'Rp 0'}\n`;
-    pesan += `Total per Tahun: ${document.getElementById('totalMakanTahunAll').value || 'Rp 0'}\n\n`;
+    pesan += `Total / Bulan: ${document.getElementById('totalMakanBulanAll').value || 'Rp 0'}\n`;
+    pesan += `Total / Tahun: ${document.getElementById('totalMakanTahunAll').value || 'Rp 0'}\n\n`;
     
     pesan += `🏪 *PENGELUARAN BUKAN MAKANAN*\n`;
-    pesan += `Total per Bulan: ${document.getElementById('totalBukanMakan').value || 'Rp 0'}\n`;
-    pesan += `Total per Tahun: ${document.getElementById('totalBukanMakanTahun').value || 'Rp 0'}\n\n`;
+    pesan += `Total / Bulan: ${document.getElementById('totalBukanMakan').value || 'Rp 0'}\n`;
+    pesan += `Total / Tahun: ${document.getElementById('totalBukanMakanTahun').value || 'Rp 0'}\n\n`;
     
     pesan += `📅 *PENGELUARAN TAHUNAN*\n`;
     pesan += `Total: ${document.getElementById('totalTahunan').value || 'Rp 0'}\n\n`;
@@ -1699,7 +2405,7 @@ window.onload = function() {
     tambahBarisPekerjaan();
     tambahBarisPekerjaan();
     
-    // Usaha
+    // Usaha - tambah 1 dengan default kosong
     tambahUsaha();
     
     // Makanan
