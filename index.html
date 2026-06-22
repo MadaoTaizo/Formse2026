@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Kuesioner Keluarga - Dengan Periode Fleksibel</title>
+    <title>Kuesioner Keluarga - Usaha Terstruktur</title>
     <style>
         * {
             box-sizing: border-box;
@@ -98,6 +98,13 @@
             min-height: 40px;
             resize: vertical;
         }
+        .form-group input[type="checkbox"] {
+            width: 20px;
+            min-width: 20px;
+            height: 20px;
+            flex: 0 0 auto;
+            accent-color: #2563eb;
+        }
         .sub-section {
             background: #f8fafc;
             padding: 14px 18px;
@@ -122,11 +129,6 @@
             display: grid;
             grid-template-columns: 1fr 1fr 1fr 1fr;
             gap: 4px 12px;
-        }
-        .grid-5 {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-            gap: 4px 10px;
         }
         .section-box {
             background: #ffffff;
@@ -317,28 +319,27 @@
             padding-bottom: 4px;
             margin-bottom: 8px;
         }
-        .periode-box {
-            background: #f8fafc;
-            border-radius: 8px;
-            padding: 8px 12px;
-            margin: 4px 0;
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 12px;
+            padding: 4px 0;
         }
-        .periode-box .form-group label {
-            min-width: 100px;
-            font-size: 12px;
-        }
-        .periode-box .form-group input {
+        .checkbox-group label {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-weight: 400;
             font-size: 13px;
-            padding: 6px 10px;
+            min-width: auto;
+            cursor: pointer;
         }
-        .period-select {
-            padding: 4px 8px;
-            border-radius: 6px;
-            border: 1px solid #cbd5e1;
-            background: white;
-            font-size: 12px;
-            flex: 0.8;
-            min-width: 80px;
+        .checkbox-group input[type="checkbox"] {
+            width: 16px;
+            min-width: 16px;
+            height: 16px;
+            cursor: pointer;
         }
         .item-row {
             background: #f8fafc;
@@ -373,17 +374,47 @@
             font-size: 12px;
             background: white;
         }
+        .category-box {
+            background: #f1f5f9;
+            border-radius: 8px;
+            padding: 8px 12px;
+            margin: 6px 0;
+            border-left: 3px solid #2563eb;
+        }
+        .category-box h6 {
+            font-size: 13px;
+            color: #1e3a6b;
+            margin-bottom: 4px;
+        }
+        .category-box .item-row {
+            background: white;
+            padding: 4px 8px;
+            margin-bottom: 3px;
+        }
+        .category-box .item-row label {
+            min-width: 100px;
+            font-size: 12px;
+        }
+        .category-box .item-row input {
+            font-size: 12px;
+            padding: 4px 8px;
+        }
+        .category-box .item-row select {
+            font-size: 11px;
+            padding: 4px 6px;
+        }
 
         @media (max-width: 820px) {
             .container { padding: 16px; }
             .form-group { flex-direction: column; align-items: stretch; }
             .form-group label { min-width: unset; width: 100%; margin-bottom: 2px; }
             .sub-section .form-group label { min-width: unset; }
-            .grid-2, .grid-3, .grid-4, .grid-5 { grid-template-columns: 1fr; }
+            .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
             .btn { width: 100%; }
             .btn-center { flex-direction: column; }
             .item-row { flex-direction: column; align-items: stretch; }
             .item-row label { min-width: unset; }
+            .checkbox-group { flex-direction: column; align-items: flex-start; }
         }
         @media (max-width: 480px) {
             body { padding: 8px; }
@@ -460,13 +491,12 @@
     </div>
 
     <!-- ========================================================= -->
-    <!-- BAGIAN III: USAHA (KBLI) dengan Periode Fleksibel -->
-    <h2>III. USAHA (KBLI) - Dengan Periode Fleksibel</h2>
+    <!-- BAGIAN III: USAHA dengan Kategori Terstruktur -->
+    <h2>III. USAHA (KBLI) - Terstruktur</h2>
     <div class="note">
         <strong>✏️ Isi untuk setiap usaha yang dijalankan keluarga.</strong>
-        Pilih jenis usaha dari daftar KBLI, <strong>sistem akan otomatis menampilkan</strong>
-        daftar pemasukan dan pengeluaran yang relevan dengan usaha tersebut.
-        <br>📌 Setiap item bisa memilih periode <strong>(Harian, Mingguan, Bulanan, atau Tahunan)</strong>.
+        Pilih jenis usaha dari daftar KBLI, lalu isi data sesuai kategori.
+        <br>📌 <strong>Jika usaha mandiri (tanpa karyawan), centang "Usaha Mandiri"</strong> - maka kolom upah/gaji akan dinonaktifkan.
     </div>
 
     <div id="containerUsaha">
@@ -476,54 +506,45 @@
     <button class="btn-add-row" onclick="tambahUsaha()" style="padding:8px 20px; font-size:14px;">+ Tambah Usaha Lain</button>
 
     <!-- ========================================================= -->
-    <!-- BAGIAN IV: PENGELUARAN KELUARGA dengan Periode Fleksibel -->
+    <!-- BAGIAN IV: PENGELUARAN KELUARGA -->
     <h2>IV. PENGELUARAN KELUARGA</h2>
-    <div class="note">
-        <strong>✏️ Isi pengeluaran keluarga dengan periode yang sesuai</strong>
-        (Harian, Mingguan, Bulanan, atau Tahunan).
-        <br>📌 Sistem akan otomatis mengkonversi semua ke <strong>Bulanan</strong> dan <strong>Tahunan</strong>.
-    </div>
 
     <!-- PENGELUARAN MAKANAN -->
     <h3>PENGELUARAN MAKANAN</h3>
     <div class="sub-section">
         <div class="section-box">
             <h5>A. BELANJA BAHAN MAKANAN</h5>
-            <div id="containerBelanjaMakanan">
-                <!-- Akan diisi JavaScript -->
-            </div>
+            <div id="containerBelanjaMakanan"></div>
             <div style="margin-top:6px;">
                 <button class="btn-add-row" onclick="tambahItemMakanan('belanja')">+ Tambah Item Belanja</button>
             </div>
             <div class="total-box" style="margin-top:8px;">
                 <div class="grid-3">
                     <div class="form-group"><label><strong>Total per Bulan</strong></label><input type="text" id="totalBelanjaMakanan" readonly placeholder="Rp 0" style="font-weight:700; color:#075985;" /></div>
-                    <div class="form-group"><label><strong>Total per Tahun (×12)</strong></label><input type="text" id="totalBelanjaMakananTahun" readonly placeholder="Rp 0" style="font-weight:700; color:#075985;" /></div>
+                    <div class="form-group"><label><strong>Total per Tahun</strong></label><input type="text" id="totalBelanjaMakananTahun" readonly placeholder="Rp 0" style="font-weight:700; color:#075985;" /></div>
                 </div>
             </div>
         </div>
 
         <div class="section-box">
             <h5>B. MAKANAN & MINUMAN JADI</h5>
-            <div id="containerMakananJadi">
-                <!-- Akan diisi JavaScript -->
-            </div>
+            <div id="containerMakananJadi"></div>
             <div style="margin-top:6px;">
                 <button class="btn-add-row" onclick="tambahItemMakanan('jadi')">+ Tambah Item Makanan Jadi</button>
             </div>
             <div class="total-box" style="margin-top:8px;">
                 <div class="grid-2">
                     <div class="form-group"><label><strong>Total per Bulan</strong></label><input type="text" id="totalMakananJadi" readonly placeholder="Rp 0" style="font-weight:700; color:#075985;" /></div>
-                    <div class="form-group"><label><strong>Total per Tahun (×12)</strong></label><input type="text" id="totalMakananJadiTahun" readonly placeholder="Rp 0" style="font-weight:700; color:#075985;" /></div>
+                    <div class="form-group"><label><strong>Total per Tahun</strong></label><input type="text" id="totalMakananJadiTahun" readonly placeholder="Rp 0" style="font-weight:700; color:#075985;" /></div>
                 </div>
             </div>
         </div>
 
         <div class="section-box">
-            <h5>C. CATATAN PENGELUARAN MAKANAN</h5>
+            <h5>C. TOTAL PENGELUARAN MAKANAN</h5>
             <div class="grid-2">
-                <div class="form-group"><label><strong>Total Pengeluaran Makanan per Bulan</strong></label><input type="text" id="totalMakanBulanAll" readonly placeholder="Rp 0" style="font-weight:700; color:#075985;" /></div>
-                <div class="form-group"><label><strong>Total Pengeluaran Makanan per Tahun</strong></label><input type="text" id="totalMakanTahunAll" readonly placeholder="Rp 0" style="font-weight:700; color:#075985;" /></div>
+                <div class="form-group"><label><strong>Total per Bulan</strong></label><input type="text" id="totalMakanBulanAll" readonly placeholder="Rp 0" style="font-weight:700; color:#075985;" /></div>
+                <div class="form-group"><label><strong>Total per Tahun</strong></label><input type="text" id="totalMakanTahunAll" readonly placeholder="Rp 0" style="font-weight:700; color:#075985;" /></div>
             </div>
         </div>
     </div>
@@ -533,9 +554,7 @@
     <div class="sub-section">
         <div class="section-box">
             <h5>A. TAGIHAN RUMAH TANGGA</h5>
-            <div id="containerTagihan">
-                <!-- Akan diisi JavaScript -->
-            </div>
+            <div id="containerTagihan"></div>
             <div style="margin-top:6px;">
                 <button class="btn-add-row" onclick="tambahItemBukanMakan('tagihan')">+ Tambah Item Tagihan</button>
             </div>
@@ -544,9 +563,7 @@
 
         <div class="section-box">
             <h5>B. TRANSPORTASI</h5>
-            <div id="containerTransportasi">
-                <!-- Akan diisi JavaScript -->
-            </div>
+            <div id="containerTransportasi"></div>
             <div style="margin-top:6px;">
                 <button class="btn-add-row" onclick="tambahItemBukanMakan('transportasi')">+ Tambah Item Transportasi</button>
             </div>
@@ -555,9 +572,7 @@
 
         <div class="section-box">
             <h5>C. KEBUTUHAN HARIAN</h5>
-            <div id="containerKebutuhan">
-                <!-- Akan diisi JavaScript -->
-            </div>
+            <div id="containerKebutuhan"></div>
             <div style="margin-top:6px;">
                 <button class="btn-add-row" onclick="tambahItemBukanMakan('kebutuhan')">+ Tambah Item Kebutuhan</button>
             </div>
@@ -566,9 +581,7 @@
 
         <div class="section-box">
             <h5>D. PENDIDIKAN</h5>
-            <div id="containerPendidikan">
-                <!-- Akan diisi JavaScript -->
-            </div>
+            <div id="containerPendidikan"></div>
             <div style="margin-top:6px;">
                 <button class="btn-add-row" onclick="tambahItemBukanMakan('pendidikan')">+ Tambah Item Pendidikan</button>
             </div>
@@ -577,9 +590,7 @@
 
         <div class="section-box">
             <h5>E. KESEHATAN</h5>
-            <div id="containerKesehatan">
-                <!-- Akan diisi JavaScript -->
-            </div>
+            <div id="containerKesehatan"></div>
             <div style="margin-top:6px;">
                 <button class="btn-add-row" onclick="tambahItemBukanMakan('kesehatan')">+ Tambah Item Kesehatan</button>
             </div>
@@ -588,9 +599,7 @@
 
         <div class="section-box">
             <h5>F. JASA</h5>
-            <div id="containerJasa">
-                <!-- Akan diisi JavaScript -->
-            </div>
+            <div id="containerJasa"></div>
             <div style="margin-top:6px;">
                 <button class="btn-add-row" onclick="tambahItemBukanMakan('jasa')">+ Tambah Item Jasa</button>
             </div>
@@ -599,9 +608,7 @@
 
         <div class="section-box">
             <h5>G. SOSIAL & KOMUNIKASI</h5>
-            <div id="containerSosial">
-                <!-- Akan diisi JavaScript -->
-            </div>
+            <div id="containerSosial"></div>
             <div style="margin-top:6px;">
                 <button class="btn-add-row" onclick="tambahItemBukanMakan('sosial')">+ Tambah Item Sosial</button>
             </div>
@@ -625,9 +632,7 @@
     <div class="sub-section">
         <div class="section-box">
             <h5>A. PAKAIAN</h5>
-            <div id="containerPakaian">
-                <!-- Akan diisi JavaScript -->
-            </div>
+            <div id="containerPakaian"></div>
             <div style="margin-top:6px;">
                 <button class="btn-add-row" onclick="tambahItemTahunan('pakaian')">+ Tambah Item Pakaian</button>
             </div>
@@ -636,9 +641,7 @@
 
         <div class="section-box">
             <h5>B. KENDARAAN</h5>
-            <div id="containerKendaraan">
-                <!-- Akan diisi JavaScript -->
-            </div>
+            <div id="containerKendaraan"></div>
             <div style="margin-top:6px;">
                 <button class="btn-add-row" onclick="tambahItemTahunan('kendaraan')">+ Tambah Item Kendaraan</button>
             </div>
@@ -647,9 +650,7 @@
 
         <div class="section-box">
             <h5>C. RUMAH</h5>
-            <div id="containerRumah">
-                <!-- Akan diisi JavaScript -->
-            </div>
+            <div id="containerRumah"></div>
             <div style="margin-top:6px;">
                 <button class="btn-add-row" onclick="tambahItemTahunan('rumah')">+ Tambah Item Rumah</button>
             </div>
@@ -658,9 +659,7 @@
 
         <div class="section-box">
             <h5>D. PENDIDIKAN (Tahunan)</h5>
-            <div id="containerPendidikanTahunan">
-                <!-- Akan diisi JavaScript -->
-            </div>
+            <div id="containerPendidikanTahunan"></div>
             <div style="margin-top:6px;">
                 <button class="btn-add-row" onclick="tambahItemTahunan('pendidikanTahunan')">+ Tambah Item Pendidikan</button>
             </div>
@@ -669,9 +668,7 @@
 
         <div class="section-box">
             <h5>E. ACARA KHUSUS</h5>
-            <div id="containerAcara">
-                <!-- Akan diisi JavaScript -->
-            </div>
+            <div id="containerAcara"></div>
             <div style="margin-top:6px;">
                 <button class="btn-add-row" onclick="tambahItemTahunan('acara')">+ Tambah Item Acara</button>
             </div>
@@ -703,11 +700,10 @@
             <li>Isilah semua kolom dengan angka yang sebenarnya dikeluarkan.</li>
             <li>Pilih <strong>periode</strong> yang sesuai untuk setiap item (Harian, Mingguan, Bulanan, Tahunan).</li>
             <li>Gunakan rata-rata pengeluaran jika nilainya berubah-ubah.</li>
-            <li>Catat semua pengeluaran sekecil apa pun.</li>
             <li>Jika ada kategori yang tidak ada pengeluarannya, tulis "0".</li>
             <li><strong>Pekerjaan</strong> diisi untuk yang bekerja sebagai pegawai/karyawan.</li>
-            <li><strong>Usaha</strong> diisi untuk yang memiliki usaha sendiri, pilih dari daftar KBLI.</li>
-            <li>Setelah memilih jenis usaha, <strong>daftar pemasukan dan pengeluaran akan muncul otomatis</strong>.</li>
+            <li><strong>Usaha</strong> diisi untuk yang memiliki usaha sendiri.</li>
+            <li>Jika usaha <strong>mandiri (tanpa karyawan)</strong>, centang "Usaha Mandiri".</li>
         </ol>
     </div>
 
@@ -730,8 +726,8 @@
             <div class="form-group"><label>Total Keuntungan Usaha / Bulan</label><input type="text" id="ringkasanKeuntunganUsaha" readonly placeholder="Rp 0" /></div>
             <div class="form-group"><label>Total Pendapatan Keluarga / Bulan</label><input type="text" id="ringkasanPendapatan" readonly placeholder="Rp 0" /></div>
             <div class="form-group"><label>Total Pengeluaran / Bulan</label><input type="text" id="ringkasanPengeluaran" readonly placeholder="Rp 0" /></div>
-            <div class="form-group"><label><strong>Selisih Pendapatan - Pengeluaran / Bulan</strong></label><input type="text" id="ringkasanSelisih" readonly placeholder="Rp 0" style="font-weight:700; color:#075985; font-size:16px;" /></div>
-            <div class="form-group"><label><strong>Selisih Pendapatan - Pengeluaran / Tahun</strong></label><input type="text" id="ringkasanSelisihTahun" readonly placeholder="Rp 0" style="font-weight:700; color:#075985; font-size:16px;" /></div>
+            <div class="form-group"><label><strong>Selisih / Bulan</strong></label><input type="text" id="ringkasanSelisih" readonly placeholder="Rp 0" style="font-weight:700; color:#075985; font-size:16px;" /></div>
+            <div class="form-group"><label><strong>Selisih / Tahun</strong></label><input type="text" id="ringkasanSelisihTahun" readonly placeholder="Rp 0" style="font-weight:700; color:#075985; font-size:16px;" /></div>
         </div>
     </div>
 
@@ -750,7 +746,6 @@
 // DATA PEKERJAAN (185+) dengan KATEGORI
 // ================================================================
 const dataPekerjaan = [
-    // PROFESIONAL
     { nama: "Dokter Spesialis", kategori: "Profesional", gaji: 25000000 },
     { nama: "Dokter Umum", kategori: "Profesional", gaji: 15000000 },
     { nama: "Dokter Gigi", kategori: "Profesional", gaji: 12000000 },
@@ -766,7 +761,6 @@ const dataPekerjaan = [
     { nama: "Manajer", kategori: "Profesional", gaji: 15000000 },
     { nama: "Direktur", kategori: "Profesional", gaji: 30000000 },
     { nama: "CEO", kategori: "Profesional", gaji: 50000000 },
-    // PENDIDIKAN
     { nama: "Guru SD", kategori: "Pendidikan", gaji: 4000000 },
     { nama: "Guru SMP", kategori: "Pendidikan", gaji: 4500000 },
     { nama: "Guru SMA", kategori: "Pendidikan", gaji: 5000000 },
@@ -774,7 +768,6 @@ const dataPekerjaan = [
     { nama: "Dosen", kategori: "Pendidikan", gaji: 8000000 },
     { nama: "Profesor", kategori: "Pendidikan", gaji: 15000000 },
     { nama: "Kepala Sekolah", kategori: "Pendidikan", gaji: 8000000 },
-    // TEKNOLOGI
     { nama: "Software Engineer", kategori: "Teknologi", gaji: 12000000 },
     { nama: "Web Developer", kategori: "Teknologi", gaji: 10000000 },
     { nama: "Mobile Developer", kategori: "Teknologi", gaji: 12000000 },
@@ -785,7 +778,6 @@ const dataPekerjaan = [
     { nama: "UI/UX Designer", kategori: "Teknologi", gaji: 10000000 },
     { nama: "Game Developer", kategori: "Teknologi", gaji: 12000000 },
     { nama: "AI Engineer", kategori: "Teknologi", gaji: 20000000 },
-    // KESEHATAN
     { nama: "Ahli Gizi", kategori: "Kesehatan", gaji: 6000000 },
     { nama: "Fisioterapis", kategori: "Kesehatan", gaji: 7000000 },
     { nama: "Psikolog", kategori: "Kesehatan", gaji: 10000000 },
@@ -793,7 +785,6 @@ const dataPekerjaan = [
     { nama: "Terapis", kategori: "Kesehatan", gaji: 6000000 },
     { nama: "Radiografer", kategori: "Kesehatan", gaji: 8000000 },
     { nama: "Analis Kesehatan", kategori: "Kesehatan", gaji: 7000000 },
-    // KEUANGAN
     { nama: "Analis Keuangan", kategori: "Keuangan", gaji: 12000000 },
     { nama: "Bankir", kategori: "Keuangan", gaji: 10000000 },
     { nama: "Teller Bank", kategori: "Keuangan", gaji: 5000000 },
@@ -801,7 +792,6 @@ const dataPekerjaan = [
     { nama: "Manajer Bank", kategori: "Keuangan", gaji: 20000000 },
     { nama: "Agen Asuransi", kategori: "Keuangan", gaji: 8000000 },
     { nama: "Broker Saham", kategori: "Keuangan", gaji: 15000000 },
-    // PEMERINTAHAN
     { nama: "PNS Golongan I", kategori: "Pemerintahan", gaji: 2500000 },
     { nama: "PNS Golongan II", kategori: "Pemerintahan", gaji: 3500000 },
     { nama: "PNS Golongan III", kategori: "Pemerintahan", gaji: 5000000 },
@@ -811,7 +801,6 @@ const dataPekerjaan = [
     { nama: "Kepala Desa", kategori: "Pemerintahan", gaji: 4000000 },
     { nama: "Lurah", kategori: "Pemerintahan", gaji: 5000000 },
     { nama: "Camat", kategori: "Pemerintahan", gaji: 7000000 },
-    // KONSTRUKSI
     { nama: "Arsitek", kategori: "Konstruksi", gaji: 10000000 },
     { nama: "Insinyur Sipil", kategori: "Konstruksi", gaji: 10000000 },
     { nama: "Insinyur Elektro", kategori: "Konstruksi", gaji: 10000000 },
@@ -822,7 +811,6 @@ const dataPekerjaan = [
     { nama: "Tukang Kayu", kategori: "Konstruksi", gaji: 4000000 },
     { nama: "Tukang Las", kategori: "Konstruksi", gaji: 4500000 },
     { nama: "Tukang Cat", kategori: "Konstruksi", gaji: 4000000 },
-    // TRANSPORTASI
     { nama: "Supir Bus", kategori: "Transportasi", gaji: 5000000 },
     { nama: "Supir Truk", kategori: "Transportasi", gaji: 6000000 },
     { nama: "Supir Taksi", kategori: "Transportasi", gaji: 4000000 },
@@ -832,13 +820,11 @@ const dataPekerjaan = [
     { nama: "Pramugari", kategori: "Transportasi", gaji: 12000000 },
     { nama: "Nakhoda Kapal", kategori: "Transportasi", gaji: 25000000 },
     { nama: "Pelaut", kategori: "Transportasi", gaji: 10000000 },
-    // PERTANIAN
     { nama: "Petani", kategori: "Pertanian", gaji: 3000000 },
     { nama: "Peternak", kategori: "Pertanian", gaji: 4000000 },
     { nama: "Nelayan", kategori: "Pertanian", gaji: 4000000 },
     { nama: "Perkebunan", kategori: "Pertanian", gaji: 3500000 },
     { nama: "Kehutanan", kategori: "Pertanian", gaji: 4000000 },
-    // PERDAGANGAN
     { nama: "Pedagang Kecil", kategori: "Perdagangan", gaji: 4000000 },
     { nama: "Pedagang Besar", kategori: "Perdagangan", gaji: 10000000 },
     { nama: "Pedagang Keliling", kategori: "Perdagangan", gaji: 3500000 },
@@ -846,7 +832,6 @@ const dataPekerjaan = [
     { nama: "Eksportir", kategori: "Perdagangan", gaji: 15000000 },
     { nama: "Importir", kategori: "Perdagangan", gaji: 15000000 },
     { nama: "Distributor", kategori: "Perdagangan", gaji: 10000000 },
-    // JASA
     { nama: "Pramusaji", kategori: "Jasa", gaji: 3000000 },
     { nama: "Koki", kategori: "Jasa", gaji: 5000000 },
     { nama: "Chef", kategori: "Jasa", gaji: 10000000 },
@@ -856,7 +841,6 @@ const dataPekerjaan = [
     { nama: "Satpam", kategori: "Jasa", gaji: 3500000 },
     { nama: "OB", kategori: "Jasa", gaji: 3000000 },
     { nama: "Pramuwisma", kategori: "Jasa", gaji: 3000000 },
-    // KREATIF
     { nama: "Desainer Grafis", kategori: "Kreatif", gaji: 7000000 },
     { nama: "Fotografer", kategori: "Kreatif", gaji: 6000000 },
     { nama: "Videografer", kategori: "Kreatif", gaji: 7000000 },
@@ -870,7 +854,6 @@ const dataPekerjaan = [
     { nama: "Seniman", kategori: "Kreatif", gaji: 5000000 },
     { nama: "Musisi", kategori: "Kreatif", gaji: 6000000 },
     { nama: "Aktor", kategori: "Kreatif", gaji: 10000000 },
-    // LAINNYA
     { nama: "Ibu Rumah Tangga", kategori: "Lainnya", gaji: 0 },
     { nama: "Mahasiswa", kategori: "Lainnya", gaji: 0 },
     { nama: "Pensiunan", kategori: "Lainnya", gaji: 0 },
@@ -883,738 +866,48 @@ const dataPekerjaan = [
 ];
 
 // ================================================================
-// DATA KBLI (USAHA) dengan DETAIL PEMASUKAN & PENGELUARAN
+// DATA KBLI (USAHA) dengan KATEGORI
 // ================================================================
 const dataKBLI = [
-    // A: PERTANIAN
-    { 
-        nama: "Budidaya Padi", 
-        kbli: "01121", 
-        kategori: "Pertanian",
-        pemasukan: [
-            { nama: "Penjualan Gabah", periode: "bulanan" },
-            { nama: "Penjualan Jerami", periode: "tahunan" },
-            { nama: "Penjualan Benih", periode: "tahunan" },
-            { nama: "Jasa Panen", periode: "bulanan" }
-        ],
-        pengeluaran: [
-            { nama: "Bibit Padi", periode: "tahunan" },
-            { nama: "Pupuk", periode: "bulanan" },
-            { nama: "Pestisida", periode: "bulanan" },
-            { nama: "Sewa Lahan", periode: "tahunan" },
-            { nama: "Upah Buruh Tani", periode: "harian" },
-            { nama: "Biaya Panen", periode: "tahunan" },
-            { nama: "Biaya Pengolahan", periode: "bulanan" },
-            { nama: "Transportasi", periode: "mingguan" }
-        ]
-    },
-    { 
-        nama: "Budidaya Jagung", 
-        kbli: "01111", 
-        kategori: "Pertanian",
-        pemasukan: [
-            { nama: "Penjualan Jagung Pipil", periode: "bulanan" },
-            { nama: "Penjualan Jagung Tongkol", periode: "bulanan" },
-            { nama: "Penjualan Pakan Ternak", periode: "bulanan" }
-        ],
-        pengeluaran: [
-            { nama: "Bibit Jagung", periode: "tahunan" },
-            { nama: "Pupuk", periode: "bulanan" },
-            { nama: "Pestisida", periode: "bulanan" },
-            { nama: "Sewa Lahan", periode: "tahunan" },
-            { nama: "Upah Buruh", periode: "harian" },
-            { nama: "Biaya Panen", periode: "tahunan" },
-            { nama: "Transportasi", periode: "mingguan" }
-        ]
-    },
-    { 
-        nama: "Budidaya Sayuran", 
-        kbli: "01131", 
-        kategori: "Pertanian",
-        pemasukan: [
-            { nama: "Penjualan Sayuran Segar", periode: "harian" },
-            { nama: "Penjualan Sayuran Olahan", periode: "mingguan" }
-        ],
-        pengeluaran: [
-            { nama: "Bibit Sayuran", periode: "bulanan" },
-            { nama: "Pupuk", periode: "mingguan" },
-            { nama: "Pestisida", periode: "mingguan" },
-            { nama: "Sewa Lahan", periode: "tahunan" },
-            { nama: "Upah Buruh", periode: "harian" },
-            { nama: "Biaya Panen", periode: "mingguan" },
-            { nama: "Transportasi", periode: "harian" },
-            { nama: "Kemasan", periode: "harian" }
-        ]
-    },
-    { 
-        nama: "Budidaya Cabai", 
-        kbli: "01138", 
-        kategori: "Pertanian",
-        pemasukan: [
-            { nama: "Penjualan Cabai Segar", periode: "harian" },
-            { nama: "Penjualan Cabai Kering", periode: "mingguan" }
-        ],
-        pengeluaran: [
-            { nama: "Bibit Cabai", periode: "bulanan" },
-            { nama: "Pupuk", periode: "mingguan" },
-            { nama: "Pestisida", periode: "mingguan" },
-            { nama: "Sewa Lahan", periode: "tahunan" },
-            { nama: "Upah Buruh", periode: "harian" },
-            { nama: "Biaya Panen", periode: "mingguan" },
-            { nama: "Transportasi", periode: "harian" }
-        ]
-    },
-    { 
-        nama: "Peternakan Ayam Pedaging", 
-        kbli: "01461", 
-        kategori: "Peternakan",
-        pemasukan: [
-            { nama: "Penjualan Ayam Hidup", periode: "bulanan" },
-            { nama: "Penjualan Ayam Potong", periode: "harian" },
-            { nama: "Penjualan Telur", periode: "harian" }
-        ],
-        pengeluaran: [
-            { nama: "DOC (Day Old Chick)", periode: "bulanan" },
-            { nama: "Pakan Ayam", periode: "harian" },
-            { nama: "Vitamin & Obat", periode: "mingguan" },
-            { nama: "Sewa Kandang", periode: "bulanan" },
-            { nama: "Upah Karyawan", periode: "bulanan" },
-            { nama: "Listrik", periode: "bulanan" },
-            { nama: "Air", periode: "bulanan" },
-            { nama: "Transportasi", periode: "mingguan" }
-        ]
-    },
-    { 
-        nama: "Peternakan Ayam Petelur", 
-        kbli: "01462", 
-        kategori: "Peternakan",
-        pemasukan: [
-            { nama: "Penjualan Telur", periode: "harian" },
-            { nama: "Penjualan Ayam Afkir", periode: "bulanan" }
-        ],
-        pengeluaran: [
-            { nama: "Pullet", periode: "tahunan" },
-            { nama: "Pakan Ayam", periode: "harian" },
-            { nama: "Vitamin & Obat", periode: "mingguan" },
-            { nama: "Sewa Kandang", periode: "bulanan" },
-            { nama: "Upah Karyawan", periode: "bulanan" },
-            { nama: "Listrik", periode: "bulanan" },
-            { nama: "Air", periode: "bulanan" },
-            { nama: "Transportasi", periode: "mingguan" }
-        ]
-    },
-    { 
-        nama: "Peternakan Sapi Potong", 
-        kbli: "01411", 
-        kategori: "Peternakan",
-        pemasukan: [
-            { nama: "Penjualan Sapi Hidup", periode: "bulanan" },
-            { nama: "Penjualan Daging Sapi", periode: "harian" },
-            { nama: "Penjualan Susu", periode: "harian" }
-        ],
-        pengeluaran: [
-            { nama: "Bibit Sapi", periode: "tahunan" },
-            { nama: "Pakan Ternak", periode: "harian" },
-            { nama: "Vitamin & Obat", periode: "mingguan" },
-            { nama: "Sewa Lahan", periode: "tahunan" },
-            { nama: "Upah Karyawan", periode: "bulanan" },
-            { nama: "Transportasi", periode: "mingguan" },
-            { nama: "Biaya Potong", periode: "bulanan" }
-        ]
-    },
-    { 
-        nama: "Budidaya Ikan Lele", 
-        kbli: "03225", 
-        kategori: "Perikanan",
-        pemasukan: [
-            { nama: "Penjualan Ikan Hidup", periode: "bulanan" },
-            { nama: "Penjualan Ikan Olahan", periode: "mingguan" }
-        ],
-        pengeluaran: [
-            { nama: "Bibit Ikan", periode: "bulanan" },
-            { nama: "Pakan Ikan", periode: "harian" },
-            { nama: "Vitamin & Obat", periode: "mingguan" },
-            { nama: "Sewa Kolam", periode: "bulanan" },
-            { nama: "Upah Karyawan", periode: "bulanan" },
-            { nama: "Listrik", periode: "bulanan" },
-            { nama: "Air", periode: "bulanan" },
-            { nama: "Transportasi", periode: "mingguan" }
-        ]
-    },
-    
-    // C: INDUSTRI
-    { 
-        nama: "Industri Tahu", 
-        kbli: "10308", 
-        kategori: "Industri Makanan",
-        pemasukan: [
-            { nama: "Penjualan Tahu", periode: "harian" },
-            { nama: "Penjualan Ampas Tahu", periode: "harian" }
-        ],
-        pengeluaran: [
-            { nama: "Kedelai", periode: "harian" },
-            { nama: "Bahan Baku Tambahan", periode: "mingguan" },
-            { nama: "Gas/LPG", periode: "mingguan" },
-            { nama: "Air", periode: "harian" },
-            { nama: "Listrik", periode: "bulanan" },
-            { nama: "Upah Karyawan", periode: "bulanan" },
-            { nama: "Kemasan", periode: "harian" },
-            { nama: "Transportasi", periode: "harian" }
-        ]
-    },
-    { 
-        nama: "Industri Tempe", 
-        kbli: "10307", 
-        kategori: "Industri Makanan",
-        pemasukan: [
-            { nama: "Penjualan Tempe", periode: "harian" },
-            { nama: "Penjualan Ampas Tempe", periode: "harian" }
-        ],
-        pengeluaran: [
-            { nama: "Kedelai", periode: "harian" },
-            { nama: "Ragi Tempe", periode: "mingguan" },
-            { nama: "Bahan Baku", periode: "mingguan" },
-            { nama: "Gas/LPG", periode: "mingguan" },
-            { nama: "Air", periode: "harian" },
-            { nama: "Listrik", periode: "bulanan" },
-            { nama: "Upah Karyawan", periode: "bulanan" },
-            { nama: "Kemasan", periode: "harian" },
-            { nama: "Transportasi", periode: "harian" }
-        ]
-    },
-    { 
-        nama: "Industri Kerupuk", 
-        kbli: "10794", 
-        kategori: "Industri Makanan",
-        pemasukan: [
-            { nama: "Penjualan Kerupuk", periode: "harian" },
-            { nama: "Penjualan Peyek", periode: "harian" },
-            { nama: "Penjualan Kripik", periode: "harian" }
-        ],
-        pengeluaran: [
-            { nama: "Bahan Baku", periode: "harian" },
-            { nama: "Minyak Goreng", periode: "harian" },
-            { nama: "Gas/LPG", periode: "mingguan" },
-            { nama: "Listrik", periode: "bulanan" },
-            { nama: "Upah Karyawan", periode: "bulanan" },
-            { nama: "Kemasan", periode: "harian" },
-            { nama: "Transportasi", periode: "harian" }
-        ]
-    },
-    { 
-        nama: "Penggilingan Padi", 
-        kbli: "10631", 
-        kategori: "Industri Makanan",
-        pemasukan: [
-            { nama: "Jasa Giling", periode: "harian" },
-            { nama: "Penjualan Beras", periode: "harian" },
-            { nama: "Penjualan Dedak", periode: "harian" }
-        ],
-        pengeluaran: [
-            { nama: "Listrik", periode: "bulanan" },
-            { nama: "Perawatan Mesin", periode: "bulanan" },
-            { nama: "Upah Karyawan", periode: "bulanan" },
-            { nama: "Sewa Tempat", periode: "bulanan" },
-            { nama: "Transportasi", periode: "harian" }
-        ]
-    },
-    { 
-        nama: "Depot Air Minum Isi Ulang", 
-        kbli: "11052", 
-        kategori: "Industri Minuman",
-        pemasukan: [
-            { nama: "Penjualan Air Galon", periode: "harian" },
-            { nama: "Penjualan Air Kemasan", periode: "harian" }
-        ],
-        pengeluaran: [
-            { nama: "Air Baku", periode: "harian" },
-            { nama: "Saringan/Filter", periode: "bulanan" },
-            { nama: "Galon", periode: "harian" },
-            { nama: "Kemasan", periode: "harian" },
-            { nama: "Listrik", periode: "bulanan" },
-            { nama: "Upah Karyawan", periode: "bulanan" },
-            { nama: "Sewa Tempat", periode: "bulanan" },
-            { nama: "Transportasi", periode: "harian" }
-        ]
-    },
-    { 
-        nama: "Pengrajin Mebel Kayu", 
-        kbli: "31011", 
-        kategori: "Industri Kerajinan",
-        pemasukan: [
-            { nama: "Penjualan Mebel", periode: "bulanan" },
-            { nama: "Penjualan Kerajinan Kayu", periode: "bulanan" },
-            { nama: "Jasa Pembuatan", periode: "bulanan" }
-        ],
-        pengeluaran: [
-            { nama: "Kayu", periode: "bulanan" },
-            { nama: "Bahan Baku", periode: "bulanan" },
-            { nama: "Paku & Lem", periode: "bulanan" },
-            { nama: "Cat/Pelitur", periode: "bulanan" },
-            { nama: "Listrik", periode: "bulanan" },
-            { nama: "Upah Karyawan", periode: "bulanan" },
-            { nama: "Sewa Tempat", periode: "bulanan" },
-            { nama: "Transportasi", periode: "mingguan" }
-        ]
-    },
-    { 
-        nama: "Tukang Jahit", 
-        kbli: "14120", 
-        kategori: "Industri Tekstil",
-        pemasukan: [
-            { nama: "Jasa Jahit", periode: "harian" },
-            { nama: "Penjualan Pakaian Jadi", periode: "harian" }
-        ],
-        pengeluaran: [
-            { nama: "Kain", periode: "bulanan" },
-            { nama: "Benang", periode: "mingguan" },
-            { nama: "Aksesoris", periode: "bulanan" },
-            { nama: "Listrik", periode: "bulanan" },
-            { nama: "Perawatan Mesin", periode: "bulanan" },
-            { nama: "Sewa Tempat", periode: "bulanan" }
-        ]
-    },
-    
-    // D: KONSTRUKSI
-    { 
-        nama: "Jasa Konstruksi Bangunan", 
-        kbli: "41011", 
-        kategori: "Konstruksi",
-        pemasukan: [
-            { nama: "Jasa Pembangunan", periode: "bulanan" },
-            { nama: "Jasa Renovasi", periode: "bulanan" },
-            { nama: "Jasa Perbaikan", periode: "harian" }
-        ],
-        pengeluaran: [
-            { nama: "Material Bangunan", periode: "harian" },
-            { nama: "Upah Tukang", periode: "harian" },
-            { nama: "Sewa Alat", periode: "harian" },
-            { nama: "Transportasi", periode: "harian" },
-            { nama: "Biaya Izin", periode: "tahunan" }
-        ]
-    },
-    
-    // G: PERDAGANGAN
-    { 
-        nama: "Warung Sembako", 
-        kbli: "47112", 
-        kategori: "Perdagangan Eceran",
-        pemasukan: [
-            { nama: "Penjualan Sembako", periode: "harian" },
-            { nama: "Penjualan Rokok", periode: "harian" },
-            { nama: "Penjualan Minuman", periode: "harian" },
-            { nama: "Penjualan Pulsa", periode: "harian" }
-        ],
-        pengeluaran: [
-            { nama: "Stok Barang", periode: "mingguan" },
-            { nama: "Sewa Tempat", periode: "bulanan" },
-            { nama: "Listrik", periode: "bulanan" },
-            { nama: "Air", periode: "bulanan" },
-            { nama: "Upah Karyawan", periode: "bulanan" },
-            { nama: "Transportasi", periode: "harian" }
-        ]
-    },
-    { 
-        nama: "Toko Material Bangunan", 
-        kbli: "47521", 
-        kategori: "Perdagangan Eceran",
-        pemasukan: [
-            { nama: "Penjualan Material", periode: "harian" },
-            { nama: "Penjualan Cat", periode: "harian" },
-            { nama: "Penjualan Peralatan", periode: "harian" }
-        ],
-        pengeluaran: [
-            { nama: "Stok Barang", periode: "bulanan" },
-            { nama: "Sewa Tempat", periode: "bulanan" },
-            { nama: "Listrik", periode: "bulanan" },
-            { nama: "Upah Karyawan", periode: "bulanan" },
-            { nama: "Transportasi", periode: "harian" }
-        ]
-    },
-    { 
-        nama: "Toko Pakaian", 
-        kbli: "47711", 
-        kategori: "Perdagangan Eceran",
-        pemasukan: [
-            { nama: "Penjualan Pakaian", periode: "harian" },
-            { nama: "Penjualan Aksesoris", periode: "harian" }
-        ],
-        pengeluaran: [
-            { nama: "Stok Barang", periode: "bulanan" },
-            { nama: "Sewa Tempat", periode: "bulanan" },
-            { nama: "Listrik", periode: "bulanan" },
-            { nama: "Upah Karyawan", periode: "bulanan" },
-            { nama: "Transportasi", periode: "mingguan" }
-        ]
-    },
-    { 
-        nama: "Toko Elektronik", 
-        kbli: "47591", 
-        kategori: "Perdagangan Eceran",
-        pemasukan: [
-            { nama: "Penjualan Elektronik", periode: "harian" },
-            { nama: "Jasa Servis", periode: "harian" }
-        ],
-        pengeluaran: [
-            { nama: "Stok Barang", periode: "bulanan" },
-            { nama: "Sewa Tempat", periode: "bulanan" },
-            { nama: "Listrik", periode: "bulanan" },
-            { nama: "Upah Karyawan", periode: "bulanan" },
-            { nama: "Transportasi", periode: "mingguan" }
-        ]
-    },
-    { 
-        nama: "SPBU/Pertashop", 
-        kbli: "47301", 
-        kategori: "Perdagangan Eceran",
-        pemasukan: [
-            { nama: "Penjualan BBM", periode: "harian" },
-            { nama: "Penjualan Pelumas", periode: "harian" },
-            { nama: "Penjualan Oli", periode: "harian" }
-        ],
-        pengeluaran: [
-            { nama: "Stok BBM", periode: "harian" },
-            { nama: "Sewa Tempat", periode: "bulanan" },
-            { nama: "Listrik", periode: "bulanan" },
-            { nama: "Air", periode: "bulanan" },
-            { nama: "Upah Karyawan", periode: "bulanan" },
-            { nama: "Transportasi", periode: "harian" }
-        ]
-    },
-    { 
-        nama: "Agen LPG 3 Kg", 
-        kbli: "47302", 
-        kategori: "Perdagangan Eceran",
-        pemasukan: [
-            { nama: "Penjualan LPG", periode: "harian" },
-            { nama: "Penjualan Gas", periode: "harian" }
-        ],
-        pengeluaran: [
-            { nama: "Stok LPG", periode: "mingguan" },
-            { nama: "Sewa Tempat", periode: "bulanan" },
-            { nama: "Transportasi", periode: "harian" },
-            { nama: "Upah Karyawan", periode: "bulanan" }
-        ]
-    },
-    
-    // I: MAKANAN & MINUMAN
-    { 
-        nama: "Warung Makan", 
-        kbli: "56101", 
-        kategori: "Makanan & Minuman",
-        pemasukan: [
-            { nama: "Penjualan Makanan", periode: "harian" },
-            { nama: "Penjualan Minuman", periode: "harian" },
-            { nama: "Pesanan Catering", periode: "mingguan" },
-            { nama: "Penjualan Makanan Kemasan", periode: "harian" }
-        ],
-        pengeluaran: [
-            { nama: "Bahan Makanan", periode: "harian" },
-            { nama: "Bumbu Dapur", periode: "harian" },
-            { nama: "Gas/LPG", periode: "mingguan" },
-            { nama: "Air", periode: "harian" },
-            { nama: "Listrik", periode: "bulanan" },
-            { nama: "Upah Karyawan", periode: "bulanan" },
-            { nama: "Sewa Tempat", periode: "bulanan" },
-            { nama: "Peralatan Makan", periode: "bulanan" },
-            { nama: "Kemasan", periode: "harian" },
-            { nama: "Transportasi", periode: "harian" }
-        ]
-    },
-    { 
-        nama: "Kedai Kopi", 
-        kbli: "56101", 
-        kategori: "Makanan & Minuman",
-        pemasukan: [
-            { nama: "Penjualan Kopi", periode: "harian" },
-            { nama: "Penjualan Minuman", periode: "harian" },
-            { nama: "Penjualan Makanan Ringan", periode: "harian" }
-        ],
-        pengeluaran: [
-            { nama: "Biji Kopi", periode: "mingguan" },
-            { nama: "Bahan Minuman", periode: "harian" },
-            { nama: "Gas/LPG", periode: "mingguan" },
-            { nama: "Air", periode: "harian" },
-            { nama: "Listrik", periode: "bulanan" },
-            { nama: "Upah Karyawan", periode: "bulanan" },
-            { nama: "Sewa Tempat", periode: "bulanan" },
-            { nama: "Peralatan", periode: "bulanan" },
-            { nama: "Kemasan", periode: "harian" }
-        ]
-    },
-    { 
-        nama: "Kedai Es Teh/Boba", 
-        kbli: "56303", 
-        kategori: "Makanan & Minuman",
-        pemasukan: [
-            { nama: "Penjualan Es Teh", periode: "harian" },
-            { nama: "Penjualan Boba", periode: "harian" },
-            { nama: "Penjualan Minuman", periode: "harian" }
-        ],
-        pengeluaran: [
-            { nama: "Teh", periode: "harian" },
-            { nama: "Boba", periode: "harian" },
-            { nama: "Gula", periode: "harian" },
-            { nama: "Susu", periode: "harian" },
-            { nama: "Es", periode: "harian" },
-            { nama: "Kemasan", periode: "harian" },
-            { nama: "Sewa Tempat", periode: "bulanan" },
-            { nama: "Listrik", periode: "bulanan" },
-            { nama: "Air", periode: "harian" },
-            { nama: "Upah Karyawan", periode: "bulanan" }
-        ]
-    },
-    { 
-        nama: "Catering", 
-        kbli: "56210", 
-        kategori: "Makanan & Minuman",
-        pemasukan: [
-            { nama: "Jasa Catering", periode: "mingguan" },
-            { nama: "Pesanan Nasi Kotak", periode: "harian" },
-            { nama: "Prasmanan", periode: "mingguan" }
-        ],
-        pengeluaran: [
-            { nama: "Bahan Makanan", periode: "harian" },
-            { nama: "Gas/LPG", periode: "mingguan" },
-            { nama: "Listrik", periode: "bulanan" },
-            { nama: "Air", periode: "harian" },
-            { nama: "Upah Karyawan", periode: "bulanan" },
-            { nama: "Sewa Dapur", periode: "bulanan" },
-            { nama: "Kemasan", periode: "harian" },
-            { nama: "Transportasi", periode: "harian" }
-        ]
-    },
-    { 
-        nama: "Homestay", 
-        kbli: "55201", 
-        kategori: "Akomodasi",
-        pemasukan: [
-            { nama: "Sewa Kamar", periode: "harian" },
-            { nama: "Penjualan Makanan", periode: "harian" },
-            { nama: "Jasa Tambahan", periode: "mingguan" }
-        ],
-        pengeluaran: [
-            { nama: "Listrik", periode: "bulanan" },
-            { nama: "Air", periode: "bulanan" },
-            { nama: "Internet", periode: "bulanan" },
-            { nama: "Perawatan", periode: "bulanan" },
-            { nama: "Kebersihan", periode: "harian" },
-            { nama: "Upah Karyawan", periode: "bulanan" },
-            { nama: "Pajak", periode: "tahunan" }
-        ]
-    },
-    
-    // J: JASA
-    { 
-        nama: "Jasa Internet/Warnet", 
-        kbli: "61104", 
-        kategori: "Jasa",
-        pemasukan: [
-            { nama: "Jasa Internet", periode: "harian" },
-            { nama: "Penjualan Pulsa", periode: "harian" },
-            { nama: "Jasa Print/Fotokopi", periode: "harian" }
-        ],
-        pengeluaran: [
-            { nama: "Listrik", periode: "bulanan" },
-            { nama: "Internet", periode: "bulanan" },
-            { nama: "Perawatan PC", periode: "bulanan" },
-            { nama: "Sewa Tempat", periode: "bulanan" },
-            { nama: "Upah Karyawan", periode: "bulanan" }
-        ]
-    },
-    { 
-        nama: "Jasa Fotografi", 
-        kbli: "74201", 
-        kategori: "Jasa",
-        pemasukan: [
-            { nama: "Jasa Foto", periode: "harian" },
-            { nama: "Jasa Video", periode: "mingguan" },
-            { nama: "Cetak Foto", periode: "harian" }
-        ],
-        pengeluaran: [
-            { nama: "Peralatan", periode: "bulanan" },
-            { nama: "Listrik", periode: "bulanan" },
-            { nama: "Sewa Tempat", periode: "bulanan" },
-            { nama: "Upah Karyawan", periode: "bulanan" },
-            { nama: "Transportasi", periode: "mingguan" }
-        ]
-    },
-    
-    // L: REAL ESTATE
-    { 
-        nama: "Sewa Bangunan/Ruko", 
-        kbli: "68112", 
-        kategori: "Real Estate",
-        pemasukan: [
-            { nama: "Sewa Bangunan", periode: "bulanan" },
-            { nama: "Sewa Ruko", periode: "bulanan" }
-        ],
-        pengeluaran: [
-            { nama: "Pajak", periode: "tahunan" },
-            { nama: "Perawatan", periode: "bulanan" },
-            { nama: "Air", periode: "bulanan" },
-            { nama: "Listrik", periode: "bulanan" },
-            { nama: "Asuransi", periode: "tahunan" }
-        ]
-    },
-    
-    // R: KESEHATAN
-    { 
-        nama: "Praktik Dokter", 
-        kbli: "86201", 
-        kategori: "Kesehatan",
-        pemasukan: [
-            { nama: "Jasa Konsultasi", periode: "harian" },
-            { nama: "Jasa Tindakan Medis", periode: "harian" }
-        ],
-        pengeluaran: [
-            { nama: "Obat-obatan", periode: "mingguan" },
-            { nama: "Alat Kesehatan", periode: "bulanan" },
-            { nama: "Sewa Tempat", periode: "bulanan" },
-            { nama: "Listrik", periode: "bulanan" },
-            { nama: "Air", periode: "bulanan" },
-            { nama: "Upah Karyawan", periode: "bulanan" }
-        ]
-    },
-    { 
-        nama: "Praktik Dokter Gigi", 
-        kbli: "86203", 
-        kategori: "Kesehatan",
-        pemasukan: [
-            { nama: "Jasa Konsultasi", periode: "harian" },
-            { nama: "Jasa Tindakan", periode: "harian" },
-            { nama: "Penjualan Alat Kesehatan", periode: "harian" }
-        ],
-        pengeluaran: [
-            { nama: "Alat Kesehatan", periode: "bulanan" },
-            { nama: "Bahan", periode: "bulanan" },
-            { nama: "Sewa Tempat", periode: "bulanan" },
-            { nama: "Listrik", periode: "bulanan" },
-            { nama: "Air", periode: "bulanan" },
-            { nama: "Upah Karyawan", periode: "bulanan" }
-        ]
-    },
-    
-    // T: JASA LAINNYA
-    { 
-        nama: "Bengkel Motor", 
-        kbli: "45407", 
-        kategori: "Jasa Reparasi",
-        pemasukan: [
-            { nama: "Jasa Servis", periode: "harian" },
-            { nama: "Penjualan Suku Cadang", periode: "harian" },
-            { nama: "Jasa Cuci Motor", periode: "harian" }
-        ],
-        pengeluaran: [
-            { nama: "Suku Cadang", periode: "mingguan" },
-            { nama: "Oli", periode: "mingguan" },
-            { nama: "Listrik", periode: "bulanan" },
-            { nama: "Air", periode: "bulanan" },
-            { nama: "Sewa Tempat", periode: "bulanan" },
-            { nama: "Upah Karyawan", periode: "bulanan" }
-        ]
-    },
-    { 
-        nama: "Bengkel Mobil", 
-        kbli: "95311", 
-        kategori: "Jasa Reparasi",
-        pemasukan: [
-            { nama: "Jasa Servis", periode: "harian" },
-            { nama: "Penjualan Suku Cadang", periode: "harian" },
-            { nama: "Jasa Cuci Mobil", periode: "harian" }
-        ],
-        pengeluaran: [
-            { nama: "Suku Cadang", periode: "mingguan" },
-            { nama: "Oli", periode: "mingguan" },
-            { nama: "Listrik", periode: "bulanan" },
-            { nama: "Air", periode: "bulanan" },
-            { nama: "Sewa Tempat", periode: "bulanan" },
-            { nama: "Upah Karyawan", periode: "bulanan" }
-        ]
-    },
-    { 
-        nama: "Servis HP", 
-        kbli: "95120", 
-        kategori: "Jasa Reparasi",
-        pemasukan: [
-            { nama: "Jasa Servis", periode: "harian" },
-            { nama: "Penjualan Aksesoris", periode: "harian" },
-            { nama: "Penjualan HP", periode: "harian" }
-        ],
-        pengeluaran: [
-            { nama: "Suku Cadang", periode: "mingguan" },
-            { nama: "Listrik", periode: "bulanan" },
-            { nama: "Sewa Tempat", periode: "bulanan" },
-            { nama: "Upah Karyawan", periode: "bulanan" }
-        ]
-    },
-    { 
-        nama: "Laundry", 
-        kbli: "96100", 
-        kategori: "Jasa",
-        pemasukan: [
-            { nama: "Jasa Cuci", periode: "harian" },
-            { nama: "Jasa Setrika", periode: "harian" },
-            { nama: "Jasa Dry Clean", periode: "harian" }
-        ],
-        pengeluaran: [
-            { nama: "Detergen", periode: "mingguan" },
-            { nama: "Pewangi", periode: "mingguan" },
-            { nama: "Listrik", periode: "bulanan" },
-            { nama: "Air", periode: "bulanan" },
-            { nama: "Sewa Tempat", periode: "bulanan" },
-            { nama: "Upah Karyawan", periode: "bulanan" },
-            { nama: "Kemasan", periode: "harian" }
-        ]
-    },
-    { 
-        nama: "Salon Kecantikan", 
-        kbli: "96122", 
-        kategori: "Jasa",
-        pemasukan: [
-            { nama: "Jasa Potong Rambut", periode: "harian" },
-            { nama: "Jasa Perawatan", periode: "harian" },
-            { nama: "Penjualan Produk", periode: "harian" }
-        ],
-        pengeluaran: [
-            { nama: "Produk Perawatan", periode: "mingguan" },
-            { nama: "Listrik", periode: "bulanan" },
-            { nama: "Air", periode: "bulanan" },
-            { nama: "Sewa Tempat", periode: "bulanan" },
-            { nama: "Upah Karyawan", periode: "bulanan" }
-        ]
-    },
-    { 
-        nama: "Pangkas Rambut", 
-        kbli: "96111", 
-        kategori: "Jasa",
-        pemasukan: [
-            { nama: "Jasa Potong Rambut", periode: "harian" },
-            { nama: "Jasa Cukur", periode: "harian" }
-        ],
-        pengeluaran: [
-            { nama: "Peralatan", periode: "bulanan" },
-            { nama: "Listrik", periode: "bulanan" },
-            { nama: "Air", periode: "bulanan" },
-            { nama: "Sewa Tempat", periode: "bulanan" }
-        ]
-    },
-    { 
-        nama: "Rias Pengantin", 
-        kbli: "96220", 
-        kategori: "Jasa",
-        pemasukan: [
-            { nama: "Jasa Rias", periode: "mingguan" },
-            { nama: "Jasa Busana", periode: "mingguan" },
-            { nama: "Sewa Aksesoris", periode: "mingguan" }
-        ],
-        pengeluaran: [
-            { nama: "Produk Makeup", periode: "bulanan" },
-            { nama: "Aksesoris", periode: "bulanan" },
-            { nama: "Sewa Tempat", periode: "bulanan" },
-            { nama: "Transportasi", periode: "mingguan" }
-        ]
-    },
+    { nama: "Budidaya Padi", kbli: "01121", kategori: "Pertanian" },
+    { nama: "Budidaya Jagung", kbli: "01111", kategori: "Pertanian" },
+    { nama: "Budidaya Sayuran", kbli: "01131", kategori: "Pertanian" },
+    { nama: "Budidaya Cabai", kbli: "01138", kategori: "Pertanian" },
+    { nama: "Peternakan Ayam Pedaging", kbli: "01461", kategori: "Peternakan" },
+    { nama: "Peternakan Ayam Petelur", kbli: "01462", kategori: "Peternakan" },
+    { nama: "Peternakan Sapi Potong", kbli: "01411", kategori: "Peternakan" },
+    { nama: "Budidaya Ikan Lele", kbli: "03225", kategori: "Perikanan" },
+    { nama: "Industri Tahu", kbli: "10308", kategori: "Industri Makanan" },
+    { nama: "Industri Tempe", kbli: "10307", kategori: "Industri Makanan" },
+    { nama: "Industri Kerupuk", kbli: "10794", kategori: "Industri Makanan" },
+    { nama: "Penggilingan Padi", kbli: "10631", kategori: "Industri Makanan" },
+    { nama: "Depot Air Minum Isi Ulang", kbli: "11052", kategori: "Industri Minuman" },
+    { nama: "Pengrajin Mebel Kayu", kbli: "31011", kategori: "Industri Kerajinan" },
+    { nama: "Tukang Jahit", kbli: "14120", kategori: "Industri Tekstil" },
+    { nama: "Jasa Konstruksi Bangunan", kbli: "41011", kategori: "Konstruksi" },
+    { nama: "Warung Sembako", kbli: "47112", kategori: "Perdagangan Eceran" },
+    { nama: "Toko Material Bangunan", kbli: "47521", kategori: "Perdagangan Eceran" },
+    { nama: "Toko Pakaian", kbli: "47711", kategori: "Perdagangan Eceran" },
+    { nama: "Toko Elektronik", kbli: "47591", kategori: "Perdagangan Eceran" },
+    { nama: "SPBU/Pertashop", kbli: "47301", kategori: "Perdagangan Eceran" },
+    { nama: "Agen LPG 3 Kg", kbli: "47302", kategori: "Perdagangan Eceran" },
+    { nama: "Warung Makan", kbli: "56101", kategori: "Makanan & Minuman" },
+    { nama: "Kedai Kopi", kbli: "56101", kategori: "Makanan & Minuman" },
+    { nama: "Kedai Es Teh/Boba", kbli: "56303", kategori: "Makanan & Minuman" },
+    { nama: "Catering", kbli: "56210", kategori: "Makanan & Minuman" },
+    { nama: "Homestay", kbli: "55201", kategori: "Akomodasi" },
+    { nama: "Jasa Internet/Warnet", kbli: "61104", kategori: "Jasa" },
+    { nama: "Jasa Fotografi", kbli: "74201", kategori: "Jasa" },
+    { nama: "Sewa Bangunan/Ruko", kbli: "68112", kategori: "Real Estate" },
+    { nama: "Praktik Dokter", kbli: "86201", kategori: "Kesehatan" },
+    { nama: "Praktik Dokter Gigi", kbli: "86203", kategori: "Kesehatan" },
+    { nama: "Bengkel Motor", kbli: "45407", kategori: "Jasa Reparasi" },
+    { nama: "Bengkel Mobil", kbli: "95311", kategori: "Jasa Reparasi" },
+    { nama: "Servis HP", kbli: "95120", kategori: "Jasa Reparasi" },
+    { nama: "Laundry", kbli: "96100", kategori: "Jasa" },
+    { nama: "Salon Kecantikan", kbli: "96122", kategori: "Jasa" },
+    { nama: "Pangkas Rambut", kbli: "96111", kategori: "Jasa" },
+    { nama: "Rias Pengantin", kbli: "96220", kategori: "Jasa" },
 ];
 
 // ================================================================
@@ -1648,6 +941,11 @@ function getPeriodeLabel(periode) {
         'tahunan': 'Tahun'
     };
     return labels[periode] || periode;
+}
+
+function formatRupiah(angka) {
+    if (angka < 0) return '- Rp ' + Math.abs(angka).toLocaleString('id-ID');
+    return 'Rp ' + angka.toLocaleString('id-ID');
 }
 
 // ================================================================
@@ -1715,7 +1013,7 @@ function hitungTotalPendapatanPekerjaan() {
 }
 
 // ================================================================
-// FUNGSI USAHA
+// FUNGSI USAHA - TERSTRUKTUR
 // ================================================================
 let usahaCounter = 1;
 
@@ -1729,6 +1027,8 @@ function tambahUsaha() {
             <h4 style="margin:0;">📌 Usaha #${usahaCounter}</h4>
             <button class="btn-remove-row" onclick="hapusUsaha('${div.id}')">✕ Hapus Usaha</button>
         </div>
+        
+        <!-- Informasi Usaha -->
         <div class="form-group">
             <label>Jenis Usaha <span style="color:#b91c1c;">*</span></label>
             <select class="jenisUsahaSelect" onchange="pilihJenisUsaha(this)" style="flex:1;">
@@ -1752,46 +1052,299 @@ function tambahUsaha() {
             <label>NIB</label>
             <input type="text" class="nibUsaha" placeholder="Nomor Induk Berusaha" style="flex:1;" />
         </div>
-        
-        <!-- PEMASUKAN -->
-        <div style="border-top:1px solid #e2e8f0; margin:12px 0; padding-top:12px;">
-            <h5>📊 PEMASUKAN USAHA</h5>
-            <div class="pemasukanContainer">
-                <!-- Akan diisi oleh JavaScript saat memilih usaha -->
+
+        <!-- Bentuk Badan Usaha -->
+        <div class="form-group">
+            <label>Bentuk Badan Usaha</label>
+            <div class="checkbox-group">
+                <label><input type="checkbox" class="badanUsaha" value="PT" /> PT</label>
+                <label><input type="checkbox" class="badanUsaha" value="CV" /> CV</label>
+                <label><input type="checkbox" class="badanUsaha" value="Firma" /> Firma</label>
+                <label><input type="checkbox" class="badanUsaha" value="Koperasi" /> Koperasi</label>
+                <label><input type="checkbox" class="badanUsaha" value="BUMDes" /> BUMDes</label>
+                <label><input type="checkbox" class="badanUsaha" value="UD" /> UD</label>
+                <label><input type="checkbox" class="badanUsaha" value="Lainnya" /> Lainnya</label>
             </div>
-            <div style="margin-top:4px;">
-                <button class="btn-add-row" onclick="tambahItemUsaha(this.closest('.usaha-detail'), 'pemasukan')">+ Tambah Item Pemasukan</button>
+            <input type="text" class="badanUsahaLain" placeholder="Sebutkan jika lainnya" style="flex:1; margin-top:4px;" />
+        </div>
+
+        <!-- Usaha Mandiri -->
+        <div class="form-group">
+            <label>Status Usaha</label>
+            <div class="checkbox-group">
+                <label><input type="checkbox" class="usahaMandiri" onchange="toggleGajiUsaha(this)" /> <strong>Usaha Mandiri (Tanpa Karyawan)</strong></label>
+                <span style="font-size:12px; color:#475569;">Centang jika tidak memiliki karyawan</span>
             </div>
-            <div class="total-box" style="margin-top:8px; background:#d1fae5; border-left-color:#0b7e3d;">
-                <div class="grid-2">
-                    <div class="form-group"><label><strong>Total Pemasukan / Bulan</strong></label><input type="text" class="totalPemasukanBulan" readonly placeholder="Rp 0" style="font-weight:700; color:#075985;" /></div>
-                    <div class="form-group"><label><strong>Total Pemasukan / Tahun</strong></label><input type="text" class="totalPemasukanTahun" readonly placeholder="Rp 0" style="font-weight:700; color:#075985;" /></div>
+        </div>
+
+        <!-- ========================================================= -->
+        <!-- PENGELUARAN USAHA -->
+        <div style="border-top:2px solid #e2e8f0; margin:12px 0; padding-top:12px;">
+            <h4 style="background:#f1f5f9; padding:6px 14px; border-radius:8px;">📊 PENGELUARAN USAHA (per Tahun)</h4>
+            
+            <!-- 26.a. Total Upah dan Gaji, serta Jaminan Sosial Pegawai -->
+            <div class="category-box" style="border-left-color:#dc2626;">
+                <h6>26.a. Total Upah dan Gaji, serta Jaminan Sosial Pegawai</h6>
+                <div id="containerGajiUsaha">
+                    <div class="item-row" style="background:white;">
+                        <label>Upah & Gaji Pegawai</label>
+                        <input type="number" placeholder="0" class="gajiPegawai" oninput="hitungUsaha(this.closest('.usaha-detail'))" />
+                        <select class="gajiPegawaiPeriode" onchange="hitungUsaha(this.closest('.usaha-detail'))">
+                            <option value="bulanan">Bulanan</option>
+                            <option value="tahunan" selected>Tahunan</option>
+                        </select>
+                    </div>
+                    <div class="item-row" style="background:white;">
+                        <label>Jaminan Sosial Pegawai</label>
+                        <input type="number" placeholder="0" class="jaminanSosial" oninput="hitungUsaha(this.closest('.usaha-detail'))" />
+                        <select class="jaminanSosialPeriode" onchange="hitungUsaha(this.closest('.usaha-detail'))">
+                            <option value="bulanan">Bulanan</option>
+                            <option value="tahunan" selected>Tahunan</option>
+                        </select>
+                    </div>
+                </div>
+                <div style="margin-top:4px;">
+                    <button class="btn-add-row" onclick="tambahItemGaji(this.closest('.usaha-detail'))">+ Tambah Item</button>
+                </div>
+                <div class="total-box" style="margin-top:6px; background:#fee2e2; border-left-color:#dc2626;">
+                    <div class="form-group"><label><strong>Total 26.a (per Tahun)</strong></label>
+                        <input type="text" class="totalGajiUsaha" readonly placeholder="Rp 0" style="font-weight:700; color:#dc2626;" />
+                    </div>
+                </div>
+            </div>
+
+            <!-- 26.b. Biaya Produksi -->
+            <div class="category-box" style="border-left-color:#f59e0b;">
+                <h6>26.b. Biaya Produksi</h6>
+                <div id="containerProduksiUsaha">
+                    <div class="item-row" style="background:white;">
+                        <label>Bahan Baku Utama</label>
+                        <input type="number" placeholder="0" class="produksiItem" oninput="hitungUsaha(this.closest('.usaha-detail'))" />
+                        <select class="produksiItemPeriode" onchange="hitungUsaha(this.closest('.usaha-detail'))">
+                            <option value="harian">Harian</option>
+                            <option value="mingguan">Mingguan</option>
+                            <option value="bulanan" selected>Bulanan</option>
+                            <option value="tahunan">Tahunan</option>
+                        </select>
+                    </div>
+                    <div class="item-row" style="background:white;">
+                        <label>Bahan Penolong</label>
+                        <input type="number" placeholder="0" class="produksiItem" oninput="hitungUsaha(this.closest('.usaha-detail'))" />
+                        <select class="produksiItemPeriode" onchange="hitungUsaha(this.closest('.usaha-detail'))">
+                            <option value="harian">Harian</option>
+                            <option value="mingguan">Mingguan</option>
+                            <option value="bulanan" selected>Bulanan</option>
+                            <option value="tahunan">Tahunan</option>
+                        </select>
+                    </div>
+                </div>
+                <div style="margin-top:4px;">
+                    <button class="btn-add-row" onclick="tambahItemProduksi(this.closest('.usaha-detail'))">+ Tambah Item</button>
+                </div>
+                <div class="total-box" style="margin-top:6px; background:#fef3c7; border-left-color:#f59e0b;">
+                    <div class="form-group"><label><strong>Total 26.b (per Tahun)</strong></label>
+                        <input type="text" class="totalProduksiUsaha" readonly placeholder="Rp 0" style="font-weight:700; color:#92400e;" />
+                    </div>
+                </div>
+            </div>
+
+            <!-- 26.c. Biaya Pembelian Barang yang Terjual -->
+            <div class="category-box" style="border-left-color:#8b5cf6;">
+                <h6>26.c. Biaya Pembelian Barang yang Terjual</h6>
+                <div id="containerPembelianUsaha">
+                    <div class="item-row" style="background:white;">
+                        <label>Pembelian Barang Dagang</label>
+                        <input type="number" placeholder="0" class="pembelianItem" oninput="hitungUsaha(this.closest('.usaha-detail'))" />
+                        <select class="pembelianItemPeriode" onchange="hitungUsaha(this.closest('.usaha-detail'))">
+                            <option value="harian">Harian</option>
+                            <option value="mingguan">Mingguan</option>
+                            <option value="bulanan" selected>Bulanan</option>
+                            <option value="tahunan">Tahunan</option>
+                        </select>
+                    </div>
+                </div>
+                <div style="margin-top:4px;">
+                    <button class="btn-add-row" onclick="tambahItemPembelian(this.closest('.usaha-detail'))">+ Tambah Item</button>
+                </div>
+                <div class="total-box" style="margin-top:6px; background:#ede9fe; border-left-color:#8b5cf6;">
+                    <div class="form-group"><label><strong>Total 26.c (per Tahun)</strong></label>
+                        <input type="text" class="totalPembelianUsaha" readonly placeholder="Rp 0" style="font-weight:700; color:#5b21b6;" />
+                    </div>
+                </div>
+            </div>
+
+            <!-- 26.d. Biaya Operasional -->
+            <div class="category-box" style="border-left-color:#3b82f6;">
+                <h6>26.d. Biaya Operasional (Air, Listrik, Gas, Internet, Pulsa, Pemeliharaan, Biaya Angkutan, dll)</h6>
+                <div id="containerOperasionalUsaha">
+                    <div class="item-row" style="background:white;">
+                        <label>Listrik</label>
+                        <input type="number" placeholder="0" class="operasionalItem" oninput="hitungUsaha(this.closest('.usaha-detail'))" />
+                        <select class="operasionalItemPeriode" onchange="hitungUsaha(this.closest('.usaha-detail'))">
+                            <option value="harian">Harian</option>
+                            <option value="mingguan">Mingguan</option>
+                            <option value="bulanan" selected>Bulanan</option>
+                            <option value="tahunan">Tahunan</option>
+                        </select>
+                    </div>
+                    <div class="item-row" style="background:white;">
+                        <label>Air</label>
+                        <input type="number" placeholder="0" class="operasionalItem" oninput="hitungUsaha(this.closest('.usaha-detail'))" />
+                        <select class="operasionalItemPeriode" onchange="hitungUsaha(this.closest('.usaha-detail'))">
+                            <option value="harian">Harian</option>
+                            <option value="mingguan">Mingguan</option>
+                            <option value="bulanan" selected>Bulanan</option>
+                            <option value="tahunan">Tahunan</option>
+                        </select>
+                    </div>
+                    <div class="item-row" style="background:white;">
+                        <label>Gas/LPG</label>
+                        <input type="number" placeholder="0" class="operasionalItem" oninput="hitungUsaha(this.closest('.usaha-detail'))" />
+                        <select class="operasionalItemPeriode" onchange="hitungUsaha(this.closest('.usaha-detail'))">
+                            <option value="harian">Harian</option>
+                            <option value="mingguan">Mingguan</option>
+                            <option value="bulanan" selected>Bulanan</option>
+                            <option value="tahunan">Tahunan</option>
+                        </select>
+                    </div>
+                </div>
+                <div style="margin-top:4px;">
+                    <button class="btn-add-row" onclick="tambahItemOperasional(this.closest('.usaha-detail'))">+ Tambah Item</button>
+                </div>
+                <div class="total-box" style="margin-top:6px; background:#dbeafe; border-left-color:#3b82f6;">
+                    <div class="form-group"><label><strong>Total 26.d (per Tahun)</strong></label>
+                        <input type="text" class="totalOperasionalUsaha" readonly placeholder="Rp 0" style="font-weight:700; color:#1d4ed8;" />
+                    </div>
+                </div>
+            </div>
+
+            <!-- 26.e. Biaya Non-Operasional -->
+            <div class="category-box" style="border-left-color:#ec4899;">
+                <h6>26.e. Biaya Non-Operasional</h6>
+                <div id="containerNonOperasionalUsaha">
+                    <div class="item-row" style="background:white;">
+                        <label>Pajak</label>
+                        <input type="number" placeholder="0" class="nonOperasionalItem" oninput="hitungUsaha(this.closest('.usaha-detail'))" />
+                        <select class="nonOperasionalItemPeriode" onchange="hitungUsaha(this.closest('.usaha-detail'))">
+                            <option value="bulanan">Bulanan</option>
+                            <option value="tahunan" selected>Tahunan</option>
+                        </select>
+                    </div>
+                    <div class="item-row" style="background:white;">
+                        <label>Bunga Pinjaman</label>
+                        <input type="number" placeholder="0" class="nonOperasionalItem" oninput="hitungUsaha(this.closest('.usaha-detail'))" />
+                        <select class="nonOperasionalItemPeriode" onchange="hitungUsaha(this.closest('.usaha-detail'))">
+                            <option value="bulanan">Bulanan</option>
+                            <option value="tahunan" selected>Tahunan</option>
+                        </select>
+                    </div>
+                </div>
+                <div style="margin-top:4px;">
+                    <button class="btn-add-row" onclick="tambahItemNonOperasional(this.closest('.usaha-detail'))">+ Tambah Item</button>
+                </div>
+                <div class="total-box" style="margin-top:6px; background:#fce7f3; border-left-color:#ec4899;">
+                    <div class="form-group"><label><strong>Total 26.e (per Tahun)</strong></label>
+                        <input type="text" class="totalNonOperasionalUsaha" readonly placeholder="Rp 0" style="font-weight:700; color:#be185d;" />
+                    </div>
+                </div>
+            </div>
+
+            <!-- 26.f. Total Pengeluaran -->
+            <div class="total-box" style="margin-top:10px; background:#d1e7dd; border-left-color:#0b7e3d;">
+                <div class="form-group"><label style="font-size:16px;"><strong>26.f. TOTAL PENGELUARAN USAHA (per Tahun)</strong></label>
+                    <input type="text" class="totalPengeluaranUsahaAll" readonly placeholder="Rp 0" style="font-size:16px; font-weight:700; color:#0b7e3d;" />
                 </div>
             </div>
         </div>
 
-        <!-- PENGELUARAN -->
-        <div style="border-top:1px solid #e2e8f0; margin:12px 0; padding-top:12px;">
-            <h5>💸 PENGELUARAN USAHA</h5>
-            <div class="pengeluaranContainer">
-                <!-- Akan diisi oleh JavaScript saat memilih usaha -->
+        <!-- ========================================================= -->
+        <!-- PEMASUKAN USAHA -->
+        <div style="border-top:2px solid #e2e8f0; margin:12px 0; padding-top:12px;">
+            <h4 style="background:#f1f5f9; padding:6px 14px; border-radius:8px;">💰 PEMASUKAN USAHA</h4>
+            
+            <!-- 27.a. Nilai Penjualan Barang dan Jasa -->
+            <div class="category-box" style="border-left-color:#059669;">
+                <h6>27.a. Nilai Penjualan Barang dan Jasa</h6>
+                <div id="containerPenjualanUsaha">
+                    <div class="item-row" style="background:white;">
+                        <label>Penjualan Barang</label>
+                        <input type="number" placeholder="0" class="penjualanItem" oninput="hitungUsaha(this.closest('.usaha-detail'))" />
+                        <select class="penjualanItemPeriode" onchange="hitungUsaha(this.closest('.usaha-detail'))">
+                            <option value="harian">Harian</option>
+                            <option value="mingguan">Mingguan</option>
+                            <option value="bulanan" selected>Bulanan</option>
+                            <option value="tahunan">Tahunan</option>
+                        </select>
+                    </div>
+                    <div class="item-row" style="background:white;">
+                        <label>Penjualan Jasa</label>
+                        <input type="number" placeholder="0" class="penjualanItem" oninput="hitungUsaha(this.closest('.usaha-detail'))" />
+                        <select class="penjualanItemPeriode" onchange="hitungUsaha(this.closest('.usaha-detail'))">
+                            <option value="harian">Harian</option>
+                            <option value="mingguan">Mingguan</option>
+                            <option value="bulanan" selected>Bulanan</option>
+                            <option value="tahunan">Tahunan</option>
+                        </select>
+                    </div>
+                </div>
+                <div style="margin-top:4px;">
+                    <button class="btn-add-row" onclick="tambahItemPenjualan(this.closest('.usaha-detail'))">+ Tambah Item</button>
+                </div>
+                <div class="total-box" style="margin-top:6px; background:#d1fae5; border-left-color:#059669;">
+                    <div class="form-group"><label><strong>Total 27.a (per Tahun)</strong></label>
+                        <input type="text" class="totalPenjualanUsaha" readonly placeholder="Rp 0" style="font-weight:700; color:#065f46;" />
+                    </div>
+                </div>
             </div>
-            <div style="margin-top:4px;">
-                <button class="btn-add-row" onclick="tambahItemUsaha(this.closest('.usaha-detail'), 'pengeluaran')">+ Tambah Item Pengeluaran</button>
+
+            <!-- 27.b. Pendapatan Lainnya -->
+            <div class="category-box" style="border-left-color:#7c3aed;">
+                <h6>27.b. Pendapatan Lainnya yang Dihasilkan Perusahaan</h6>
+                <div id="containerPendapatanLainUsaha">
+                    <div class="item-row" style="background:white;">
+                        <label>Sewa Aset</label>
+                        <input type="number" placeholder="0" class="pendapatanLainItem" oninput="hitungUsaha(this.closest('.usaha-detail'))" />
+                        <select class="pendapatanLainItemPeriode" onchange="hitungUsaha(this.closest('.usaha-detail'))">
+                            <option value="bulanan">Bulanan</option>
+                            <option value="tahunan" selected>Tahunan</option>
+                        </select>
+                    </div>
+                    <div class="item-row" style="background:white;">
+                        <label>Bunga Deposito</label>
+                        <input type="number" placeholder="0" class="pendapatanLainItem" oninput="hitungUsaha(this.closest('.usaha-detail'))" />
+                        <select class="pendapatanLainItemPeriode" onchange="hitungUsaha(this.closest('.usaha-detail'))">
+                            <option value="bulanan">Bulanan</option>
+                            <option value="tahunan" selected>Tahunan</option>
+                        </select>
+                    </div>
+                </div>
+                <div style="margin-top:4px;">
+                    <button class="btn-add-row" onclick="tambahItemPendapatanLain(this.closest('.usaha-detail'))">+ Tambah Item</button>
+                </div>
+                <div class="total-box" style="margin-top:6px; background:#ede9fe; border-left-color:#7c3aed;">
+                    <div class="form-group"><label><strong>Total 27.b (per Tahun)</strong></label>
+                        <input type="text" class="totalPendapatanLainUsaha" readonly placeholder="Rp 0" style="font-weight:700; color:#4c1d95;" />
+                    </div>
+                </div>
             </div>
-            <div class="total-box" style="margin-top:8px; background:#fee2e2; border-left-color:#dc2626;">
-                <div class="grid-2">
-                    <div class="form-group"><label><strong>Total Pengeluaran / Bulan</strong></label><input type="text" class="totalPengeluaranBulan" readonly placeholder="Rp 0" style="font-weight:700; color:#dc2626;" /></div>
-                    <div class="form-group"><label><strong>Total Pengeluaran / Tahun</strong></label><input type="text" class="totalPengeluaranTahun" readonly placeholder="Rp 0" style="font-weight:700; color:#dc2626;" /></div>
+
+            <!-- 27.c. Total Nilai Penjualan -->
+            <div class="total-box" style="margin-top:10px; background:#dbeafe; border-left-color:#2563eb;">
+                <div class="form-group"><label style="font-size:16px;"><strong>27.c. TOTAL NILAI PENJUALAN (a+b) per Tahun</strong></label>
+                    <input type="text" class="totalPemasukanUsahaAll" readonly placeholder="Rp 0" style="font-size:16px; font-weight:700; color:#1d4ed8;" />
                 </div>
             </div>
         </div>
 
-        <!-- KEUNTUNGAN -->
-        <div class="total-box" style="background:#dbeafe; border-left-color:#2563eb; margin-top:10px;">
+        <!-- KEUNTUNGAN USAHA -->
+        <div class="total-box" style="margin-top:10px; background:#dbeafe; border-left-color:#2563eb;">
             <div class="grid-2">
-                <div class="form-group"><label><strong>Keuntungan / Bulan</strong></label><input type="text" class="keuntunganBulan" readonly placeholder="Rp 0" style="font-weight:700; color:#075985; font-size:16px;" /></div>
-                <div class="form-group"><label><strong>Keuntungan / Tahun</strong></label><input type="text" class="keuntunganTahun" readonly placeholder="Rp 0" style="font-weight:700; color:#075985; font-size:16px;" /></div>
+                <div class="form-group"><label style="font-size:16px;"><strong>📈 KEUNTUNGAN USAHA / Tahun</strong></label>
+                    <input type="text" class="keuntunganUsahaTahun" readonly placeholder="Rp 0" style="font-size:16px; font-weight:700; color:#075985;" />
+                </div>
+                <div class="form-group"><label style="font-size:16px;"><strong>📈 KEUNTUNGAN USAHA / Bulan</strong></label>
+                    <input type="text" class="keuntunganUsahaBulan" readonly placeholder="Rp 0" style="font-size:16px; font-weight:700; color:#075985;" />
+                </div>
             </div>
         </div>
     `;
@@ -1811,116 +1364,267 @@ function pilihJenisUsaha(select) {
     const div = select.closest('.usaha-detail');
     const kbliInput = div.querySelector('.kbliUsaha');
     const kategoriInput = div.querySelector('.kategoriUsaha');
-    const pemasukanContainer = div.querySelector('.pemasukanContainer');
-    const pengeluaranContainer = div.querySelector('.pengeluaranContainer');
-    
     const selectedOption = select.options[select.selectedIndex];
-    const nama = selectedOption.value;
-    const kbli = selectedOption.getAttribute('data-kbli') || '';
-    const kategori = selectedOption.getAttribute('data-kategori') || '';
+    kbliInput.value = selectedOption.getAttribute('data-kbli') || '';
+    kategoriInput.value = selectedOption.getAttribute('data-kategori') || '';
+}
+
+function toggleGajiUsaha(checkbox) {
+    const div = checkbox.closest('.usaha-detail');
+    const gajiContainer = div.querySelector('#containerGajiUsaha');
+    const gajiInputs = gajiContainer.querySelectorAll('input');
+    const gajiSelects = gajiContainer.querySelectorAll('select');
+    const isMandiri = checkbox.checked;
     
-    kbliInput.value = kbli;
-    kategoriInput.value = kategori;
+    gajiInputs.forEach(inp => {
+        inp.disabled = isMandiri;
+        if (isMandiri) inp.value = 0;
+    });
+    gajiSelects.forEach(sel => sel.disabled = isMandiri);
     
-    // Kosongkan container
-    pemasukanContainer.innerHTML = '';
-    pengeluaranContainer.innerHTML = '';
-    
-    // Cari data KBLI yang dipilih
-    const data = dataKBLI.find(u => u.nama === nama);
-    
-    if (data) {
-        // Tambahkan item pemasukan dari data
-        data.pemasukan.forEach(item => {
-            tambahItemUsahaWithData(div, 'pemasukan', item.nama, item.periode);
-        });
-        
-        // Tambahkan item pengeluaran dari data
-        data.pengeluaran.forEach(item => {
-            tambahItemUsahaWithData(div, 'pengeluaran', item.nama, item.periode);
-        });
+    if (isMandiri) {
+        gajiContainer.style.opacity = '0.5';
+        gajiContainer.style.pointerEvents = 'none';
+    } else {
+        gajiContainer.style.opacity = '1';
+        gajiContainer.style.pointerEvents = 'auto';
     }
-    
     hitungUsaha(div);
 }
 
-function tambahItemUsaha(div, jenis) {
-    tambahItemUsahaWithData(div, jenis, '', 'bulanan');
-}
-
-function tambahItemUsahaWithData(div, jenis, nama, periode) {
-    const container = div.querySelector(`.${jenis}Container`);
-    const itemDiv = document.createElement('div');
-    itemDiv.className = 'item-row';
-    itemDiv.style.cssText = jenis === 'pemasukan' ? 'background:#f0fdf4;' : 'background:#fef2f2;';
-    itemDiv.innerHTML = `
-        <input type="text" placeholder="Nama Item" class="${jenis}Nama" value="${nama}" style="flex:1.5; min-width:100px;" />
-        <input type="number" placeholder="Nilai" class="${jenis}Nilai" style="flex:1; min-width:80px;" oninput="hitungUsaha(this.closest('.usaha-detail'))" />
-        <select class="${jenis}Periode" style="flex:0.8; min-width:80px;" onchange="hitungUsaha(this.closest('.usaha-detail'))">
-            <option value="harian" ${periode === 'harian' ? 'selected' : ''}>Harian</option>
-            <option value="mingguan" ${periode === 'mingguan' ? 'selected' : ''}>Mingguan</option>
-            <option value="bulanan" ${periode === 'bulanan' ? 'selected' : ''}>Bulanan</option>
-            <option value="tahunan" ${periode === 'tahunan' ? 'selected' : ''}>Tahunan</option>
+// ================================================================
+// FUNGSI TAMBAH ITEM USAHA
+// ================================================================
+function tambahItemGaji(div) {
+    const container = div.querySelector('#containerGajiUsaha');
+    const row = document.createElement('div');
+    row.className = 'item-row';
+    row.style.background = 'white';
+    row.innerHTML = `
+        <label>Item Gaji</label>
+        <input type="text" placeholder="Nama" class="gajiNama" style="flex:1;" />
+        <input type="number" placeholder="0" class="gajiPegawai" oninput="hitungUsaha(this.closest('.usaha-detail'))" />
+        <select class="gajiPegawaiPeriode" onchange="hitungUsaha(this.closest('.usaha-detail'))">
+            <option value="bulanan">Bulanan</option>
+            <option value="tahunan" selected>Tahunan</option>
         </select>
-        <button class="btn-remove-row" onclick="hapusItemUsaha(this)">✕</button>
+        <button class="btn-remove-row" onclick="this.closest('.item-row').remove(); hitungUsaha(this.closest('.usaha-detail'))">✕</button>
     `;
-    container.appendChild(itemDiv);
+    container.appendChild(row);
 }
 
-function hapusItemUsaha(btn) {
-    const item = btn.closest('.item-row');
-    const container = item.parentElement;
-    if (container.children.length > 1) {
-        item.remove();
-        const div = container.closest('.usaha-detail');
-        hitungUsaha(div);
-    } else {
-        alert('Minimal 1 item harus ada.');
-    }
+function tambahItemProduksi(div) {
+    const container = div.querySelector('#containerProduksiUsaha');
+    const row = document.createElement('div');
+    row.className = 'item-row';
+    row.style.background = 'white';
+    row.innerHTML = `
+        <label>Item Produksi</label>
+        <input type="text" placeholder="Nama" class="produksiNama" style="flex:1;" />
+        <input type="number" placeholder="0" class="produksiItem" oninput="hitungUsaha(this.closest('.usaha-detail'))" />
+        <select class="produksiItemPeriode" onchange="hitungUsaha(this.closest('.usaha-detail'))">
+            <option value="harian">Harian</option>
+            <option value="mingguan">Mingguan</option>
+            <option value="bulanan" selected>Bulanan</option>
+            <option value="tahunan">Tahunan</option>
+        </select>
+        <button class="btn-remove-row" onclick="this.closest('.item-row').remove(); hitungUsaha(this.closest('.usaha-detail'))">✕</button>
+    `;
+    container.appendChild(row);
 }
 
+function tambahItemPembelian(div) {
+    const container = div.querySelector('#containerPembelianUsaha');
+    const row = document.createElement('div');
+    row.className = 'item-row';
+    row.style.background = 'white';
+    row.innerHTML = `
+        <label>Item Pembelian</label>
+        <input type="text" placeholder="Nama" class="pembelianNama" style="flex:1;" />
+        <input type="number" placeholder="0" class="pembelianItem" oninput="hitungUsaha(this.closest('.usaha-detail'))" />
+        <select class="pembelianItemPeriode" onchange="hitungUsaha(this.closest('.usaha-detail'))">
+            <option value="harian">Harian</option>
+            <option value="mingguan">Mingguan</option>
+            <option value="bulanan" selected>Bulanan</option>
+            <option value="tahunan">Tahunan</option>
+        </select>
+        <button class="btn-remove-row" onclick="this.closest('.item-row').remove(); hitungUsaha(this.closest('.usaha-detail'))">✕</button>
+    `;
+    container.appendChild(row);
+}
+
+function tambahItemOperasional(div) {
+    const container = div.querySelector('#containerOperasionalUsaha');
+    const row = document.createElement('div');
+    row.className = 'item-row';
+    row.style.background = 'white';
+    row.innerHTML = `
+        <label>Item Operasional</label>
+        <input type="text" placeholder="Nama" class="operasionalNama" style="flex:1;" />
+        <input type="number" placeholder="0" class="operasionalItem" oninput="hitungUsaha(this.closest('.usaha-detail'))" />
+        <select class="operasionalItemPeriode" onchange="hitungUsaha(this.closest('.usaha-detail'))">
+            <option value="harian">Harian</option>
+            <option value="mingguan">Mingguan</option>
+            <option value="bulanan" selected>Bulanan</option>
+            <option value="tahunan">Tahunan</option>
+        </select>
+        <button class="btn-remove-row" onclick="this.closest('.item-row').remove(); hitungUsaha(this.closest('.usaha-detail'))">✕</button>
+    `;
+    container.appendChild(row);
+}
+
+function tambahItemNonOperasional(div) {
+    const container = div.querySelector('#containerNonOperasionalUsaha');
+    const row = document.createElement('div');
+    row.className = 'item-row';
+    row.style.background = 'white';
+    row.innerHTML = `
+        <label>Item Non-Operasional</label>
+        <input type="text" placeholder="Nama" class="nonOperasionalNama" style="flex:1;" />
+        <input type="number" placeholder="0" class="nonOperasionalItem" oninput="hitungUsaha(this.closest('.usaha-detail'))" />
+        <select class="nonOperasionalItemPeriode" onchange="hitungUsaha(this.closest('.usaha-detail'))">
+            <option value="bulanan">Bulanan</option>
+            <option value="tahunan" selected>Tahunan</option>
+        </select>
+        <button class="btn-remove-row" onclick="this.closest('.item-row').remove(); hitungUsaha(this.closest('.usaha-detail'))">✕</button>
+    `;
+    container.appendChild(row);
+}
+
+function tambahItemPenjualan(div) {
+    const container = div.querySelector('#containerPenjualanUsaha');
+    const row = document.createElement('div');
+    row.className = 'item-row';
+    row.style.background = 'white';
+    row.innerHTML = `
+        <label>Item Penjualan</label>
+        <input type="text" placeholder="Nama" class="penjualanNama" style="flex:1;" />
+        <input type="number" placeholder="0" class="penjualanItem" oninput="hitungUsaha(this.closest('.usaha-detail'))" />
+        <select class="penjualanItemPeriode" onchange="hitungUsaha(this.closest('.usaha-detail'))">
+            <option value="harian">Harian</option>
+            <option value="mingguan">Mingguan</option>
+            <option value="bulanan" selected>Bulanan</option>
+            <option value="tahunan">Tahunan</option>
+        </select>
+        <button class="btn-remove-row" onclick="this.closest('.item-row').remove(); hitungUsaha(this.closest('.usaha-detail'))">✕</button>
+    `;
+    container.appendChild(row);
+}
+
+function tambahItemPendapatanLain(div) {
+    const container = div.querySelector('#containerPendapatanLainUsaha');
+    const row = document.createElement('div');
+    row.className = 'item-row';
+    row.style.background = 'white';
+    row.innerHTML = `
+        <label>Item Pendapatan Lain</label>
+        <input type="text" placeholder="Nama" class="pendapatanLainNama" style="flex:1;" />
+        <input type="number" placeholder="0" class="pendapatanLainItem" oninput="hitungUsaha(this.closest('.usaha-detail'))" />
+        <select class="pendapatanLainItemPeriode" onchange="hitungUsaha(this.closest('.usaha-detail'))">
+            <option value="bulanan">Bulanan</option>
+            <option value="tahunan" selected>Tahunan</option>
+        </select>
+        <button class="btn-remove-row" onclick="this.closest('.item-row').remove(); hitungUsaha(this.closest('.usaha-detail'))">✕</button>
+    `;
+    container.appendChild(row);
+}
+
+// ================================================================
+// FUNGSI HITUNG USAHA
+// ================================================================
 function hitungUsaha(div) {
-    // Hitung Pemasukan
-    const pemasukanItems = div.querySelectorAll('.pemasukanItem');
-    let totalPemBulan = 0;
-    let totalPemTahun = 0;
-    pemasukanItems.forEach(item => {
-        const nilai = parseFloat(item.value) || 0;
-        const row = item.closest('.item-row');
-        const periode = row.querySelector('.pemasukanPeriode').value;
-        totalPemBulan += konversiKeBulanan(nilai, periode);
-        totalPemTahun += konversiKeTahunan(nilai, periode);
+    // Cek apakah usaha mandiri
+    const isMandiri = div.querySelector('.usahaMandiri')?.checked || false;
+    
+    // 26.a. Total Upah dan Gaji
+    let totalGaji = 0;
+    if (!isMandiri) {
+        div.querySelectorAll('.gajiPegawai').forEach(inp => {
+            const val = parseFloat(inp.value) || 0;
+            const periode = inp.closest('.item-row').querySelector('.gajiPegawaiPeriode').value;
+            totalGaji += konversiKeTahunan(val, periode);
+        });
+        div.querySelectorAll('.jaminanSosial').forEach(inp => {
+            const val = parseFloat(inp.value) || 0;
+            const periode = inp.closest('.item-row').querySelector('.jaminanSosialPeriode').value;
+            totalGaji += konversiKeTahunan(val, periode);
+        });
+    }
+    div.querySelector('.totalGajiUsaha').value = formatRupiah(totalGaji);
+    
+    // 26.b. Biaya Produksi
+    let totalProduksi = 0;
+    div.querySelectorAll('.produksiItem').forEach(inp => {
+        const val = parseFloat(inp.value) || 0;
+        const periode = inp.closest('.item-row').querySelector('.produksiItemPeriode').value;
+        totalProduksi += konversiKeTahunan(val, periode);
     });
+    div.querySelector('.totalProduksiUsaha').value = formatRupiah(totalProduksi);
     
-    div.querySelector('.totalPemasukanBulan').value = formatRupiah(totalPemBulan);
-    div.querySelector('.totalPemasukanTahun').value = formatRupiah(totalPemTahun);
-    
-    // Hitung Pengeluaran
-    const pengeluaranItems = div.querySelectorAll('.pengeluaranItem');
-    let totalPengBulan = 0;
-    let totalPengTahun = 0;
-    pengeluaranItems.forEach(item => {
-        const nilai = parseFloat(item.value) || 0;
-        const row = item.closest('.item-row');
-        const periode = row.querySelector('.pengeluaranPeriode').value;
-        totalPengBulan += konversiKeBulanan(nilai, periode);
-        totalPengTahun += konversiKeTahunan(nilai, periode);
+    // 26.c. Biaya Pembelian
+    let totalPembelian = 0;
+    div.querySelectorAll('.pembelianItem').forEach(inp => {
+        const val = parseFloat(inp.value) || 0;
+        const periode = inp.closest('.item-row').querySelector('.pembelianItemPeriode').value;
+        totalPembelian += konversiKeTahunan(val, periode);
     });
+    div.querySelector('.totalPembelianUsaha').value = formatRupiah(totalPembelian);
     
-    div.querySelector('.totalPengeluaranBulan').value = formatRupiah(totalPengBulan);
-    div.querySelector('.totalPengeluaranTahun').value = formatRupiah(totalPengTahun);
+    // 26.d. Biaya Operasional
+    let totalOperasional = 0;
+    div.querySelectorAll('.operasionalItem').forEach(inp => {
+        const val = parseFloat(inp.value) || 0;
+        const periode = inp.closest('.item-row').querySelector('.operasionalItemPeriode').value;
+        totalOperasional += konversiKeTahunan(val, periode);
+    });
+    div.querySelector('.totalOperasionalUsaha').value = formatRupiah(totalOperasional);
+    
+    // 26.e. Biaya Non-Operasional
+    let totalNonOperasional = 0;
+    div.querySelectorAll('.nonOperasionalItem').forEach(inp => {
+        const val = parseFloat(inp.value) || 0;
+        const periode = inp.closest('.item-row').querySelector('.nonOperasionalItemPeriode').value;
+        totalNonOperasional += konversiKeTahunan(val, periode);
+    });
+    div.querySelector('.totalNonOperasionalUsaha').value = formatRupiah(totalNonOperasional);
+    
+    // 26.f. Total Pengeluaran
+    const totalPengeluaran = totalGaji + totalProduksi + totalPembelian + totalOperasional + totalNonOperasional;
+    div.querySelector('.totalPengeluaranUsahaAll').value = formatRupiah(totalPengeluaran);
+    
+    // 27.a. Nilai Penjualan
+    let totalPenjualan = 0;
+    div.querySelectorAll('.penjualanItem').forEach(inp => {
+        const val = parseFloat(inp.value) || 0;
+        const periode = inp.closest('.item-row').querySelector('.penjualanItemPeriode').value;
+        totalPenjualan += konversiKeTahunan(val, periode);
+    });
+    div.querySelector('.totalPenjualanUsaha').value = formatRupiah(totalPenjualan);
+    
+    // 27.b. Pendapatan Lainnya
+    let totalPendapatanLain = 0;
+    div.querySelectorAll('.pendapatanLainItem').forEach(inp => {
+        const val = parseFloat(inp.value) || 0;
+        const periode = inp.closest('.item-row').querySelector('.pendapatanLainItemPeriode').value;
+        totalPendapatanLain += konversiKeTahunan(val, periode);
+    });
+    div.querySelector('.totalPendapatanLainUsaha').value = formatRupiah(totalPendapatanLain);
+    
+    // 27.c. Total Pemasukan
+    const totalPemasukan = totalPenjualan + totalPendapatanLain;
+    div.querySelector('.totalPemasukanUsahaAll').value = formatRupiah(totalPemasukan);
     
     // Keuntungan
-    const labaBulan = totalPemBulan - totalPengBulan;
-    const labaTahun = totalPemTahun - totalPengTahun;
-    div.querySelector('.keuntunganBulan').value = formatRupiah(labaBulan);
-    div.querySelector('.keuntunganTahun').value = formatRupiah(labaTahun);
+    const keuntunganTahun = totalPemasukan - totalPengeluaran;
+    const keuntunganBulan = keuntunganTahun / 12;
+    div.querySelector('.keuntunganUsahaTahun').value = formatRupiah(keuntunganTahun);
+    div.querySelector('.keuntunganUsahaBulan').value = formatRupiah(keuntunganBulan);
     
     updateRingkasan();
 }
 
 // ================================================================
-// FUNGSI PENGELUARAN MAKANAN - Periode Fleksibel
+// FUNGSI PENGELUARAN MAKANAN
 // ================================================================
 function initMakananContainer() {
     const container = document.getElementById('containerBelanjaMakanan');
@@ -1999,7 +1703,6 @@ function hapusItemMakanan(btn, jenis) {
 }
 
 function hitungTotalMakanan() {
-    // Belanja Bahan Makanan
     let totalBelanjaBulan = 0;
     let totalBelanjaTahun = 0;
     document.querySelectorAll('#containerBelanjaMakanan .item-row').forEach(row => {
@@ -2011,7 +1714,6 @@ function hitungTotalMakanan() {
     document.getElementById('totalBelanjaMakanan').value = formatRupiah(totalBelanjaBulan);
     document.getElementById('totalBelanjaMakananTahun').value = formatRupiah(totalBelanjaTahun);
     
-    // Makanan Jadi
     let totalJadiBulan = 0;
     let totalJadiTahun = 0;
     document.querySelectorAll('#containerMakananJadi .item-row').forEach(row => {
@@ -2023,12 +1725,10 @@ function hitungTotalMakanan() {
     document.getElementById('totalMakananJadi').value = formatRupiah(totalJadiBulan);
     document.getElementById('totalMakananJadiTahun').value = formatRupiah(totalJadiTahun);
     
-    // Total Makanan
     const totalBulan = totalBelanjaBulan + totalJadiBulan;
     const totalTahun = totalBelanjaTahun + totalJadiTahun;
     document.getElementById('totalMakanBulanAll').value = formatRupiah(totalBulan);
     document.getElementById('totalMakanTahunAll').value = formatRupiah(totalTahun);
-    
     updateRingkasan();
 }
 
@@ -2148,7 +1848,6 @@ function hitungTotalBukanMakan() {
     
     document.getElementById('totalBukanMakan').value = formatRupiah(grandTotalBulan);
     document.getElementById('totalBukanMakanTahun').value = formatRupiah(grandTotalTahun);
-    
     updateRingkasan();
 }
 
@@ -2255,31 +1954,25 @@ function hitungTotalTahunan() {
 // FUNGSI RINGKASAN
 // ================================================================
 function updateRingkasan() {
-    // Pendapatan dari pekerjaan
     const pendapatanPekerjaan = parseFloat(document.getElementById('totalPendapatanPekerjaan').value.replace(/[^0-9\-]/g,'')) || 0;
     
-    // Total keuntungan dari semua usaha (per Bulan)
     let totalKeuntunganUsaha = 0;
-    document.querySelectorAll('.keuntunganBulan').forEach(inp => {
+    document.querySelectorAll('.keuntunganUsahaBulan').forEach(inp => {
         const val = parseFloat(inp.value.replace(/[^0-9\-]/g,'')) || 0;
         totalKeuntunganUsaha += val;
     });
     
-    // Total pendapatan keluarga
     const totalPendapatan = pendapatanPekerjaan + totalKeuntunganUsaha;
     
-    // Pengeluaran
     const makan = parseFloat(document.getElementById('totalMakanBulanAll').value.replace(/[^0-9\-]/g,'')) || 0;
     const bukanMakan = parseFloat(document.getElementById('totalBukanMakan').value.replace(/[^0-9\-]/g,'')) || 0;
     const tahunan = parseFloat(document.getElementById('totalTahunan').value.replace(/[^0-9\-]/g,'')) || 0;
     
-    // Ringkasan pengeluaran
     document.getElementById('ringkasanMakan').value = formatRupiah(makan);
     document.getElementById('ringkasanBukanMakan').value = formatRupiah(bukanMakan);
     document.getElementById('ringkasanTahunan').value = formatRupiah(tahunan);
     document.getElementById('ringkasanTotalTahunan').value = formatRupiah((makan * 12) + (bukanMakan * 12) + tahunan);
     
-    // Ringkasan ekonomi
     document.getElementById('ringkasanPendapatanPekerjaan').value = formatRupiah(pendapatanPekerjaan);
     document.getElementById('ringkasanKeuntunganUsaha').value = formatRupiah(totalKeuntunganUsaha);
     document.getElementById('ringkasanPendapatan').value = formatRupiah(totalPendapatan);
@@ -2288,11 +1981,6 @@ function updateRingkasan() {
     document.getElementById('ringkasanPengeluaran').value = formatRupiah(totalPengeluaranBulanan);
     document.getElementById('ringkasanSelisih').value = formatRupiah(totalPendapatan - totalPengeluaranBulanan);
     document.getElementById('ringkasanSelisihTahun').value = formatRupiah((totalPendapatan - totalPengeluaranBulanan) * 12);
-}
-
-function formatRupiah(angka) {
-    if (angka < 0) return '- Rp ' + Math.abs(angka).toLocaleString('id-ID');
-    return 'Rp ' + angka.toLocaleString('id-ID');
 }
 
 // ================================================================
@@ -2310,7 +1998,7 @@ function kirimWhatsApp() {
     pesan += `No KK: ${document.getElementById('noKK').value || '-'}\n\n`;
     
     // Pekerjaan
-    pesan += `👨‍👩‍👧‍👦 *PEKERJAAN (185+)*\n`;
+    pesan += `👨‍👩‍👧‍👦 *PEKERJAAN*\n`;
     document.querySelectorAll('#tbodyPekerjaan tr').forEach((row, i) => {
         const nama = row.querySelector('.namaPekerja')?.value || '-';
         const pekerjaan = row.querySelector('.pekerjaanSelect')?.value || '-';
@@ -2321,48 +2009,34 @@ function kirimWhatsApp() {
     pesan += `Total Pendapatan Pekerjaan: ${document.getElementById('totalPendapatanPekerjaan').value || 'Rp 0'}\n\n`;
     
     // Usaha
-    pesan += `🏪 *USAHA (KBLI)*\n`;
+    pesan += `🏪 *USAHA*\n`;
     document.querySelectorAll('.usaha-detail').forEach((div, i) => {
         const jenis = div.querySelector('.jenisUsahaSelect')?.value || '-';
         const kbli = div.querySelector('.kbliUsaha')?.value || '-';
         const kategori = div.querySelector('.kategoriUsaha')?.value || '-';
-        const keuntunganBulan = div.querySelector('.keuntunganBulan')?.value || 'Rp 0';
-        const keuntunganTahun = div.querySelector('.keuntunganTahun')?.value || 'Rp 0';
+        const isMandiri = div.querySelector('.usahaMandiri')?.checked ? '✅ Ya' : '❌ Tidak';
+        
+        // Badan Usaha
+        const checkboxes = div.querySelectorAll('.badanUsaha:checked');
+        let badanUsaha = [];
+        checkboxes.forEach(cb => badanUsaha.push(cb.value));
+        const badanLain = div.querySelector('.badanUsahaLain')?.value || '';
+        if (badanLain) badanUsaha.push(badanLain);
+        const badanStr = badanUsaha.length > 0 ? badanUsaha.join(', ') : '-';
+        
+        const totalPengeluaran = div.querySelector('.totalPengeluaranUsahaAll')?.value || 'Rp 0';
+        const totalPemasukan = div.querySelector('.totalPemasukanUsahaAll')?.value || 'Rp 0';
+        const keuntunganTahun = div.querySelector('.keuntunganUsahaTahun')?.value || 'Rp 0';
+        const keuntunganBulan = div.querySelector('.keuntunganUsahaBulan')?.value || 'Rp 0';
         
         pesan += `\n📌 Usaha #${i+1}\n`;
         pesan += `Jenis: ${jenis} (KBLI: ${kbli}) - ${kategori}\n`;
-        pesan += `Keuntungan / Bulan: ${keuntunganBulan}\n`;
+        pesan += `Bentuk Badan Usaha: ${badanStr}\n`;
+        pesan += `Usaha Mandiri: ${isMandiri}\n`;
+        pesan += `Total Pengeluaran / Tahun: ${totalPengeluaran}\n`;
+        pesan += `Total Pemasukan / Tahun: ${totalPemasukan}\n`;
         pesan += `Keuntungan / Tahun: ${keuntunganTahun}\n`;
-        
-        // Pemasukan
-        const pemasukanItems = div.querySelectorAll('.pemasukanItem');
-        if (pemasukanItems.length > 0) {
-            pesan += `Pemasukan:\n`;
-            pemasukanItems.forEach((inp) => {
-                const row = inp.closest('.item-row');
-                const nama = row.querySelector('.pemasukanNama')?.value || '-';
-                const nilai = inp.value || '0';
-                const periode = row.querySelector('.pemasukanPeriode')?.value || 'bulanan';
-                pesan += `  - ${nama}: Rp${parseInt(nilai).toLocaleString()} (${getPeriodeLabel(periode)})\n`;
-            });
-            const total = div.querySelector('.totalPemasukanBulan')?.value || 'Rp 0';
-            pesan += `  Total Pemasukan / Bulan: ${total}\n`;
-        }
-        
-        // Pengeluaran
-        const pengeluaranItems = div.querySelectorAll('.pengeluaranItem');
-        if (pengeluaranItems.length > 0) {
-            pesan += `Pengeluaran:\n`;
-            pengeluaranItems.forEach((inp) => {
-                const row = inp.closest('.item-row');
-                const nama = row.querySelector('.pengeluaranNama')?.value || '-';
-                const nilai = inp.value || '0';
-                const periode = row.querySelector('.pengeluaranPeriode')?.value || 'bulanan';
-                pesan += `  - ${nama}: Rp${parseInt(nilai).toLocaleString()} (${getPeriodeLabel(periode)})\n`;
-            });
-            const total = div.querySelector('.totalPengeluaranBulan')?.value || 'Rp 0';
-            pesan += `  Total Pengeluaran / Bulan: ${total}\n`;
-        }
+        pesan += `Keuntungan / Bulan: ${keuntunganBulan}\n`;
     });
     pesan += `\n`;
     
@@ -2401,23 +2075,15 @@ function simpanKuesioner() {
 // INISIALISASI
 // ================================================================
 window.onload = function() {
-    // Pekerjaan
     tambahBarisPekerjaan();
     tambahBarisPekerjaan();
     
-    // Usaha - tambah 1 dengan default kosong
     tambahUsaha();
     
-    // Makanan
     initMakananContainer();
-    
-    // Bukan Makanan
     initBukanMakanContainer();
-    
-    // Tahunan
     initTahunanContainer();
     
-    // Hitung semua
     hitungTotalPendapatanPekerjaan();
     hitungTotalMakanan();
     hitungTotalBukanMakan();
